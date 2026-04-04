@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/akmathur1/Arjun-Mathur-Website-/issues"
   },
-  "homepage": "https://github.com/akmathur1/Arjun-Mathur-Website-#readme",
+  "homepage": ".",
   "description": "",
   "dependencies": {
     "@types/react": "^19.2.14",
