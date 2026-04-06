@@ -5,56 +5,62 @@ const CELL_W = 12;
 const CELL_H = 16;
 const CHAR_SIZE = 10;
 const GRID_CHAR = '+';
-const GRID_ALPHA = 0.08;          // always visible grid
+const GRID_ALPHA = 0.06;
 const CHARS = '@#%=+-.:;*'.split('');
 
 // Blue-tinted palette — 3 brightness tiers
-const C_GRID: [number, number, number] = [120, 160, 220];    // tier 1: faint but visible
-const C_STRUCT: [number, number, number] = [140, 180, 255];  // tier 2: medium readable
-const C_SIGNAL: [number, number, number] = [180, 220, 255];  // tier 3: bright active
+const C_GRID: [number, number, number] = [120, 160, 220];
+const C_STRUCT: [number, number, number] = [140, 180, 255];
+const C_SIGNAL: [number, number, number] = [180, 220, 255];
 const C_EVENT: [number, number, number] = [150, 190, 240];
 
 // Flow
 const FLOW_RES = 50;
 const FLOW_DRIFT = 0.00003;
 
-// Mouse — barely perceptible
+// Mouse
 const MOUSE_RADIUS = 200;
 const MOUSE_FLOW_STRENGTH = 0.15;
-const MOUSE_BRIGHT_BOOST = 0.015;
+const MOUSE_BRIGHT_BOOST = 0.012;
 
-// Field evolution
-const EVOLVE_INT = 480;    // ~8s between morphs
-const EVOLVE_FADE = 240;   // 4s crossfade
+// Evolution
+const EVOLVE_INT = 480;
+const EVOLVE_FADE = 240;
 
-// Autonomous events — rare system emissions
-const EVENT_INTERVAL_MIN = 360;  // ~6s
-const EVENT_INTERVAL_MAX = 600;  // ~10s
+// Events
+const EVENT_INTERVAL_MIN = 360;
+const EVENT_INTERVAL_MAX = 600;
 const EVENT_HINTS = ['∇ψ', 'Ξ(t)', 'σ', '∂/∂t', 'λ', 'μ', '∇f', 'Δ', 'Σ', 'ρ'];
+
+// ─── Composition: focal regions ────────────────────────────────
+// These define the "center of gravity" of the system
+// Normalized coords (0-1), applied relative to screen dimensions
+const FOCAL_REGIONS = [
+  { x: 0.70, y: 0.35, rx: 0.25, ry: 0.35, weight: 1.0 },   // primary: right-center
+  { x: 0.20, y: 0.25, rx: 0.15, ry: 0.20, weight: 0.5 },   // secondary: upper-left
+  { x: 0.45, y: 0.75, rx: 0.20, ry: 0.15, weight: 0.4 },   // tertiary: lower-center
+  { x: 0.85, y: 0.70, rx: 0.12, ry: 0.18, weight: 0.35 },  // small: lower-right
+];
 
 // ─── Types ─────────────────────────────────────────────────────
 interface StreamBand {
   y: number;
   startCol: number;
-  segments: number[];  // char index, -1 = gap
+  segments: number[];
   opacity: number;
   targetOpacity: number;
 }
 
 interface Signal {
   pts: { x: number; y: number }[];
-  head: number;
-  speed: number;
-  len: number;
-  bright: number;
+  head: number; speed: number;
+  len: number; bright: number;
 }
 
-interface Event {
-  x: number;
-  y: number;
+interface SysEvent {
+  x: number; y: number;
   text: string;
-  age: number;
-  life: number;
+  age: number; life: number;
 }
 
 // ─── RNG ───────────────────────────────────────────────────────
@@ -67,6 +73,23 @@ function mkRng(seed: number) {
   };
 }
 
+// ─── Composition field: how much structure belongs at (nx, ny) ─
+// Returns 0..1 — 0 = empty space, 1 = focal center
+function compositionWeight(nx: number, ny: number): number {
+  let w = 0;
+  for (const f of FOCAL_REGIONS) {
+    const dx = (nx - f.x) / f.rx;
+    const dy = (ny - f.y) / f.ry;
+    const d = dx * dx + dy * dy;
+    if (d < 1) {
+      // Smooth falloff (cubic hermite)
+      const t = 1 - d;
+      w = Math.max(w, t * t * (3 - 2 * t) * f.weight);
+    }
+  }
+  return w;
+}
+
 // ─── Component ─────────────────────────────────────────────────
 const DevinBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -76,7 +99,7 @@ const DevinBackground: React.FC = () => {
   const cursorBlink = useRef(0);
   const evolveTimer = useRef(0);
   const evoSeed = useRef(200);
-  const eventsRef = useRef<Event[]>([]);
+  const eventsRef = useRef<SysEvent[]>([]);
   const nextEventRef = useRef(300);
 
   const stateRef = useRef<{
@@ -86,152 +109,182 @@ const DevinBackground: React.FC = () => {
     flowAngles: Float32Array;
     flowCols: number; flowRows: number;
     w: number; h: number;
+    // Precomputed per-cell composition weight (0..1)
+    compMap: Float32Array;
   } | null>(null);
 
   // ── Generate a stream band ───────────────────────────────────
-  // Horizontal rows of structured characters: +@@@#==--..
-  // Density biased toward center-right of screen (intentional asymmetry)
   function makeBand(
-    cols: number, rows: number, _w: number, _h: number,
-    rng: () => number, biasCenter: boolean
+    cols: number, rows: number, rng: () => number,
+    compMap: Float32Array,
   ): StreamBand {
-    let y: number;
-    if (biasCenter) {
-      // Bias toward middle 60% of screen vertically
-      y = Math.floor(rows * 0.2 + rng() * rows * 0.6);
-    } else {
-      y = Math.floor(rng() * rows);
+    // Pick a row that has reasonable composition weight
+    // Try a few times to land in a good spot
+    let bestRow = 0, bestWeight = 0;
+    for (let attempt = 0; attempt < 8; attempt++) {
+      const tryRow = Math.floor(rng() * rows);
+      const midCol = Math.floor(cols / 2);
+      const w = compMap[tryRow * cols + midCol];
+      if (w > bestWeight) { bestWeight = w; bestRow = tryRow; }
+    }
+    const y = bestRow;
+
+    // Scan this row for regions with composition weight
+    // Start the band where weight begins
+    let startCol = 0;
+    let endCol = cols - 1;
+
+    // Find first column with weight > threshold
+    const threshold = 0.05;
+    for (let c = 0; c < cols; c++) {
+      if (compMap[y * cols + c] > threshold) {
+        startCol = Math.max(0, c - Math.floor(rng() * 8));
+        break;
+      }
+    }
+    for (let c = cols - 1; c >= 0; c--) {
+      if (compMap[y * cols + c] > threshold) {
+        endCol = Math.min(cols - 1, c + Math.floor(rng() * 8));
+        break;
+      }
     }
 
-    const bandLen = 12 + Math.floor(rng() * (cols * 0.55));
-
-    // Start position: bias right side slightly
-    let startCol: number;
-    if (rng() < 0.4) {
-      // Right-biased
-      startCol = Math.floor(cols * 0.4 + rng() * cols * 0.5);
-    } else {
-      startCol = Math.floor(rng() * (cols - 10));
+    // If no weight found in this row, make a short random band
+    if (bestWeight < threshold) {
+      startCol = Math.floor(rng() * cols * 0.8);
+      endCol = startCol + 5 + Math.floor(rng() * 15);
     }
 
+    const bandLen = endCol - startCol + 1;
     const segments: number[] = [];
     const pattern = Math.floor(rng() * 6);
-    const density = 0.25 + rng() * 0.55;
 
     for (let c = 0; c < bandLen; c++) {
+      const col = startCol + c;
+      const cw = col < cols ? compMap[y * cols + col] : 0;
+
+      // Density scales with composition weight
+      // High weight = dense characters, low weight = sparse/gaps
+      const density = cw * 0.8 + 0.05;
       if (rng() > density) { segments.push(-1); continue; }
 
-      const pos = c / bandLen;
+      // Character weight: heavier chars (@#%) near focal centers
       let ci: number;
+      const pos = c / bandLen;
 
-      switch (pattern) {
-        case 0: // Dense center: ..--==@@@##==--..
-          if (pos > 0.3 && pos < 0.7) ci = Math.floor(rng() * 3);
-          else if (pos > 0.15 && pos < 0.85) ci = 3 + Math.floor(rng() * 3);
-          else ci = 6 + Math.floor(rng() * 3);
-          break;
-        case 1: // Repeating blocks
-          { const b = Math.floor(c / 4) % 3;
-            ci = b === 0 ? Math.floor(rng() * 3) : b === 1 ? 3 + Math.floor(rng() * 3) : 6 + Math.floor(rng() * 3);
-          } break;
-        case 2: // Left-heavy fade
-          { const wt = 1 - pos;
-            ci = wt > 0.6 ? Math.floor(rng() * 3) : wt > 0.3 ? 3 + Math.floor(rng() * 4) : 6 + Math.floor(rng() * 3);
-          } break;
-        case 3: // Uniform medium
-          ci = 2 + Math.floor(rng() * 5);
-          break;
-        case 4: // Right-heavy
-          ci = pos > 0.5 ? Math.floor(rng() * 3) : pos > 0.2 ? 3 + Math.floor(rng() * 3) : 7 + Math.floor(rng() * 2);
-          break;
-        default: // Sparse with dense micro-clusters
-          if (rng() < 0.15) {
-            ci = Math.floor(rng() * 3);
-            for (let k = 0; k < 1 + Math.floor(rng() * 4) && c + k < bandLen; k++) {
-              segments.push(ci); c++;
-            }
-            continue;
-          }
-          ci = 4 + Math.floor(rng() * 5);
-          break;
+      if (cw > 0.6) {
+        // Dense focal zone: heavy chars
+        ci = Math.floor(rng() * 3); // @#%
+      } else if (cw > 0.3) {
+        // Medium zone: mixed
+        switch (pattern % 3) {
+          case 0:
+            if (pos > 0.3 && pos < 0.7) ci = Math.floor(rng() * 3);
+            else ci = 3 + Math.floor(rng() * 3);
+            break;
+          case 1:
+            { const b = Math.floor(c / 4) % 3;
+              ci = b === 0 ? Math.floor(rng() * 3) : b === 1 ? 3 + Math.floor(rng() * 3) : 6 + Math.floor(rng() * 3);
+            } break;
+          default:
+            ci = 2 + Math.floor(rng() * 5);
+        }
+      } else if (cw > 0.1) {
+        // Light zone: light chars
+        ci = 4 + Math.floor(rng() * 5); // +-.:;*
+      } else {
+        // Very sparse: dots and dashes only
+        ci = 6 + Math.floor(rng() * 3); // .:;
       }
+
       segments.push(ci);
     }
 
+    // Opacity also scales with composition weight
+    const baseAlpha = 0.08 + bestWeight * 0.35;
     return {
       y, startCol, segments,
-      opacity: 0, targetOpacity: 0.15 + rng() * 0.25,
+      opacity: 0, targetOpacity: baseAlpha + rng() * 0.1,
     };
   }
 
   // ── Build initial field ──────────────────────────────────────
-  function buildBands(cols: number, rows: number, w: number, h: number, rng: () => number): StreamBand[] {
+  function buildBands(
+    cols: number, rows: number, rng: () => number,
+    compMap: Float32Array,
+  ): StreamBand[] {
     const bands: StreamBand[] = [];
 
-    // Scattered individual bands (30-40)
-    const n = 30 + Math.floor(rng() * 12);
+    // More bands in total — composition weight controls where they appear
+    const n = 45 + Math.floor(rng() * 15);
     for (let i = 0; i < n; i++) {
-      const b = makeBand(cols, rows, w, h, rng, i < n * 0.6);
+      const b = makeBand(cols, rows, rng, compMap);
       b.opacity = b.targetOpacity;
       bands.push(b);
     }
 
-    // Structured zones: groups of adjacent rows forming coherent blocks
-    const numZones = 5 + Math.floor(rng() * 4);
-    for (let z = 0; z < numZones; z++) {
-      // Bias zones toward center and right
-      const baseRow = Math.floor(
-        rng() < 0.5
-          ? rows * 0.15 + rng() * rows * 0.7  // center bias
-          : rng() * rows
-      );
-      const zoneH = 3 + Math.floor(rng() * 10);
-      const zoneStartCol = Math.floor(
-        rng() < 0.55
-          ? cols * 0.35 + rng() * cols * 0.55  // right bias
-          : rng() * cols * 0.4
-      );
-      const zoneW = Math.floor(cols * (0.15 + rng() * 0.45));
+    // Dense zone clusters: tight groups of rows in focal areas
+    for (const focal of FOCAL_REGIONS) {
+      if (focal.weight < 0.3) continue;
+      const centerRow = Math.floor(focal.y * rows);
+      const centerCol = Math.floor(focal.x * cols);
+      const zoneH = Math.floor(focal.ry * rows * 1.5);
+      const zoneW = Math.floor(focal.rx * cols * 2);
 
-      for (let r = 0; r < zoneH; r++) {
-        const row = baseRow + r;
-        if (row >= rows) break;
+      for (let r = -zoneH; r <= zoneH; r++) {
+        const row = centerRow + r;
+        if (row < 0 || row >= rows) continue;
+        if (rng() > 0.55) continue; // not every row
 
-        const bLen = zoneW + Math.floor((rng() - 0.5) * 15);
+        const rowStart = Math.max(0, centerCol - zoneW + Math.floor((rng() - 0.3) * 10));
+        const rowEnd = Math.min(cols - 1, centerCol + zoneW + Math.floor((rng() - 0.7) * 10));
+        const bLen = rowEnd - rowStart + 1;
+        if (bLen <= 0) continue;
+
         const segs: number[] = [];
-        const d = 0.35 + rng() * 0.5;
-
         for (let c = 0; c < bLen; c++) {
-          if (rng() > d) { segs.push(-1); continue; }
-          const ex = Math.abs(c / bLen - 0.5) * 2;
-          const ey = Math.abs(r / zoneH - 0.5) * 2;
+          const col = rowStart + c;
+          const cw = compMap[row * cols + col];
+          if (rng() > cw * 0.85 + 0.05) { segs.push(-1); continue; }
+
+          const ex = Math.abs((col - centerCol) / zoneW);
+          const ey = Math.abs((row - centerRow) / zoneH);
           const edge = Math.max(ex, ey);
-          if (edge < 0.35) segs.push(Math.floor(rng() * 3));
-          else if (edge < 0.65) segs.push(2 + Math.floor(rng() * 4));
+
+          if (edge < 0.3) segs.push(Math.floor(rng() * 3));
+          else if (edge < 0.6) segs.push(2 + Math.floor(rng() * 4));
           else segs.push(5 + Math.floor(rng() * 4));
         }
 
         bands.push({
-          y: row,
-          startCol: zoneStartCol + Math.floor((rng() - 0.5) * 5),
-          segments: segs,
-          opacity: 0.15 + rng() * 0.25,
-          targetOpacity: 0.15 + rng() * 0.25,
+          y: row, startCol: rowStart, segments: segs,
+          opacity: 0.12 + focal.weight * 0.25 + rng() * 0.08,
+          targetOpacity: 0.12 + focal.weight * 0.25 + rng() * 0.08,
         });
       }
     }
+
     return bands;
   }
 
-  // ── Build signal flow lanes ──────────────────────────────────
+  // ── Build signals biased toward focal regions ────────────────
   function buildSignals(w: number, h: number, rng: () => number): Signal[] {
     const sigs: Signal[] = [];
     const n = 16 + Math.floor(rng() * 8);
     for (let i = 0; i < n; i++) {
       const pts: { x: number; y: number }[] = [];
       const segs = 50 + Math.floor(rng() * 60);
-      let px = rng() * w, py = rng() * h;
-      // Strong horizontal bias — signals flow mostly left-to-right
+
+      // Start signals near focal regions
+      let px: number, py: number;
+      if (rng() < 0.7) {
+        const f = FOCAL_REGIONS[Math.floor(rng() * FOCAL_REGIONS.length)];
+        px = (f.x + (rng() - 0.5) * f.rx * 2) * w;
+        py = (f.y + (rng() - 0.5) * f.ry * 2) * h;
+      } else {
+        px = rng() * w; py = rng() * h;
+      }
+
       let ang = rng() < 0.7
         ? (rng() < 0.5 ? 0 : Math.PI) + (rng() - 0.5) * 0.3
         : rng() * Math.PI * 2;
@@ -239,7 +292,6 @@ const DevinBackground: React.FC = () => {
       for (let s = 0; s < segs; s++) {
         pts.push({ x: px, y: py });
         ang += (rng() - 0.5) * curv * 2;
-        // Keep on screen
         if (px < w * 0.03) ang += 0.04;
         if (px > w * 0.97) ang -= 0.04;
         if (py < h * 0.03) ang += 0.03;
@@ -272,6 +324,14 @@ const DevinBackground: React.FC = () => {
     const cols = Math.ceil(w / CELL_W) + 2;
     const rows = Math.ceil(h / CELL_H) + 2;
 
+    // Precompute composition weight for every cell
+    const compMap = new Float32Array(cols * rows);
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        compMap[r * cols + c] = compositionWeight(c / cols, r / rows);
+      }
+    }
+
     const flowCols = Math.ceil(w / FLOW_RES) + 2;
     const flowRows = Math.ceil(h / FLOW_RES) + 2;
     const flowAngles = new Float32Array(flowCols * flowRows);
@@ -279,13 +339,14 @@ const DevinBackground: React.FC = () => {
 
     stateRef.current = {
       cols, rows,
-      bands: buildBands(cols, rows, w, h, rng),
+      bands: buildBands(cols, rows, rng, compMap),
       signals: buildSignals(w, h, rng),
       flowAngles, flowCols, flowRows, w, h,
+      compMap,
     };
   }
 
-  // ── Flow angle (very subtle mouse bend) ──────────────────────
+  // ── Flow angle ───────────────────────────────────────────────
   function flowAng(x: number, y: number, t: number, s: NonNullable<typeof stateRef.current>): number {
     const fc = Math.min(Math.max(Math.floor(x / FLOW_RES), 0), s.flowCols - 1);
     const fr = Math.min(Math.max(Math.floor(y / FLOW_RES), 0), s.flowRows - 1);
@@ -308,11 +369,10 @@ const DevinBackground: React.FC = () => {
     if (!ctx) return;
 
     const dpr = window.devicePixelRatio || 1;
-    const { w, h, cols, rows, bands, signals } = s;
+    const { w, h, cols, rows, bands, signals, compMap } = s;
     timeRef.current++;
     const time = timeRef.current;
     cursorBlink.current++;
-
     const cmx = mouseRef.current.x, cmy = mouseRef.current.y;
 
     // ── Field evolution ────────────────────────────────────────
@@ -326,11 +386,10 @@ const DevinBackground: React.FC = () => {
       const erng = mkRng(evoSeed.current++);
       const spawnN = 2 + Math.floor(Math.random() * 3);
       for (let i = 0; i < spawnN; i++) {
-        bands.push(makeBand(cols, rows, w, h, erng, Math.random() < 0.6));
+        bands.push(makeBand(cols, rows, erng, compMap));
       }
     }
 
-    // Update band opacities, cull dead
     for (let i = bands.length - 1; i >= 0; i--) {
       const b = bands[i];
       const rate = 1 / EVOLVE_FADE;
@@ -339,28 +398,26 @@ const DevinBackground: React.FC = () => {
       if (b.targetOpacity === 0 && b.opacity < 0.002) bands.splice(i, 1);
     }
 
-    // ── Autonomous events (rare) ───────────────────────────────
+    // ── Autonomous events ──────────────────────────────────────
     nextEventRef.current--;
     if (nextEventRef.current <= 0) {
       nextEventRef.current = EVENT_INTERVAL_MIN + Math.floor(Math.random() * (EVENT_INTERVAL_MAX - EVENT_INTERVAL_MIN));
-      // Pick a random position biased toward existing structure
       let ex: number, ey: number;
       if (bands.length > 0 && Math.random() < 0.7) {
         const b = bands[Math.floor(Math.random() * bands.length)];
         ex = (b.startCol + b.segments.length / 2) * CELL_W;
         ey = b.y * CELL_H;
       } else {
-        ex = w * (0.2 + Math.random() * 0.6);
-        ey = h * (0.2 + Math.random() * 0.6);
+        const f = FOCAL_REGIONS[0];
+        ex = f.x * w + (Math.random() - 0.5) * f.rx * w;
+        ey = f.y * h + (Math.random() - 0.5) * f.ry * h;
       }
       eventsRef.current.push({
         x: ex, y: ey,
         text: EVENT_HINTS[Math.floor(Math.random() * EVENT_HINTS.length)],
-        age: 0, life: 180, // ~3s
+        age: 0, life: 180,
       });
     }
-
-    // Update events
     const events = eventsRef.current;
     for (let i = events.length - 1; i >= 0; i--) {
       events[i].age++;
@@ -371,10 +428,10 @@ const DevinBackground: React.FC = () => {
     ctx.scale(dpr, dpr);
     ctx.imageSmoothingEnabled = false;
 
-    // Background: radial gradient for depth
-    const grad = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, Math.max(w, h) * 0.7);
+    // Background gradient
+    const grad = ctx.createRadialGradient(w * 0.6, h * 0.4, 0, w * 0.5, h * 0.5, Math.max(w, h) * 0.75);
     grad.addColorStop(0, '#0F172A');
-    grad.addColorStop(0.6, '#0B1220');
+    grad.addColorStop(0.5, '#0B1220');
     grad.addColorStop(1, '#070C16');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
@@ -390,12 +447,11 @@ const DevinBackground: React.FC = () => {
       if (arr) arr.push(b); else bandsByRow.set(b.y, [b]);
     }
 
-    // ── Signal glow (sparse) ───────────────────────────────────
+    // ── Signal glow ────────────────────────────────────────────
     const glowCells: Map<number, number> = new Map();
     for (const sig of signals) {
       sig.head += sig.speed;
       if (sig.head > 1) sig.head -= 1;
-
       const headIdx = sig.head * (sig.pts.length - 1);
       for (let t = 0; t < sig.len; t++) {
         const idx = headIdx - t;
@@ -429,8 +485,9 @@ const DevinBackground: React.FC = () => {
 
       for (let col = 0; col < cols; col++) {
         const px = col * CELL_W;
+        const cw = compMap[row * cols + col]; // composition weight
 
-        // Very subtle flow displacement — snapped to integers for crisp rendering
+        // Flow displacement
         const ang = flowAng(px, py, time, s);
         const ox = Math.cos(ang) * 0.2 * Math.sin(time * 0.002 + col * 0.06);
         const oy = Math.sin(ang) * 0.2 * Math.cos(time * 0.0015 + row * 0.04);
@@ -456,7 +513,6 @@ const DevinBackground: React.FC = () => {
         const cellKey = row * cols + col;
         const glow = glowCells.get(cellKey) || 0;
 
-        // Mouse: very subtle local brightness boost only
         const mdx = cmx - px, mdy = cmy - py;
         const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
         const mBoost = mDist < MOUSE_RADIUS
@@ -464,41 +520,47 @@ const DevinBackground: React.FC = () => {
           : 0;
 
         if (structChar >= 0 && structAlpha > 0.003) {
-          // Tier 2: structure — always legible
+          // Structure: always legible, brightness scales with composition
           const ch = CHARS[structChar];
-          const alpha = 0.08 + structAlpha * 0.6 + glow * 0.5 + mBoost;
+          const alpha = 0.06 + structAlpha * 0.55 + glow * 0.5 + cw * 0.15 + mBoost;
           const r = C_STRUCT[0] + glow * (C_SIGNAL[0] - C_STRUCT[0]);
           const g = C_STRUCT[1] + glow * (C_SIGNAL[1] - C_STRUCT[1]);
           const b = C_STRUCT[2] + glow * (C_SIGNAL[2] - C_STRUCT[2]);
           ctx.fillStyle = `rgba(${r | 0},${g | 0},${b | 0},${Math.min(0.85, alpha)})`;
           ctx.fillText(ch, dx, dy);
         } else if (glow > 0.01) {
-          // Tier 3: active signal — brightest
+          // Signal glow
           const alpha = GRID_ALPHA + glow * 0.55;
           ctx.fillStyle = `rgba(${C_SIGNAL[0]},${C_SIGNAL[1]},${C_SIGNAL[2]},${Math.min(0.9, alpha)})`;
           ctx.fillText(GRID_CHAR, dx, dy);
         } else {
-          // Tier 1: base grid — faint but always visible
-          const ga = GRID_ALPHA + mBoost;
-          ctx.fillStyle = `rgba(${C_GRID[0]},${C_GRID[1]},${C_GRID[2]},${ga})`;
-          ctx.fillText(GRID_CHAR, dx, dy);
+          // Grid: fades near structure (negative space contrast)
+          // Near focal centers: grid dims so structure pops
+          // In empty space: grid is clearly visible
+          const gridFade = Math.max(0.2, 1 - cw * 0.7);
+          const ga = GRID_ALPHA * gridFade + mBoost;
+
+          // Threshold: suppress grid in regions with very low composition weight
+          // Creates intentional empty space
+          if (ga > 0.008) {
+            ctx.fillStyle = `rgba(${C_GRID[0]},${C_GRID[1]},${C_GRID[2]},${ga})`;
+            ctx.fillText(GRID_CHAR, dx, dy);
+          }
         }
       }
     }
 
-    // ── Autonomous events (faint system emissions) ─────────────
+    // ── Events ─────────────────────────────────────────────────
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     for (const ev of events) {
-      const progress = ev.age / ev.life;
-      // Smooth bell curve: fade in 20%, hold 50%, fade out 30%
+      const p = ev.age / ev.life;
       let alpha: number;
-      if (progress < 0.2) alpha = progress / 0.2;
-      else if (progress > 0.7) alpha = (1 - progress) / 0.3;
+      if (p < 0.2) alpha = p / 0.2;
+      else if (p > 0.7) alpha = (1 - p) / 0.3;
       else alpha = 1;
-      alpha *= 0.18; // very faint
-      const fs = 9;
-      ctx.font = `${fs}px "SF Mono","Fira Code","Cascadia Code",monospace`;
+      alpha *= 0.18;
+      ctx.font = `9px "SF Mono","Fira Code","Cascadia Code",monospace`;
       ctx.fillStyle = `rgba(${C_EVENT[0]},${C_EVENT[1]},${C_EVENT[2]},${alpha})`;
       ctx.fillText(ev.text, ev.x, ev.y);
     }
@@ -511,7 +573,6 @@ const DevinBackground: React.FC = () => {
     ctx.fillStyle = 'rgba(203,213,225,0.88)';
     ctx.fillText('Arjun Mathur:', w / 2, h / 2);
 
-    // Blinking cursor
     if ((cursorBlink.current % 60) < 35) {
       const met = ctx.measureText('Arjun Mathur:');
       ctx.fillStyle = 'rgba(203,213,225,0.55)';
