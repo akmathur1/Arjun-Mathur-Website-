@@ -1,97 +1,61 @@
 import React, { useRef, useEffect } from 'react';
 
 // ─── Grid ──────────────────────────────────────────────────────
-const CELL_W = 12;                // horizontal character spacing (tight)
-const CELL_H = 16;                // vertical line spacing
-const CHAR_SIZE = 10;             // font size
+const CELL_W = 12;
+const CELL_H = 16;
+const CHAR_SIZE = 10;
 const GRID_CHAR = '+';
-const GRID_ALPHA = 0.045;         // very faint base grid
-const BG = '#0a0f1a';
-const STRUCT_CHARS = '@#%=+-.:;*'.split('');
-// Colors (muted blue-gray palette)
-const C_GRID: [number, number, number] = [80, 100, 150];
-const C_STRUCT: [number, number, number] = [75, 95, 145];
-const C_SIGNAL: [number, number, number] = [115, 155, 215];
-const C_FRAG: [number, number, number] = [130, 170, 230];
-const C_HOVER: [number, number, number] = [95, 125, 180];
+const GRID_ALPHA = 0.04;
+const BG = '#080d18';
+const CHARS = '@#%=+-.:;*'.split('');
+
+// Muted blue-gray palette
+const C_GRID: [number, number, number] = [70, 90, 140];
+const C_STRUCT: [number, number, number] = [65, 85, 130];
+const C_SIGNAL: [number, number, number] = [100, 140, 200];
+const C_EVENT: [number, number, number] = [90, 120, 175];
 
 // Flow
 const FLOW_RES = 50;
-const FLOW_DRIFT = 0.00005;
+const FLOW_DRIFT = 0.00003;
 
-// Mouse
-const MOUSE_RADIUS = 300;
-const MOUSE_STRENGTH = 0.4;
-const MOUSE_PULL = 1.5;
-const HOVER_RADIUS = 180;
-const HOVER_FRAG_CD = 40;
-const HOVER_FRAG_P = 0.35;
+// Mouse — barely perceptible
+const MOUSE_RADIUS = 200;
+const MOUSE_FLOW_STRENGTH = 0.15;
+const MOUSE_BRIGHT_BOOST = 0.015;
 
-// Fragments
-const FRAG_LIFE = 260;
-const FRAG_FADEIN = 25;
-const FRAG_FADEOUT = 55;
-const FRAG_DRIFT = 0.12;
-const MAX_FRAGS = 24;
-const CONN_DIST = 200;
-const CONN_ALPHA = 0.07;
+// Field evolution
+const EVOLVE_INT = 480;    // ~8s between morphs
+const EVOLVE_FADE = 240;   // 4s crossfade
 
-// Evolution
-const EVOLVE_INT = 550;
-const EVOLVE_FADE = 180;
-
-// ─── Expression pools ─────────────────────────────────────────
-const EXPR_STD = [
-  'λ(x) → ∇²ψ', 'Σᵢ wᵢxᵢ', 'd/dt σ(Wx+b)', 'argmin_θ L(θ)',
-  'Ξ(t) ≈ drift', '∂f/∂x = 0', 'P(A|B) ∝ L(B|A)', 'H(X) = -Σ p log p',
-  '∇·F = ρ/ε₀', 'det(A-λI) = 0', 'E[X] = ∫x dF(x)', 'KL(p‖q)',
-  'softmax(zᵢ)', 'α → β → γ', 'μ ± 2σ', 'O(n log n)',
-  'ReLU(Wx)', '∂L/∂w', 'tanh(z)', 'x̂ = Ax + Bu',
-  'ŷ = f(θ,x)', 'tr(AᵀA)', 'rank(J)', 'dim ker(T)',
-  'sup{f(x)}', 'lim n→∞', '‖∇f‖₂', 'conv(K,x)',
-  'FFT(x[n])', 'Var(X̄)', '∇_θ J(θ)', 'ε ~ N(0,I)',
-];
-const EXPR_COMPLEX = [
-  '∫₀^∞ e^{-x²} dx = √π/2', '∇²ψ + (2m/ℏ²)(E-V)ψ = 0',
-  'L(θ) = -Σᵢ [yᵢlog(ŷᵢ) + (1-yᵢ)log(1-ŷᵢ)]',
-  'θₜ₊₁ = θₜ - η∇L(θₜ) + μ(θₜ - θₜ₋₁)',
-  'ELBO = E_q[log p(x|z)] - KL(q(z|x)‖p(z))',
-  'ρ(t+1) = Σ_s P(s\'|s,π(s)) · ρ(t)',
-];
-const EXPR_HOVER = [
-  '∇²ψ', 'Ξ(t)', 'σ(z)', '∂/∂t', 'λ_max', 'tr(A)',
-  '‖x‖', 'det(J)', 'ρ(s)', 'π*(a|s)', 'log Z', '∇f', 'Δw',
-];
-const SEQUENCES = [
-  ['∂L/∂w', '→ Δw = -η∇L', '→ θ* converged'],
-  ['encode(x) → z', 'z ~ q(z|x)', 'decode(z) → x̂'],
-  ['loss = Σ(ŷ-y)²', '∇loss = 2Σ(ŷ-y)', 'w -= η·∇loss'],
-  ['A = UΣVᵀ', 'rank(A) = r'],
-  ['forward(x)', 'loss(ŷ,y)', 'backward()'],
-  ['sample z', 'decode(z) → x̂', 'L_recon + L_KL'],
-];
+// Autonomous events — rare system emissions
+const EVENT_INTERVAL_MIN = 360;  // ~6s
+const EVENT_INTERVAL_MAX = 600;  // ~10s
+const EVENT_HINTS = ['∇ψ', 'Ξ(t)', 'σ', '∂/∂t', 'λ', 'μ', '∇f', 'Δ', 'Σ', 'ρ'];
 
 // ─── Types ─────────────────────────────────────────────────────
 interface StreamBand {
-  // A horizontal band of ASCII characters, like a line of terminal output
-  y: number;           // row index (in grid coords)
-  startCol: number;    // leftmost column
-  segments: number[];  // per-column: char index into STRUCT_CHARS, -1 = gap
+  y: number;
+  startCol: number;
+  segments: number[];  // char index, -1 = gap
   opacity: number;
   targetOpacity: number;
-  born: number;
 }
 
 interface Signal {
   pts: { x: number; y: number }[];
-  head: number; speed: number;
-  len: number; bright: number;
+  head: number;
+  speed: number;
+  len: number;
+  bright: number;
 }
 
-interface Frag {
-  x: number; y: number; vx: number; vy: number;
-  text: string; age: number; life: number; scale: number;
-  seqId: number; isHover: boolean;
+interface Event {
+  x: number;
+  y: number;
+  text: string;
+  age: number;
+  life: number;
 }
 
 // ─── RNG ───────────────────────────────────────────────────────
@@ -104,45 +68,17 @@ function mkRng(seed: number) {
   };
 }
 
-// ─── Noise for hover reveal ────────────────────────────────────
-function makeNoise(seed: number) {
-  const perm = new Uint8Array(512);
-  const rng = mkRng(seed);
-  const p = new Uint8Array(256);
-  for (let i = 0; i < 256; i++) p[i] = i;
-  for (let i = 255; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [p[i], p[j]] = [p[j], p[i]];
-  }
-  for (let i = 0; i < 512; i++) perm[i] = p[i & 255];
-  const grad = [[1, 1], [-1, 1], [1, -1], [-1, -1], [1, 0], [-1, 0], [0, 1], [0, -1]];
-  return (x: number, y: number): number => {
-    const X = Math.floor(x) & 255, Y = Math.floor(y) & 255;
-    const xf = x - Math.floor(x), yf = y - Math.floor(y);
-    const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
-    const g = (ix: number, iy: number) => {
-      const gi = perm[perm[ix] + iy] & 7;
-      return grad[gi][0] * (xf - (ix > X ? 1 : 0)) + grad[gi][1] * (yf - (iy > Y ? 1 : 0));
-    };
-    const n00 = g(X, Y), n10 = g(X + 1, Y), n01 = g(X, Y + 1), n11 = g(X + 1, Y + 1);
-    return (n00 * (1 - u) + n10 * u) * (1 - v) + (n01 * (1 - u) + n11 * u) * v;
-  };
-}
-
 // ─── Component ─────────────────────────────────────────────────
 const DevinBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef(0);
   const mouseRef = useRef({ x: -9999, y: -9999 });
-  const prevMouseRef = useRef({ x: -9999, y: -9999 });
-  const mouseSpeedRef = useRef(0);
   const timeRef = useRef(0);
-  const fragsRef = useRef<Frag[]>([]);
-  const seqCtr = useRef(0);
   const cursorBlink = useRef(0);
-  const hoverCD = useRef(0);
   const evolveTimer = useRef(0);
   const evoSeed = useRef(200);
+  const eventsRef = useRef<Event[]>([]);
+  const nextEventRef = useRef(300);
 
   const stateRef = useRef<{
     cols: number; rows: number;
@@ -151,220 +87,175 @@ const DevinBackground: React.FC = () => {
     flowAngles: Float32Array;
     flowCols: number; flowRows: number;
     w: number; h: number;
-    noise: (x: number, y: number) => number;
   } | null>(null);
 
-  // ── Generate a horizontal stream band ────────────────────────
-  // These mimic the Cognition reference: horizontal rows of structured characters
-  // like "+@@@#/+==--..." flowing left to right
+  // ── Generate a stream band ───────────────────────────────────
+  // Horizontal rows of structured characters: +@@@#==--..
+  // Density biased toward center-right of screen (intentional asymmetry)
   function makeBand(
-    cols: number, rows: number, rng: () => number, frame: number
+    cols: number, rows: number, _w: number, _h: number,
+    rng: () => number, biasCenter: boolean
   ): StreamBand {
-    const y = Math.floor(rng() * rows);
-    // Band spans a portion of the row
-    const bandLen = 15 + Math.floor(rng() * (cols * 0.6));
-    const startCol = Math.floor(rng() * (cols - 10));
-    const segments: number[] = [];
+    let y: number;
+    if (biasCenter) {
+      // Bias toward middle 60% of screen vertically
+      y = Math.floor(rows * 0.2 + rng() * rows * 0.6);
+    } else {
+      y = Math.floor(rng() * rows);
+    }
 
-    // Generate structured character pattern (not random)
-    // Use repeating motifs with variation
-    const patternType = Math.floor(rng() * 5);
-    let density = 0.3 + rng() * 0.5; // overall density
+    const bandLen = 12 + Math.floor(rng() * (cols * 0.55));
+
+    // Start position: bias right side slightly
+    let startCol: number;
+    if (rng() < 0.4) {
+      // Right-biased
+      startCol = Math.floor(cols * 0.4 + rng() * cols * 0.5);
+    } else {
+      startCol = Math.floor(rng() * (cols - 10));
+    }
+
+    const segments: number[] = [];
+    const pattern = Math.floor(rng() * 6);
+    const density = 0.25 + rng() * 0.55;
 
     for (let c = 0; c < bandLen; c++) {
-      // Probability of a gap
-      if (rng() > density) {
-        segments.push(-1);
-        continue;
-      }
+      if (rng() > density) { segments.push(-1); continue; }
 
-      let charIdx: number;
-      const pos = c / bandLen; // 0..1 position along band
+      const pos = c / bandLen;
+      let ci: number;
 
-      switch (patternType) {
-        case 0:
-          // Dense center, light edges: @@@##==--..
-          if (pos > 0.3 && pos < 0.7) {
-            charIdx = Math.floor(rng() * 3); // @#%
-          } else if (pos > 0.15 && pos < 0.85) {
-            charIdx = 3 + Math.floor(rng() * 3); // =+-
-          } else {
-            charIdx = 6 + Math.floor(rng() * 3); // .:;
-          }
+      switch (pattern) {
+        case 0: // Dense center: ..--==@@@##==--..
+          if (pos > 0.3 && pos < 0.7) ci = Math.floor(rng() * 3);
+          else if (pos > 0.15 && pos < 0.85) ci = 3 + Math.floor(rng() * 3);
+          else ci = 6 + Math.floor(rng() * 3);
           break;
-        case 1:
-          // Repeating blocks: @@@ === ... @@@ === ...
-          {
-            const block = Math.floor(c / 4) % 3;
-            if (block === 0) charIdx = Math.floor(rng() * 3);
-            else if (block === 1) charIdx = 3 + Math.floor(rng() * 3);
-            else charIdx = 6 + Math.floor(rng() * 3);
-          }
+        case 1: // Repeating blocks
+          { const b = Math.floor(c / 4) % 3;
+            ci = b === 0 ? Math.floor(rng() * 3) : b === 1 ? 3 + Math.floor(rng() * 3) : 6 + Math.floor(rng() * 3);
+          } break;
+        case 2: // Left-heavy fade
+          { const wt = 1 - pos;
+            ci = wt > 0.6 ? Math.floor(rng() * 3) : wt > 0.3 ? 3 + Math.floor(rng() * 4) : 6 + Math.floor(rng() * 3);
+          } break;
+        case 3: // Uniform medium
+          ci = 2 + Math.floor(rng() * 5);
           break;
-        case 2:
-          // Left-heavy: dense on left, fading right
-          {
-            const weight = 1 - pos;
-            if (weight > 0.6) charIdx = Math.floor(rng() * 3);
-            else if (weight > 0.3) charIdx = 3 + Math.floor(rng() * 4);
-            else charIdx = 6 + Math.floor(rng() * 3);
-          }
+        case 4: // Right-heavy
+          ci = pos > 0.5 ? Math.floor(rng() * 3) : pos > 0.2 ? 3 + Math.floor(rng() * 3) : 7 + Math.floor(rng() * 2);
           break;
-        case 3:
-          // Uniform medium density
-          charIdx = 2 + Math.floor(rng() * 5); // %=+-*
-          break;
-        default:
-          // Sparse with occasional dense clusters
-          if (rng() < 0.2) {
-            charIdx = Math.floor(rng() * 3); // @#%
-            // Repeat for a small cluster
-            for (let k = 0; k < 2 + Math.floor(rng() * 4) && c + k < bandLen; k++) {
-              segments.push(charIdx);
-              c++;
+        default: // Sparse with dense micro-clusters
+          if (rng() < 0.15) {
+            ci = Math.floor(rng() * 3);
+            for (let k = 0; k < 1 + Math.floor(rng() * 4) && c + k < bandLen; k++) {
+              segments.push(ci); c++;
             }
             continue;
           }
-          charIdx = 4 + Math.floor(rng() * 5);
+          ci = 4 + Math.floor(rng() * 5);
           break;
       }
-
-      segments.push(charIdx);
+      segments.push(ci);
     }
 
     return {
       y, startCol, segments,
-      opacity: 0, targetOpacity: 0.15 + rng() * 0.25,
-      born: frame,
+      opacity: 0, targetOpacity: 0.1 + rng() * 0.2,
     };
   }
 
-  // ── Build initial bands ──────────────────────────────────────
-  function buildBands(cols: number, rows: number, rng: () => number): StreamBand[] {
+  // ── Build initial field ──────────────────────────────────────
+  function buildBands(cols: number, rows: number, w: number, h: number, rng: () => number): StreamBand[] {
     const bands: StreamBand[] = [];
-    // Create many bands — the reference shows heavy coverage
-    const n = 25 + Math.floor(rng() * 15);
+
+    // Scattered individual bands (30-40)
+    const n = 30 + Math.floor(rng() * 12);
     for (let i = 0; i < n; i++) {
-      const b = makeBand(cols, rows, rng, 0);
-      b.opacity = b.targetOpacity; // start visible
+      const b = makeBand(cols, rows, w, h, rng, i < n * 0.6);
+      b.opacity = b.targetOpacity;
       bands.push(b);
     }
-    // Also create some "cluster zones" — groups of adjacent rows
-    const numZones = 4 + Math.floor(rng() * 3);
-    for (let z = 0; z < numZones; z++) {
-      const baseRow = Math.floor(rng() * rows);
-      const zoneHeight = 3 + Math.floor(rng() * 8);
-      const zoneStartCol = Math.floor(rng() * (cols * 0.3));
-      const zoneWidth = Math.floor(cols * (0.2 + rng() * 0.5));
 
-      for (let r = 0; r < zoneHeight; r++) {
+    // Structured zones: groups of adjacent rows forming coherent blocks
+    const numZones = 5 + Math.floor(rng() * 4);
+    for (let z = 0; z < numZones; z++) {
+      // Bias zones toward center and right
+      const baseRow = Math.floor(
+        rng() < 0.5
+          ? rows * 0.15 + rng() * rows * 0.7  // center bias
+          : rng() * rows
+      );
+      const zoneH = 3 + Math.floor(rng() * 10);
+      const zoneStartCol = Math.floor(
+        rng() < 0.55
+          ? cols * 0.35 + rng() * cols * 0.55  // right bias
+          : rng() * cols * 0.4
+      );
+      const zoneW = Math.floor(cols * (0.15 + rng() * 0.45));
+
+      for (let r = 0; r < zoneH; r++) {
         const row = baseRow + r;
         if (row >= rows) break;
 
-        const bandLen = zoneWidth + Math.floor((rng() - 0.5) * 20);
-        const segments: number[] = [];
-        const density = 0.4 + rng() * 0.45;
+        const bLen = zoneW + Math.floor((rng() - 0.5) * 15);
+        const segs: number[] = [];
+        const d = 0.35 + rng() * 0.5;
 
-        for (let c = 0; c < bandLen; c++) {
-          if (rng() > density) { segments.push(-1); continue; }
-          // Characters get lighter toward edges
-          const dx = Math.abs(c / bandLen - 0.5) * 2; // 0=center, 1=edge
-          const dy = Math.abs(r / zoneHeight - 0.5) * 2;
-          const edgeDist = Math.max(dx, dy);
-
-          if (edgeDist < 0.4) {
-            segments.push(Math.floor(rng() * 3)); // @#%
-          } else if (edgeDist < 0.7) {
-            segments.push(2 + Math.floor(rng() * 4)); // %=+-
-          } else {
-            segments.push(5 + Math.floor(rng() * 4)); // -.:;
-          }
+        for (let c = 0; c < bLen; c++) {
+          if (rng() > d) { segs.push(-1); continue; }
+          const ex = Math.abs(c / bLen - 0.5) * 2;
+          const ey = Math.abs(r / zoneH - 0.5) * 2;
+          const edge = Math.max(ex, ey);
+          if (edge < 0.35) segs.push(Math.floor(rng() * 3));
+          else if (edge < 0.65) segs.push(2 + Math.floor(rng() * 4));
+          else segs.push(5 + Math.floor(rng() * 4));
         }
 
         bands.push({
-          y: row, startCol: zoneStartCol + Math.floor((rng() - 0.5) * 6),
-          segments,
-          opacity: 0.12 + rng() * 0.22,
-          targetOpacity: 0.12 + rng() * 0.22,
-          born: 0,
+          y: row,
+          startCol: zoneStartCol + Math.floor((rng() - 0.5) * 5),
+          segments: segs,
+          opacity: 0.1 + rng() * 0.2,
+          targetOpacity: 0.1 + rng() * 0.2,
         });
       }
     }
     return bands;
   }
 
-  // ── Build signals ────────────────────────────────────────────
+  // ── Build signal flow lanes ──────────────────────────────────
   function buildSignals(w: number, h: number, rng: () => number): Signal[] {
     const sigs: Signal[] = [];
-    const n = 14 + Math.floor(rng() * 8);
+    const n = 16 + Math.floor(rng() * 8);
     for (let i = 0; i < n; i++) {
       const pts: { x: number; y: number }[] = [];
-      const segs = 50 + Math.floor(rng() * 50);
+      const segs = 50 + Math.floor(rng() * 60);
       let px = rng() * w, py = rng() * h;
-      let ang = rng() * Math.PI * 2;
-      // Bias toward horizontal movement
-      if (rng() < 0.6) ang = (rng() < 0.5 ? 0 : Math.PI) + (rng() - 0.5) * 0.4;
-      const curv = 0.01 + rng() * 0.03;
+      // Strong horizontal bias — signals flow mostly left-to-right
+      let ang = rng() < 0.7
+        ? (rng() < 0.5 ? 0 : Math.PI) + (rng() - 0.5) * 0.3
+        : rng() * Math.PI * 2;
+      const curv = 0.008 + rng() * 0.025;
       for (let s = 0; s < segs; s++) {
         pts.push({ x: px, y: py });
         ang += (rng() - 0.5) * curv * 2;
-        if (px < w * 0.05) ang += 0.03;
-        if (px > w * 0.95) ang -= 0.03;
-        if (py < h * 0.05) ang += 0.02;
-        if (py > h * 0.95) ang -= 0.02;
-        const step = CELL_W * (0.8 + rng() * 0.8);
-        px += Math.cos(ang) * step;
-        py += Math.sin(ang) * step;
+        // Keep on screen
+        if (px < w * 0.03) ang += 0.04;
+        if (px > w * 0.97) ang -= 0.04;
+        if (py < h * 0.03) ang += 0.03;
+        if (py > h * 0.97) ang -= 0.03;
+        px += Math.cos(ang) * CELL_W * (0.8 + rng() * 0.7);
+        py += Math.sin(ang) * CELL_W * (0.8 + rng() * 0.7);
       }
       sigs.push({
         pts, head: rng(),
-        speed: 0.0006 + rng() * 0.0018,
-        len: 5 + Math.floor(rng() * 14),
-        bright: 0.3 + rng() * 0.5,
+        speed: 0.0005 + rng() * 0.0015,
+        len: 5 + Math.floor(rng() * 15),
+        bright: 0.25 + rng() * 0.4,
       });
     }
     return sigs;
-  }
-
-  // ── Spawn fragment ───────────────────────────────────────────
-  function spawn(x: number, y: number, text: string, sid: number, hover: boolean) {
-    const f = fragsRef.current;
-    if (f.length >= MAX_FRAGS) f.shift();
-    const a = Math.random() * Math.PI * 2;
-    f.push({
-      x, y,
-      vx: Math.cos(a) * FRAG_DRIFT * (hover ? 0.4 : 1),
-      vy: Math.sin(a) * FRAG_DRIFT * (hover ? 0.4 : 1),
-      text, age: 0,
-      life: hover ? 130 : FRAG_LIFE + Math.floor(Math.random() * 50),
-      scale: 0, seqId: sid, isHover: hover,
-    });
-  }
-
-  function handleClick(e: MouseEvent) {
-    const x = e.clientX, y = e.clientY;
-    const count = 2 + Math.floor(Math.random() * 4);
-    if (Math.random() < 0.35) {
-      const seq = SEQUENCES[Math.floor(Math.random() * SEQUENCES.length)];
-      const sid = seqCtr.current++;
-      seq.forEach((t, i) => {
-        setTimeout(() => {
-          spawn(x + (i - (seq.length - 1) / 2) * 55,
-            y + (Math.random() - 0.5) * 35, t, sid, false);
-        }, i * 350);
-      });
-    } else {
-      const sid = seqCtr.current++;
-      for (let i = 0; i < count; i++) {
-        setTimeout(() => {
-          const a = (i / count) * Math.PI * 2 + Math.random() * 0.5;
-          const r = 25 + Math.random() * 50;
-          const pool = Math.random() < 0.15 ? EXPR_COMPLEX : EXPR_STD;
-          spawn(x + Math.cos(a) * r, y + Math.sin(a) * r,
-            pool[Math.floor(Math.random() * pool.length)], sid, false);
-        }, i * 120);
-      }
-    }
   }
 
   // ── Initialize ───────────────────────────────────────────────
@@ -387,17 +278,15 @@ const DevinBackground: React.FC = () => {
     const flowAngles = new Float32Array(flowCols * flowRows);
     for (let i = 0; i < flowAngles.length; i++) flowAngles[i] = rng() * Math.PI * 2;
 
-    const bands = buildBands(cols, rows, rng);
-    const signals = buildSignals(w, h, rng);
-    const noise = makeNoise(42);
-
     stateRef.current = {
-      cols, rows, bands, signals,
-      flowAngles, flowCols, flowRows, w, h, noise,
+      cols, rows,
+      bands: buildBands(cols, rows, w, h, rng),
+      signals: buildSignals(w, h, rng),
+      flowAngles, flowCols, flowRows, w, h,
     };
   }
 
-  // ── Flow angle ───────────────────────────────────────────────
+  // ── Flow angle (very subtle mouse bend) ──────────────────────
   function flowAng(x: number, y: number, t: number, s: NonNullable<typeof stateRef.current>): number {
     const fc = Math.min(Math.max(Math.floor(x / FLOW_RES), 0), s.flowCols - 1);
     const fr = Math.min(Math.max(Math.floor(y / FLOW_RES), 0), s.flowRows - 1);
@@ -405,8 +294,8 @@ const DevinBackground: React.FC = () => {
     const mx = mouseRef.current.x, my = mouseRef.current.y;
     const dx = x - mx, dy = y - my;
     const dist = Math.sqrt(dx * dx + dy * dy);
-    if (dist < MOUSE_RADIUS) {
-      base += Math.atan2(dy, dx) * (1 - dist / MOUSE_RADIUS) * MOUSE_STRENGTH;
+    if (dist < MOUSE_RADIUS && dist > 0) {
+      base += Math.atan2(dy, dx) * (1 - dist / MOUSE_RADIUS) * MOUSE_FLOW_STRENGTH;
     }
     return base;
   }
@@ -420,32 +309,25 @@ const DevinBackground: React.FC = () => {
     if (!ctx) return;
 
     const dpr = window.devicePixelRatio || 1;
-    const { w, h, cols, rows, bands, signals, noise } = s;
+    const { w, h, cols, rows, bands, signals } = s;
     timeRef.current++;
     const time = timeRef.current;
     cursorBlink.current++;
 
     const cmx = mouseRef.current.x, cmy = mouseRef.current.y;
-    const mvx = cmx - prevMouseRef.current.x;
-    const mvy = cmy - prevMouseRef.current.y;
-    prevMouseRef.current = { x: cmx, y: cmy };
-    mouseSpeedRef.current = mouseSpeedRef.current * 0.85 + Math.sqrt(mvx * mvx + mvy * mvy) * 0.15;
-    const mspd = mouseSpeedRef.current;
 
-    // ── Evolve bands ───────────────────────────────────────────
+    // ── Field evolution ────────────────────────────────────────
     evolveTimer.current++;
     if (evolveTimer.current >= EVOLVE_INT) {
       evolveTimer.current = 0;
-      // Fade out 2-4 random bands
       const fadeN = 2 + Math.floor(Math.random() * 3);
-      for (let i = 0; i < fadeN && bands.length > 10; i++) {
+      for (let i = 0; i < fadeN && bands.length > 15; i++) {
         bands[Math.floor(Math.random() * bands.length)].targetOpacity = 0;
       }
-      // Spawn new bands
-      const spawnN = 2 + Math.floor(Math.random() * 3);
       const erng = mkRng(evoSeed.current++);
+      const spawnN = 2 + Math.floor(Math.random() * 3);
       for (let i = 0; i < spawnN; i++) {
-        bands.push(makeBand(cols, rows, erng, time));
+        bands.push(makeBand(cols, rows, w, h, erng, Math.random() < 0.6));
       }
     }
 
@@ -458,6 +340,34 @@ const DevinBackground: React.FC = () => {
       if (b.targetOpacity === 0 && b.opacity < 0.002) bands.splice(i, 1);
     }
 
+    // ── Autonomous events (rare) ───────────────────────────────
+    nextEventRef.current--;
+    if (nextEventRef.current <= 0) {
+      nextEventRef.current = EVENT_INTERVAL_MIN + Math.floor(Math.random() * (EVENT_INTERVAL_MAX - EVENT_INTERVAL_MIN));
+      // Pick a random position biased toward existing structure
+      let ex: number, ey: number;
+      if (bands.length > 0 && Math.random() < 0.7) {
+        const b = bands[Math.floor(Math.random() * bands.length)];
+        ex = (b.startCol + b.segments.length / 2) * CELL_W;
+        ey = b.y * CELL_H;
+      } else {
+        ex = w * (0.2 + Math.random() * 0.6);
+        ey = h * (0.2 + Math.random() * 0.6);
+      }
+      eventsRef.current.push({
+        x: ex, y: ey,
+        text: EVENT_HINTS[Math.floor(Math.random() * EVENT_HINTS.length)],
+        age: 0, life: 180, // ~3s
+      });
+    }
+
+    // Update events
+    const events = eventsRef.current;
+    for (let i = events.length - 1; i >= 0; i--) {
+      events[i].age++;
+      if (events[i].age >= events[i].life) events.splice(i, 1);
+    }
+
     ctx.save();
     ctx.scale(dpr, dpr);
     ctx.fillStyle = BG;
@@ -465,31 +375,18 @@ const DevinBackground: React.FC = () => {
     ctx.font = `${CHAR_SIZE}px "SF Mono","Fira Code","Cascadia Code","Consolas",monospace`;
     ctx.textBaseline = 'middle';
 
-    // ── Build structure map from bands ─────────────────────────
-    // Rather than a Float32Array for every cell (expensive for tight grid),
-    // we build a sparse lookup: Map<"row,col" -> {charIdx, alpha}>
-    // But that's slow too. Instead, iterate bands per-row.
-
-    // Pre-index bands by row for fast lookup
+    // Pre-index bands by row
     const bandsByRow: Map<number, StreamBand[]> = new Map();
     for (const b of bands) {
-      const existing = bandsByRow.get(b.y);
-      if (existing) existing.push(b);
-      else bandsByRow.set(b.y, [b]);
+      if (b.opacity < 0.003) continue;
+      const arr = bandsByRow.get(b.y);
+      if (arr) arr.push(b); else bandsByRow.set(b.y, [b]);
     }
 
-    // ── Signal glow: precompute per-cell glow ──────────────────
-    // Use a sparse map for signal glow since grid is very dense
-    const glowCells: Map<number, number> = new Map(); // key = row*cols+col
-
+    // ── Signal glow (sparse) ───────────────────────────────────
+    const glowCells: Map<number, number> = new Map();
     for (const sig of signals) {
-      const hpi = Math.min(Math.floor(sig.head * (sig.pts.length - 1)), sig.pts.length - 1);
-      const hp = sig.pts[hpi];
-      const sd = Math.sqrt((hp.x - cmx) ** 2 + (hp.y - cmy) ** 2);
-      const sm = sd < MOUSE_RADIUS
-        ? 1 + (1 - sd / MOUSE_RADIUS) * 2.5 * Math.min(mspd / 8, 1)
-        : 1;
-      sig.head += sig.speed * sm;
+      sig.head += sig.speed;
       if (sig.head > 1) sig.head -= 1;
 
       const headIdx = sig.head * (sig.pts.length - 1);
@@ -509,32 +406,15 @@ const DevinBackground: React.FC = () => {
             if (c < 0 || c >= cols || r < 0 || r >= rows) continue;
             const key = r * cols + c;
             const dist = Math.sqrt(dc * dc + dr * dr);
-            const glow = fade * sig.bright * Math.max(0, 1 - dist * 0.5);
-            glowCells.set(key, Math.min(1, (glowCells.get(key) || 0) + glow));
+            const gv = fade * sig.bright * Math.max(0, 1 - dist * 0.5);
+            glowCells.set(key, Math.min(1, (glowCells.get(key) || 0) + gv));
           }
         }
       }
     }
 
-    // ── Hover state ────────────────────────────────────────────
-    const mouseOn = cmx > 0 && cmy > 0 && cmx < w && cmy < h;
-    if (mouseOn) {
-      hoverCD.current--;
-      if (hoverCD.current <= 0) {
-        hoverCD.current = HOVER_FRAG_CD;
-        if (Math.random() < HOVER_FRAG_P && mspd > 1.5) {
-          spawn(
-            cmx + (Math.random() - 0.5) * HOVER_RADIUS,
-            cmy + (Math.random() - 0.5) * HOVER_RADIUS,
-            EXPR_HOVER[Math.floor(Math.random() * EXPR_HOVER.length)],
-            -1, true,
-          );
-        }
-      }
-    }
-
-    // ── Render all cells ───────────────────────────────────────
-    ctx.textAlign = 'left'; // monospace left-aligned for proper spacing
+    // ── Render cells ───────────────────────────────────────────
+    ctx.textAlign = 'left';
 
     for (let row = 0; row < rows; row++) {
       const py = row * CELL_H;
@@ -543,31 +423,21 @@ const DevinBackground: React.FC = () => {
       for (let col = 0; col < cols; col++) {
         const px = col * CELL_W;
 
-        // Flow displacement
+        // Very subtle flow displacement
         const ang = flowAng(px, py, time, s);
-        let ox = Math.cos(ang) * 0.3 * Math.sin(time * 0.003 + col * 0.08);
-        let oy = Math.sin(ang) * 0.3 * Math.cos(time * 0.002 + row * 0.06);
-
-        // Mouse pull
-        const mdx = cmx - px, mdy = cmy - py;
-        const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
-        if (mDist < MOUSE_RADIUS && mDist > 0) {
-          const pt = (1 - mDist / MOUSE_RADIUS);
-          ox += (mdx / mDist) * pt * pt * MOUSE_PULL;
-          oy += (mdy / mDist) * pt * pt * MOUSE_PULL;
-        }
-
+        const ox = Math.cos(ang) * 0.2 * Math.sin(time * 0.002 + col * 0.06);
+        const oy = Math.sin(ang) * 0.2 * Math.cos(time * 0.0015 + row * 0.04);
         const dx = px + ox;
         const dy = py + oy;
 
-        // Check if this cell has structure from a band
+        // Structure from bands
         let structChar = -1;
         let structAlpha = 0;
         if (rowBands) {
           for (const b of rowBands) {
-            const localCol = col - b.startCol;
-            if (localCol >= 0 && localCol < b.segments.length) {
-              const ci = b.segments[localCol];
+            const lc = col - b.startCol;
+            if (lc >= 0 && lc < b.segments.length) {
+              const ci = b.segments[lc];
               if (ci >= 0) {
                 structChar = ci;
                 structAlpha = Math.max(structAlpha, b.opacity);
@@ -576,92 +446,49 @@ const DevinBackground: React.FC = () => {
           }
         }
 
-        // Signal glow
         const cellKey = row * cols + col;
         const glow = glowCells.get(cellKey) || 0;
 
-        // Hover reveal
-        let hoverBoost = 0;
-        if (mouseOn && mDist < HOVER_RADIUS) {
-          const ht = 1 - mDist / HOVER_RADIUS;
-          hoverBoost = ht * ht * 0.4;
-          // Reveal hidden noise structure
-          if (structChar < 0) {
-            const nv = noise(col * 0.12, row * 0.12 + time * 0.0001);
-            if (nv > 0.1 && hoverBoost > 0.05) {
-              structChar = Math.floor(Math.abs(nv * 8)) % STRUCT_CHARS.length;
-              structAlpha = hoverBoost * nv * 1.5;
-            }
-          }
-        }
+        // Mouse: very subtle local brightness boost only
+        const mdx = cmx - px, mdy = cmy - py;
+        const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+        const mBoost = mDist < MOUSE_RADIUS
+          ? (1 - mDist / MOUSE_RADIUS) * MOUSE_BRIGHT_BOOST
+          : 0;
 
-        if (structChar >= 0 && structAlpha > 0.005) {
-          const ch = STRUCT_CHARS[structChar];
-          const alpha = structAlpha + glow * 0.5 + hoverBoost * 0.1;
-          const isReveal = hoverBoost > 0.05 && structAlpha < 0.1;
-          const base = isReveal ? C_HOVER : C_STRUCT;
-          const r = base[0] + glow * (C_SIGNAL[0] - base[0]);
-          const g = base[1] + glow * (C_SIGNAL[1] - base[1]);
-          const b = base[2] + glow * (C_SIGNAL[2] - base[2]);
-          ctx.fillStyle = `rgba(${r | 0},${g | 0},${b | 0},${Math.min(0.85, alpha)})`;
+        if (structChar >= 0 && structAlpha > 0.003) {
+          const ch = CHARS[structChar];
+          const alpha = structAlpha + glow * 0.4 + mBoost;
+          const r = C_STRUCT[0] + glow * (C_SIGNAL[0] - C_STRUCT[0]);
+          const g = C_STRUCT[1] + glow * (C_SIGNAL[1] - C_STRUCT[1]);
+          const b = C_STRUCT[2] + glow * (C_SIGNAL[2] - C_STRUCT[2]);
+          ctx.fillStyle = `rgba(${r | 0},${g | 0},${b | 0},${Math.min(0.7, alpha)})`;
           ctx.fillText(ch, dx, dy);
         } else if (glow > 0.01) {
-          ctx.fillStyle = `rgba(${C_SIGNAL[0]},${C_SIGNAL[1]},${C_SIGNAL[2]},${Math.min(1, GRID_ALPHA + glow * 0.4)})`;
+          ctx.fillStyle = `rgba(${C_SIGNAL[0]},${C_SIGNAL[1]},${C_SIGNAL[2]},${Math.min(0.8, GRID_ALPHA + glow * 0.35)})`;
           ctx.fillText(GRID_CHAR, dx, dy);
         } else {
-          const ga = GRID_ALPHA + (hoverBoost > 0 ? hoverBoost * 0.035 : 0);
+          const ga = GRID_ALPHA + mBoost;
           ctx.fillStyle = `rgba(${C_GRID[0]},${C_GRID[1]},${C_GRID[2]},${ga})`;
           ctx.fillText(GRID_CHAR, dx, dy);
         }
       }
     }
 
-    // ── Fragments ──────────────────────────────────────────────
-    const frags = fragsRef.current;
-    for (let i = frags.length - 1; i >= 0; i--) {
-      const f = frags[i];
-      f.age++;
-      f.x += f.vx; f.y += f.vy;
-      const fa = flowAng(f.x, f.y, time, s);
-      f.vx += Math.cos(fa) * 0.002; f.vy += Math.sin(fa) * 0.002;
-      f.vx *= 0.997; f.vy *= 0.997;
-      if (f.age < FRAG_FADEIN) f.scale = f.age / FRAG_FADEIN;
-      else if (f.age > f.life - FRAG_FADEOUT) f.scale = Math.max(0, (f.life - f.age) / FRAG_FADEOUT);
-      else f.scale = 1;
-      if (f.age >= f.life) frags.splice(i, 1);
-    }
-
-    // Connections
-    ctx.lineWidth = 0.5;
-    for (let i = 0; i < frags.length; i++) {
-      if (frags[i].isHover) continue;
-      for (let j = i + 1; j < frags.length; j++) {
-        if (frags[j].isHover) continue;
-        const a = frags[i], b = frags[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const sameSeq = a.seqId >= 0 && a.seqId === b.seqId;
-        const maxD = sameSeq ? CONN_DIST * 2.2 : CONN_DIST;
-        if (dist < maxD) {
-          const alpha = (1 - dist / maxD) * Math.min(a.scale, b.scale) *
-            (sameSeq ? CONN_ALPHA * 3.5 : CONN_ALPHA);
-          ctx.strokeStyle = `rgba(${C_FRAG[0]},${C_FRAG[1]},${C_FRAG[2]},${alpha})`;
-          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-        }
-      }
-    }
-
-    // Fragment text
+    // ── Autonomous events (faint system emissions) ─────────────
     ctx.textAlign = 'center';
-    for (const f of frags) {
-      if (f.scale <= 0) continue;
-      const alpha = f.scale * (f.isHover ? 0.32 : 0.55);
-      const fs = (f.isHover ? 10 : 13) * (0.85 + f.scale * 0.15);
+    for (const ev of events) {
+      const progress = ev.age / ev.life;
+      // Smooth bell curve: fade in 20%, hold 50%, fade out 30%
+      let alpha: number;
+      if (progress < 0.2) alpha = progress / 0.2;
+      else if (progress > 0.7) alpha = (1 - progress) / 0.3;
+      else alpha = 1;
+      alpha *= 0.18; // very faint
+      const fs = 9;
       ctx.font = `${fs}px "SF Mono","Fira Code","Cascadia Code",monospace`;
-      ctx.textBaseline = 'middle';
-      const rgb = f.isHover ? C_HOVER : C_FRAG;
-      ctx.fillStyle = `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${alpha})`;
-      ctx.fillText(f.text, f.x, f.y);
+      ctx.fillStyle = `rgba(${C_EVENT[0]},${C_EVENT[1]},${C_EVENT[2]},${alpha})`;
+      ctx.fillText(ev.text, ev.x, ev.y);
     }
 
     // ── Center text ────────────────────────────────────────────
@@ -671,9 +498,11 @@ const DevinBackground: React.FC = () => {
     ctx.textBaseline = 'middle';
     ctx.fillStyle = 'rgba(203,213,225,0.88)';
     ctx.fillText('Arjun Mathur:', w / 2, h / 2);
+
+    // Blinking cursor
     if ((cursorBlink.current % 60) < 35) {
       const met = ctx.measureText('Arjun Mathur:');
-      ctx.fillStyle = 'rgba(203,213,225,0.6)';
+      ctx.fillStyle = 'rgba(203,213,225,0.55)';
       ctx.fillRect(w / 2 + met.width / 2 + 5, h / 2 - ts * 0.34, 2, ts * 0.68);
     }
 
@@ -686,21 +515,18 @@ const DevinBackground: React.FC = () => {
     animRef.current = requestAnimationFrame(render);
     const onR = () => initialize();
     const onM = (e: MouseEvent) => { mouseRef.current = { x: e.clientX, y: e.clientY }; };
-    const onC = (e: MouseEvent) => handleClick(e);
     window.addEventListener('resize', onR);
     window.addEventListener('mousemove', onM);
-    window.addEventListener('click', onC);
     return () => {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener('resize', onR);
       window.removeEventListener('mousemove', onM);
-      window.removeEventListener('click', onC);
     };
   }, []); // eslint-disable-line
 
   return (
     <canvas ref={canvasRef}
-      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', cursor: 'crosshair' }}
+      style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
     />
   );
 };
