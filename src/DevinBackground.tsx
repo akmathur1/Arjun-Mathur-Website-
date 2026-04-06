@@ -5,15 +5,14 @@ const CELL_W = 12;
 const CELL_H = 16;
 const CHAR_SIZE = 10;
 const GRID_CHAR = '+';
-const GRID_ALPHA = 0.04;
-const BG = '#080d18';
+const GRID_ALPHA = 0.08;          // always visible grid
 const CHARS = '@#%=+-.:;*'.split('');
 
-// Muted blue-gray palette
-const C_GRID: [number, number, number] = [70, 90, 140];
-const C_STRUCT: [number, number, number] = [65, 85, 130];
-const C_SIGNAL: [number, number, number] = [100, 140, 200];
-const C_EVENT: [number, number, number] = [90, 120, 175];
+// Blue-tinted palette — 3 brightness tiers
+const C_GRID: [number, number, number] = [120, 160, 220];    // tier 1: faint but visible
+const C_STRUCT: [number, number, number] = [140, 180, 255];  // tier 2: medium readable
+const C_SIGNAL: [number, number, number] = [180, 220, 255];  // tier 3: bright active
+const C_EVENT: [number, number, number] = [150, 190, 240];
 
 // Flow
 const FLOW_RES = 50;
@@ -161,7 +160,7 @@ const DevinBackground: React.FC = () => {
 
     return {
       y, startCol, segments,
-      opacity: 0, targetOpacity: 0.1 + rng() * 0.2,
+      opacity: 0, targetOpacity: 0.15 + rng() * 0.25,
     };
   }
 
@@ -216,8 +215,8 @@ const DevinBackground: React.FC = () => {
           y: row,
           startCol: zoneStartCol + Math.floor((rng() - 0.5) * 5),
           segments: segs,
-          opacity: 0.1 + rng() * 0.2,
-          targetOpacity: 0.1 + rng() * 0.2,
+          opacity: 0.15 + rng() * 0.25,
+          targetOpacity: 0.15 + rng() * 0.25,
         });
       }
     }
@@ -370,10 +369,18 @@ const DevinBackground: React.FC = () => {
 
     ctx.save();
     ctx.scale(dpr, dpr);
-    ctx.fillStyle = BG;
+    ctx.imageSmoothingEnabled = false;
+
+    // Background: radial gradient for depth
+    const grad = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, Math.max(w, h) * 0.7);
+    grad.addColorStop(0, '#0F172A');
+    grad.addColorStop(0.6, '#0B1220');
+    grad.addColorStop(1, '#070C16');
+    ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
+
     ctx.font = `${CHAR_SIZE}px "SF Mono","Fira Code","Cascadia Code","Consolas",monospace`;
-    ctx.textBaseline = 'middle';
+    ctx.textBaseline = 'top';
 
     // Pre-index bands by row
     const bandsByRow: Map<number, StreamBand[]> = new Map();
@@ -423,12 +430,12 @@ const DevinBackground: React.FC = () => {
       for (let col = 0; col < cols; col++) {
         const px = col * CELL_W;
 
-        // Very subtle flow displacement
+        // Very subtle flow displacement — snapped to integers for crisp rendering
         const ang = flowAng(px, py, time, s);
         const ox = Math.cos(ang) * 0.2 * Math.sin(time * 0.002 + col * 0.06);
         const oy = Math.sin(ang) * 0.2 * Math.cos(time * 0.0015 + row * 0.04);
-        const dx = px + ox;
-        const dy = py + oy;
+        const dx = (px + ox) | 0;
+        const dy = (py + oy) | 0;
 
         // Structure from bands
         let structChar = -1;
@@ -457,17 +464,21 @@ const DevinBackground: React.FC = () => {
           : 0;
 
         if (structChar >= 0 && structAlpha > 0.003) {
+          // Tier 2: structure — always legible
           const ch = CHARS[structChar];
-          const alpha = structAlpha + glow * 0.4 + mBoost;
+          const alpha = 0.08 + structAlpha * 0.6 + glow * 0.5 + mBoost;
           const r = C_STRUCT[0] + glow * (C_SIGNAL[0] - C_STRUCT[0]);
           const g = C_STRUCT[1] + glow * (C_SIGNAL[1] - C_STRUCT[1]);
           const b = C_STRUCT[2] + glow * (C_SIGNAL[2] - C_STRUCT[2]);
-          ctx.fillStyle = `rgba(${r | 0},${g | 0},${b | 0},${Math.min(0.7, alpha)})`;
+          ctx.fillStyle = `rgba(${r | 0},${g | 0},${b | 0},${Math.min(0.85, alpha)})`;
           ctx.fillText(ch, dx, dy);
         } else if (glow > 0.01) {
-          ctx.fillStyle = `rgba(${C_SIGNAL[0]},${C_SIGNAL[1]},${C_SIGNAL[2]},${Math.min(0.8, GRID_ALPHA + glow * 0.35)})`;
+          // Tier 3: active signal — brightest
+          const alpha = GRID_ALPHA + glow * 0.55;
+          ctx.fillStyle = `rgba(${C_SIGNAL[0]},${C_SIGNAL[1]},${C_SIGNAL[2]},${Math.min(0.9, alpha)})`;
           ctx.fillText(GRID_CHAR, dx, dy);
         } else {
+          // Tier 1: base grid — faint but always visible
           const ga = GRID_ALPHA + mBoost;
           ctx.fillStyle = `rgba(${C_GRID[0]},${C_GRID[1]},${C_GRID[2]},${ga})`;
           ctx.fillText(GRID_CHAR, dx, dy);
@@ -477,6 +488,7 @@ const DevinBackground: React.FC = () => {
 
     // ── Autonomous events (faint system emissions) ─────────────
     ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
     for (const ev of events) {
       const progress = ev.age / ev.life;
       // Smooth bell curve: fade in 20%, hold 50%, fade out 30%
