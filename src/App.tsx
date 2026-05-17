@@ -3,7 +3,7 @@ import DevinBackground from './DevinBackground';
 
 const App: React.FC = () => {
   return (
-    <div style={{ width: '100vw', height: '100vh', position: 'relative', background: '#020617' }}>
+    <div style={{ width: '100vw', height: '100vh', position: 'relative', background: '#EDECE8' }}>
       <DevinBackground />
     </div>
   );

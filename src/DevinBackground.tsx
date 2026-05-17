@@ -8,11 +8,11 @@ const GRID_CHAR = '+';
 const GRID_ALPHA = 0.06;
 const CHARS = '@#%=+-.:;*'.split('');
 
-// Blue-tinted palette — 3 brightness tiers
-const C_GRID: [number, number, number] = [120, 160, 220];
-const C_STRUCT: [number, number, number] = [140, 180, 255];
-const C_SIGNAL: [number, number, number] = [180, 220, 255];
-const C_EVENT: [number, number, number] = [150, 190, 240];
+// Blue-tinted palette — 3 brightness tiers (dark-on-light)
+const C_GRID: [number, number, number] = [70, 95, 140];
+const C_STRUCT: [number, number, number] = [30, 55, 110];
+const C_SIGNAL: [number, number, number] = [15, 65, 160];
+const C_EVENT: [number, number, number] = [50, 75, 130];
 
 // Flow
 const FLOW_RES = 50;
@@ -430,9 +430,9 @@ const DevinBackground: React.FC = () => {
 
     // Background gradient
     const grad = ctx.createRadialGradient(w * 0.6, h * 0.4, 0, w * 0.5, h * 0.5, Math.max(w, h) * 0.75);
-    grad.addColorStop(0, '#0F172A');
-    grad.addColorStop(0.5, '#0B1220');
-    grad.addColorStop(1, '#070C16');
+    grad.addColorStop(0, '#F4F2EE');
+    grad.addColorStop(0.5, '#EDECE8');
+    grad.addColorStop(1, '#E2E0DA');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
 
@@ -570,12 +570,12 @@ const DevinBackground: React.FC = () => {
     ctx.font = `300 ${ts}px "SF Mono","Fira Code","Cascadia Code",monospace`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillStyle = 'rgba(203,213,225,0.88)';
+    ctx.fillStyle = 'rgba(30,40,65,0.88)';
     ctx.fillText('Arjun Mathur:', w / 2, h / 2);
 
     if ((cursorBlink.current % 60) < 35) {
       const met = ctx.measureText('Arjun Mathur:');
-      ctx.fillStyle = 'rgba(203,213,225,0.55)';
+      ctx.fillStyle = 'rgba(30,40,65,0.55)';
       ctx.fillRect(w / 2 + met.width / 2 + 5, h / 2 - ts * 0.34, 2, ts * 0.68);
     }
 
