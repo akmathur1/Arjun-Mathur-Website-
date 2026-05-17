@@ -7,8 +7,8 @@ const COLORS = {
   line: '#1a1a1a',
 };
 
-const SERIF = '"Tiempos Headline", "Source Serif Pro", "PT Serif", "Iowan Old Style", Georgia, serif';
-const MONO = '"SF Mono", "JetBrains Mono", "Fira Code", "Cascadia Code", "Consolas", monospace';
+const SERIF = '"Newsreader", "Tiempos Headline", "Source Serif 4", "Iowan Old Style", Georgia, serif';
+const MONO = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace';
 
 type Entry = {
   title: React.ReactNode;
