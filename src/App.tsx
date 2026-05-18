@@ -407,35 +407,256 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             </figure>
           )}
 
-          <p
-            style={{
-              fontFamily: MONO,
-              fontSize: 16,
-              lineHeight: 1.7,
-              maxWidth: 760,
-              marginTop: 40,
-              color: COLORS.text,
-            }}
-          >
-            {entry.description}
-          </p>
-
-          <p
-            style={{
-              fontFamily: MONO,
-              fontSize: 14,
-              lineHeight: 1.6,
-              maxWidth: 760,
-              marginTop: 48,
-              color: COLORS.muted,
-            }}
-          >
-            More detail coming soon — figures, methods, and write-up in progress.
-          </p>
+          {slug === 'fus-idp-hamiltonians' ? (
+            <FUSProjectBody />
+          ) : (
+            <p
+              style={{
+                fontFamily: MONO,
+                fontSize: 16,
+                lineHeight: 1.7,
+                maxWidth: 760,
+                marginTop: 40,
+                color: COLORS.text,
+              }}
+            >
+              {entry.description}
+            </p>
+          )}
         </article>
       )}
     </PageShell>
   );
 };
+
+const BodyParagraph: React.FC<{ children: React.ReactNode; top?: number }> = ({
+  children,
+  top = 24,
+}) => (
+  <p
+    style={{
+      fontFamily: MONO,
+      fontSize: 15.5,
+      lineHeight: 1.75,
+      maxWidth: 760,
+      marginTop: top,
+      color: COLORS.text,
+    }}
+  >
+    {children}
+  </p>
+);
+
+const InlineFigure: React.FC<{ src: string; alt: string; caption: React.ReactNode }> = ({
+  src,
+  alt,
+  caption,
+}) => (
+  <figure style={{ marginTop: 40, maxWidth: 820 }}>
+    <img
+      src={src}
+      alt={alt}
+      style={{
+        display: 'block',
+        width: '100%',
+        height: 'auto',
+        border: `1px solid ${COLORS.text}`,
+        background: '#fff',
+      }}
+    />
+    <figcaption
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        color: COLORS.muted,
+        marginTop: 10,
+        maxWidth: 760,
+      }}
+    >
+      {caption}
+    </figcaption>
+  </figure>
+);
+
+const FUSProjectBody: React.FC = () => (
+  <div style={{ marginTop: 40 }}>
+    <BodyParagraph top={0}>
+      Sequence-resolved coarse-grained Hamiltonians for FUS-derived intrinsically
+      disordered protein variants. This work explores how emergent condensate behavior
+      can be reconstructed from reduced interaction representations while preserving
+      the dominant thermodynamic structure governing intrinsically disordered systems.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Our current framework combines MPIPI interaction parameterization, stochastic
+      Langevin dynamics, and coarse-grained phase simulations to study how local
+      sequence-level perturbations propagate into mesoscale condensate organization.
+      Rather than treating phase separation as a purely phenomenological process, the
+      objective is to recover the latent energetic structure that governs density
+      stabilization, condensate topology, and sequence-dependent phase transitions.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      A major computational focus is dimensional reduction of high-dimensional
+      interaction tensors into physically interpretable Hamiltonian representations.
+      We are particularly interested in whether a constrained subset of interaction
+      modes can preserve the dominant statistical mechanics of the full molecular
+      system while dramatically reducing computational complexity. Early results
+      suggest that many emergent condensate properties may lie on compact energetic
+      manifolds that can be reconstructed from lower-dimensional coarse-grained
+      operators.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      The computational infrastructure is built primarily in Julia to support
+      scalable numerical simulation, differentiable scientific computing, and
+      high-performance tensor operations. Current systems integrate
+      DifferentialEquations.jl, CUDA.jl, StaticArrays.jl, LinearAlgebra,
+      KernelDensity.jl, Flux.jl, and custom simulation tooling designed for
+      large-scale stochastic biomolecular dynamics. Julia has been especially
+      valuable for combining high-level scientific abstraction with low-level
+      numerical performance, allowing rapid iteration on Hamiltonian formulations,
+      parameter sweeps, and GPU-accelerated phase simulations without sacrificing
+      computational efficiency.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      A significant inspiration for this direction comes from recent work in
+      physics-constrained neural Hamiltonians and coarse-grained electronic
+      structure modeling. In particular, the Orbital Electronic Coarse Graining
+      framework introduced by Maier and Jackson proposes a physically constrained
+      Hamiltonian learning approach where reduced overlap operators are used to
+      reconstruct emergent electronic structure from compressed molecular
+      representations. Their work is compelling because it moves beyond purely
+      black-box regression and instead attempts to preserve physically meaningful
+      operator structure during dimensional reduction.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      At the same time, we view many current coarse-graining approaches as still
+      fundamentally limited by static projection assumptions and constrained
+      representations of emergent dynamics. Existing methods often preserve local
+      observables while losing higher-order collective structure, particularly
+      under nonequilibrium evolution or strongly fluctuating condensate regimes.
+      In systems like intrinsically disordered proteins, where transient
+      interaction networks and sequence-specific fluctuations dominate
+      organization, preserving only low-order averaged structure may fail to
+      capture the true dynamical landscape governing condensate evolution.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Our work attempts to move further toward adaptive Hamiltonian systems that
+      evolve directly with sequence-conditioned interaction geometry. Rather than
+      projecting dynamics into a fixed reduced basis, we are exploring whether
+      latent energetic manifolds themselves can become learnable dynamical objects
+      capable of continuously restructuring under changing thermodynamic
+      conditions.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      We are also heavily interested in weak-form Hamiltonian learning and
+      coarse-grained surrogate modeling frameworks inspired by recent work on
+      WSINDy-based Hamiltonian reduction. That work demonstrates that weak-form
+      equation learning can recover reduced Hamiltonian structure directly from
+      noisy dynamical trajectories while preserving physically meaningful
+      invariants. The broader implication is extremely important for biomolecular
+      systems: large-scale thermodynamic organization may be recoverable from
+      sparse observed dynamics without requiring full reconstruction of
+      microscopic degrees of freedom.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/fus/wsindy-trajectories.png"
+      alt="WSINDy multi-model Hamiltonian inference: trajectories recovered at increasing forcing scales"
+      caption={
+        <>
+          <strong>Fig. 1.</strong> Multi-model Hamiltonian recovery via weak-form
+          sparse identification. Trajectories Ẑ (cyan, yellow, red) learned by
+          WSINDy from noisy data Z (black) of a nearly-periodic two-oscillator
+          system, evaluated across σ<sub>φf</sub> ∈ {'{'}1, 4, 16{'}'}. As the
+          forcing scale grows, the inferred Hamiltonian transitions from the
+          limiting roto-rate H<sub>0</sub>, through the full system H<sub>ε</sub>,
+          to the leading-order reduced Hamiltonian H<sub>0</sub><sup>μ</sup> —
+          recovering the adiabatic invariant directly from trajectory statistics.
+          The lower panels show true-positive rates and parameter-error norms
+          remaining high across model classes, evidencing robustness of the weak
+          form under multi-scale separation and additive noise. The analogue we
+          care about: in IDP condensates, fast intra-residue motions screen slow
+          collective reorganization in much the same way σ<sub>φf</sub>
+          parameterizes here.
+        </>
+      }
+    />
+
+    <InlineFigure
+      src="/projects/fus/wsindy-two-oscillator.png"
+      alt="Two-oscillator Hamiltonian system: equations of motion and averaged reduced Hamiltonian"
+      caption={
+        <>
+          <strong>Fig. 2.</strong> Canonical fast–slow Hamiltonian testbed (Eq. 28).
+          Fast variables (Q, P) on 𝒪(1) timescales couple to slow variables
+          (q, p) on 𝒪(ε) timescales through V(Q, q) = Qq sin(2Q + 2q). The
+          limiting adiabatic invariant μ<sub>0</sub> = ½(Q² + P²) labels orbits of
+          the roto-rate R<sub>0</sub>, and averaging H<sub>ε</sub> around the
+          time-t flow yields a reduced Hamiltonian H<sub>0</sub><sup>μ</sup>(q, p)
+          expressible analytically in terms of Bessel functions of the first kind.
+          The structural lesson carries directly to biomolecular condensates: a
+          clean separation between bonded backbone oscillation and slow density
+          reorganization should admit a similarly tractable averaged Hamiltonian,
+          and the sin(2Q + 2q)-style coupling is a useful caricature of
+          aromatic-sticker periodicity along the disordered chain.
+        </>
+      }
+    />
+
+    <InlineFigure
+      src="/projects/fus/wsindy-henon-heiles.png"
+      alt="Hénon–Heiles embedded pendulum: 3-DOF Hamiltonian with elliptic-integral angular frequency"
+      caption={
+        <>
+          <strong>Fig. 3.</strong> Hénon–Heiles embedded pendulum (Example 2). A
+          3-DOF Hamiltonian of the form H<sub>ε</sub>(z) = ½P² + α²(1 − cos Q) +
+          ε H<sub>1</sub>(z), separating a pendulum subsystem from two
+          slow-coupled oscillators. The limiting angular frequency
+          ω<sub>0</sub>(z) admits a closed form via the complete elliptic
+          integral of the first kind, and the leading-order adiabatic invariant
+          μ<sub>0</sub> reduces by averaging against the time-θ flow map
+          Φ<sub>θ</sub>. This higher-dimensional case demonstrates that weak-form
+          Hamiltonian reduction holds when fast–slow separation is mediated by
+          strongly nonlinear potentials — the regime most relevant to IDP systems
+          where cation-π, π-π, and aromatic-sticker interactions dominate
+          condensate energetics and produce comparable elliptic-type closed-form
+          structure under the right coordinate choice.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      Long-term, the goal is to develop scalable computational architectures
+      capable of bridging molecular-scale interaction statistics with emergent
+      condensate physics across biologically relevant systems. Future directions
+      include differentiable Hamiltonian learning, adaptive coarse-grained basis
+      evolution, latent phase landscape reconstruction, inverse interaction
+      estimation, and physically constrained generative simulation systems capable
+      of learning reduced thermodynamic structure directly from trajectory
+      evolution.
+    </BodyParagraph>
+
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 14,
+        lineHeight: 1.6,
+        maxWidth: 760,
+        marginTop: 56,
+        color: COLORS.muted,
+      }}
+    >
+      Figures, simulation studies, and full technical write-up currently in
+      development with Dr. Trevor GrandPré.
+    </p>
+  </div>
+);
 
 export default App;
