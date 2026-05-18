@@ -19,50 +19,21 @@ type Entry = {
   description: string;
   featured?: boolean;
   thumbnail?: React.ReactNode;
+  poster?: { src: string; alt: string };
 };
 
-const PhysicsThumbnail: React.FC = () => (
-  <svg
-    viewBox="0 0 160 100"
-    width={140}
-    height={88}
-    style={{ display: 'block', border: `1px solid ${COLORS.text}`, background: COLORS.bg }}
-    aria-label="Physics Work"
-  >
-    {/* Dense condensate phase, left */}
-    <g fill={COLORS.text}>
-      {[
-        [28, 30], [38, 36], [22, 44], [34, 50], [44, 44], [30, 58],
-        [42, 62], [24, 68], [36, 72], [50, 54], [52, 36], [18, 56],
-        [46, 70], [40, 28], [28, 78],
-      ].map(([cx, cy], i) => (
-        <circle key={`d-${i}`} cx={cx} cy={cy} r={2.2} />
-      ))}
-    </g>
-    {/* Dilute phase, right */}
-    <g fill={COLORS.text} opacity={0.55}>
-      {[
-        [82, 26], [104, 38], [128, 30], [146, 52], [92, 60], [118, 70],
-        [138, 78], [100, 84], [86, 44], [124, 54], [110, 24],
-      ].map(([cx, cy], i) => (
-        <circle key={`s-${i}`} cx={cx} cy={cy} r={1.6} />
-      ))}
-    </g>
-    {/* Interface */}
-    <line x1={66} y1={8} x2={66} y2={92} stroke={COLORS.text} strokeWidth={0.5} strokeDasharray="2 3" opacity={0.6} />
-    {/* Label */}
-    <text
-      x={80}
-      y={97}
-      textAnchor="middle"
-      fontFamily={MONO}
-      fontSize={6}
-      fill={COLORS.muted}
-      letterSpacing={1}
-    >
-      PHYSICS · WORK
-    </text>
-  </svg>
+const FUSThumbnail: React.FC = () => (
+  <img
+    src="/projects/fus/pipeline.png"
+    alt="Physics-informed basis and ML parameterization pipeline"
+    style={{
+      display: 'block',
+      width: 180,
+      height: 'auto',
+      border: `1px solid ${COLORS.text}`,
+      background: COLORS.bg,
+    }}
+  />
 );
 
 const ENTRIES: Entry[] = [
@@ -73,7 +44,11 @@ const ENTRIES: Entry[] = [
     description:
       'Sequence-resolved coarse-grained Hamiltonians for FUS-derived intrinsically disordered protein variants. MPIPI parameterization, Langevin dynamics, and density–temperature phase diagrams probing sequence-dependent condensate organization. With Dr. Trevor GrandPré.',
     featured: true,
-    thumbnail: <PhysicsThumbnail />,
+    thumbnail: <FUSThumbnail />,
+    poster: {
+      src: '/projects/fus/poster.png',
+      alt: 'WashU poster: bead-per-residue simulations, ML segmentation, and coarse-grained model reduction of FUS-derived IDPs',
+    },
   },
   {
     title: 'Second Entry Title',
@@ -416,8 +391,20 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             </span>
           </div>
 
-          {entry.thumbnail && (
-            <div style={{ marginTop: 32 }}>{entry.thumbnail}</div>
+          {entry.poster && (
+            <figure style={{ marginTop: 40 }}>
+              <img
+                src={entry.poster.src}
+                alt={entry.poster.alt}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  height: 'auto',
+                  border: `1px solid ${COLORS.text}`,
+                  background: '#fff',
+                }}
+              />
+            </figure>
           )}
 
           <p
@@ -426,7 +413,7 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
               fontSize: 16,
               lineHeight: 1.7,
               maxWidth: 760,
-              marginTop: 32,
+              marginTop: 40,
               color: COLORS.text,
             }}
           >
