@@ -113,9 +113,14 @@ const App: React.FC = () => {
             color: COLORS.text,
           }}
         >
-          Short bio placeholder. Replace this paragraph with a few sentences describing
-          who you are, what you work on, and what visitors should expect to find here.
-          Keep it to three or four lines so it stays balanced with the header above.
+          I'm Arjun Mathur, founder of Molterra. I spend most of my time thinking about
+          computation, large systems, and the strange ways technology shapes the physical
+          world around us. My work sits closest to industrial software and scientific
+          infrastructure, especially in places where important work still depends on
+          fragmented tools and human intuition. I'm interested in building systems that
+          quietly accelerate progress behind the scenes. Outside of that, I write
+          occasionally about technology, research, markets, and ideas that feel a little
+          ahead of their time.
         </p>
 
         {/* Timeline */}
