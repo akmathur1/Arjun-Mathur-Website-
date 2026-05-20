@@ -45,10 +45,6 @@ const ENTRIES: Entry[] = [
       'Sequence-resolved coarse-grained Hamiltonians for FUS-derived intrinsically disordered protein variants. MPIPI parameterization, Langevin dynamics, and density–temperature phase diagrams probing sequence-dependent condensate organization. With Dr. Trevor GrandPré.',
     featured: true,
     thumbnail: <FUSThumbnail />,
-    poster: {
-      src: '/projects/fus/poster.png',
-      alt: 'WashU poster: bead-per-residue simulations, ML segmentation, and coarse-grained model reduction of FUS-derived IDPs',
-    },
   },
   {
     title: 'Second Entry Title',
