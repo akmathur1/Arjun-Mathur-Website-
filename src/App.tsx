@@ -36,6 +36,59 @@ const FUSThumbnail: React.FC = () => (
   />
 );
 
+const OvarianMTLThumbnail: React.FC = () => {
+  const inputs: [number, number][] = [[20, 30], [20, 55], [20, 80]];
+  const shared: [number, number][] = [[78, 22], [78, 44], [78, 66], [78, 88]];
+  const headA: [number, number][] = [[128, 28], [168, 28]];
+  const headB: [number, number][] = [[128, 82], [168, 82]];
+  return (
+    <svg
+      viewBox="0 0 200 115"
+      width={180}
+      height={104}
+      style={{ display: 'block', border: `1px solid ${COLORS.text}`, background: COLORS.bg }}
+      aria-label="Multitask neural network: shared trunk with two task heads"
+    >
+      <g stroke={COLORS.text} strokeWidth={0.4} opacity={0.32}>
+        {inputs.flatMap(([ix, iy], i) =>
+          shared.map(([sx, sy], j) => (
+            <line key={`is-${i}-${j}`} x1={ix} y1={iy} x2={sx} y2={sy} />
+          ))
+        )}
+        {shared.flatMap(([sx, sy], i) => [
+          <line key={`sa-${i}`} x1={sx} y1={sy} x2={headA[0][0]} y2={headA[0][1]} />,
+          <line key={`sb-${i}`} x1={sx} y1={sy} x2={headB[0][0]} y2={headB[0][1]} />,
+        ])}
+        <line x1={headA[0][0]} y1={headA[0][1]} x2={headA[1][0]} y2={headA[1][1]} opacity={0.6} />
+        <line x1={headB[0][0]} y1={headB[0][1]} x2={headB[1][0]} y2={headB[1][1]} opacity={0.6} />
+      </g>
+      <g fill={COLORS.text}>
+        {inputs.map(([x, y], i) => <circle key={`i-${i}`} cx={x} cy={y} r={2.6} />)}
+        {shared.map(([x, y], i) => <circle key={`s-${i}`} cx={x} cy={y} r={2.6} />)}
+        {headA.map(([x, y], i) => <circle key={`a-${i}`} cx={x} cy={y} r={2.6} />)}
+        {headB.map(([x, y], i) => <circle key={`b-${i}`} cx={x} cy={y} r={2.6} />)}
+      </g>
+      <text x={172} y={20} fontFamily={MONO} fontSize={5.5} fill={COLORS.muted}>
+        P(R)
+      </text>
+      <text x={172} y={97} fontFamily={MONO} fontSize={5.5} fill={COLORS.muted}>
+        P(Prog)
+      </text>
+      <text
+        x={100}
+        y={112}
+        fontFamily={MONO}
+        fontSize={5.5}
+        fill={COLORS.muted}
+        textAnchor="middle"
+        letterSpacing={1}
+      >
+        SHARED TRUNK · TASK HEADS
+      </text>
+    </svg>
+  );
+};
+
 const ENTRIES: Entry[] = [
   {
     slug: 'fus-idp-hamiltonians',
@@ -47,9 +100,12 @@ const ENTRIES: Entry[] = [
     thumbnail: <FUSThumbnail />,
   },
   {
-    title: 'Second Entry Title',
-    date: 'April 2, 2026',
-    description: 'Description for the second entry — concise summary of the work, paper, or update.',
+    slug: 'ovarian-mtl',
+    title: 'OvarianMTL Algorithm ML Infrastructure (Mayo Clinic)',
+    date: 'May 2025 — August 2025',
+    description:
+      "Built 3 separate models achieving an average AUC of 85% for predicting drug response in high-grade serous ovarian cancer. With Dr. Aadel Chaudhari's group at Mayo Clinic.",
+    thumbnail: <OvarianMTLThumbnail />,
   },
   {
     title: 'Third Entry Title',
@@ -313,10 +369,29 @@ const TimelineRow: React.FC<{ entry: Entry; last: boolean; onOpen?: () => void }
           {boxContent}
         </div>
       ) : (
-        <>
-          {titleAndDate}
-          {description}
-        </>
+        <div
+          onClick={onOpen}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+          role={onOpen ? 'button' : undefined}
+          tabIndex={onOpen ? 0 : undefined}
+          onKeyDown={(e) => {
+            if (onOpen && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault();
+              onOpen();
+            }
+          }}
+          style={{
+            cursor: onOpen ? 'pointer' : 'default',
+            padding: onOpen ? '4px 6px' : 0,
+            marginLeft: onOpen ? -6 : 0,
+            marginRight: onOpen ? -6 : 0,
+            background: hover && onOpen ? 'rgba(26,26,26,0.04)' : 'transparent',
+            transition: 'background 120ms ease',
+          }}
+        >
+          {boxContent}
+        </div>
       )}
     </div>
   );
@@ -405,6 +480,8 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
 
           {slug === 'fus-idp-hamiltonians' ? (
             <FUSProjectBody />
+          ) : slug === 'ovarian-mtl' ? (
+            <OvarianMTLProjectBody />
           ) : (
             <p
               style={{
@@ -651,6 +728,88 @@ const FUSProjectBody: React.FC = () => (
     >
       Figures, simulation studies, and full technical write-up currently in
       development with Dr. Trevor GrandPré.
+    </p>
+  </div>
+);
+
+const OvarianMTLProjectBody: React.FC = () => (
+  <div style={{ marginTop: 40 }}>
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 14,
+        lineHeight: 1.6,
+        color: COLORS.muted,
+        marginTop: 0,
+        marginBottom: 24,
+        letterSpacing: 0.3,
+      }}
+    >
+      Multitask Neural Networks for Ovarian Cancer Drug Response Prediction · Mayo
+      Clinic · Dr. Aadel Chaudhari's group
+    </p>
+
+    <BodyParagraph top={0}>
+      Constructed a transcriptomics-driven multi-task classification pipeline for
+      recurrent HGSOC therapeutic response modeling using RNA-seq profiles from 89
+      paired PDX tumor models. The objective was to convert high-dimensional
+      expression data into calibrated, biologically interpretable predictions of
+      drug response and progression risk under the severe sample-size constraints
+      that define rare-disease oncology.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Implemented DESeq2 normalization and differential expression testing to
+      reduce dimensionality from ~20k transcripts to ~1.5k predictive genes,
+      followed by FetterGrad feature selection and nested K-fold cross-validation
+      to prevent leakage between hyperparameter tuning and outer evaluation. This
+      pruning step was critical: the transcriptomic signal-to-noise ratio in
+      paired PDX cohorts is dominated by low-variance housekeeping transcripts
+      and donor-batch effects, both of which corrupt downstream gradient signal
+      if left in the feature space.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Designed a shared-representation neural architecture with task-specific
+      output heads estimating P(Response) and P(Progression), trained via Adam
+      optimization under severe class imbalance and limited sample constraints.
+      The shared trunk exploits the strong positive correlation between
+      response and progression labels — the two tasks regularize each other,
+      and the multitask formulation acts as an inductive prior far more
+      effective than independent single-task models on this data scale.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Benchmarked against gradient-boosted decision trees and penalized logistic
+      regression classifiers, achieving state-of-the-art discrimination (AUC up
+      to 0.969) across multiple second-line chemotherapeutic agents. The shared
+      representation outperformed both baselines on the agents with the smallest
+      effective sample size, consistent with the expectation that
+      cross-task gradient sharing dominates when single-task data is sparse.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Applied SHAP-based attribution analysis to recover biologically meaningful
+      gene programs driving treatment efficacy and progression risk, enabling
+      interpretable precision-oncology predictions from high-dimensional
+      transcriptomic data. The attribution maps localized predictive signal to
+      pathways with prior literature support for HGSOC chemoresistance, providing
+      a path from black-box prediction to mechanistic hypothesis generation for
+      downstream wet-lab validation.
+    </BodyParagraph>
+
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 14,
+        lineHeight: 1.6,
+        maxWidth: 760,
+        marginTop: 56,
+        color: COLORS.muted,
+      }}
+    >
+      Three models built. Average AUC: 0.85 across drug response prediction
+      tasks. Best-performing agent AUC: 0.969.
     </p>
   </div>
 );
