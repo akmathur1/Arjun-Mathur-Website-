@@ -105,6 +105,7 @@ const ENTRIES: Entry[] = [
     date: 'May 2025 — August 2025',
     description:
       "Built 3 separate models achieving an average AUC of 85% for predicting drug response in high-grade serous ovarian cancer. With Dr. Aadel Chaudhari's group at Mayo Clinic.",
+    featured: true,
     thumbnail: <OvarianMTLThumbnail />,
   },
   {
