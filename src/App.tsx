@@ -65,7 +65,7 @@ const ENTRIES: Entry[] = [
     title: 'OvarianMTL Algorithm ML Infrastructure (Mayo Clinic)',
     date: 'May 2025 — August 2025',
     description:
-      "Built 3 separate models achieving an average AUC of 85% for predicting drug response in high-grade serous ovarian cancer. With Dr. Aadel Chaudhari's group at Mayo Clinic.",
+      "Developed a multi-task machine learning framework for predicting individualized chemotherapy response and progression risk in recurrent high-grade serous ovarian cancer using RNA-seq profiles from 89 patient-derived xenograft (PDX) models. Constructed a transcriptomics pipeline combining DESeq2 differential expression analysis (~20,000 genes → ~1,500 predictive biomarkers), FetterGrad feature selection, nested cross-validation, and ensemble learning with XGBoost and penalized logistic regression. Designed OvarianMTLNet, a dual-head neural architecture jointly estimating therapeutic response and progression probabilities across Topotecan, Gemcitabine, Doxorubicin, Carboplatin, and Paclitaxel cohorts. Achieved ROC-AUCs up to 0.969 on held-out datasets and leveraged SHAP attribution analysis to identify biologically interpretable gene programs associated with chemotherapy sensitivity and resistance. Research conducted under Dr. Aadel Chaudhuri within Mayo Clinic Radiation Oncology.",
     featured: true,
     thumbnail: <OvarianMTLThumbnail />,
   },
@@ -708,7 +708,7 @@ const OvarianMTLProjectBody: React.FC = () => (
       }}
     >
       Multitask Neural Networks for Ovarian Cancer Drug Response Prediction · Mayo
-      Clinic · Dr. Aadel Chaudhari's group
+      Clinic · Dr. Aadel Chaudhuri's group
     </p>
 
     <BodyParagraph top={0}>
