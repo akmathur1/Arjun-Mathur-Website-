@@ -57,7 +57,50 @@ const TIER_STYLE: Record<'featured' | 'boxed', React.CSSProperties> = {
 const SERIF = '"Newsreader", "Tiempos Headline", "Source Serif 4", "Iowan Old Style", Georgia, serif';
 const MONO = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace';
 
-type View = { name: 'home' } | { name: 'project'; slug: string } | { name: 'investments' };
+type View =
+  | { name: 'home' }
+  | { name: 'project'; slug: string }
+  | { name: 'investments' }
+  | { name: 'books' };
+
+// Work and Contact have no page behind them yet, so they stay plain anchors; an entry
+// with a view routes instead of jumping to a fragment.
+const NAV: { label: string; view?: View }[] = [
+  { label: 'Home', view: { name: 'home' } },
+  { label: 'Work' },
+  { label: 'Investments', view: { name: 'investments' } },
+  { label: 'Books', view: { name: 'books' } },
+  { label: 'Contact' },
+];
+
+type Book = {
+  title: string;
+  author: string;
+  note?: string;
+};
+
+// Placeholder shelf, same convention as WRITINGS — swap in real titles.
+const BOOKS: Book[] = [
+  {
+    title: 'First Book Title',
+    author: 'Author Name',
+    note: 'A line on why it stuck — placeholder until the real note goes in.',
+  },
+  {
+    title: 'Second Book Title',
+    author: 'Author Name',
+    note: 'Another placeholder. Notes are optional; a bare title and author reads fine.',
+  },
+  {
+    title: 'Third Book Title',
+    author: 'Author Name',
+  },
+  {
+    title: 'Fourth Book Title',
+    author: 'Author Name',
+    note: 'Final placeholder, showing the spacing across a longer shelf.',
+  },
+];
 
 type Entry = {
   slug?: string;
@@ -146,6 +189,9 @@ const App: React.FC = () => {
   if (view.name === 'investments') {
     return <InvestmentsPage onNavigate={setView} />;
   }
+  if (view.name === 'books') {
+    return <BooksPage onNavigate={setView} />;
+  }
   return <Home onNavigate={setView} />;
 };
 
@@ -193,14 +239,14 @@ const PageShell: React.FC<{
             fontSize: 14,
           }}
         >
-          {['Home', 'Work', 'Contact'].map((label) => (
+          {NAV.map(({ label, view }) => (
             <a
               key={label}
               href={`#${label.toLowerCase()}`}
               onClick={(e) => {
-                if (label === 'Home') {
+                if (view) {
                   e.preventDefault();
-                  onNavigate({ name: 'home' });
+                  onNavigate(view);
                 }
               }}
               style={{
@@ -561,6 +607,121 @@ const InvestmentsPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNaviga
     </PageShell>
   );
 };
+
+const BookRow: React.FC<{ book: Book }> = ({ book }) => (
+  <div>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'baseline',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: 24,
+      }}
+    >
+      <span
+        style={{
+          fontFamily: MONO,
+          fontWeight: 700,
+          fontSize: 14,
+          color: COLORS.text,
+          minWidth: 0,
+        }}
+      >
+        {book.title}
+      </span>
+      <span
+        style={{
+          fontFamily: MONO,
+          fontSize: 14,
+          color: COLORS.muted,
+          whiteSpace: 'nowrap',
+          flexShrink: 0,
+        }}
+      >
+        {book.author}
+      </span>
+    </div>
+
+    {book.note && (
+      <div
+        style={{
+          fontFamily: MONO,
+          fontSize: 13,
+          lineHeight: 1.65,
+          color: COLORS.muted,
+          marginTop: 6,
+        }}
+      >
+        {book.note}
+      </div>
+    )}
+  </div>
+);
+
+const BooksPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
+  <PageShell onNavigate={onNavigate}>
+    <a
+      href="#home"
+      onClick={(e) => {
+        e.preventDefault();
+        onNavigate({ name: 'home' });
+      }}
+      style={{
+        display: 'inline-block',
+        marginTop: 48,
+        fontFamily: MONO,
+        fontSize: 14,
+        color: COLORS.muted,
+        textDecoration: 'none',
+      }}
+    >
+      ← back
+    </a>
+
+    <article style={{ marginTop: 28 }}>
+      <h2
+        style={{
+          fontFamily: SERIF,
+          fontWeight: 400,
+          fontSize: 26,
+          letterSpacing: -0.2,
+          color: COLORS.text,
+        }}
+      >
+        Books
+      </h2>
+
+      <p
+        style={{
+          fontFamily: MONO,
+          fontSize: 14,
+          lineHeight: 1.75,
+          maxWidth: 640,
+          marginTop: 20,
+          color: COLORS.text,
+        }}
+      >
+        What I'm reading, and the books that shaped how I think about computation,
+        systems, and markets.
+      </p>
+
+      <div
+        style={{
+          marginTop: 32,
+          maxWidth: 640,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 24,
+        }}
+      >
+        {BOOKS.map((book) => (
+          <BookRow key={book.title} book={book} />
+        ))}
+      </div>
+    </article>
+  </PageShell>
+);
 
 const SectionHeading: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <h2
