@@ -28,7 +28,7 @@ const FUSThumbnail: React.FC = () => (
     alt="Physics-informed basis and ML parameterization pipeline"
     style={{
       display: 'block',
-      width: 180,
+      width: 150,
       height: 'auto',
       border: `1px solid ${COLORS.text}`,
       background: COLORS.bg,
@@ -42,7 +42,7 @@ const OvarianMTLThumbnail: React.FC = () => (
     alt="OvarianMTLNet pipeline: DESeq2 preprocessing, FetterGrad training, multitask architecture with response and progression heads"
     style={{
       display: 'block',
-      width: 180,
+      width: 150,
       height: 'auto',
       border: `1px solid ${COLORS.text}`,
       background: COLORS.bg,
@@ -104,16 +104,16 @@ const PageShell: React.FC<{ onNavigate: (v: View) => void; children: React.React
       minHeight: '100vh',
       background: COLORS.bg,
       color: COLORS.text,
-      padding: '72px 80px 120px',
+      padding: '56px 56px 120px',
     }}
   >
-    <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+    <div style={{ maxWidth: 720 }}>
       <header
         style={{
           display: 'flex',
           alignItems: 'baseline',
-          justifyContent: 'space-between',
-          gap: 48,
+          justifyContent: 'flex-start',
+          gap: 56,
         }}
       >
         <h1
@@ -121,7 +121,7 @@ const PageShell: React.FC<{ onNavigate: (v: View) => void; children: React.React
           style={{
             fontFamily: SERIF,
             fontWeight: 400,
-            fontSize: 36,
+            fontSize: 34,
             letterSpacing: -0.2,
             color: COLORS.text,
             cursor: 'pointer',
@@ -132,9 +132,9 @@ const PageShell: React.FC<{ onNavigate: (v: View) => void; children: React.React
         <nav
           style={{
             display: 'flex',
-            gap: 32,
+            gap: 18,
             fontFamily: MONO,
-            fontSize: 16,
+            fontSize: 14,
           }}
         >
           {['Home', 'Work', 'Contact'].map((label) => (
@@ -169,10 +169,10 @@ const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
     <p
       style={{
         fontFamily: MONO,
-        fontSize: 16,
-        lineHeight: 1.7,
+        fontSize: 14,
+        lineHeight: 1.75,
         maxWidth: 720,
-        marginTop: 72,
+        marginTop: 32,
         color: COLORS.text,
       }}
     >
@@ -186,7 +186,7 @@ const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
       ahead of their time.
     </p>
 
-    <section style={{ position: 'relative', marginTop: 80, paddingLeft: 0 }}>
+    <section style={{ position: 'relative', marginTop: 56, paddingLeft: 0 }}>
       <div
         style={{
           position: 'absolute',
@@ -236,7 +236,7 @@ const TimelineRow: React.FC<{ entry: Entry; last: boolean; onOpen?: () => void }
         style={{
           fontFamily: MONO,
           fontWeight: 700,
-          fontSize: 16,
+          fontSize: 14,
           color: COLORS.text,
         }}
       >
@@ -245,7 +245,7 @@ const TimelineRow: React.FC<{ entry: Entry; last: boolean; onOpen?: () => void }
       <span
         style={{
           fontFamily: MONO,
-          fontSize: 16,
+          fontSize: 14,
           color: COLORS.muted,
           whiteSpace: 'nowrap',
         }}
@@ -259,10 +259,10 @@ const TimelineRow: React.FC<{ entry: Entry; last: boolean; onOpen?: () => void }
     <div
       style={{
         fontFamily: MONO,
-        fontSize: 15,
-        lineHeight: 1.6,
+        fontSize: 13,
+        lineHeight: 1.65,
         color: COLORS.muted,
-        marginTop: 8,
+        marginTop: 6,
       }}
     >
       {entry.description}
@@ -293,7 +293,7 @@ const TimelineRow: React.FC<{ entry: Entry; last: boolean; onOpen?: () => void }
       style={{
         position: 'relative',
         paddingLeft: contentLeft,
-        marginBottom: last ? 0 : 40,
+        marginBottom: last ? 0 : 32,
       }}
     >
       <div
@@ -322,7 +322,7 @@ const TimelineRow: React.FC<{ entry: Entry; last: boolean; onOpen?: () => void }
           }}
           style={{
             border: `1px solid ${COLORS.text}`,
-            padding: '18px 22px',
+            padding: '14px 18px',
             cursor: onOpen ? 'pointer' : 'default',
             background: hover && onOpen ? 'rgba(26,26,26,0.04)' : 'transparent',
             transition: 'background 120ms ease',
@@ -375,7 +375,7 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
         }}
         style={{
           display: 'inline-block',
-          marginTop: 64,
+          marginTop: 48,
           fontFamily: MONO,
           fontSize: 14,
           color: COLORS.muted,
@@ -390,7 +390,7 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
           Project not found.
         </p>
       ) : (
-        <article style={{ marginTop: 32 }}>
+        <article style={{ marginTop: 28 }}>
           <div
             style={{
               display: 'flex',
@@ -404,10 +404,10 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
               style={{
                 fontFamily: SERIF,
                 fontWeight: 400,
-                fontSize: 30,
+                fontSize: 26,
                 letterSpacing: -0.2,
                 color: COLORS.text,
-                maxWidth: 720,
+                maxWidth: 540,
               }}
             >
               {entry.title}
@@ -415,7 +415,7 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             <span
               style={{
                 fontFamily: MONO,
-                fontSize: 15,
+                fontSize: 13,
                 color: COLORS.muted,
                 whiteSpace: 'nowrap',
               }}
@@ -448,10 +448,10 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             <p
               style={{
                 fontFamily: MONO,
-                fontSize: 16,
-                lineHeight: 1.7,
-                maxWidth: 760,
-                marginTop: 40,
+                fontSize: 14,
+                lineHeight: 1.75,
+                maxWidth: 640,
+                marginTop: 32,
                 color: COLORS.text,
               }}
             >
@@ -471,9 +471,9 @@ const BodyParagraph: React.FC<{ children: React.ReactNode; top?: number }> = ({
   <p
     style={{
       fontFamily: MONO,
-      fontSize: 15.5,
+      fontSize: 14,
       lineHeight: 1.75,
-      maxWidth: 760,
+      maxWidth: 640,
       marginTop: top,
       color: COLORS.text,
     }}
@@ -487,7 +487,7 @@ const InlineFigure: React.FC<{ src: string; alt: string; caption: React.ReactNod
   alt,
   caption,
 }) => (
-  <figure style={{ marginTop: 40, maxWidth: 820 }}>
+  <figure style={{ marginTop: 36, maxWidth: 640 }}>
     <img
       src={src}
       alt={alt}
@@ -502,11 +502,11 @@ const InlineFigure: React.FC<{ src: string; alt: string; caption: React.ReactNod
     <figcaption
       style={{
         fontFamily: MONO,
-        fontSize: 13,
+        fontSize: 12,
         lineHeight: 1.6,
         color: COLORS.muted,
         marginTop: 10,
-        maxWidth: 760,
+        maxWidth: 640,
       }}
     >
       {caption}
@@ -515,7 +515,7 @@ const InlineFigure: React.FC<{ src: string; alt: string; caption: React.ReactNod
 );
 
 const FUSProjectBody: React.FC = () => (
-  <div style={{ marginTop: 40 }}>
+  <div style={{ marginTop: 32 }}>
     <BodyParagraph top={0}>
       Sequence-resolved coarse-grained Hamiltonians for FUS-derived intrinsically
       disordered protein variants. This work explores how emergent condensate behavior
@@ -681,10 +681,10 @@ const FUSProjectBody: React.FC = () => (
     <p
       style={{
         fontFamily: MONO,
-        fontSize: 14,
+        fontSize: 13,
         lineHeight: 1.6,
-        maxWidth: 760,
-        marginTop: 56,
+        maxWidth: 640,
+        marginTop: 48,
         color: COLORS.muted,
       }}
     >
@@ -695,11 +695,11 @@ const FUSProjectBody: React.FC = () => (
 );
 
 const OvarianMTLProjectBody: React.FC = () => (
-  <div style={{ marginTop: 40 }}>
+  <div style={{ marginTop: 32 }}>
     <p
       style={{
         fontFamily: MONO,
-        fontSize: 14,
+        fontSize: 13,
         lineHeight: 1.6,
         color: COLORS.muted,
         marginTop: 0,
@@ -763,10 +763,10 @@ const OvarianMTLProjectBody: React.FC = () => (
     <p
       style={{
         fontFamily: MONO,
-        fontSize: 14,
+        fontSize: 13,
         lineHeight: 1.6,
-        maxWidth: 760,
-        marginTop: 56,
+        maxWidth: 640,
+        marginTop: 48,
         color: COLORS.muted,
       }}
     >
