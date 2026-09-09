@@ -20,17 +20,25 @@ const LEVEL_INK = [
 ];
 
 // Hand-maintained on purpose: neither Fidelity nor Monarch exposes an API a static
-// site can read, and no credential can live in a public JS bundle. Percentage only —
-// no balances, no dollar amounts. Set ytdPercent to a number (e.g. 18.4) to show the
-// panel; while it is null the panel renders nothing rather than showing a fake figure.
-const PORTFOLIO: { ytdPercent: number | null; asOf: string } = {
-  ytdPercent: null,
-  asOf: '',
+// site can read, and no credential can live in a public JS bundle. Percentages only —
+// no balances, no dollar amounts. A row with percent: null is SKIPPED rather than
+// rendered as a guess, so benchmarks stay hidden until real figures are filled in.
+const INVESTMENTS: {
+  period: string;
+  rows: { label: string; percent: number | null }[];
+} = {
+  period: 'Last 3 months',
+  rows: [
+    { label: 'Portfolio', percent: 7.59 },
+    { label: 'S&P 500', percent: null },
+    { label: 'US Stocks', percent: null },
+    { label: 'Bonds', percent: null },
+  ],
 };
 
-const CAL_DAYS = 308; // 44 weeks: the grid then spans the full right column
-const CAL_CELL = 9;
-const CAL_GAP = 3;
+const CAL_DAYS = 182; // 26 weeks, sized to leave room for the investments panel
+const CAL_CELL = 7;
+const CAL_GAP = 2;
 const CAL_WEEKS = Math.ceil(CAL_DAYS / 7) + 1;
 const CAL_WIDTH = CAL_WEEKS * (CAL_CELL + CAL_GAP) - CAL_GAP;
 
@@ -355,14 +363,21 @@ const WRITINGS: Entry[] = [
   },
 ];
 
-const ReturnsPanel: React.FC = () => {
-  if (PORTFOLIO.ytdPercent === null) return null;
-  const gain = PORTFOLIO.ytdPercent;
+const pct = (n: number) => `${n >= 0 ? '+' : '−'}${Math.abs(n).toFixed(2)}%`;
+
+const InvestmentsPanel: React.FC = () => {
+  const rows = INVESTMENTS.rows.filter(
+    (r): r is { label: string; percent: number } => r.percent !== null
+  );
+  if (!rows.length) return null;
+
+  const [head, ...benchmarks] = rows;
+  const peak = Math.max(...rows.map((r) => Math.abs(r.percent)));
 
   return (
-    <div style={{ marginTop: 64 }}>
+    <div style={{ flex: '1 1 200px', minWidth: 0 }}>
       <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 14, color: COLORS.text }}>
-        Returns
+        Investments
       </div>
 
       <p
@@ -374,7 +389,7 @@ const ReturnsPanel: React.FC = () => {
           marginTop: 8,
         }}
       >
-        Year to date{PORTFOLIO.asOf ? `, as of ${PORTFOLIO.asOf}` : ''}.
+        {INVESTMENTS.period}.
       </p>
 
       <div
@@ -386,9 +401,42 @@ const ReturnsPanel: React.FC = () => {
           marginTop: 14,
         }}
       >
-        {gain >= 0 ? '+' : '−'}
-        {Math.abs(gain).toFixed(1)}%
+        {pct(head.percent)}
       </div>
+      <div style={{ fontFamily: MONO, fontSize: 12, color: COLORS.muted, marginTop: 2 }}>
+        {head.label}
+      </div>
+
+      {benchmarks.length > 0 && (
+        <div style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {benchmarks.map((r) => (
+            <div key={r.label}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  gap: 12,
+                  fontFamily: MONO,
+                  fontSize: 12,
+                  color: COLORS.muted,
+                }}
+              >
+                <span style={{ minWidth: 0 }}>{r.label}</span>
+                <span style={{ flexShrink: 0 }}>{pct(r.percent)}</span>
+              </div>
+              <div style={{ height: 3, marginTop: 5, background: 'rgba(26,26,26,0.10)' }}>
+                <div
+                  style={{
+                    height: 3,
+                    width: `${(Math.abs(r.percent) / peak) * 100}%`,
+                    background: COLORS.text,
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -468,8 +516,19 @@ const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
 
       {/* Same flex basis as the Writings column below, so the panel's edges line up
           with that column instead of floating on their own. */}
-      <div style={{ flex: '1 1 420px', maxWidth: 540, minWidth: 0 }}>
+      <div
+        style={{
+          flex: '1 1 420px',
+          maxWidth: 540,
+          minWidth: 0,
+          display: 'flex',
+          gap: 20,
+          alignItems: 'flex-start',
+          flexWrap: 'wrap',
+        }}
+      >
         <ContributionCalendar />
+        <InvestmentsPanel />
       </div>
     </div>
 
@@ -493,7 +552,6 @@ const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
       <div style={{ flex: '1 1 420px', maxWidth: 540, minWidth: 0 }}>
         <SectionHeading>Writings</SectionHeading>
         <Timeline entries={WRITINGS} />
-        <ReturnsPanel />
       </div>
     </div>
   </PageShell>
