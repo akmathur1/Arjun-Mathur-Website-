@@ -30,9 +30,9 @@ const INVESTMENTS: {
   period: 'Last 3 months',
   rows: [
     { label: 'Portfolio', percent: 7.59 },
-    { label: 'S&P 500', percent: null },
-    { label: 'US Stocks', percent: null },
-    { label: 'Bonds', percent: null },
+    { label: 'S&P 500', percent: 3.88 },
+    { label: 'US Stocks', percent: 3.83 },
+    { label: 'US Bonds', percent: -1.49 },
   ],
 };
 
@@ -57,7 +57,7 @@ const TIER_STYLE: Record<'featured' | 'boxed', React.CSSProperties> = {
 const SERIF = '"Newsreader", "Tiempos Headline", "Source Serif 4", "Iowan Old Style", Georgia, serif';
 const MONO = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace';
 
-type View = { name: 'home' } | { name: 'project'; slug: string };
+type View = { name: 'home' } | { name: 'project'; slug: string } | { name: 'investments' };
 
 type Entry = {
   slug?: string;
@@ -142,6 +142,9 @@ const App: React.FC = () => {
 
   if (view.name === 'project') {
     return <ProjectPage slug={view.slug} onNavigate={setView} />;
+  }
+  if (view.name === 'investments') {
+    return <InvestmentsPage onNavigate={setView} />;
   }
   return <Home onNavigate={setView} />;
 };
@@ -365,7 +368,43 @@ const WRITINGS: Entry[] = [
 
 const pct = (n: number) => `${n >= 0 ? '+' : '−'}${Math.abs(n).toFixed(2)}%`;
 
-const InvestmentsPanel: React.FC = () => {
+// A losing benchmark still has bar length, so a solid bar would read as a gain.
+// Negative rows get a hollow bar; the sign stays on the number either way.
+const BenchmarkRow: React.FC<{
+  label: string;
+  percent: number;
+  peak: number;
+  size?: number;
+}> = ({ label, percent, peak, size = 12 }) => (
+  <div>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        gap: 12,
+        fontFamily: MONO,
+        fontSize: size,
+        color: COLORS.muted,
+      }}
+    >
+      <span style={{ minWidth: 0 }}>{label}</span>
+      <span style={{ flexShrink: 0 }}>{pct(percent)}</span>
+    </div>
+    <div style={{ height: 3, marginTop: 5, background: 'rgba(26,26,26,0.10)' }}>
+      <div
+        style={{
+          height: 3,
+          width: `${(Math.abs(percent) / peak) * 100}%`,
+          background: percent >= 0 ? COLORS.text : 'transparent',
+          border: percent >= 0 ? 'none' : `1px solid ${COLORS.muted}`,
+          boxSizing: 'border-box',
+        }}
+      />
+    </div>
+  </div>
+);
+
+const InvestmentsPanel: React.FC<{ onOpen: () => void }> = ({ onOpen }) => {
   const rows = INVESTMENTS.rows.filter(
     (r): r is { label: string; percent: number } => r.percent !== null
   );
@@ -376,9 +415,24 @@ const InvestmentsPanel: React.FC = () => {
 
   return (
     <div style={{ flex: '1 1 200px', minWidth: 0 }}>
-      <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 14, color: COLORS.text }}>
+      <a
+        href="#investments"
+        onClick={(e) => {
+          e.preventDefault();
+          onOpen();
+        }}
+        style={{
+          fontFamily: MONO,
+          fontWeight: 700,
+          fontSize: 14,
+          color: COLORS.text,
+          textDecoration: 'underline',
+          textUnderlineOffset: 5,
+          textDecorationThickness: 1,
+        }}
+      >
         Investments
-      </div>
+      </a>
 
       <p
         style={{
@@ -410,34 +464,101 @@ const InvestmentsPanel: React.FC = () => {
       {benchmarks.length > 0 && (
         <div style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 10 }}>
           {benchmarks.map((r) => (
-            <div key={r.label}>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  gap: 12,
-                  fontFamily: MONO,
-                  fontSize: 12,
-                  color: COLORS.muted,
-                }}
-              >
-                <span style={{ minWidth: 0 }}>{r.label}</span>
-                <span style={{ flexShrink: 0 }}>{pct(r.percent)}</span>
-              </div>
-              <div style={{ height: 3, marginTop: 5, background: 'rgba(26,26,26,0.10)' }}>
-                <div
-                  style={{
-                    height: 3,
-                    width: `${(Math.abs(r.percent) / peak) * 100}%`,
-                    background: COLORS.text,
-                  }}
-                />
-              </div>
-            </div>
+            <BenchmarkRow key={r.label} label={r.label} percent={r.percent} peak={peak} />
           ))}
         </div>
       )}
     </div>
+  );
+};
+
+const InvestmentsPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => {
+  const rows = INVESTMENTS.rows.filter(
+    (r): r is { label: string; percent: number } => r.percent !== null
+  );
+  const peak = rows.length ? Math.max(...rows.map((r) => Math.abs(r.percent))) : 1;
+
+  return (
+    <PageShell onNavigate={onNavigate}>
+      <a
+        href="#home"
+        onClick={(e) => {
+          e.preventDefault();
+          onNavigate({ name: 'home' });
+        }}
+        style={{
+          display: 'inline-block',
+          marginTop: 48,
+          fontFamily: MONO,
+          fontSize: 14,
+          color: COLORS.muted,
+          textDecoration: 'none',
+        }}
+      >
+        ← back
+      </a>
+
+      <article style={{ marginTop: 28 }}>
+        <h2
+          style={{
+            fontFamily: SERIF,
+            fontWeight: 400,
+            fontSize: 26,
+            letterSpacing: -0.2,
+            color: COLORS.text,
+          }}
+        >
+          Investments
+        </h2>
+
+        <p
+          style={{
+            fontFamily: MONO,
+            fontSize: 14,
+            lineHeight: 1.75,
+            maxWidth: 640,
+            marginTop: 20,
+            color: COLORS.text,
+          }}
+        >
+          Portfolio performance against benchmarks over the trailing three months.
+          Percentages only — no balances or positions.
+        </p>
+
+        <div
+          style={{
+            marginTop: 32,
+            maxWidth: 460,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+          }}
+        >
+          {rows.map((r) => (
+            <BenchmarkRow
+              key={r.label}
+              label={r.label}
+              percent={r.percent}
+              peak={peak}
+              size={14}
+            />
+          ))}
+        </div>
+
+        <p
+          style={{
+            fontFamily: MONO,
+            fontSize: 13,
+            lineHeight: 1.6,
+            maxWidth: 640,
+            marginTop: 48,
+            color: COLORS.muted,
+          }}
+        >
+          Holdings, allocation, and a longer performance history to come.
+        </p>
+      </article>
+    </PageShell>
   );
 };
 
@@ -528,7 +649,7 @@ const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
         }}
       >
         <ContributionCalendar />
-        <InvestmentsPanel />
+        <InvestmentsPanel onOpen={() => onNavigate({ name: 'investments' })} />
       </div>
     </div>
 
