@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 250" width="520" height="250"
+     role="img" aria-label="A generated span in which the token Wait repeats; the first repeated Wait is marked rejected, and two alternative tokens at that same position are marked chosen">
+  <rect width="520" height="250" fill="#EDECE8"/>
+  <g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+
+    <!-- the span that repeats -->
+    <text x="291" y="20" font-size="12" fill="#696969" text-anchor="middle">repeated span</text>
+    <path d="M 402 56 L 402 32 L 180 32 L 180 54" fill="none" stroke="#696969" stroke-width="1.5"/>
+    <path d="M 175 48 L 180 56 L 185 48" fill="none" stroke="#696969" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- the generated token sequence -->
+    <g font-size="15" fill="#1a1a1a">
+      <rect x="40"  y="60" width="40"  height="30" fill="none" stroke="#696969" stroke-width="1"/>
+      <text x="60"  y="75" text-anchor="middle" dominant-baseline="central">…</text>
+      <rect x="90"  y="60" width="48"  height="30" fill="none" stroke="#696969" stroke-width="1"/>
+      <text x="114" y="75" text-anchor="middle" dominant-baseline="central">So</text>
+
+      <!-- the loop-starting token: the only position FTPO trains on -->
+      <rect x="148" y="60" width="64" height="30" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+      <text x="180" y="75" text-anchor="middle" dominant-baseline="central" font-weight="700">Wait</text>
+
+      <rect x="222" y="60" width="64" height="30" fill="none" stroke="#696969" stroke-width="1"/>
+      <text x="254" y="75" text-anchor="middle" dominant-baseline="central">Wait</text>
+      <rect x="296" y="60" width="64" height="30" fill="none" stroke="#696969" stroke-width="1"/>
+      <text x="328" y="75" text-anchor="middle" dominant-baseline="central">Wait</text>
+      <rect x="370" y="60" width="64" height="30" fill="none" stroke="#696969" stroke-width="1"/>
+      <text x="402" y="75" text-anchor="middle" dominant-baseline="central">Wait</text>
+      <text x="464" y="75" text-anchor="middle" dominant-baseline="central" fill="#696969">…</text>
+    </g>
+
+    <text x="180" y="106" font-size="12" fill="#696969" text-anchor="middle">rejected</text>
+
+    <!-- alternatives available at that same position -->
+    <path d="M 180 116 C 180 150, 196 158, 196 174" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 191 168 L 196 176 L 201 168" fill="none" stroke="#1a1a1a" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 180 116 C 180 152, 310 148, 310 174" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 305 168 L 310 176 L 315 168" fill="none" stroke="#1a1a1a" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g font-size="15" fill="#1a1a1a">
+      <rect x="140" y="178" width="112" height="30" fill="#1a1a1a"/>
+      <text x="196" y="193" text-anchor="middle" dominant-baseline="central" fill="#EDECE8">Therefore</text>
+      <rect x="280" y="178" width="60" height="30" fill="#1a1a1a"/>
+      <text x="310" y="193" text-anchor="middle" dominant-baseline="central" fill="#EDECE8">The</text>
+    </g>
+
+    <text x="140" y="230" font-size="12" fill="#696969">chosen — sampled from filtered alternatives</text>
+  </g>
+</svg>

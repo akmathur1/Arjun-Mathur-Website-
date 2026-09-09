@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 190" width="300" height="190"
+     role="img" aria-label="A repeated span cycling back on itself, cut at its first token and redirected to an alternative continuation">
+  <rect width="300" height="190" fill="#EDECE8"/>
+
+  <!-- the repeated span: the same continuation, three times over -->
+  <rect x="54" y="26" width="132" height="16" fill="#1a1a1a"/>
+  <rect x="54" y="52" width="132" height="16" fill="#1a1a1a"/>
+  <rect x="54" y="78" width="132" height="16" fill="#1a1a1a"/>
+
+  <!-- context feeding the loop back into itself -->
+  <path d="M 46 26 L 34 26 L 34 94 L 44 94" fill="none" stroke="#1a1a1a" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 38 89 L 45 94 L 38 99" fill="none" stroke="#1a1a1a" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- the loop-starting token, marked rejected -->
+  <rect x="52.5" y="24.5" width="19" height="19" fill="#EDECE8" stroke="#1a1a1a" stroke-width="3"/>
+
+  <!-- the escape: a different next token -->
+  <path d="M 62 48 C 62 112, 104 136, 142 136" fill="none" stroke="#1a1a1a" stroke-width="2.5"
+        stroke-linecap="round"/>
+  <path d="M 136 131 L 144 136 L 136 141" fill="none" stroke="#1a1a1a" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="150" y="128" width="116" height="16" fill="#1a1a1a"/>
+
+  <text x="54" y="176" font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace"
+        font-size="17" letter-spacing="1.5" fill="#696969">FTPO</text>
+</svg>

@@ -144,6 +144,21 @@ const OvarianMTLThumbnail: React.FC = () => (
   />
 );
 
+const AntidoomThumbnail: React.FC = () => (
+  <img
+    src="/projects/antidoom/thumbnail.svg"
+    alt="A repeated span cycling back on itself, cut at its first token and redirected to an alternative continuation"
+    style={{
+      display: 'block',
+      width: 150,
+      maxWidth: '100%',
+      height: 'auto',
+      border: `1px solid ${COLORS.text}`,
+      background: COLORS.bg,
+    }}
+  />
+);
+
 const ENTRIES: Entry[] = [
   {
     slug: 'fus-idp-hamiltonians',
@@ -162,6 +177,15 @@ const ENTRIES: Entry[] = [
       "Developed a multi-task machine learning framework for predicting individualized chemotherapy response and progression risk in recurrent high-grade serous ovarian cancer using RNA-seq profiles from 89 patient-derived xenograft (PDX) models. Constructed a transcriptomics pipeline combining DESeq2 differential expression analysis (~20,000 genes → ~1,500 predictive biomarkers), FetterGrad feature selection, nested cross-validation, and ensemble learning with XGBoost and penalized logistic regression. Designed OvarianMTLNet, a dual-head neural architecture jointly estimating therapeutic response and progression probabilities across Topotecan, Gemcitabine, Doxorubicin, Carboplatin, and Paclitaxel cohorts. Achieved ROC-AUCs up to 0.969 on held-out datasets and leveraged SHAP attribution analysis to identify biologically interpretable gene programs associated with chemotherapy sensitivity and resistance. Research conducted under Dr. Aadel Chaudhuri within Mayo Clinic Radiation Oncology.",
     tier: 'boxed',
     thumbnail: <OvarianMTLThumbnail />,
+  },
+  {
+    slug: 'antidoom',
+    title: 'Antidoom — Final Token Preference Optimization',
+    date: '2026',
+    description:
+      'Targeted preference data and training for reducing repetition loops in reasoning models. Samples completions, detects where a repeated span begins, marks the loop-starting token as rejected, selects coherent alternatives at that same position, and trains a LoRA adapter with Final Token Preference Optimization (FTPO). Adapts the single-token preference idea from Antislop to runaway repetition. Liquid AI.',
+    tier: 'boxed',
+    thumbnail: <AntidoomThumbnail />,
   },
   {
     title: 'Third Entry Title',
@@ -1056,6 +1080,8 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             <FUSProjectBody />
           ) : slug === 'ovarian-mtl' ? (
             <OvarianMTLProjectBody />
+          ) : slug === 'antidoom' ? (
+            <AntidoomProjectBody />
           ) : (
             <p
               style={{
@@ -1124,6 +1150,131 @@ const InlineFigure: React.FC<{ src: string; alt: string; caption: React.ReactNod
       {caption}
     </figcaption>
   </figure>
+);
+
+const AntidoomProjectBody: React.FC = () => (
+  <div style={{ marginTop: 32 }}>
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        color: COLORS.muted,
+        marginTop: 0,
+        marginBottom: 24,
+        letterSpacing: 0.3,
+      }}
+    >
+      Reducing Doom Loops with Final Token Preference Optimization · Liquid AI ·
+      github.com/Liquid4All/antidoom
+    </p>
+
+    <BodyParagraph top={0}>
+      Antidoom generates and trains targeted preference data for reducing model
+      repetition loops. It is a narrow tool for a narrow failure mode: sample model
+      completions, detect where a repeated span begins, mark the first loop-starting
+      token as rejected, choose coherent alternative next tokens, then train a LoRA
+      adapter with Final Token Preference Optimization. The method adapts the
+      single-token preference training idea from Antislop to the specific problem of
+      runaway repetition during reasoning.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Doom loops tend to appear when three forces line up. Common reasoning tokens —
+      Wait, So, But, Alternatively — become unusually attractive after heavy synthetic
+      reasoning training, and can dominate the next-token distribution without moving
+      the reasoning forward. Once a short sequence appears, the prior context makes
+      that sequence more likely to appear again, so across repeated turns the
+      probability of each token climbs toward certainty. And at temperature at or near
+      zero the model keeps selecting the highest-probability continuation, leaving a
+      locally reinforced loop no natural escape route.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Rather than training on full gold answers, Antidoom attacks the failure at the
+      token where the loop begins, training only on the local preference: do not choose
+      the token that starts the repetition; choose one of the plausible alternatives
+      available at that same position. For each prompt it generates a completion, scans
+      for inner repetition, and refines the boundary in token space so the rejected
+      token is the first readable token of the repeated segment.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/antidoom/ftpo.svg"
+      alt="A generated span in which the token Wait repeats; the first repeated Wait is marked rejected, and two alternative tokens at that same position are marked chosen"
+      caption={
+        <>
+          <strong>Fig. 1.</strong> The unit of training. Each FTPO row carries a context
+          prefix ending immediately before the rejected token, exactly one rejected
+          token — the token that begins the loop — and one or more chosen tokens sampled
+          from filtered alternatives at that same position, alongside metadata about the
+          source prompt and detected loop. Training regularises overrepresented rejected
+          and chosen tokens so the adapter learns a broad anti-loop preference rather
+          than simply suppressing one word.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The default configuration reads prompts from a prompt-only ShareGPT mixture built
+      for this pipeline, which deliberately excludes gold answers, rationales, hidden
+      tests, verifier targets, and answer labels. How many preference rows a run yields
+      depends on the number of prompts, the number of temperature passes, and how
+      loop-prone the checkpoint already is; roughly fifteen thousand prompts is a
+      sensible floor, aiming for fifteen to twenty thousand preference rows.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Two settings dominate the outcome. The cap on training examples should sit well
+      below the number of generated rows — at most about seventy percent — so that
+      rejected-token regularisation has room to shave off overrepresented tokens;
+      without that headroom the generated set can be badly unbalanced and training
+      degrades. Learning rate is the other: the trainer can both undertrain and
+      overtrain, and an overtrained model produces more doom loops, not fewer. Early
+      stopping on the share of samples where the chosen token beats the rejected one is
+      the practical guard — a strong reduction in looping usually appears well before
+      that share reaches half.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      The remaining knobs are mostly about not trading one pathology for another.
+      Rejected-token regularisation flattens the frequency distribution by culling
+      samples, since the tokens that start doom loops are by construction the most
+      frequent ones and suppressing them too aggressively is its own failure. Chosen-token
+      regularisation does the same on the other side, so that a favoured alternative does
+      not itself become a loop. Stop-word filtering is left off deliberately: common words
+      can genuinely be loop-starting tokens, and frequency is better handled by
+      regularisation than by exclusion. A higher LoRA rank than usual improves
+      learnability with less degradation, and unlike earlier Antislop ablations, this
+      trainer appears to prefer training all layers rather than a restricted set.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Generation runs on vLLM, one single-GPU engine per visible device; training is
+      single-GPU LoRA followed by a merge. CUDA is the default path. ROCm needs a
+      separate environment built from vLLM's prebuilt ROCm wheels rather than the
+      CUDA-only lockfile, and two overrides that are not optional: the Triton attention
+      backend, because the default ROCm attention kernel memory-faults on LFM2, and
+      plain Torch AdamW in place of the paged 32-bit optimizer, which would otherwise
+      drag in bitsandbytes. The multi-GPU generation path additionally pins devices
+      through the ROCm-specific visibility variable and gives each worker its own JIT
+      cache directories, since shared caches race into memory access faults.
+    </BodyParagraph>
+
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        maxWidth: 640,
+        marginTop: 48,
+        color: COLORS.muted,
+      }}
+    >
+      Validated on Instinct MI325 (gfx942). Liquid AI, “Reducing Doom Loops with Final
+      Token Preference Optimization”, Liquid AI Blog, 2026.
+    </p>
+  </div>
 );
 
 const FUSProjectBody: React.FC = () => (
