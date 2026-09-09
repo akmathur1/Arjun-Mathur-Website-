@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const COLORS = {
   bg: '#EDECE8',
   text: '#1a1a1a',
-  muted: '#7a7a7a',
+  muted: '#696969', // 4.64:1 on bg; #7a7a7a was 3.63:1 and failed WCAG AA
   line: '#1a1a1a',
 };
 
@@ -25,6 +25,18 @@ const CAL_GAP = 3;
 const CAL_WEEKS = Math.ceil(CAL_DAYS / 7) + 1;
 const CAL_WIDTH = CAL_WEEKS * (CAL_CELL + CAL_GAP) - CAL_GAP;
 
+const TIER_STYLE: Record<'featured' | 'boxed', React.CSSProperties> = {
+  featured: {
+    border: `2px solid ${COLORS.text}`,
+    boxShadow: `6px 6px 0 ${COLORS.text}`,
+    padding: '14px 18px',
+  },
+  boxed: {
+    border: '1px solid rgba(26,26,26,0.18)',
+    padding: '14px 18px',
+  },
+};
+
 const SERIF = '"Newsreader", "Tiempos Headline", "Source Serif 4", "Iowan Old Style", Georgia, serif';
 const MONO = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace';
 
@@ -35,7 +47,9 @@ type Entry = {
   title: React.ReactNode;
   date: string;
   description: string;
-  featured?: boolean;
+  // Physical Intelligence gives entries three weights: the newest gets a heavy rule
+  // and a hard offset shadow, older highlights get a hairline box, the rest run bare.
+  tier?: 'featured' | 'boxed';
   thumbnail?: React.ReactNode;
   poster?: { src: string; alt: string };
 };
@@ -47,6 +61,7 @@ const FUSThumbnail: React.FC = () => (
     style={{
       display: 'block',
       width: 150,
+      maxWidth: '100%',
       height: 'auto',
       border: `1px solid ${COLORS.text}`,
       background: COLORS.bg,
@@ -61,6 +76,7 @@ const OvarianMTLThumbnail: React.FC = () => (
     style={{
       display: 'block',
       width: 150,
+      maxWidth: '100%',
       height: 'auto',
       border: `1px solid ${COLORS.text}`,
       background: COLORS.bg,
@@ -75,7 +91,7 @@ const ENTRIES: Entry[] = [
     date: 'August 2025 — present',
     description:
       'Sequence-resolved coarse-grained Hamiltonians for FUS-derived intrinsically disordered protein variants. MPIPI parameterization, Langevin dynamics, and density–temperature phase diagrams probing sequence-dependent condensate organization. With Dr. Trevor GrandPré.',
-    featured: true,
+    tier: 'featured',
     thumbnail: <FUSThumbnail />,
   },
   {
@@ -84,7 +100,7 @@ const ENTRIES: Entry[] = [
     date: 'May 2025 — August 2025',
     description:
       "Developed a multi-task machine learning framework for predicting individualized chemotherapy response and progression risk in recurrent high-grade serous ovarian cancer using RNA-seq profiles from 89 patient-derived xenograft (PDX) models. Constructed a transcriptomics pipeline combining DESeq2 differential expression analysis (~20,000 genes → ~1,500 predictive biomarkers), FetterGrad feature selection, nested cross-validation, and ensemble learning with XGBoost and penalized logistic regression. Designed OvarianMTLNet, a dual-head neural architecture jointly estimating therapeutic response and progression probabilities across Topotecan, Gemcitabine, Doxorubicin, Carboplatin, and Paclitaxel cohorts. Achieved ROC-AUCs up to 0.969 on held-out datasets and leveraged SHAP attribution analysis to identify biologically interpretable gene programs associated with chemotherapy sensitivity and resistance. Research conducted under Dr. Aadel Chaudhuri within Mayo Clinic Radiation Oncology.",
-    featured: true,
+    tier: 'boxed',
     thumbnail: <OvarianMTLThumbnail />,
   },
   {
@@ -123,7 +139,7 @@ const PageShell: React.FC<{
       minHeight: '100vh',
       background: COLORS.bg,
       color: COLORS.text,
-      padding: '56px 56px 120px',
+      padding: 'clamp(28px, 5vw, 56px) clamp(20px, 4vw, 56px) 120px',
     }}
   >
     <div style={{ maxWidth }}>
@@ -132,7 +148,8 @@ const PageShell: React.FC<{
           display: 'flex',
           alignItems: 'baseline',
           justifyContent: 'flex-start',
-          gap: 56,
+          flexWrap: 'wrap',
+          gap: 'clamp(16px, 4vw, 56px)',
         }}
       >
         <h1
@@ -224,10 +241,10 @@ const ContributionCalendar: React.FC = () => {
 
   const total = days ? days.reduce((n, d) => n + d.count, 0) : 0;
 
-  // The rail is pinned to the grid's own width; left to size itself, the caption's
-  // max-content width widens it and steals space from the timeline column.
+  // Pinned to the grid's own width so the caption wraps inside the panel rather than
+  // setting the panel's width from its own max-content.
   return (
-    <aside style={{ flex: '0 0 auto', width: CAL_WIDTH, marginTop: 32 }}>
+    <aside style={{ width: CAL_WIDTH, maxWidth: '100%', marginTop: 64 }}>
       <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 14, color: COLORS.text }}>
         Activity
       </div>
@@ -261,7 +278,7 @@ const ContributionCalendar: React.FC = () => {
         {days ? '.' : ''}
       </p>
 
-      <div style={{ display: 'flex', gap: CAL_GAP, marginTop: 14 }}>
+      <div style={{ display: 'flex', gap: CAL_GAP, marginTop: 14, overflowX: 'auto' }}>
         {weeks.map((week, wi) => (
           <div key={wi} style={{ display: 'flex', flexDirection: 'column', gap: CAL_GAP }}>
             {week.map((day, di) => (
@@ -300,65 +317,120 @@ const ContributionCalendar: React.FC = () => {
   );
 };
 
+// Placeholder writings — same shape as ENTRIES so both columns share TimelineRow.
+// Tier mix mirrors Physical Intelligence: newest carries the shadow, the rest vary.
+const WRITINGS: Entry[] = [
+  {
+    title: 'First Writing Title',
+    date: 'March 4, 2026',
+    description:
+      'Placeholder description — swap for the real essay summary. Two lines here matches the rhythm of the reference layout.',
+    tier: 'featured',
+  },
+  {
+    title: 'Second Writing Title',
+    date: 'January 22, 2026',
+    description: 'Another placeholder. Short entries run bare, with no box around them.',
+  },
+  {
+    title: 'Third Writing Title',
+    date: 'December 9, 2025',
+    description: 'Placeholder text for a third piece, kept to roughly two lines.',
+  },
+  {
+    title: 'Fourth Writing Title',
+    date: 'October 30, 2025',
+    description:
+      'A boxed placeholder, showing the hairline treatment used for older highlights.',
+    tier: 'boxed',
+  },
+];
+
+const SectionHeading: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <h2
+    style={{
+      fontFamily: SERIF,
+      fontWeight: 400,
+      fontSize: 22,
+      letterSpacing: -0.2,
+      color: COLORS.text,
+    }}
+  >
+    {children}
+  </h2>
+);
+
+const Timeline: React.FC<{ entries: Entry[]; onOpen?: (entry: Entry) => void }> = ({
+  entries,
+  onOpen,
+}) => (
+  <section style={{ position: 'relative', marginTop: 24 }}>
+    <div
+      style={{
+        position: 'absolute',
+        left: 4,
+        top: 12,
+        bottom: 12,
+        width: 1,
+        background: COLORS.line,
+      }}
+    />
+
+    {entries.map((entry, i) => (
+      <TimelineRow
+        key={i}
+        entry={entry}
+        last={i === entries.length - 1}
+        onOpen={entry.slug && onOpen ? () => onOpen(entry) : undefined}
+      />
+    ))}
+  </section>
+);
+
 const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
-  <PageShell onNavigate={onNavigate} maxWidth={1160}>
+  <PageShell onNavigate={onNavigate} maxWidth={1256}>
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 14,
+        lineHeight: 1.75,
+        maxWidth: 720,
+        marginTop: 32,
+        color: COLORS.text,
+      }}
+    >
+      I'm Arjun Mathur, founder of Molterra. I spend most of my time thinking about
+      computation, large systems, and the strange ways technology shapes the physical
+      world around us. My work sits closest to industrial software and scientific
+      infrastructure, especially in places where important work still depends on
+      fragmented tools and human intuition. I'm interested in building systems that
+      quietly accelerate progress behind the scenes. Outside of that, I write
+      occasionally about technology, research, markets, and ideas that feel a little
+      ahead of their time.
+    </p>
+
     <div
       style={{
         display: 'flex',
-        gap: 64,
+        gap: 56,
         alignItems: 'flex-start',
         flexWrap: 'wrap',
+        marginTop: 56,
       }}
     >
-      <div style={{ flex: '1 1 560px', maxWidth: 720, minWidth: 0 }}>
-        <p
-          style={{
-            fontFamily: MONO,
-            fontSize: 14,
-            lineHeight: 1.75,
-            maxWidth: 720,
-            marginTop: 32,
-            color: COLORS.text,
-          }}
-        >
-          I'm Arjun Mathur, founder of Molterra. I spend most of my time thinking about
-          computation, large systems, and the strange ways technology shapes the physical
-          world around us. My work sits closest to industrial software and scientific
-          infrastructure, especially in places where important work still depends on
-          fragmented tools and human intuition. I'm interested in building systems that
-          quietly accelerate progress behind the scenes. Outside of that, I write
-          occasionally about technology, research, markets, and ideas that feel a little
-          ahead of their time.
-        </p>
-
-        <section style={{ position: 'relative', marginTop: 56, paddingLeft: 0 }}>
-          <div
-            style={{
-              position: 'absolute',
-              left: 4,
-              top: 12,
-              bottom: 12,
-              width: 1,
-              background: COLORS.line,
-            }}
-          />
-
-          {ENTRIES.map((entry, i) => (
-            <TimelineRow
-              key={i}
-              entry={entry}
-              last={i === ENTRIES.length - 1}
-              onOpen={
-                entry.slug
-                  ? () => onNavigate({ name: 'project', slug: entry.slug as string })
-                  : undefined
-              }
-            />
-          ))}
-        </section>
+      <div style={{ flex: '1 1 520px', maxWidth: 700, minWidth: 0 }}>
+        <SectionHeading>Research</SectionHeading>
+        <Timeline
+          entries={ENTRIES}
+          onOpen={(entry) => onNavigate({ name: 'project', slug: entry.slug as string })}
+        />
       </div>
 
-      <ContributionCalendar />
+      <div style={{ flex: '1 1 420px', maxWidth: 500, minWidth: 0 }}>
+        <SectionHeading>Writings</SectionHeading>
+        <Timeline entries={WRITINGS} />
+        <ContributionCalendar />
+      </div>
     </div>
   </PageShell>
 );
@@ -378,6 +450,9 @@ const TimelineRow: React.FC<{ entry: Entry; last: boolean; onOpen?: () => void }
         display: 'flex',
         alignItems: 'baseline',
         justifyContent: 'space-between',
+        // Without wrap the nowrap date has no way out of a narrow column and renders
+        // straight through the tier border; let it drop to its own line instead.
+        flexWrap: 'wrap',
         gap: 24,
       }}
     >
@@ -387,6 +462,7 @@ const TimelineRow: React.FC<{ entry: Entry; last: boolean; onOpen?: () => void }
           fontWeight: 700,
           fontSize: 14,
           color: COLORS.text,
+          minWidth: 0,
         }}
       >
         {entry.title}
@@ -397,6 +473,7 @@ const TimelineRow: React.FC<{ entry: Entry; last: boolean; onOpen?: () => void }
           fontSize: 14,
           color: COLORS.muted,
           whiteSpace: 'nowrap',
+          flexShrink: 0,
         }}
       >
         {entry.date}
@@ -419,15 +496,15 @@ const TimelineRow: React.FC<{ entry: Entry; last: boolean; onOpen?: () => void }
   );
 
   const textCol = (
-    <div style={{ flex: 1, minWidth: 0 }}>
+    <div style={{ flex: '1 1 240px', minWidth: 0 }}>
       {titleAndDate}
       {description}
     </div>
   );
 
   const boxContent = entry.thumbnail ? (
-    <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start' }}>
-      <div style={{ flexShrink: 0 }}>{entry.thumbnail}</div>
+    <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+      <div style={{ flexShrink: 0, maxWidth: '100%' }}>{entry.thumbnail}</div>
       {textCol}
     </div>
   ) : (
@@ -456,54 +533,33 @@ const TimelineRow: React.FC<{ entry: Entry; last: boolean; onOpen?: () => void }
           background: COLORS.text,
         }}
       />
-      {entry.featured ? (
-        <div
-          onClick={onOpen}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-          role={onOpen ? 'button' : undefined}
-          tabIndex={onOpen ? 0 : undefined}
-          onKeyDown={(e) => {
-            if (onOpen && (e.key === 'Enter' || e.key === ' ')) {
-              e.preventDefault();
-              onOpen();
-            }
-          }}
-          style={{
-            border: `1px solid ${COLORS.text}`,
-            padding: '14px 18px',
-            cursor: onOpen ? 'pointer' : 'default',
-            background: hover && onOpen ? 'rgba(26,26,26,0.04)' : 'transparent',
-            transition: 'background 120ms ease',
-          }}
-        >
-          {boxContent}
-        </div>
-      ) : (
-        <div
-          onClick={onOpen}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-          role={onOpen ? 'button' : undefined}
-          tabIndex={onOpen ? 0 : undefined}
-          onKeyDown={(e) => {
-            if (onOpen && (e.key === 'Enter' || e.key === ' ')) {
-              e.preventDefault();
-              onOpen();
-            }
-          }}
-          style={{
-            cursor: onOpen ? 'pointer' : 'default',
-            padding: onOpen ? '4px 6px' : 0,
-            marginLeft: onOpen ? -6 : 0,
-            marginRight: onOpen ? -6 : 0,
-            background: hover && onOpen ? 'rgba(26,26,26,0.04)' : 'transparent',
-            transition: 'background 120ms ease',
-          }}
-        >
-          {boxContent}
-        </div>
-      )}
+      <div
+        onClick={onOpen}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        role={onOpen ? 'button' : undefined}
+        tabIndex={onOpen ? 0 : undefined}
+        onKeyDown={(e) => {
+          if (onOpen && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            onOpen();
+          }
+        }}
+        style={{
+          ...(entry.tier
+            ? TIER_STYLE[entry.tier]
+            : {
+                padding: onOpen ? '4px 6px' : 0,
+                marginLeft: onOpen ? -6 : 0,
+                marginRight: onOpen ? -6 : 0,
+              }),
+          cursor: onOpen ? 'pointer' : 'default',
+          background: hover && onOpen ? 'rgba(26,26,26,0.04)' : 'transparent',
+          transition: 'background 120ms ease',
+        }}
+      >
+        {boxContent}
+      </div>
     </div>
   );
 };
