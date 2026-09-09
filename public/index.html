@@ -17,6 +17,19 @@
         font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
         color: #1a1a1a;
       }
+      /* Hairline between the activity graph and the investments panel. Lives here
+         rather than inline so it can drop out once the two panels stack. */
+      .panel-divider {
+        align-self: stretch;
+        width: 1px;
+        background: rgba(26, 26, 26, 0.18);
+      }
+      /* Biased just above the point where the panels stack (~500px): the rule costs
+         1px of row width, so hiding it a little early guarantees it can never be the
+         thing that forces the wrap. */
+      @media (max-width: 510px) {
+        .panel-divider { display: none; }
+      }
     </style>
   </head>
   <body>

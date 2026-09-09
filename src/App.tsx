@@ -643,12 +643,15 @@ const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
           maxWidth: 540,
           minWidth: 0,
           display: 'flex',
-          gap: 20,
-          alignItems: 'flex-start',
+          // Column gap is halved because the divider sits between the two panels and
+          // takes a gap on each side; row gap is the spacing used once they stack.
+          gap: '28px 14px',
+          alignItems: 'stretch',
           flexWrap: 'wrap',
         }}
       >
         <ContributionCalendar />
+        <div className="panel-divider" />
         <InvestmentsPanel onOpen={() => onNavigate({ name: 'investments' })} />
       </div>
     </div>
