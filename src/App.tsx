@@ -19,7 +19,16 @@ const LEVEL_INK = [
   'rgba(26,26,26,0.92)',
 ];
 
-const CAL_DAYS = 210;
+// Hand-maintained on purpose: neither Fidelity nor Monarch exposes an API a static
+// site can read, and no credential can live in a public JS bundle. Percentage only —
+// no balances, no dollar amounts. Set ytdPercent to a number (e.g. 18.4) to show the
+// panel; while it is null the panel renders nothing rather than showing a fake figure.
+const PORTFOLIO: { ytdPercent: number | null; asOf: string } = {
+  ytdPercent: null,
+  asOf: '',
+};
+
+const CAL_DAYS = 308; // 44 weeks: the grid then spans the full right column
 const CAL_CELL = 9;
 const CAL_GAP = 3;
 const CAL_WEEKS = Math.ceil(CAL_DAYS / 7) + 1;
@@ -244,7 +253,7 @@ const ContributionCalendar: React.FC = () => {
   // Pinned to the grid's own width so the caption wraps inside the panel rather than
   // setting the panel's width from its own max-content.
   return (
-    <aside style={{ width: CAL_WIDTH, maxWidth: '100%', marginTop: 64 }}>
+    <aside style={{ width: CAL_WIDTH, maxWidth: '100%' }}>
       <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 14, color: COLORS.text }}>
         Activity
       </div>
@@ -346,6 +355,44 @@ const WRITINGS: Entry[] = [
   },
 ];
 
+const ReturnsPanel: React.FC = () => {
+  if (PORTFOLIO.ytdPercent === null) return null;
+  const gain = PORTFOLIO.ytdPercent;
+
+  return (
+    <div style={{ marginTop: 64 }}>
+      <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 14, color: COLORS.text }}>
+        Returns
+      </div>
+
+      <p
+        style={{
+          fontFamily: MONO,
+          fontSize: 13,
+          lineHeight: 1.65,
+          color: COLORS.muted,
+          marginTop: 8,
+        }}
+      >
+        Year to date{PORTFOLIO.asOf ? `, as of ${PORTFOLIO.asOf}` : ''}.
+      </p>
+
+      <div
+        style={{
+          fontFamily: SERIF,
+          fontSize: 34,
+          letterSpacing: -0.5,
+          color: COLORS.text,
+          marginTop: 14,
+        }}
+      >
+        {gain >= 0 ? '+' : '−'}
+        {Math.abs(gain).toFixed(1)}%
+      </div>
+    </div>
+  );
+};
+
 const SectionHeading: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <h2
     style={{
@@ -388,26 +435,43 @@ const Timeline: React.FC<{ entries: Entry[]; onOpen?: (entry: Entry) => void }> 
 );
 
 const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
-  <PageShell onNavigate={onNavigate} maxWidth={1256}>
-    <p
+  <PageShell onNavigate={onNavigate} maxWidth={1296}>
+    <div
       style={{
-        fontFamily: MONO,
-        fontSize: 14,
-        lineHeight: 1.75,
-        maxWidth: 720,
+        display: 'flex',
+        gap: 56,
+        alignItems: 'flex-start',
+        flexWrap: 'wrap',
         marginTop: 32,
-        color: COLORS.text,
       }}
     >
-      I'm Arjun Mathur, founder of Molterra. I spend most of my time thinking about
-      computation, large systems, and the strange ways technology shapes the physical
-      world around us. My work sits closest to industrial software and scientific
-      infrastructure, especially in places where important work still depends on
-      fragmented tools and human intuition. I'm interested in building systems that
-      quietly accelerate progress behind the scenes. Outside of that, I write
-      occasionally about technology, research, markets, and ideas that feel a little
-      ahead of their time.
-    </p>
+      <p
+        style={{
+          fontFamily: MONO,
+          fontSize: 14,
+          lineHeight: 1.75,
+          color: COLORS.text,
+          flex: '1 1 520px',
+          maxWidth: 700,
+          minWidth: 0,
+        }}
+      >
+        I'm Arjun Mathur, founder of Molterra. I spend most of my time thinking about
+        computation, large systems, and the strange ways technology shapes the physical
+        world around us. My work sits closest to industrial software and scientific
+        infrastructure, especially in places where important work still depends on
+        fragmented tools and human intuition. I'm interested in building systems that
+        quietly accelerate progress behind the scenes. Outside of that, I write
+        occasionally about technology, research, markets, and ideas that feel a little
+        ahead of their time.
+      </p>
+
+      {/* Same flex basis as the Writings column below, so the panel's edges line up
+          with that column instead of floating on their own. */}
+      <div style={{ flex: '1 1 420px', maxWidth: 540, minWidth: 0 }}>
+        <ContributionCalendar />
+      </div>
+    </div>
 
     <div
       style={{
@@ -426,10 +490,10 @@ const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
         />
       </div>
 
-      <div style={{ flex: '1 1 420px', maxWidth: 500, minWidth: 0 }}>
+      <div style={{ flex: '1 1 420px', maxWidth: 540, minWidth: 0 }}>
         <SectionHeading>Writings</SectionHeading>
         <Timeline entries={WRITINGS} />
-        <ContributionCalendar />
+        <ReturnsPanel />
       </div>
     </div>
   </PageShell>
