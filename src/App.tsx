@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const COLORS = {
   bg: '#EDECE8',
@@ -6,6 +6,24 @@ const COLORS = {
   muted: '#7a7a7a',
   line: '#1a1a1a',
 };
+
+const GITHUB_USER = 'akmathur1';
+
+// Contribution squares in the site's ink, not GitHub green, so the panel reads as
+// part of the page. Index maps directly to the API's 0-4 level.
+const LEVEL_INK = [
+  'rgba(26,26,26,0.07)',
+  'rgba(26,26,26,0.26)',
+  'rgba(26,26,26,0.46)',
+  'rgba(26,26,26,0.68)',
+  'rgba(26,26,26,0.92)',
+];
+
+const CAL_DAYS = 210;
+const CAL_CELL = 9;
+const CAL_GAP = 3;
+const CAL_WEEKS = Math.ceil(CAL_DAYS / 7) + 1;
+const CAL_WIDTH = CAL_WEEKS * (CAL_CELL + CAL_GAP) - CAL_GAP;
 
 const SERIF = '"Newsreader", "Tiempos Headline", "Source Serif 4", "Iowan Old Style", Georgia, serif';
 const MONO = '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace';
@@ -95,10 +113,11 @@ const App: React.FC = () => {
   return <Home onNavigate={setView} />;
 };
 
-const PageShell: React.FC<{ onNavigate: (v: View) => void; children: React.ReactNode }> = ({
-  onNavigate,
-  children,
-}) => (
+const PageShell: React.FC<{
+  onNavigate: (v: View) => void;
+  maxWidth?: number;
+  children: React.ReactNode;
+}> = ({ onNavigate, maxWidth = 720, children }) => (
   <div
     style={{
       minHeight: '100vh',
@@ -107,7 +126,7 @@ const PageShell: React.FC<{ onNavigate: (v: View) => void; children: React.React
       padding: '56px 56px 120px',
     }}
   >
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth }}>
       <header
         style={{
           display: 'flex',
@@ -164,53 +183,183 @@ const PageShell: React.FC<{ onNavigate: (v: View) => void; children: React.React
   </div>
 );
 
-const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
-  <PageShell onNavigate={onNavigate}>
-    <p
-      style={{
-        fontFamily: MONO,
-        fontSize: 14,
-        lineHeight: 1.75,
-        maxWidth: 720,
-        marginTop: 32,
-        color: COLORS.text,
-      }}
-    >
-      I'm Arjun Mathur, founder of Molterra. I spend most of my time thinking about
-      computation, large systems, and the strange ways technology shapes the physical
-      world around us. My work sits closest to industrial software and scientific
-      infrastructure, especially in places where important work still depends on
-      fragmented tools and human intuition. I'm interested in building systems that
-      quietly accelerate progress behind the scenes. Outside of that, I write
-      occasionally about technology, research, markets, and ideas that feel a little
-      ahead of their time.
-    </p>
+type ContribDay = { date: string; count: number; level: number };
 
-    <section style={{ position: 'relative', marginTop: 56, paddingLeft: 0 }}>
+// GitHub's contribution graph is not exposed by the public REST API, so this reads
+// a CORS-enabled mirror of the same data. Failure is non-fatal: the panel hides.
+const ContributionCalendar: React.FC = () => {
+  const [days, setDays] = useState<ContribDay[] | null>(null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USER}?y=last`)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+      .then((data: { contributions: ContribDay[] }) => {
+        if (alive) setDays(data.contributions.slice(-CAL_DAYS));
+      })
+      .catch(() => {
+        if (alive) setFailed(true);
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  if (failed) return null;
+
+  // Pad the leading column so each row is a fixed weekday, the way GitHub aligns it.
+  let weeks: (ContribDay | null)[][] = [];
+  if (days && days.length) {
+    const cells: (ContribDay | null)[] = [];
+    const lead = new Date(`${days[0].date}T00:00:00`).getDay();
+    for (let i = 0; i < lead; i += 1) cells.push(null);
+    days.forEach((d) => cells.push(d));
+    while (cells.length % 7 !== 0) cells.push(null);
+    for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
+  } else {
+    // Reserve the same footprint while loading so nothing shifts underneath.
+    weeks = Array.from({ length: CAL_WEEKS }, () => Array(7).fill(null));
+  }
+
+  const total = days ? days.reduce((n, d) => n + d.count, 0) : 0;
+
+  // The rail is pinned to the grid's own width; left to size itself, the caption's
+  // max-content width widens it and steals space from the timeline column.
+  return (
+    <aside style={{ flex: '0 0 auto', width: CAL_WIDTH, marginTop: 32 }}>
+      <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 14, color: COLORS.text }}>
+        Activity
+      </div>
+
+      <p
+        style={{
+          fontFamily: MONO,
+          fontSize: 13,
+          lineHeight: 1.65,
+          color: COLORS.muted,
+          marginTop: 8,
+        }}
+      >
+        {days ? `${total.toLocaleString()} contributions in the last ${CAL_DAYS} days` : '\u00a0'}
+        {days ? ' on ' : ''}
+        {days && (
+          <a
+            href={`https://github.com/${GITHUB_USER}`}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              color: COLORS.text,
+              textDecoration: 'underline',
+              textUnderlineOffset: 4,
+              textDecorationThickness: 1,
+            }}
+          >
+            @{GITHUB_USER}
+          </a>
+        )}
+        {days ? '.' : ''}
+      </p>
+
+      <div style={{ display: 'flex', gap: CAL_GAP, marginTop: 14 }}>
+        {weeks.map((week, wi) => (
+          <div key={wi} style={{ display: 'flex', flexDirection: 'column', gap: CAL_GAP }}>
+            {week.map((day, di) => (
+              <div
+                key={di}
+                title={day ? `${day.count} on ${day.date}` : undefined}
+                style={{
+                  width: CAL_CELL,
+                  height: CAL_CELL,
+                  background: day ? LEVEL_INK[day.level] : 'transparent',
+                }}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+
       <div
         style={{
-          position: 'absolute',
-          left: 4,
-          top: 12,
-          bottom: 12,
-          width: 1,
-          background: COLORS.line,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 6,
+          marginTop: 12,
+          fontFamily: MONO,
+          fontSize: 11,
+          color: COLORS.muted,
         }}
-      />
+      >
+        <span>Less</span>
+        {LEVEL_INK.map((ink) => (
+          <div key={ink} style={{ width: CAL_CELL, height: CAL_CELL, background: ink }} />
+        ))}
+        <span>More</span>
+      </div>
+    </aside>
+  );
+};
 
-      {ENTRIES.map((entry, i) => (
-        <TimelineRow
-          key={i}
-          entry={entry}
-          last={i === ENTRIES.length - 1}
-          onOpen={
-            entry.slug
-              ? () => onNavigate({ name: 'project', slug: entry.slug as string })
-              : undefined
-          }
-        />
-      ))}
-    </section>
+const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
+  <PageShell onNavigate={onNavigate} maxWidth={1160}>
+    <div
+      style={{
+        display: 'flex',
+        gap: 64,
+        alignItems: 'flex-start',
+        flexWrap: 'wrap',
+      }}
+    >
+      <div style={{ flex: '1 1 560px', maxWidth: 720, minWidth: 0 }}>
+        <p
+          style={{
+            fontFamily: MONO,
+            fontSize: 14,
+            lineHeight: 1.75,
+            maxWidth: 720,
+            marginTop: 32,
+            color: COLORS.text,
+          }}
+        >
+          I'm Arjun Mathur, founder of Molterra. I spend most of my time thinking about
+          computation, large systems, and the strange ways technology shapes the physical
+          world around us. My work sits closest to industrial software and scientific
+          infrastructure, especially in places where important work still depends on
+          fragmented tools and human intuition. I'm interested in building systems that
+          quietly accelerate progress behind the scenes. Outside of that, I write
+          occasionally about technology, research, markets, and ideas that feel a little
+          ahead of their time.
+        </p>
+
+        <section style={{ position: 'relative', marginTop: 56, paddingLeft: 0 }}>
+          <div
+            style={{
+              position: 'absolute',
+              left: 4,
+              top: 12,
+              bottom: 12,
+              width: 1,
+              background: COLORS.line,
+            }}
+          />
+
+          {ENTRIES.map((entry, i) => (
+            <TimelineRow
+              key={i}
+              entry={entry}
+              last={i === ENTRIES.length - 1}
+              onOpen={
+                entry.slug
+                  ? () => onNavigate({ name: 'project', slug: entry.slug as string })
+                  : undefined
+              }
+            />
+          ))}
+        </section>
+      </div>
+
+      <ContributionCalendar />
+    </div>
   </PageShell>
 );
 
