@@ -36,6 +36,78 @@ const INVESTMENTS: {
   ],
 };
 
+// Positions only: tickers and names, deliberately no sizes, weights, values, or
+// account details. Grouped by sector for scanning rather than by account.
+type Holding = { ticker: string; name: string };
+const HOLDINGS: { group: string; items: Holding[] }[] = [
+  {
+    group: 'Technology & semiconductors',
+    items: [
+      { ticker: 'AAPL', name: 'Apple' },
+      { ticker: 'AMZN', name: 'Amazon' },
+      { ticker: 'ANET', name: 'Arista Networks' },
+      { ticker: 'ASML', name: 'ASML' },
+      { ticker: 'COHR', name: 'Coherent' },
+      { ticker: 'CRWV', name: 'CoreWeave' },
+      { ticker: 'GLW', name: 'Corning' },
+      { ticker: 'GOOGL', name: 'Alphabet' },
+      { ticker: 'INTC', name: 'Intel' },
+      { ticker: 'META', name: 'Meta Platforms' },
+      { ticker: 'NOW', name: 'ServiceNow' },
+      { ticker: 'NVDA', name: 'Nvidia' },
+      { ticker: 'ORCL', name: 'Oracle' },
+      { ticker: 'SNDK', name: 'Sandisk' },
+      { ticker: 'VPG', name: 'Vishay Precision Group' },
+      { ticker: 'VRT', name: 'Vertiv' },
+    ],
+  },
+  {
+    group: 'Financials & exchanges',
+    items: [
+      { ticker: 'GS', name: 'Goldman Sachs' },
+      { ticker: 'ICE', name: 'Intercontinental Exchange' },
+      { ticker: 'MA', name: 'Mastercard' },
+      { ticker: 'SPGI', name: 'S&P Global' },
+      { ticker: 'V', name: 'Visa' },
+    ],
+  },
+  {
+    group: 'Consumer, industrial & healthcare',
+    items: [
+      { ticker: 'ALC', name: 'Alcon' },
+      { ticker: 'DAL', name: 'Delta Air Lines' },
+      { ticker: 'KO', name: 'Coca-Cola' },
+      { ticker: 'UBER', name: 'Uber' },
+      { ticker: 'WMT', name: 'Walmart' },
+    ],
+  },
+  {
+    group: 'Holding companies & real assets',
+    items: [
+      { ticker: 'BN', name: 'Brookfield Corporation' },
+      { ticker: 'HHH', name: 'Howard Hughes Holdings' },
+      { ticker: 'PSHZF', name: 'Pershing Square Holdings' },
+      { ticker: 'PSUS', name: 'Pershing Square USA' },
+    ],
+  },
+  {
+    group: 'Funds & ETFs',
+    items: [
+      { ticker: 'DRAM', name: 'Roundhill Memory ETF' },
+      { ticker: 'FXAIX', name: 'Fidelity 500 Index Fund' },
+      { ticker: 'GLD', name: 'SPDR Gold Trust' },
+      { ticker: 'JPY', name: 'Lazard Japanese Equity ETF' },
+      { ticker: 'QQQ', name: 'Invesco QQQ' },
+      { ticker: 'SPY', name: 'SPDR S&P 500 ETF' },
+      { ticker: 'TOV', name: 'EA Series Trust ETF' },
+    ],
+  },
+  {
+    group: 'Digital assets',
+    items: [{ ticker: 'BTC', name: 'Bitcoin' }],
+  },
+];
+
 const CAL_DAYS = 182; // 26 weeks, sized to leave room for the investments panel
 const CAL_CELL = 7;
 const CAL_GAP = 2;
@@ -546,7 +618,9 @@ const InvestmentsPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNaviga
   const rows = INVESTMENTS.rows.filter(
     (r): r is { label: string; percent: number } => r.percent !== null
   );
+  const [head, ...benchmarks] = rows;
   const peak = rows.length ? Math.max(...rows.map((r) => Math.abs(r.percent))) : 1;
+  const count = HOLDINGS.reduce((n, g) => n + g.items.length, 0);
 
   return (
     <PageShell onNavigate={onNavigate}>
@@ -591,27 +665,138 @@ const InvestmentsPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNaviga
             color: COLORS.text,
           }}
         >
-          Portfolio performance against benchmarks over the trailing three months.
-          Percentages only — no balances or positions.
+          Performance against benchmarks over the trailing three months, and current
+          positions. Percentages and tickers only — no balances, sizes, or values.
         </p>
 
-        <div
-          style={{
-            marginTop: 32,
-            maxWidth: 460,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 16,
-          }}
-        >
-          {rows.map((r) => (
-            <BenchmarkRow
-              key={r.label}
-              label={r.label}
-              percent={r.percent}
-              peak={peak}
-              size={14}
-            />
+        {/* --- performance --- */}
+        {head && (
+          <div style={{ marginTop: 40 }}>
+            <div
+              style={{
+                fontFamily: SERIF,
+                fontSize: 44,
+                letterSpacing: -0.8,
+                lineHeight: 1,
+                color: COLORS.text,
+              }}
+            >
+              {pct(head.percent)}
+            </div>
+            <div style={{ fontFamily: MONO, fontSize: 12, color: COLORS.muted, marginTop: 8 }}>
+              {head.label} · {INVESTMENTS.period.toLowerCase()}
+            </div>
+
+            <div
+              style={{
+                marginTop: 24,
+                maxWidth: 420,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 14,
+              }}
+            >
+              {benchmarks.map((r) => (
+                <BenchmarkRow
+                  key={r.label}
+                  label={r.label}
+                  percent={r.percent}
+                  peak={peak}
+                  size={13}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* --- holdings --- */}
+        <div style={{ marginTop: 64, borderTop: `1px solid ${COLORS.text}`, paddingTop: 28 }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'baseline',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: 12,
+            }}
+          >
+            <h3
+              style={{
+                fontFamily: SERIF,
+                fontWeight: 400,
+                fontSize: 22,
+                letterSpacing: -0.2,
+                color: COLORS.text,
+              }}
+            >
+              Holdings
+            </h3>
+            <span style={{ fontFamily: MONO, fontSize: 12, color: COLORS.muted }}>
+              {count} positions
+            </span>
+          </div>
+
+          {HOLDINGS.map((g) => (
+            <section key={g.group} style={{ marginTop: 32 }}>
+              <div
+                style={{
+                  fontFamily: MONO,
+                  fontSize: 11,
+                  letterSpacing: 1.2,
+                  textTransform: 'uppercase',
+                  color: COLORS.muted,
+                  paddingBottom: 8,
+                  borderBottom: '1px solid rgba(26,26,26,0.18)',
+                }}
+              >
+                {g.group}
+              </div>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))',
+                  columnGap: 32,
+                  rowGap: 9,
+                  marginTop: 14,
+                }}
+              >
+                {g.items.map((h) => (
+                  <div
+                    key={h.ticker}
+                    style={{
+                      display: 'flex',
+                      gap: 12,
+                      alignItems: 'baseline',
+                      fontFamily: MONO,
+                      fontSize: 13,
+                      minWidth: 0,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: 700,
+                        color: COLORS.text,
+                        flex: '0 0 56px',
+                      }}
+                    >
+                      {h.ticker}
+                    </span>
+                    <span
+                      style={{
+                        color: COLORS.muted,
+                        minWidth: 0,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {h.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
           ))}
         </div>
 
@@ -621,11 +806,11 @@ const InvestmentsPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNaviga
             fontSize: 13,
             lineHeight: 1.6,
             maxWidth: 640,
-            marginTop: 48,
+            marginTop: 56,
             color: COLORS.muted,
           }}
         >
-          Holdings, allocation, and a longer performance history to come.
+          Allocation and a longer performance history to come.
         </p>
       </article>
     </PageShell>
