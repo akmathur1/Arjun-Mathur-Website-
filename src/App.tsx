@@ -255,7 +255,7 @@ const ENTRIES: Entry[] = [
     title: 'Antidoom — Final Token Preference Optimization',
     date: '2026',
     description:
-      'Targeted preference data and training for reducing repetition loops in reasoning models. Samples completions, detects where a repeated span begins, marks the loop-starting token as rejected, selects coherent alternatives at that same position, and trains a LoRA adapter with Final Token Preference Optimization (FTPO). Adapts the single-token preference idea from Antislop to runaway repetition. Liquid AI.',
+      'Targeted preference data and training for reducing repetition loops in reasoning models. Samples completions, detects where a repeated span begins, marks the loop-starting token as rejected, selects coherent alternatives at that same position, and trains a LoRA adapter with Final Token Preference Optimization (FTPO). Adapts the single-token preference idea from Antislop to runaway repetition.',
     tier: 'boxed',
     thumbnail: <AntidoomThumbnail />,
   },
@@ -1350,8 +1350,7 @@ const AntidoomProjectBody: React.FC = () => (
         letterSpacing: 0.3,
       }}
     >
-      Reducing Doom Loops with Final Token Preference Optimization · Liquid AI ·
-      github.com/Liquid4All/antidoom
+      Reducing Doom Loops with Final Token Preference Optimization
     </p>
 
     <BodyParagraph top={0}>
@@ -1439,7 +1438,8 @@ const AntidoomProjectBody: React.FC = () => (
       single-GPU LoRA followed by a merge. CUDA is the default path. ROCm needs a
       separate environment built from vLLM's prebuilt ROCm wheels rather than the
       CUDA-only lockfile, and two overrides that are not optional: the Triton attention
-      backend, because the default ROCm attention kernel memory-faults on LFM2, and
+      backend, because the default ROCm attention kernel memory-faults on this model
+      family, and
       plain Torch AdamW in place of the paged 32-bit optimizer, which would otherwise
       drag in bitsandbytes. The multi-GPU generation path additionally pins devices
       through the ROCm-specific visibility variable and gives each worker its own JIT
@@ -1456,8 +1456,7 @@ const AntidoomProjectBody: React.FC = () => (
         color: COLORS.muted,
       }}
     >
-      Validated on Instinct MI325 (gfx942). Liquid AI, “Reducing Doom Loops with Final
-      Token Preference Optimization”, Liquid AI Blog, 2026.
+      Validated on Instinct MI325 (gfx942).
     </p>
   </div>
 );
