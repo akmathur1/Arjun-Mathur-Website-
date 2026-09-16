@@ -231,6 +231,21 @@ const AntidoomThumbnail: React.FC = () => (
   />
 );
 
+const GRNThumbnail: React.FC = () => (
+  <img
+    src="/projects/grn-indistinguishability/fig2-overview.jpg"
+    alt="Workflow: the eud-1, nhr-40, sult-1 regulatory network with unknown structure; a family of ODE models fit to expression data; fits assessed across model structures; a model set of shared regulatory features identified"
+    style={{
+      display: 'block',
+      width: 150,
+      maxWidth: '100%',
+      height: 'auto',
+      border: `1px solid ${COLORS.text}`,
+      background: '#fff',
+    }}
+  />
+);
+
 const ENTRIES: Entry[] = [
   {
     slug: 'fus-idp-hamiltonians',
@@ -258,6 +273,15 @@ const ENTRIES: Entry[] = [
       'Targeted preference data and training for reducing repetition loops in reasoning models. Samples completions, detects where a repeated span begins, marks the loop-starting token as rejected, selects coherent alternatives at that same position, and trains a LoRA adapter with Final Token Preference Optimization (FTPO). Adapts the single-token preference idea from Antislop to runaway repetition.',
     tier: 'boxed',
     thumbnail: <AntidoomThumbnail />,
+  },
+  {
+    slug: 'grn-indistinguishability',
+    title: 'Practical Indistinguishability in Gene Regulatory Network Inference',
+    date: 'August 2025',
+    description:
+      'A case study in how far regulatory network structure can be inferred from typical experimental data. We fit 13,824 distinct ODE models — each a different regulatory network over eud-1, sult-1, and nhr-40 — to RNA-seq from three experiments on the nematode Pristionchus pacificus, whose mouth-form dimorphism is a developmental decision. Synthetic tests establish the limits of inference in the experimental data regime; model sets of shared regulatory features are recovered per experiment, and a single network in their intersection explains all three. With FitzGerald, Reich, Agaba, Werner, and Mangan.',
+    tier: 'boxed',
+    thumbnail: <GRNThumbnail />,
   },
   {
     title: 'Third Entry Title',
@@ -1267,6 +1291,8 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             <OvarianMTLProjectBody />
           ) : slug === 'antidoom' ? (
             <AntidoomProjectBody />
+          ) : slug === 'grn-indistinguishability' ? (
+            <GRNProjectBody />
           ) : (
             <p
               style={{
@@ -1457,6 +1483,235 @@ const AntidoomProjectBody: React.FC = () => (
       }}
     >
       Validated on Instinct MI325 (gfx942).
+    </p>
+  </div>
+);
+
+const GRNProjectBody: React.FC = () => (
+  <div style={{ marginTop: 32 }}>
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        color: COLORS.muted,
+        marginTop: 0,
+        marginBottom: 24,
+        letterSpacing: 0.3,
+      }}
+    >
+      Cody E. FitzGerald, Shelley Reich, Victor Agaba, Arjun Mathur, Michael S. Werner,
+      Niall M. Mangan · arXiv 2508.21006 · PMC12407701
+    </p>
+
+    <BodyParagraph top={0}>
+      Determining mechanistic models of gene regulation, especially the regulation
+      underlying phenotypic variation, is a central goal of both mathematical biology
+      and modern evolutionary biology. Even the highest-quality experimental data come
+      with challenges: there are always sources of noise, a limit to how often the
+      system can be measured in time, and no way to measure every state that
+      participates in the full underlying complexity. On top of that there is usually
+      uncertainty in the mechanism itself, which gives rise to multiple competing model
+      structures. It may be known that a gene is regulated by a transcription factor but
+      unclear whether it experiences activation or repression — and subtle changes of
+      that kind reshape the cost-function landscape that parameter estimation has to
+      navigate.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      This kind of structural uncertainty is rarely explored in depth, largely because
+      distinguishing between model structures in a data-driven way is computationally
+      expensive: each candidate structure has its own high-dimensional landscape, and
+      landscapes for biological systems are known to feature long, flat canyons where
+      parameters vary widely while behaviour stays qualitatively the same. To make the
+      case that this deserves more attention, we ran a meta-analysis across six
+      mathematical biology journals. A very large number of models are published each
+      year, but comparison across model structures is far less common — a lower bound
+      from searching for the Akaike Information Criterion suggests at least 23% of
+      studies in PLOS Computational Biology involve some model selection, and far fewer
+      in the more classical journals.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/grn-indistinguishability/fig1-models-per-year.jpg"
+      alt="Journal articles per year in six mathematical biology journals, rising steadily, with the combined total shown in pink"
+      caption={
+        <>
+          <strong>Fig. 1.</strong> A growing number of mathematical models of biological
+          systems are published each year. Articles over time in the Bulletin of
+          Mathematical Biology, Biophysical Journal, Journal of Biological Rhythms,
+          Journal of Mathematical Biology, Journal of Theoretical Biology, and PLOS
+          Computational Biology, as indexed on PubMed; combined total in pink.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The case study is a developmental decision in the nematode Pristionchus
+      pacificus, which exhibits an evolutionary novelty: a mouth-form dimorphism.
+      Adults are either eurystomatous, able to kill other nematodes for food, or
+      stenostomatous, eating only bacteria. Two genes act as switches. eud-1 encodes a
+      sulfatase and sult-1 a sulfotransferase — enzymes with opposite biochemical
+      functions — and mutating either yields a fully penetrant phenotype regardless of
+      environment, while overexpression yields the opposite one. The nuclear hormone
+      receptor nhr-40, a transcription factor, sits downstream and gives opposite
+      phenotypes depending on the allele. The regulatory connections between these
+      three are not understood, which is the source of the structural uncertainty here.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/grn-indistinguishability/fig2-overview.jpg"
+      alt="Four-panel workflow: the unknown eud-1, nhr-40, sult-1 network; ODE models fit to expression data from three experiments; fits assessed across structures; a model set identified"
+      caption={
+        <>
+          <strong>Fig. 2.</strong> The approach. (A) The network underpinning the
+          mouth-form decision is thought to involve eud-1, nhr-40, and sult-1, but its
+          regulatory structure is unknown; gene expression from three experiments is
+          used to identify key features. (B) A family of ODE models is fit to the data.
+          (C) Fits are assessed across model structures. (D) The model set — the
+          collection of models with shared regulatory features that best fit — is
+          identified.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      We took a maximalist approach and fit 13,824 ordinary differential equation
+      models, each a distinct effective regulatory network over the three genes, to
+      normalised RNA-seq for eud-1, sult-1, and nhr-40 sampled at six time points
+      across development in three conditions: wild type, an eud-1 knock-out, and a
+      sult-1 knock-out. Only mRNA was measured, so the protein states are hidden and the
+      system is partially observed. Testing representative models with STRIKE-GOLDD
+      showed they were not structurally identifiable, owing to a scaling symmetry: the
+      same transformation of parameters and protein states leaves every equation
+      invariant. Because the symmetry lives in the mRNA production term, it affects all
+      13,824 models. We broke it by rescaling the protein states and half-max constants
+      by the translation rate, which also removes one parameter dimension, and confirmed
+      identifiability on a subset with StructuralIdentifiability.jl before estimation.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Before touching experimental data we asked what inference is possible at all in
+      this data regime. Taking one model that fits the real data well as ground truth,
+      we generated synthetic data across a wide range of sampling rates and
+      multiplicative noise levels — signal-dependent noise being the simplest defensible
+      error model given that variance rose with the mean — and refit both the true
+      structure and three deliberately misspecified ones. In the high-sampling,
+      low-noise corner the models are cleanly distinguishable. In the regime matching
+      the experiment, the true structure and a closely related one fit comparably, while
+      structurally unrelated models fail badly, with uncertainty spanning the whole
+      dynamic range for nhr-40. Parameters are not practically identifiable here, but
+      some structures can fit and others cannot — which is exactly what practical
+      indistinguishability is about: the ability to uniquely infer structure, rather
+      than parameters, from the data at hand.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/grn-indistinguishability/fig3-synthetic.jpg"
+      alt="Network diagrams for four model structures; heat maps of fit cost across sampling rate and noise level for each; forward simulations against synthetic data in the experimental regime"
+      caption={
+        <>
+          <strong>Fig. 3.</strong> Synthetic tests of practical indistinguishability.
+          (A) Model 11574, the ground truth, alongside 7308, which shares many of its
+          features, and 353 and 1, which share none. (B) Cost of fitting each to
+          synthetic data from 11574 across sampling rates and noise levels; lighter is a
+          better fit, and the yellow square marks the approximate experimental regime.
+          (C) Forward simulations at the parameters recovered in that regime. 11574 and
+          7308 both fit reasonably; 353 and 1 do not.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      Fitting all 13,824 structures to the wild-type experiment, roughly a thousand
+      give a reasonable fit before the sorted cost curve plateaus and then climbs
+      sharply. Cost and uncertainty correlate as expected: the worst models leave
+      nhr-40 almost entirely unconstrained. To learn what separates the acceptable
+      models, we trained a decision tree on 21 structural features of each network. Two
+      classes emerge, both featuring positive regulation of eud-1 and nhr-40,
+      regulation of eud-1 by NHR-40, and autoregulation of nhr-40, differing in whether
+      NHR-40 also regulates sult-1 — 325 networks in all. The tree also names a broad
+      set of structures that predictably fail, though it cannot classify models sitting
+      near the rounded shoulder of the plateau, which share features with both sides.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/grn-indistinguishability/fig4-wildtype.jpg"
+      alt="Sorted cost curve over 13,824 models with a plateau after about 1000; example good and poor fits; noise versus cost; decision tree over structural features; the resolved and unresolved features of the model set"
+      caption={
+        <>
+          <strong>Fig. 4.</strong> Wild type. (A) All 13,824 models sorted by cost, with
+          a plateau after about 1,000 (pink). (B) Forward simulations for a well-fit
+          model (bottom) and a poor one (top). (C) Estimated noise against cost. (D) A
+          decision tree over 21 structural features separates acceptable from
+          unacceptable fits into two classes. (E) Resolved features of the second class
+          in black, unresolved in dashed brown. (F) One example network from that class,
+          dense with positive auto- and cross-regulation.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The knock-out experiments are far more constraining. With eud-1 removed, only a
+      handful of the 144 remaining structures fit, separated from the rest by a large
+      gap in cost; the two best share positive autoregulation of nhr-40 and positive
+      regulation of sult-1 by NHR-40, differing only in whether SULT-1 feeds back on
+      nhr-40. With sult-1 removed, about ten structures fit, favouring regulation of
+      eud-1 by NHR-40, autoregulation of eud-1, and either autoregulation of nhr-40 or
+      regulation of nhr-40 by EUD-1. Intersecting the three model sets yields a single
+      unified network. It is dominated by positive regulation, features regulation of
+      eud-1 by NHR-40 and autoregulation of nhr-40, and reduces cleanly to the
+      knock-out cases — which also explains a previously puzzling observation, that
+      sult-1 expression rises significantly when eud-1 is knocked out even though
+      neither is a transcription factor.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/grn-indistinguishability/fig5-unified.jpg"
+      alt="Sorted cost curves for the wild-type, eud-1 knock-out, and sult-1 knock-out experiments; shared features of the best fits; the unified network; its simulations against each experiment"
+      caption={
+        <>
+          <strong>Fig. 5.</strong> Across experiments. (A) Sorted cost curves for wild
+          type, eud-1 KO, and sult-1 KO, best fits shaded pink, the unified structure in
+          orange. (B) Regulatory features common to the best-fitting models. (C) The
+          unified network. (D) Its simulations at optimised parameters against each
+          experiment; one replicate shown, one standard deviation as the band.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The result is a possible mechanism, not a verified one, and the paper is explicit
+      about what remains open. The wild-type model set holds roughly a thousand
+      networks and the sult-1 set around ten, so structural uncertainty is still large.
+      NHR-40's prominence may partly reflect a modelling choice: its protein initial
+      condition was estimated wherever it entered a production term, giving those
+      models one extra parameter, though far more of the network was resolved than its
+      mere presence. Many good fits placed that initial condition near ten million in
+      scaled units, plausible only if the effective translation rate is small —
+      pointing to post-transcriptional processes outside the model. Parameter
+      estimation used a thousand multi-start seeds per model, spot-checked at ten
+      thousand; the multiplicative error model was chosen on qualitative grounds, with
+      weighted least squares giving similar results. The natural next experiments are
+      an nhr-40 knock-out and optimal experiment design over the discovered model sets
+      — denser sampling, protein measurements, or perturbations that act on the network
+      indirectly. The comparative framework itself applies wherever structural
+      uncertainty is the obstacle and the data make algorithmic model selection
+      infeasible.
+    </BodyParagraph>
+
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        maxWidth: 640,
+        marginTop: 48,
+        color: COLORS.muted,
+      }}
+    >
+      Figures reproduced from the preprint under CC BY 4.0. arxiv.org/abs/2508.21006 ·
+      pmc.ncbi.nlm.nih.gov/articles/PMC12407701
     </p>
   </div>
 );
