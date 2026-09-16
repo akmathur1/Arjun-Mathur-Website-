@@ -1,0 +1,24 @@
+[
+  {
+    "title": "First Writing Title",
+    "date": "March 4, 2026",
+    "description": "Placeholder description — swap for the real essay summary. Two lines here matches the rhythm of the reference layout.",
+    "tier": "featured"
+  },
+  {
+    "title": "Second Writing Title",
+    "date": "January 22, 2026",
+    "description": "Another placeholder. Short entries run bare, with no box around them."
+  },
+  {
+    "title": "Third Writing Title",
+    "date": "December 9, 2025",
+    "description": "Placeholder text for a third piece, kept to roughly two lines."
+  },
+  {
+    "title": "Fourth Writing Title",
+    "date": "October 30, 2025",
+    "description": "A boxed placeholder, showing the hairline treatment used for older highlights.",
+    "tier": "boxed"
+  }
+]

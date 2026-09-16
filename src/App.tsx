@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import writingsData from './writings.json';
 
 const COLORS = {
   bg: '#EDECE8',
@@ -503,34 +504,26 @@ const ContributionCalendar: React.FC = () => {
   );
 };
 
-// Placeholder writings — same shape as ENTRIES so both columns share TimelineRow.
-// Tier mix mirrors Physical Intelligence: newest carries the shadow, the rest vary.
-const WRITINGS: Entry[] = [
-  {
-    title: 'First Writing Title',
-    date: 'March 4, 2026',
-    description:
-      'Placeholder description — swap for the real essay summary. Two lines here matches the rhythm of the reference layout.',
-    tier: 'featured',
-  },
-  {
-    title: 'Second Writing Title',
-    date: 'January 22, 2026',
-    description: 'Another placeholder. Short entries run bare, with no box around them.',
-  },
-  {
-    title: 'Third Writing Title',
-    date: 'December 9, 2025',
-    description: 'Placeholder text for a third piece, kept to roughly two lines.',
-  },
-  {
-    title: 'Fourth Writing Title',
-    date: 'October 30, 2025',
-    description:
-      'A boxed placeholder, showing the hairline treatment used for older highlights.',
-    tier: 'boxed',
-  },
-];
+// Writings live in src/writings.json so the announce-writings workflow can diff the
+// same file the site renders: add an entry there, push, and subscribers get mailed.
+// Same shape as ENTRIES so both columns share TimelineRow; tier mix mirrors Physical
+// Intelligence — newest carries the shadow, the rest vary.
+type WritingRecord = {
+  title: string;
+  date: string;
+  description: string;
+  tier?: string;
+  url?: string;
+};
+
+const writingRecords: WritingRecord[] = writingsData;
+
+const WRITINGS: Entry[] = writingRecords.map(({ title, date, description, tier }) => ({
+  title,
+  date,
+  description,
+  tier: tier === 'featured' || tier === 'boxed' ? tier : undefined,
+}));
 
 const pct = (n: number) => `${n >= 0 ? '+' : '−'}${Math.abs(n).toFixed(2)}%`;
 
@@ -970,6 +963,121 @@ const SectionHeading: React.FC<{ children: React.ReactNode }> = ({ children }) =
   </h2>
 );
 
+type SubscribeStatus = 'idle' | 'sending' | 'done' | 'error';
+
+// Posts to /api/subscribe, which adds the address to the Resend audience. The CRA dev
+// server has no /api route and answers unknown paths with index.html — a 200 — so
+// success is judged on the JSON body, not the status code.
+const SubscribeToWritings: React.FC = () => {
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<SubscribeStatus>('idle');
+  const [error, setError] = useState('');
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('sending');
+    setError('');
+    try {
+      const r = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const body: { ok?: boolean; error?: string } = await r.json().catch(() => ({}));
+      if (!r.ok || body.ok !== true) {
+        throw new Error(body.error || 'Could not subscribe. Try again in a moment.');
+      }
+      setStatus('done');
+    } catch (err) {
+      setStatus('error');
+      setError(err instanceof Error ? err.message : 'Could not subscribe. Try again in a moment.');
+    }
+  };
+
+  if (status === 'done') {
+    return (
+      <p style={{ fontFamily: MONO, fontSize: 13, lineHeight: 1.65, color: COLORS.muted, marginTop: 14 }}>
+        You're on the list. New writings will land in your inbox.
+      </p>
+    );
+  }
+
+  if (!open) {
+    return (
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        style={{
+          fontFamily: MONO,
+          fontSize: 13,
+          color: COLORS.text,
+          background: 'none',
+          border: 'none',
+          padding: 0,
+          cursor: 'pointer',
+          textDecoration: 'underline',
+          textUnderlineOffset: 5,
+          textDecorationThickness: 1,
+        }}
+      >
+        Subscribe to email updates of new writings
+      </button>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} style={{ marginTop: 14, width: '100%' }}>
+      <div style={{ display: 'flex', gap: 12, alignItems: 'stretch' }}>
+        <input
+          type="email"
+          required
+          autoFocus
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@example.com"
+          disabled={status === 'sending'}
+          aria-label="Email address"
+          style={{
+            flex: 1,
+            minWidth: 0,
+            fontFamily: MONO,
+            fontSize: 13,
+            color: COLORS.text,
+            background: 'transparent',
+            border: 'none',
+            borderBottom: `1px solid ${COLORS.text}`,
+            borderRadius: 0,
+            padding: '6px 0',
+          }}
+        />
+        <button
+          type="submit"
+          disabled={status === 'sending'}
+          style={{
+            fontFamily: MONO,
+            fontWeight: 700,
+            fontSize: 13,
+            color: COLORS.text,
+            background: 'transparent',
+            border: `1px solid ${COLORS.text}`,
+            borderRadius: 0,
+            padding: '6px 14px',
+            cursor: status === 'sending' ? 'default' : 'pointer',
+            opacity: status === 'sending' ? 0.5 : 1,
+          }}
+        >
+          {status === 'sending' ? 'Subscribing…' : 'Subscribe'}
+        </button>
+      </div>
+
+      <p style={{ fontFamily: MONO, fontSize: 12, lineHeight: 1.6, color: COLORS.muted, marginTop: 8 }}>
+        {status === 'error' ? error : 'One email per new writing. Unsubscribe any time.'}
+      </p>
+    </form>
+  );
+};
+
 const Timeline: React.FC<{ entries: Entry[]; onOpen?: (entry: Entry) => void }> = ({
   entries,
   onOpen,
@@ -1068,7 +1176,18 @@ const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
       </div>
 
       <div style={{ flex: '1 1 420px', maxWidth: 540, minWidth: 0 }}>
-        <SectionHeading>Writings</SectionHeading>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '0 24px',
+          }}
+        >
+          <SectionHeading>Writings</SectionHeading>
+          <SubscribeToWritings />
+        </div>
         <Timeline entries={WRITINGS} />
       </div>
     </div>

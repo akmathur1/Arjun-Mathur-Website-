@@ -1,0 +1,32 @@
+name: Announce new writings
+
+# Every push to main that changes the writings list mails subscribers about the
+# entries that are new relative to the pre-push commit. See scripts/announce-writings.mjs.
+on:
+  push:
+    branches: [main]
+    paths: [src/writings.json]
+
+permissions:
+  contents: read
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The script diffs against github.event.before, which may be several commits back.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: node scripts/announce-writings.mjs
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
+          RESEND_FROM: ${{ secrets.RESEND_FROM }}
+          BEFORE_SHA: ${{ github.event.before }}
+          SITE_URL: https://arjun-mathur-website.vercel.app
