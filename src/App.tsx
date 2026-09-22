@@ -134,13 +134,14 @@ type View =
   | { name: 'home' }
   | { name: 'project'; slug: string }
   | { name: 'investments' }
-  | { name: 'books' };
+  | { name: 'books' }
+  | { name: 'work' };
 
-// Work and Contact have no page behind them yet, so they stay plain anchors; an entry
-// with a view routes instead of jumping to a fragment.
+// Contact has no page behind it yet, so it stays a plain anchor; an entry with a
+// view routes instead of jumping to a fragment.
 const NAV: { label: string; view?: View }[] = [
   { label: 'Home', view: { name: 'home' } },
-  { label: 'Work' },
+  { label: 'Work', view: { name: 'work' } },
   { label: 'Investments', view: { name: 'investments' } },
   { label: 'Books', view: { name: 'books' } },
   { label: 'Contact' },
@@ -172,6 +173,149 @@ const BOOKS: Book[] = [
     title: 'Fourth Book Title',
     author: 'Author Name',
     note: 'Final placeholder, showing the spacing across a longer shelf.',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Work
+
+// One row per role, in the order LinkedIn lists them: ongoing roles first, then
+// the rest by end date. Dates are YYYY-MM; end: null means the role is ongoing.
+// A role with no start is listed but kept off the chart until its dates are in.
+// Logos live in public/work and are drawn in grayscale until hovered, so a
+// column of brand colours doesn't fight the page.
+type Role = {
+  slug: string;
+  org: string;
+  short?: string; // chart gutter label when the full name is long
+  role: string;
+  kind?: string;
+  start?: string;
+  end?: string | null;
+  location?: string;
+  summary?: string;
+  details?: string[];
+  logo: { src: string; scale?: number };
+  url?: string;
+  project?: string; // slug of the related ENTRIES item
+  featured?: boolean;
+};
+
+const WORK: Role[] = [
+  {
+    slug: 'molterra',
+    org: 'Molterra',
+    role: 'Founder',
+    kind: 'Self-employed',
+    start: '2025-07',
+    end: null,
+    location: 'New York',
+    summary:
+      'Real-time hyperspecific domain information. Backed by Cory Levy and Joshua Browder.',
+    logo: { src: '/work/molterra.png' },
+    url: 'https://molterra.com',
+    project: 'molterra-security',
+    featured: true,
+  },
+  {
+    slug: 'washu',
+    org: 'Washington University in St. Louis',
+    short: 'WashU',
+    role: 'Researcher',
+    start: '2025-08',
+    end: null,
+    location: 'St. Louis',
+    summary:
+      'With Dr. Trevor GrandPré: sequence-resolved coarse-grained Hamiltonians for FUS-derived intrinsically disordered protein variants — MPIPI parameterization, Langevin dynamics, and density–temperature phase diagrams — to get at sequence-dependent interfacial energetics and mesoscale condensate organization through statistical thermodynamics and polymer field theory.',
+    logo: { src: '/work/washu.svg' },
+    project: 'fus-idp-hamiltonians',
+  },
+  {
+    slug: 'mayo-clinic',
+    org: 'Mayo Clinic',
+    role: 'Research',
+    kind: 'Full-time',
+    start: '2025-04',
+    end: null,
+    location: 'Rochester, Minnesota',
+    summary:
+      "Dr. Aadel Chaudhuri's group: multitask learning algorithms and architecture-agnostic methods for modeling heterogeneous treatment responses in cancer.",
+    details: [
+      'Three models averaging 85% AUC for predicting drug response in high-grade serous ovarian cancer.',
+      'OvarianMTLNet, a custom multitask network that outperformed multinomial logistic regression, random forests, XGBoost, standard neural networks, and SVMs.',
+      'F1 above 85% across the stable, progression, and response categories for every drug.',
+    ],
+    logo: { src: '/work/mayo-clinic.svg' },
+    project: 'ovarian-mtl',
+  },
+  {
+    slug: 'jump-trading',
+    org: 'Jump Trading Group',
+    short: 'Jump Trading',
+    role: 'Quantitative Research Intern',
+    kind: 'Internship',
+    start: '2025-06',
+    end: '2025-08',
+    location: 'Chicago',
+    logo: { src: '/work/jump-trading.svg' },
+  },
+  {
+    slug: 'altman-solon',
+    org: 'Altman Solon',
+    role: 'Winter Analyst',
+    kind: 'Internship',
+    start: '2025-01',
+    end: '2025-03',
+    location: 'Boston',
+    summary:
+      'Strategy consulting for technology, media, and telecom: corporate strategy and commercial due diligence. Took the semester off to do it.',
+    logo: { src: '/work/altman-solon.svg' },
+  },
+  {
+    slug: 'google-deepmind',
+    org: 'Google DeepMind',
+    short: 'DeepMind',
+    role: 'Research',
+    kind: 'Part-time',
+    start: '2024-05',
+    end: '2025-03',
+    location: 'Cambridge, Massachusetts',
+    summary: 'MedPipe3D software package. Contributor to Julia 1.9.',
+    logo: { src: '/work/google-deepmind.svg' },
+  },
+  {
+    slug: 'washu-medicine',
+    org: 'Washington University School of Medicine',
+    short: 'WashU Medicine',
+    role: 'Research',
+    kind: 'Full-time',
+    start: '2022-05',
+    end: '2024-12',
+    location: 'St. Louis',
+    summary: "Dr. Eric Landsness's group: algorithms for neural recovery and stroke detection.",
+    logo: { src: '/work/washu-medicine.svg' },
+  },
+  {
+    slug: 'hms-mgh',
+    org: 'Harvard Medical School & Massachusetts General Hospital',
+    short: 'Harvard / MGH',
+    role: 'Research',
+    kind: 'Part-time',
+    start: '2024-06',
+    end: '2024-07',
+    location: 'Cambridge, Massachusetts',
+    summary:
+      "Nicole Zürcher's group: neuroimaging and graphing for neurodevelopmental and psychiatric disorders.",
+    logo: { src: '/work/hms-mgh.svg' },
+  },
+  {
+    // Role and dates still to be filled in; listed so the organization is not
+    // missing, and off the chart until they are.
+    slug: 'sehgal-foundation',
+    org: 'S M Sehgal Foundation',
+    short: 'Sehgal Foundation',
+    role: '',
+    logo: { src: '/work/sehgal-foundation.svg' },
   },
 ];
 
@@ -336,6 +480,9 @@ const App: React.FC = () => {
   }
   if (view.name === 'books') {
     return <BooksPage onNavigate={setView} />;
+  }
+  if (view.name === 'work') {
+    return <WorkPage onNavigate={setView} />;
   }
   return <Home onNavigate={setView} />;
 };
@@ -972,6 +1119,561 @@ const BooksPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) 
     </article>
   </PageShell>
 );
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+// Months since year zero, so ranges can be subtracted and mapped onto the chart.
+const monthIndex = (ym: string) => {
+  const [y, m] = ym.split('-').map(Number);
+  return y * 12 + (m - 1);
+};
+
+const monthLabel = (ym: string) => {
+  const [y, m] = ym.split('-').map(Number);
+  return `${MONTHS[m - 1]} ${y}`;
+};
+
+// LinkedIn counts both end months, so Jun — Aug is 3 mos, not 2.
+const spanLabel = (months: number) => {
+  const y = Math.floor(months / 12);
+  const m = months % 12;
+  const parts: string[] = [];
+  if (y) parts.push(`${y} ${y === 1 ? 'yr' : 'yrs'}`);
+  if (m) parts.push(`${m} ${m === 1 ? 'mo' : 'mos'}`);
+  return parts.join(' ');
+};
+
+const roleDates = (r: Role) =>
+  r.start ? `${monthLabel(r.start)} — ${r.end ? monthLabel(r.end) : 'present'}` : '';
+
+const roleMonths = (r: Role, now: number) =>
+  r.start ? (r.end ? monthIndex(r.end) : Math.floor(now)) - monthIndex(r.start) + 1 : 0;
+
+// Internships and part-time roles are hatched; founder and full-time roles are solid.
+const isHatched = (r: Role) => r.kind === 'Internship' || r.kind === 'Part-time';
+
+const HATCH: React.CSSProperties = {
+  backgroundImage: `repeating-linear-gradient(135deg, ${COLORS.text} 0 1.5px, transparent 1.5px 5px)`,
+  boxShadow: `inset 0 0 0 1px ${COLORS.text}`,
+};
+const SOLID: React.CSSProperties = { background: COLORS.text };
+
+// Logos sit in a white tile with a hairline, like the research thumbnails, and stay
+// in grayscale until their row is hovered so the page keeps its single ink.
+const OrgLogo: React.FC<{ role: Role; size: number; active: boolean }> = ({
+  role,
+  size,
+  active,
+}) => (
+  <div
+    aria-hidden
+    style={{
+      flexShrink: 0,
+      width: size,
+      height: size,
+      padding: size >= 40 ? 6 : 3,
+      border: `1px solid ${COLORS.text}`,
+      background: '#fff',
+      overflow: 'hidden',
+      position: 'relative',
+      zIndex: 1,
+    }}
+  >
+    <img
+      src={role.logo.src}
+      alt=""
+      style={{
+        display: 'block',
+        width: '100%',
+        height: '100%',
+        objectFit: 'contain',
+        transform: role.logo.scale ? `scale(${role.logo.scale})` : undefined,
+        filter: active ? 'none' : 'grayscale(1)',
+        transition: 'filter 200ms ease',
+      }}
+    />
+  </div>
+);
+
+const CHART_ROW = 34;
+const CHART_BAR = 10;
+
+type ChartProps = {
+  roles: Role[];
+  now: number; // fractional month index of today
+  active: string | null;
+  onActive: (slug: string | null) => void;
+  onPick: (slug: string) => void;
+};
+
+// Each dated role as a bar against year gridlines, from January of the earliest
+// year through December of this one. Ongoing roles run to a dashed "now" line and
+// fade past it. Hovering a row names its dates; clicking scrolls to its entry.
+const WorkChart: React.FC<ChartProps> = ({ roles, now, active, onActive, onPick }) => {
+  const dated = roles.filter((r): r is Role & { start: string } => Boolean(r.start));
+  if (!dated.length) return null;
+
+  const firstYear = Math.floor(Math.min(...dated.map((r) => monthIndex(r.start))) / 12);
+  const t0 = firstYear * 12;
+  const t1 = (Math.floor(now / 12) + 1) * 12;
+  const x = (m: number) => ((m - t0) / (t1 - t0)) * 100;
+  const years: number[] = [];
+  for (let y = firstYear; y * 12 < t1; y += 1) years.push(y);
+  const nowX = x(now);
+
+  const label: React.CSSProperties = {
+    position: 'absolute',
+    top: 0,
+    paddingLeft: 6,
+    fontFamily: MONO,
+    fontSize: 11,
+    letterSpacing: 1,
+    whiteSpace: 'nowrap',
+  };
+
+  return (
+    <div className="work-chart" style={{ marginTop: 40 }}>
+      <div className="work-row" style={{ height: 24 }}>
+        <div />
+        <div style={{ position: 'relative', height: '100%' }}>
+          {years.map((y) => (
+            <span key={y} style={{ ...label, left: `${x(y * 12)}%`, color: COLORS.muted }}>
+              {y}
+            </span>
+          ))}
+          <span style={{ ...label, left: `${nowX}%`, color: COLORS.text }}>now</span>
+        </div>
+      </div>
+
+      <div style={{ position: 'relative' }}>
+        <div
+          aria-hidden
+          className="work-row"
+          style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
+        >
+          <div />
+          <div style={{ position: 'relative', height: '100%' }}>
+            {years.map((y) => (
+              <div
+                key={y}
+                style={{
+                  position: 'absolute',
+                  left: `${x(y * 12)}%`,
+                  top: 0,
+                  bottom: 0,
+                  width: 1,
+                  background: 'rgba(26,26,26,0.14)',
+                }}
+              />
+            ))}
+            <div
+              style={{
+                position: 'absolute',
+                left: `${nowX}%`,
+                top: 0,
+                bottom: 0,
+                borderLeft: `1px dashed ${COLORS.text}`,
+              }}
+            />
+          </div>
+        </div>
+
+        {dated.map((r, i) => {
+          const start = x(monthIndex(r.start));
+          const end = r.end ? x(monthIndex(r.end) + 1) : nowX;
+          const fill = isHatched(r) ? HATCH : SOLID;
+          const isActive = active === r.slug;
+          // A bar that reaches deep into the track gets its label on the left.
+          const labelLeft = end > 62;
+          return (
+            <div
+              key={r.slug}
+              className="work-row"
+              role="button"
+              tabIndex={0}
+              aria-label={`${r.org}, ${r.role}, ${roleDates(r)}`}
+              onMouseEnter={() => onActive(r.slug)}
+              onMouseLeave={() => onActive(null)}
+              onFocus={() => onActive(r.slug)}
+              onBlur={() => onActive(null)}
+              onClick={() => onPick(r.slug)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onPick(r.slug);
+                }
+              }}
+              style={{ height: CHART_ROW, cursor: 'pointer' }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  paddingRight: 14,
+                  minWidth: 0,
+                }}
+              >
+                <OrgLogo role={r} size={22} active={isActive} />
+                <span
+                  className="work-name"
+                  style={{
+                    fontFamily: MONO,
+                    fontSize: 12,
+                    color: isActive ? COLORS.text : COLORS.muted,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    transition: 'color 120ms ease',
+                  }}
+                >
+                  {r.short || r.org}
+                </span>
+              </div>
+
+              <div
+                className="work-track"
+                style={{ position: 'relative', height: '100%', animationDelay: `${120 + i * 70}ms` }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: `${start}%`,
+                    width: `${end - start}%`,
+                    minWidth: 6,
+                    top: (CHART_ROW - CHART_BAR) / 2,
+                    height: CHART_BAR,
+                    ...fill,
+                  }}
+                />
+                {!r.end && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: `${nowX}%`,
+                      right: 0,
+                      top: (CHART_ROW - CHART_BAR) / 2,
+                      height: CHART_BAR,
+                      ...fill,
+                      WebkitMaskImage: 'linear-gradient(to right, #000, transparent)',
+                      maskImage: 'linear-gradient(to right, #000, transparent)',
+                    }}
+                  />
+                )}
+                {isActive && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      ...(labelLeft
+                        ? { right: `calc(${100 - start}% + 8px)` }
+                        : { left: `calc(${end}% + 8px)` }),
+                      padding: '2px 6px',
+                      fontFamily: MONO,
+                      fontSize: 11,
+                      whiteSpace: 'nowrap',
+                      color: COLORS.text,
+                      background: COLORS.bg,
+                      pointerEvents: 'none',
+                      zIndex: 1,
+                    }}
+                  >
+                    {roleDates(r)} · {spanLabel(roleMonths(r, now))}
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          gap: '6px 18px',
+          marginTop: 16,
+          fontFamily: MONO,
+          fontSize: 11,
+          color: COLORS.muted,
+        }}
+      >
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}>
+          <span style={{ width: 16, height: 8, ...SOLID }} /> founder or full-time
+        </span>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}>
+          <span style={{ width: 16, height: 8, ...HATCH }} /> part-time or internship
+        </span>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}>
+          <span style={{ height: 12, borderLeft: `1px dashed ${COLORS.text}` }} /> today
+        </span>
+      </div>
+    </div>
+  );
+};
+
+const TILE = 44;
+
+const WorkRow: React.FC<{
+  role: Role;
+  now: number;
+  last: boolean;
+  active: boolean;
+  onActive: (slug: string | null) => void;
+  onNavigate: (v: View) => void;
+}> = ({ role: r, now, last, active, onActive, onNavigate }) => {
+  const months = roleMonths(r, now);
+  const meta = [r.kind, r.location, months ? spanLabel(months) : ''].filter(Boolean);
+  const linkStyle: React.CSSProperties = {
+    fontFamily: MONO,
+    fontSize: 12,
+    color: COLORS.text,
+    textDecoration: 'underline',
+    textUnderlineOffset: 4,
+    textDecorationThickness: 1,
+  };
+
+  return (
+    <div
+      id={`work-${r.slug}`}
+      onMouseEnter={() => onActive(r.slug)}
+      onMouseLeave={() => onActive(null)}
+      style={{
+        display: 'flex',
+        gap: 20,
+        alignItems: 'flex-start',
+        marginBottom: last ? 0 : 36,
+        scrollMarginTop: 24,
+      }}
+    >
+      <OrgLogo role={r} size={TILE} active={active} />
+
+      <div
+        style={{
+          flex: '1 1 240px',
+          minWidth: 0,
+          ...(r.featured ? TIER_STYLE.featured : { paddingTop: 3 }),
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '0 24px',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: MONO,
+              fontWeight: 700,
+              fontSize: 14,
+              color: COLORS.text,
+              minWidth: 0,
+            }}
+          >
+            {r.org}
+          </span>
+          {r.start && (
+            <span
+              style={{
+                fontFamily: MONO,
+                fontSize: 13,
+                color: COLORS.muted,
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+              }}
+            >
+              {roleDates(r)}
+            </span>
+          )}
+        </div>
+
+        {(r.role || meta.length > 0) && (
+          <div style={{ fontFamily: MONO, fontSize: 13, lineHeight: 1.65, marginTop: 4 }}>
+            {r.role && <span style={{ color: COLORS.text }}>{r.role}</span>}
+            {meta.length > 0 && (
+              <span style={{ color: COLORS.muted }}>
+                {r.role ? ' · ' : ''}
+                {meta.join(' · ')}
+              </span>
+            )}
+          </div>
+        )}
+
+        {!r.role && !r.start && (
+          <div
+            style={{
+              fontFamily: MONO,
+              fontSize: 13,
+              lineHeight: 1.65,
+              color: COLORS.muted,
+              marginTop: 4,
+            }}
+          >
+            Details to come.
+          </div>
+        )}
+
+        {r.summary && (
+          <p
+            style={{
+              fontFamily: MONO,
+              fontSize: 13,
+              lineHeight: 1.65,
+              color: COLORS.muted,
+              marginTop: 8,
+            }}
+          >
+            {r.summary}
+          </p>
+        )}
+
+        {r.details && (
+          <ul
+            style={{
+              listStyle: 'none',
+              marginTop: 8,
+              fontFamily: MONO,
+              fontSize: 13,
+              lineHeight: 1.65,
+              color: COLORS.muted,
+            }}
+          >
+            {r.details.map((d) => (
+              <li key={d} style={{ display: 'flex', gap: 10 }}>
+                <span aria-hidden style={{ flexShrink: 0 }}>
+                  –
+                </span>
+                <span style={{ minWidth: 0 }}>{d}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {(r.url || r.project) && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 20px', marginTop: 10 }}>
+            {r.url && (
+              <a href={r.url} target="_blank" rel="noreferrer" style={linkStyle}>
+                {r.url.replace(/^https?:\/\//, '')} ↗
+              </a>
+            )}
+            {r.project && (
+              <a
+                href={`#${r.project}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate({ name: 'project', slug: r.project as string });
+                }}
+                style={linkStyle}
+              >
+                Related research →
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const WorkPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => {
+  const [active, setActive] = useState<string | null>(null);
+  const today = new Date();
+  const now = today.getFullYear() * 12 + today.getMonth() + (today.getDate() - 1) / 31;
+
+  const pick = (slug: string) => {
+    const el = document.getElementById(`work-${slug}`);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  return (
+    <PageShell onNavigate={onNavigate} maxWidth={880}>
+      <a
+        href="#home"
+        onClick={(e) => {
+          e.preventDefault();
+          onNavigate({ name: 'home' });
+        }}
+        style={{
+          display: 'inline-block',
+          marginTop: 48,
+          fontFamily: MONO,
+          fontSize: 14,
+          color: COLORS.muted,
+          textDecoration: 'none',
+        }}
+      >
+        ← back
+      </a>
+
+      <article style={{ marginTop: 28 }}>
+        <h2
+          style={{
+            fontFamily: SERIF,
+            fontWeight: 400,
+            fontSize: 26,
+            letterSpacing: -0.2,
+            color: COLORS.text,
+          }}
+        >
+          Work
+        </h2>
+
+        <p
+          style={{
+            fontFamily: MONO,
+            fontSize: 14,
+            lineHeight: 1.75,
+            maxWidth: 640,
+            marginTop: 20,
+            color: COLORS.text,
+          }}
+        >
+          Where I've worked, newest first. Several of these ran at the same time, so
+          the chart lays each role against the calendar; the list underneath has what I
+          did at each.
+        </p>
+
+        <WorkChart
+          roles={WORK}
+          now={now}
+          active={active}
+          onActive={setActive}
+          onPick={pick}
+        />
+
+        <div style={{ position: 'relative', marginTop: 56 }}>
+          <div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              left: TILE / 2,
+              top: TILE / 2,
+              bottom: TILE / 2,
+              width: 1,
+              background: COLORS.line,
+            }}
+          />
+          {WORK.map((r, i) => (
+            <WorkRow
+              key={r.slug}
+              role={r}
+              now={now}
+              last={i === WORK.length - 1}
+              active={active === r.slug}
+              onActive={setActive}
+              onNavigate={onNavigate}
+            />
+          ))}
+        </div>
+      </article>
+    </PageShell>
+  );
+};
 
 const SectionHeading: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <h2
@@ -2521,56 +3223,210 @@ const OvarianMTLProjectBody: React.FC = () => (
       }}
     >
       Multitask Neural Networks for Ovarian Cancer Drug Response Prediction · Mayo
-      Clinic · Dr. Aadel Chaudhuri's group
+      Clinic Radiation Oncology · Dr. Aadel Chaudhuri's group · May – August 2025
     </p>
 
     <BodyParagraph top={0}>
-      Constructed a transcriptomics-driven multi-task classification pipeline for
-      recurrent HGSOC therapeutic response modeling using RNA-seq profiles from 89
-      paired PDX tumor models. The objective was to convert high-dimensional
-      expression data into calibrated, biologically interpretable predictions of
-      drug response and progression risk under the severe sample-size constraints
-      that define rare-disease oncology.
+      High-grade serous ovarian carcinoma is the most common and the most lethal form of
+      ovarian cancer, and its defining clinical problem is recurrence. Most patients
+      respond to platinum-based first-line therapy and most of them relapse, at which
+      point the oncologist is choosing a second-line agent — topotecan, gemcitabine,
+      doxorubicin, carboplatin again, paclitaxel — with very little to go on about which
+      one this particular tumor will answer to. I spent the summer in Dr. Aadel
+      Chaudhuri's group at Mayo Clinic building the machine-learning infrastructure for
+      a different way of making that choice: read the tumor's transcriptome, and predict,
+      per agent, whether it will respond and whether the disease will progress.
     </BodyParagraph>
 
     <BodyParagraph>
-      Implemented DESeq2 normalization and differential expression testing to
-      reduce dimensionality from ~20k transcripts to ~1.5k predictive genes,
-      followed by FetterGrad feature selection and nested K-fold cross-validation
-      to prevent leakage between hyperparameter tuning and outer evaluation. This
-      pruning step was critical: the transcriptomic signal-to-noise ratio in
-      paired PDX cohorts is dominated by low-variance housekeeping transcripts
-      and donor-batch effects, both of which corrupt downstream gradient signal
-      if left in the feature space.
+      The data were RNA-seq profiles from 89 patient-derived xenograft models. A PDX is a
+      patient's tumor grown in an immunodeficient mouse; unlike a cell line it keeps the
+      tumor's heterogeneity and much of its architecture, and unlike a patient it can be
+      dosed with five different drugs and observed. That is what makes the cohort
+      unusual: for each model and each agent there are two binary labels — did it
+      respond, did it progress — measured directly rather than inferred from a chart.
+      It is also what makes the problem hard. Eighty-nine is a small number against
+      twenty thousand genes, the labels are badly imbalanced, and rare-disease oncology
+      never hands you more. Every design decision I made was about extracting a
+      calibrated, interpretable signal from that regime without fooling myself.
     </BodyParagraph>
 
-    <BodyParagraph>
-      Designed a shared-representation neural architecture with task-specific
-      output heads estimating P(Response) and P(Progression), trained via Adam
-      optimization under severe class imbalance and limited sample constraints.
-      The shared trunk exploits the strong positive correlation between
-      response and progression labels — the two tasks regularize each other,
-      and the multitask formulation acts as an inductive prior far more
-      effective than independent single-task models on this data scale.
+    <InlineFigure
+      src="/projects/ovarian-mtl/cohort.svg"
+      alt="A stack of 89 PDX models against five agent columns, forming a grid in which each cell carries two binary labels, response and progression"
+      caption={
+        <>
+          <strong>Fig. 1.</strong> The shape of the problem. Eighty-nine PDX models, five
+          second-line agents, and two positively correlated binary labels per cell, under
+          severe class imbalance.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The first job was to get the feature space down to something a model could learn
+      from at this sample size. Raw counts across roughly 20,000 transcripts are
+      dominated by two kinds of noise that have nothing to do with drug response:
+      low-variance housekeeping genes that are expressed at about the same level in
+      every sample, and donor-batch effects that separate models by where and when they
+      were sequenced rather than by biology. Left in the feature space, both corrupt the
+      gradient — the network spends its capacity fitting them. I ran DESeq2 for
+      normalization and differential-expression testing, which brought the space from
+      about 20,000 transcripts to roughly 1,500 genes with statistical support as
+      predictive biomarkers, and then applied FetterGrad feature selection on top of
+      that to arrive at the model's input. This pruning was the single most important
+      step in the pipeline; nothing downstream worked well without it.
     </BodyParagraph>
 
-    <BodyParagraph>
-      Benchmarked against gradient-boosted decision trees and penalized logistic
-      regression classifiers, achieving state-of-the-art discrimination (AUC up
-      to 0.969) across multiple second-line chemotherapeutic agents. The shared
+    <InlineFigure
+      src="/projects/ovarian-mtl/feature-funnel.svg"
+      alt="Four bars narrowing left to right: about 20,000 raw transcripts, DESeq2 normalization and differential expression, about 1,500 predictive biomarkers, FetterGrad-selected model input"
+      caption={
+        <>
+          <strong>Fig. 2.</strong> The feature funnel. DESeq2 takes ~20,000 transcripts to
+          ~1,500 predictive genes; FetterGrad selection produces the model input. Both
+          steps exist to keep housekeeping variance and batch effects out of the
+          gradient.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      With this little data the easiest way to produce an impressive number is to leak.
+      If the same samples that tune a model's hyperparameters also score it, the score
+      measures how well you tuned to those samples, not how well the model generalizes.
+      So I used nested K-fold cross-validation throughout: an outer loop holds out a
+      fold for evaluation and never shows it to anything else; inside each outer
+      training split, an inner loop does all hyperparameter selection on its own
+      validation folds. The held-out fold is untouched by tuning, and the outer scores
+      are the only ones I report. It is more expensive — every configuration is fit
+      many times — but on 89 samples it is the difference between a result and an
+      artifact.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/ovarian-mtl/nested-cv.svg"
+      alt="Two rows of folds: an outer loop with one held-out fold for evaluation, and an inner loop within the outer training split for hyperparameter tuning"
+      caption={
+        <>
+          <strong>Fig. 3.</strong> Nested cross-validation. Tuning happens only inside the
+          outer training split; the held-out fold is never seen by selection, so no
+          information leaks from evaluation into the model.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      Then the architecture. The obvious approach is two separate classifiers — one for
+      response, one for progression — but that throws away the most useful thing about
+      the labels, which is that they are strongly and positively correlated: a tumor that
+      responds tends not to progress, and vice versa. I designed OvarianMTLNet as a
+      shared-representation network: selected gene expression goes into a common trunk of
+      dense layers, and two task-specific heads read that one representation to estimate
+      P(response) and P(progression). Both losses backpropagate into the trunk, trained
+      with Adam. In effect each task supervises the other. The progression labels
+      regularize what the trunk learns for response, and the response labels do the same
+      for progression, so the representation is shaped by twice the supervision either
+      task could provide alone.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/ovarian-mtl/mtl-architecture.svg"
+      alt="OvarianMTLNet: selected gene expression enters a shared trunk of dense layers, which fans out to a response head and a progression head"
+      caption={
+        <>
+          <strong>Fig. 4.</strong> OvarianMTLNet. One shared trunk, two heads, both losses
+          updating the same representation.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      This is why multitask learning is the right inductive prior for exactly this data
+      scale and not merely a fashionable one. A single-task network on a few dozen
+      positive examples has to discover the relevant gene programs from those examples
+      alone. The multitask network sees every label as evidence about the shared
+      structure, which is where the biology actually lives — the transcriptional state
+      that makes a tumor chemosensitive tends to be the same state that keeps it from
+      progressing. When single-task data is sparse, cross-task gradient sharing
+      dominates, and the advantage should be largest precisely on the agents with the
+      fewest examples. That is what I set out to test.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/ovarian-mtl/single-vs-multi.svg"
+      alt="Left, two separate single-task networks each seeing only its own labels; right, one shared trunk receiving gradients from both the response and progression heads"
+      caption={
+        <>
+          <strong>Fig. 5.</strong> Single-task versus multitask. Two supervision signals,
+          one representation — an inductive prior that matters most when each task's
+          data is sparse.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      I benchmarked it against the two models a careful statistician would reach for
+      first on tabular expression data: gradient-boosted decision trees in XGBoost, and
+      penalized logistic regression. All three sat on the same feature funnel and the
+      same nested cross-validation, so the comparison isolates the architecture. Across
+      the second-line agents OvarianMTLNet reached an ROC-AUC of up to 0.969 on held-out
+      folds, with an average of 0.85 across the response-prediction tasks, and the shared
       representation outperformed both baselines on the agents with the smallest
-      effective sample size, consistent with the expectation that
-      cross-task gradient sharing dominates when single-task data is sparse.
+      effective sample size — the pattern the multitask argument predicts. I also
+      ensembled the models, which is the cheapest robustness you can buy at this scale.
+      The full pipeline — DESeq2, FetterGrad, nested folds, the three models — is in the
+      diagram below, which is the one I actually worked from.
     </BodyParagraph>
 
-    <BodyParagraph>
-      Applied SHAP-based attribution analysis to recover biologically meaningful
-      gene programs driving treatment efficacy and progression risk, enabling
-      interpretable precision-oncology predictions from high-dimensional
-      transcriptomic data. The attribution maps localized predictive signal to
-      pathways with prior literature support for HGSOC chemoresistance, providing
-      a path from black-box prediction to mechanistic hypothesis generation for
-      downstream wet-lab validation.
+    <InlineFigure
+      src="/projects/ovarian-mtl/pipeline.png"
+      alt="OvarianMTLNet pipeline: DESeq2 preprocessing, FetterGrad training, multitask architecture with response and progression heads"
+      caption={
+        <>
+          <strong>Fig. 6.</strong> The working pipeline diagram: preprocessing from RNA-seq
+          through DESeq2 and FetterGrad, the training process for P(response) and
+          P(progression), and the final OvarianMTLNet architecture alongside the
+          XGBoost and logistic-regression baselines.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      A prediction that an oncologist cannot interrogate is not much use to one, so the
+      last part of the work was attribution. I used SHAP to decompose each prediction into
+      per-gene contributions: for a given tumor and agent, which genes pushed the
+      estimate toward response and which pushed it away, and by how much. Aggregated over
+      the cohort, those contributions surface the gene programs the model relies on, and
+      the ones that carried the most weight localized to pathways with prior literature
+      support for chemoresistance in high-grade serous disease. That matters in two
+      directions. It is a sanity check on the model — a network that predicted well from
+      biologically meaningless genes would be fitting batch structure, not tumors — and it
+      is a path from a black-box score to a mechanistic hypothesis that someone can take
+      into the wet lab.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/ovarian-mtl/shap-attribution.svg"
+      alt="A waterfall from base rate to predicted probability, with generic gene contributions pushing the estimate up or down"
+      caption={
+        <>
+          <strong>Fig. 7.</strong> SHAP attribution for one prediction, illustrative. Each
+          gene's contribution sums to the output; over the cohort, the recurring
+          contributors are the gene programs the model has learned to trust.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      What I took from the summer is less a number than a discipline. The ceiling on a
+      problem like this is set by the data, and the work is in refusing every shortcut
+      that would make the result look better than the data can support: leakage, an
+      unpruned feature space, a model that cannot explain itself. Multitask learning
+      earned its place here not because it is clever but because it is the honest way to
+      use two correlated labels when you have eighty-nine of each. The same framework —
+      funnel, nested folds, shared trunk, attribution — applies to any small-cohort
+      precision-oncology problem where the labels come in correlated pairs.
     </BodyParagraph>
 
     <p
@@ -2583,8 +3439,9 @@ const OvarianMTLProjectBody: React.FC = () => (
         color: COLORS.muted,
       }}
     >
-      Three models built. Average AUC: 0.85 across drug response prediction
-      tasks. Best-performing agent AUC: 0.969.
+      Three models built. Average ROC-AUC 0.85 across drug-response prediction tasks;
+      best-performing agent 0.969. Research conducted under Dr. Aadel Chaudhuri, Mayo
+      Clinic Radiation Oncology.
     </p>
   </div>
 );

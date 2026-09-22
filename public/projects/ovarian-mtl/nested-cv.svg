@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" width="640" height="300"
+     role="img" aria-label="Nested K-fold cross-validation drawn as two strips. The outer loop, for evaluation, is a strip of five equal folds; the fourth is solid ink and labelled held-out fold, the other four are light and labelled train, and a note says to repeat for each of the K folds, with two miniature strips at the top right showing the held-out cell moving one position each time. Brackets under the four train folds merge into one arrow down to the inner loop, for hyperparameter tuning on the outer train split only: a second strip of five folds with one mid-grey validation fold and four light train folds. The caption reads: the held-out fold is never seen by tuning, so there is no leakage between selection and evaluation.">
+  <rect width="640" height="300" fill="#EDECE8"/>
+  <g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+
+    <!-- ===== OUTER LOOP ===== -->
+    <text x="12" y="28" font-size="13" font-weight="700" fill="#1a1a1a">outer loop — evaluation</text>
+
+    <!-- mini strips, top right: held-out cell moves one position each repeat -->
+    <g>
+      <rect x="548" y="12" width="80" height="6" fill="rgba(26,26,26,0.07)"/>
+      <rect x="564" y="12" width="16" height="6" fill="#1a1a1a"/>
+      <rect x="548" y="12" width="80" height="6" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+      <path d="M 564 12 V 18 M 580 12 V 18 M 596 12 V 18 M 612 12 V 18" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+
+      <rect x="548" y="24" width="80" height="6" fill="rgba(26,26,26,0.07)"/>
+      <rect x="580" y="24" width="16" height="6" fill="#1a1a1a"/>
+      <rect x="548" y="24" width="80" height="6" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+      <path d="M 564 24 V 30 M 580 24 V 30 M 596 24 V 30 M 612 24 V 30" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    </g>
+
+    <!-- outer strip: 5 cells x 92, y 42..80; cell 4 is the held-out fold -->
+    <rect x="12" y="42" width="276" height="38" fill="rgba(26,26,26,0.07)"/>
+    <rect x="380" y="42" width="92" height="38" fill="rgba(26,26,26,0.07)"/>
+    <rect x="288" y="42" width="92" height="38" fill="#1a1a1a"/>
+    <rect x="12" y="42" width="460" height="38" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <path d="M 104 42 V 80 M 196 42 V 80 M 288 42 V 80 M 380 42 V 80" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+
+    <!-- labels beneath the outer strip -->
+    <g font-size="11" fill="#696969" text-anchor="middle">
+      <text x="150" y="95">train</text>
+      <text x="334" y="95">held-out fold</text>
+      <text x="426" y="95">train</text>
+    </g>
+
+    <!-- note right of the outer strip -->
+    <g font-size="11" fill="#696969">
+      <text x="484" y="57">repeat for each</text>
+      <text x="484" y="71">of the K folds</text>
+    </g>
+
+    <!-- brackets under the four train cells (1-3 and 5), merging into one arrow -->
+    <path d="M 12 102 L 12 106 L 288 106 L 288 102" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 380 102 L 380 106 L 472 106 L 472 102" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 150 106 L 150 122 L 426 122 L 426 106" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 242 122 L 242 142" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 237 137 L 242 142 L 247 137" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- ===== INNER LOOP ===== -->
+    <text x="12" y="162" font-size="13" font-weight="700" fill="#1a1a1a">inner loop — hyperparameter tuning, on the outer train split only</text>
+
+    <!-- inner strip: 5 cells x 92, y 176..214; cell 1 is the validation fold -->
+    <rect x="12" y="176" width="92" height="38" fill="rgba(26,26,26,0.28)"/>
+    <rect x="104" y="176" width="368" height="38" fill="rgba(26,26,26,0.07)"/>
+    <rect x="12" y="176" width="460" height="38" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <path d="M 104 176 V 214 M 196 176 V 214 M 288 176 V 214 M 380 176 V 214" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+
+    <!-- labels beneath the inner strip -->
+    <g font-size="11" fill="#696969" text-anchor="middle">
+      <text x="58" y="229">validation</text>
+      <text x="288" y="229">train</text>
+    </g>
+    <path d="M 104 236 L 104 240 L 472 240 L 472 236" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+
+    <!-- caption -->
+    <g font-size="12" fill="#696969">
+      <text x="12" y="266">the held-out fold is never seen by tuning —</text>
+      <text x="12" y="282">no leakage between selection and evaluation</text>
+    </g>
+  </g>
+</svg>

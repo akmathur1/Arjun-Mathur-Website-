@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" width="640" height="320"
+     role="img" aria-label="OvarianMTLNet architecture, left to right: selected gene expression features (about 1,500, FetterGrad-selected) feed a shared trunk of two stacked dense layers, one representation for both tasks; from the trunk two arrows fan out to two output heads, P(response) and P(progression). Trained with Adam, both losses update the trunk and the tasks regularize each other.">
+  <rect width="640" height="320" fill="#EDECE8"/>
+  <g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+
+    <!-- STAGE 1 : selected gene expression (light fill) -->
+    <rect x="12" y="82" width="160" height="108" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <g font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">
+      <text x="92" y="105">selected</text>
+      <text x="92" y="122">gene expression</text>
+    </g>
+    <g font-size="12" fill="#696969" text-anchor="middle">
+      <text x="92" y="146">~1,500 →</text>
+      <text x="92" y="161">FetterGrad-selected</text>
+      <text x="92" y="176">features</text>
+    </g>
+
+    <!-- arrow : stage 1 → shared trunk -->
+    <path d="M 172 136 L 196 136" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 191 131 L 196 136 L 191 141" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- STAGE 2 : shared trunk (dashed enclosure) -->
+    <rect x="196" y="56" width="176" height="186" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1" stroke-dasharray="5 4"/>
+    <!-- enclosure tag sits on the top border -->
+    <rect x="204" y="49" width="48" height="14" fill="#EDECE8"/>
+    <text x="208" y="60" font-size="11" fill="#696969">shared</text>
+
+    <text x="284" y="80" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">shared trunk</text>
+
+    <!-- dense 1 -->
+    <rect x="240" y="94" width="88" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <text x="284" y="108" font-size="13" fill="#1a1a1a" text-anchor="middle" dominant-baseline="central">dense</text>
+
+    <!-- short arrow between the dense layers -->
+    <path d="M 284 122 L 284 150" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 279 145 L 284 150 L 289 145" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- dense 2 -->
+    <rect x="240" y="150" width="88" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <text x="284" y="164" font-size="13" fill="#1a1a1a" text-anchor="middle" dominant-baseline="central">dense</text>
+
+    <g font-size="12" fill="#696969" text-anchor="middle">
+      <text x="284" y="198">dense layers ·</text>
+      <text x="284" y="213">one representation</text>
+      <text x="284" y="228">for both tasks</text>
+    </g>
+
+    <!-- fan-out : trunk → two heads -->
+    <path d="M 372 136 L 436 136 L 436 96 L 498 96" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M 493 91 L 498 96 L 493 101" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 436 136 L 436 176 L 498 176" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M 493 171 L 498 176 L 493 181" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- response head (solid ink) -->
+    <rect x="498" y="79" width="130" height="34" fill="#1a1a1a"/>
+    <text x="563" y="96" font-size="13" font-weight="700" fill="#EDECE8" text-anchor="middle" dominant-baseline="central">P(response)</text>
+    <text x="563" y="127" font-size="11" fill="#696969" text-anchor="middle">response head</text>
+
+    <!-- progression head (solid ink) -->
+    <rect x="498" y="159" width="130" height="34" fill="#1a1a1a"/>
+    <text x="563" y="176" font-size="13" font-weight="700" fill="#EDECE8" text-anchor="middle" dominant-baseline="central">P(progression)</text>
+    <text x="563" y="207" font-size="11" fill="#696969" text-anchor="middle">progression head</text>
+
+    <!-- caption -->
+    <text x="12" y="296" font-size="12" fill="#696969">trained with Adam · both losses update the trunk · the tasks regularize each other</text>
+  </g>
+</svg>

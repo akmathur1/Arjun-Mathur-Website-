@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 248" width="640" height="248"
+     role="img" aria-label="Feature funnel drawn as four bars narrowing left to right on a common midline: raw transcripts (about 20,000 genes) pass through DESeq2 normalization and differential expression to about 1,500 predictive biomarker genes, then FetterGrad selection yields the model input. The funnel removes low-variance housekeeping transcripts and donor-batch effects before they reach the gradient.">
+  <rect width="640" height="248" fill="#EDECE8"/>
+  <g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+
+    <!-- midline y = 106; bars 128 wide, 24 px gaps -->
+
+    <!-- 1 raw transcripts : 120 tall -->
+    <text x="92" y="37" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">raw transcripts</text>
+    <rect x="28" y="46" width="128" height="120" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <text x="92" y="183" font-size="12" fill="#696969" text-anchor="middle">~20,000 genes</text>
+
+    <path d="M 156 106 L 180 106" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 175 101 L 180 106 L 175 111" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- 2 DESeq2 : 70 tall -->
+    <text x="244" y="62" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">DESeq2</text>
+    <rect x="180" y="71" width="128" height="70" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <g font-size="12" fill="#696969" text-anchor="middle">
+      <text x="244" y="158">normalize +</text>
+      <text x="244" y="173">differential expression</text>
+    </g>
+
+    <path d="M 308 106 L 332 106" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 327 101 L 332 106 L 327 111" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- 3 predictive biomarkers : 44 tall -->
+    <g font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">
+      <text x="396" y="60">predictive</text>
+      <text x="396" y="75">biomarkers</text>
+    </g>
+    <rect x="332" y="84" width="128" height="44" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <text x="396" y="145" font-size="12" fill="#696969" text-anchor="middle">~1,500 genes</text>
+
+    <path d="M 460 106 L 484 106" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 479 101 L 484 106 L 479 111" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- 4 FetterGrad selection : 26 tall, solid ink -->
+    <g font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">
+      <text x="548" y="69">FetterGrad</text>
+      <text x="548" y="84">selection</text>
+    </g>
+    <rect x="484" y="93" width="128" height="26" fill="#1a1a1a"/>
+    <text x="548" y="136" font-size="12" fill="#696969" text-anchor="middle">model input</text>
+
+    <!-- caption -->
+    <g font-size="11" fill="#696969">
+      <text x="28" y="214">removes low-variance housekeeping transcripts and donor-batch effects</text>
+      <text x="28" y="229">before they reach the gradient</text>
+    </g>
+  </g>
+</svg>

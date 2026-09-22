@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 304" width="640" height="304"
+     role="img" aria-label="The prediction problem drawn as a matrix: 89 PDX models, each with an RNA-seq expression profile, form the rows; five agents (Topotecan, Gemcitabine, Doxorubicin, Carboplatin, Paclitaxel) form the columns; every (model, agent) cell carries two binary labels, response yes/no and progression yes/no, which are positively correlated and severely class-imbalanced.">
+  <rect width="640" height="304" fill="#EDECE8"/>
+  <g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+
+    <!-- LEFT : the stack of PDX models -->
+    <text x="20" y="32" font-size="13" font-weight="700" fill="#1a1a1a">89 PDX models</text>
+    <g font-size="12" fill="#696969">
+      <text x="20" y="49">RNA-seq expression</text>
+      <text x="20" y="64">profile each</text>
+    </g>
+
+    <!-- 14 hairline bars, split 7 / gap / 7 to imply 89 -->
+    <g fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1">
+      <rect x="20" y="76"  width="104" height="7"/>
+      <rect x="20" y="87"  width="104" height="7"/>
+      <rect x="20" y="98"  width="104" height="7"/>
+      <rect x="20" y="109" width="104" height="7"/>
+      <rect x="20" y="120" width="104" height="7"/>
+      <rect x="20" y="131" width="104" height="7"/>
+      <rect x="20" y="142" width="104" height="7"/>
+
+      <rect x="20" y="171" width="104" height="7"/>
+      <rect x="20" y="182" width="104" height="7"/>
+      <rect x="20" y="193" width="104" height="7"/>
+      <rect x="20" y="204" width="104" height="7"/>
+      <rect x="20" y="215" width="104" height="7"/>
+      <rect x="20" y="226" width="104" height="7"/>
+      <rect x="20" y="237" width="104" height="7"/>
+    </g>
+
+    <!-- COLUMN HEADERS : the five agents -->
+    <g font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">
+      <text x="208" y="64">Topotecan</text>
+      <text x="300" y="64">Gemcitabine</text>
+      <text x="392" y="64">Doxorubicin</text>
+      <text x="484" y="64">Carboplatin</text>
+      <text x="576" y="64">Paclitaxel</text>
+    </g>
+
+    <!-- GRID : one light cell per (model, agent) -->
+    <g fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1">
+      <!-- Topotecan -->
+      <rect x="172" y="76"  width="72" height="7"/>
+      <rect x="172" y="87"  width="72" height="7"/>
+      <rect x="172" y="98"  width="72" height="7"/>
+      <rect x="172" y="109" width="72" height="7"/>
+      <rect x="172" y="120" width="72" height="7"/>
+      <rect x="172" y="131" width="72" height="7"/>
+      <rect x="172" y="142" width="72" height="7"/>
+      <rect x="172" y="171" width="72" height="7"/>
+      <rect x="172" y="182" width="72" height="7"/>
+      <rect x="172" y="193" width="72" height="7"/>
+      <rect x="172" y="204" width="72" height="7"/>
+      <rect x="172" y="215" width="72" height="7"/>
+      <rect x="172" y="226" width="72" height="7"/>
+      <rect x="172" y="237" width="72" height="7"/>
+      <!-- Gemcitabine -->
+      <rect x="264" y="76"  width="72" height="7"/>
+      <rect x="264" y="87"  width="72" height="7"/>
+      <rect x="264" y="98"  width="72" height="7"/>
+      <rect x="264" y="109" width="72" height="7"/>
+      <rect x="264" y="120" width="72" height="7"/>
+      <rect x="264" y="131" width="72" height="7"/>
+      <rect x="264" y="142" width="72" height="7"/>
+      <rect x="264" y="171" width="72" height="7"/>
+      <rect x="264" y="182" width="72" height="7"/>
+      <rect x="264" y="193" width="72" height="7"/>
+      <rect x="264" y="204" width="72" height="7"/>
+      <rect x="264" y="215" width="72" height="7"/>
+      <rect x="264" y="226" width="72" height="7"/>
+      <rect x="264" y="237" width="72" height="7"/>
+      <!-- Doxorubicin -->
+      <rect x="356" y="76"  width="72" height="7"/>
+      <rect x="356" y="87"  width="72" height="7"/>
+      <rect x="356" y="98"  width="72" height="7"/>
+      <rect x="356" y="109" width="72" height="7"/>
+      <rect x="356" y="120" width="72" height="7"/>
+      <rect x="356" y="131" width="72" height="7"/>
+      <rect x="356" y="142" width="72" height="7"/>
+      <rect x="356" y="171" width="72" height="7"/>
+      <rect x="356" y="182" width="72" height="7"/>
+      <rect x="356" y="193" width="72" height="7"/>
+      <rect x="356" y="204" width="72" height="7"/>
+      <rect x="356" y="215" width="72" height="7"/>
+      <rect x="356" y="226" width="72" height="7"/>
+      <rect x="356" y="237" width="72" height="7"/>
+      <!-- Carboplatin -->
+      <rect x="448" y="76"  width="72" height="7"/>
+      <rect x="448" y="87"  width="72" height="7"/>
+      <rect x="448" y="98"  width="72" height="7"/>
+      <rect x="448" y="109" width="72" height="7"/>
+      <rect x="448" y="120" width="72" height="7"/>
+      <rect x="448" y="131" width="72" height="7"/>
+      <rect x="448" y="142" width="72" height="7"/>
+      <rect x="448" y="171" width="72" height="7"/>
+      <rect x="448" y="182" width="72" height="7"/>
+      <rect x="448" y="193" width="72" height="7"/>
+      <rect x="448" y="204" width="72" height="7"/>
+      <rect x="448" y="215" width="72" height="7"/>
+      <rect x="448" y="226" width="72" height="7"/>
+      <rect x="448" y="237" width="72" height="7"/>
+      <!-- Paclitaxel -->
+      <rect x="540" y="76"  width="72" height="7"/>
+      <rect x="540" y="87"  width="72" height="7"/>
+      <rect x="540" y="98"  width="72" height="7"/>
+      <rect x="540" y="109" width="72" height="7"/>
+      <rect x="540" y="120" width="72" height="7"/>
+      <rect x="540" y="131" width="72" height="7"/>
+      <rect x="540" y="142" width="72" height="7"/>
+      <rect x="540" y="171" width="72" height="7"/>
+      <rect x="540" y="182" width="72" height="7"/>
+      <rect x="540" y="193" width="72" height="7"/>
+      <rect x="540" y="204" width="72" height="7"/>
+      <rect x="540" y="215" width="72" height="7"/>
+      <rect x="540" y="226" width="72" height="7"/>
+      <rect x="540" y="237" width="72" height="7"/>
+    </g>
+
+    <!-- the elided middle of the 89 rows -->
+    <g font-size="12" fill="#696969" text-anchor="middle">
+      <text x="72"  y="164">⋮</text>
+      <text x="208" y="164">⋮</text>
+      <text x="300" y="164">⋮</text>
+      <text x="392" y="164">⋮</text>
+      <text x="484" y="164">⋮</text>
+      <text x="576" y="164">⋮</text>
+    </g>
+
+    <!-- LEGEND : two labels per cell -->
+    <g font-size="12">
+      <text x="20" y="266" fill="#696969">each (model, agent) cell:</text>
+      <rect x="216" y="257" width="10" height="10" fill="#1a1a1a"/>
+      <text x="234" y="266" fill="#1a1a1a">response  yes / no</text>
+      <rect x="390" y="257" width="10" height="10" fill="rgba(26,26,26,0.28)"/>
+      <text x="408" y="266" fill="#1a1a1a">progression  yes / no</text>
+    </g>
+
+    <!-- caption -->
+    <text x="20" y="288" font-size="11" fill="#696969">two binary labels per cell · positively correlated · severe class imbalance</text>
+  </g>
+</svg>
