@@ -361,10 +361,10 @@ const OvarianMTLThumbnail: React.FC = () => (
   />
 );
 
-const AntidoomThumbnail: React.FC = () => (
+const OssiaThumbnail: React.FC = () => (
   <img
-    src="/projects/antidoom/thumbnail.svg"
-    alt="A repeated span cycling back on itself, cut at its first token and redirected to an alternative continuation"
+    src="/projects/ossia/thumbnail.svg"
+    alt="Three identical dark horizontal bars stacked one above another, a span repeating. An arrow along the left edge joins the top bar and the bottom one, closing the stack into a cycle. The first cell of the top bar is outlined with a heavy stroke, cutting the span at its first token, and from that cell a curve descends to a different bar off to the right, an alternative continuation. The letters FTPO sit in small monospace below."
     style={{
       display: 'block',
       width: 150,
@@ -435,13 +435,13 @@ const ENTRIES: Entry[] = [
     thumbnail: <OvarianMTLThumbnail />,
   },
   {
-    slug: 'antidoom',
-    title: 'Antidoom — Final Token Preference Optimization',
+    slug: 'ossia',
+    title: 'Ossia — Preference Training at the Loop\'s First Token',
     date: '2026',
     description:
-      'Targeted preference data and training for reducing repetition loops in reasoning models. Samples completions, detects where a repeated span begins, marks the loop-starting token as rejected, selects coherent alternatives at that same position, and trains a LoRA adapter with Final Token Preference Optimization (FTPO). Adapts the single-token preference idea from Antislop to runaway repetition.',
+      'Preference data and training for one failure of reasoning models: the repetition loop. For each prompt, completions are sampled and scanned for where a repeated span begins; the token that opens the loop is marked rejected, coherent alternatives at that position are marked chosen, and the resulting rows train a LoRA adapter with Final Token Preference Optimization (FTPO), which is then merged. The single-token preference idea comes from Antislop, carried over to runaway repetition during reasoning.',
     tier: 'boxed',
-    thumbnail: <AntidoomThumbnail />,
+    thumbnail: <OssiaThumbnail />,
   },
   {
     slug: 'grn-indistinguishability',
@@ -2136,8 +2136,8 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             <FUSProjectBody />
           ) : slug === 'ovarian-mtl' ? (
             <OvarianMTLProjectBody />
-          ) : slug === 'antidoom' ? (
-            <AntidoomProjectBody />
+          ) : slug === 'ossia' ? (
+            <OssiaProjectBody />
           ) : slug === 'grn-indistinguishability' ? (
             <GRNProjectBody />
           ) : (
@@ -2210,7 +2210,7 @@ const InlineFigure: React.FC<{ src: string; alt: string; caption: React.ReactNod
   </figure>
 );
 
-const AntidoomProjectBody: React.FC = () => (
+const OssiaProjectBody: React.FC = () => (
   <div style={{ marginTop: 32 }}>
     <p
       style={{
@@ -2223,100 +2223,118 @@ const AntidoomProjectBody: React.FC = () => (
         letterSpacing: 0.3,
       }}
     >
-      Reducing Doom Loops with Final Token Preference Optimization
+      Cutting repetition loops at the token where they start
     </p>
 
     <BodyParagraph top={0}>
-      Antidoom generates and trains targeted preference data for reducing model
-      repetition loops. It is a narrow tool for a narrow failure mode: sample model
-      completions, detect where a repeated span begins, mark the first loop-starting
-      token as rejected, choose coherent alternative next tokens, then train a LoRA
-      adapter with Final Token Preference Optimization. The method adapts the
-      single-token preference training idea from Antislop to the specific problem of
+      Ossia builds preference data aimed at one defect of reasoning models, the
+      repetition loop, and trains against it. The tool is narrow, and so is the
+      failure it targets. A run starts by sampling completions from the model for
+      every prompt. Each completion is scanned for inner repetition, which locates
+      where a repeated span begins. There, the first token that sets the loop
+      going is marked rejected, and coherent alternative next tokens at the same
+      position are marked chosen. What remains is to train a LoRA adapter on those
+      rows with Final Token Preference Optimization (FTPO). Antislop supplied the
+      underlying idea, single-token preference training; Ossia points it at
       runaway repetition during reasoning.
     </BodyParagraph>
 
     <BodyParagraph>
-      Doom loops tend to appear when three forces line up. Common reasoning tokens —
-      Wait, So, But, Alternatively — become unusually attractive after heavy synthetic
-      reasoning training, and can dominate the next-token distribution without moving
-      the reasoning forward. Once a short sequence appears, the prior context makes
-      that sequence more likely to appear again, so across repeated turns the
-      probability of each token climbs toward certainty. And at temperature at or near
-      zero the model keeps selecting the highest-probability continuation, leaving a
-      locally reinforced loop no natural escape route.
+      Three forces, when they coincide, tend to yield doom loops. One is a matter
+      of training history: after heavy synthetic reasoning training, the workhorse
+      tokens of reasoning — Wait, So, But, Alternatively — carry an outsized pull,
+      and any one of them can take over the next-token distribution without
+      advancing the argument at all. Another is a matter of context: a short
+      sequence, having occurred once, is now part of the prefix, and that prefix
+      raises the odds of the same sequence occurring again, so over successive
+      repetitions the probability of each of its tokens rises toward one. The last
+      is a matter of decoding: with temperature at or near zero, every step takes
+      the highest-probability continuation, so a loop that its own context has
+      been reinforcing has nothing left to break it.
     </BodyParagraph>
 
     <BodyParagraph>
-      Rather than training on full gold answers, Antidoom attacks the failure at the
-      token where the loop begins, training only on the local preference: do not choose
-      the token that starts the repetition; choose one of the plausible alternatives
-      available at that same position. For each prompt it generates a completion, scans
-      for inner repetition, and refines the boundary in token space so the rejected
-      token is the first readable token of the repeated segment.
+      Full gold answers are not what Ossia trains on. The entire signal is a
+      single local preference, stated at the token where the loop begins: at that
+      position, any plausible alternative that was available is preferred over the
+      token that sets the repetition off, and nothing beyond that position is
+      trained on. The position itself comes out of the scan. The scan finds the
+      repeated segment; its opening edge is then adjusted in token space until the
+      slot marked rejected sits on the first readable token of that segment.
     </BodyParagraph>
 
     <InlineFigure
-      src="/projects/antidoom/ftpo.svg"
-      alt="A generated span in which the token Wait repeats; the first repeated Wait is marked rejected, and two alternative tokens at that same position are marked chosen"
+      src="/projects/ossia/ftpo.svg"
+      alt="Diagram of a token sequence in boxes, reading, between ellipses, So Wait Wait Wait Wait. A bracket labeled repeated span covers the run of Waits. The first Wait of the run is drawn with a heavy outline and labeled rejected. Two arrows lead from that outlined cell down to two filled dark cells reading Therefore and The, alternatives at the same position as the rejected token, labeled chosen, sampled from filtered alternatives."
       caption={
         <>
-          <strong>Fig. 1.</strong> The unit of training. Each FTPO row carries a context
-          prefix ending immediately before the rejected token, exactly one rejected
-          token — the token that begins the loop — and one or more chosen tokens sampled
-          from filtered alternatives at that same position, alongside metadata about the
-          source prompt and detected loop. Training regularises overrepresented rejected
-          and chosen tokens so the adapter learns a broad anti-loop preference rather
-          than simply suppressing one word.
+          <strong>Fig. 1.</strong> The unit of training is one FTPO row. Its context prefix stops
+          immediately before the rejected token. The rejected token is single, the
+          one that opens the loop. The chosen tokens number one or more, drawn
+          from the filtered alternatives at that position. Metadata records which
+          prompt the row came from and what loop was detected. Across rows, some
+          rejected and some chosen tokens end up overrepresented; training
+          regularizes them, and that is what turns the lesson from a reflex
+          against one word into a broad preference against looping.
         </>
       }
     />
 
     <BodyParagraph top={40}>
-      The default configuration reads prompts from a prompt-only ShareGPT mixture built
-      for this pipeline, which deliberately excludes gold answers, rationales, hidden
-      tests, verifier targets, and answer labels. How many preference rows a run yields
-      depends on the number of prompts, the number of temperature passes, and how
-      loop-prone the checkpoint already is; roughly fifteen thousand prompts is a
-      sensible floor, aiming for fifteen to twenty thousand preference rows.
+      In the default configuration, prompts come from a ShareGPT mixture that was
+      put together for this pipeline and contains prompts only. Gold answers,
+      rationales, hidden tests, verifier targets, answer labels: none of these are
+      in it, and their absence is by design. The row count a run ends up with is a
+      product of its prompt count, its number of temperature passes, and the
+      checkpoint's existing appetite for looping. Fifteen thousand prompts, give
+      or take, is the least a run should start from; the aim is fifteen to twenty
+      thousand preference rows.
     </BodyParagraph>
 
     <BodyParagraph>
-      Two settings dominate the outcome. The cap on training examples should sit well
-      below the number of generated rows — at most about seventy percent — so that
-      rejected-token regularisation has room to shave off overrepresented tokens;
-      without that headroom the generated set can be badly unbalanced and training
-      degrades. Learning rate is the other: the trainer can both undertrain and
-      overtrain, and an overtrained model produces more doom loops, not fewer. Early
-      stopping on the share of samples where the chosen token beats the rejected one is
-      the practical guard — a strong reduction in looping usually appears well before
-      that share reaches half.
+      Most of the outcome is set by two numbers. The first is the cap on training
+      examples. It belongs well below the number of rows generated — somewhere
+      under about seventy percent of them — since rejected-token regularization
+      works by shaving overrepresented tokens out of the set, and it can only do
+      that with room to spare. With no room to spare, what reaches the trainer can
+      be badly lopsided, and the results suffer for it. The second is the learning
+      rate, and the trainer can miss in either direction. Undertraining is
+      possible; so is overtraining, and an overtrained model loops more often, not
+      less. The working safeguard is to stop early, watching one number: across
+      the samples, how often the chosen token outscores the rejected one. Looping
+      usually falls off sharply while that number is still well under a half.
     </BodyParagraph>
 
     <BodyParagraph>
-      The remaining knobs are mostly about not trading one pathology for another.
-      Rejected-token regularisation flattens the frequency distribution by culling
-      samples, since the tokens that start doom loops are by construction the most
-      frequent ones and suppressing them too aggressively is its own failure. Chosen-token
-      regularisation does the same on the other side, so that a favoured alternative does
-      not itself become a loop. Stop-word filtering is left off deliberately: common words
-      can genuinely be loop-starting tokens, and frequency is better handled by
-      regularisation than by exclusion. A higher LoRA rank than usual improves
-      learnability with less degradation, and unlike earlier Antislop ablations, this
-      trainer appears to prefer training all layers rather than a restricted set.
+      The remaining settings exist mainly so that curing the loop does not install
+      a different defect in its place. Rejected-token regularization culls
+      samples, and the effect of the cull is a flatter frequency distribution. The
+      tokens that open loops are, by the method's own construction, the ones that
+      occur most; push them down too hard and the model has simply been broken in
+      a different way. On the chosen side, chosen-token regularization performs
+      the mirror-image cull, to keep a favored alternative from turning into a
+      loop of its own. There is no stop-word filter, on purpose. Ordinary words
+      can and do open loops, so a filter would throw away real cases; frequency is
+      a job for regularization, not exclusion. The LoRA rank is set higher than is
+      usual, which makes the task more learnable at a smaller cost in degradation.
+      Where earlier Antislop ablations favored a restricted set of layers, this
+      trainer seems to do better with all of them trained.
     </BodyParagraph>
 
     <BodyParagraph>
-      Generation runs on vLLM, one single-GPU engine per visible device; training is
-      single-GPU LoRA followed by a merge. CUDA is the default path. ROCm needs a
-      separate environment built from vLLM's prebuilt ROCm wheels rather than the
-      CUDA-only lockfile, and two overrides that are not optional: the Triton attention
-      backend, because the default ROCm attention kernel memory-faults on this model
-      family, and
-      plain Torch AdamW in place of the paged 32-bit optimizer, which would otherwise
-      drag in bitsandbytes. The multi-GPU generation path additionally pins devices
-      through the ROCm-specific visibility variable and gives each worker its own JIT
-      cache directories, since shared caches race into memory access faults.
+      vLLM does the generating, with a single-GPU engine started for each visible
+      device; a single GPU also does the training, as LoRA, and the adapter is
+      merged afterward. All of this runs on CUDA by default. ROCm is a different
+      matter. The CUDA-only lockfile does not serve it, so a separate environment
+      is built from vLLM's own prebuilt ROCm wheels, and two overrides must be in
+      place. Attention has to go through the Triton attention backend, as the ROCm
+      default attention kernel memory-faults on this model family. The optimizer
+      has to be plain Torch AdamW rather than the paged 32-bit optimizer, whose
+      dependency on bitsandbytes would otherwise be pulled in. The multi-GPU
+      generation path does two more things on its own: it pins devices through the
+      ROCm-specific visibility variable, and it hands every worker JIT cache
+      directories of its own, since caches shared between workers race into memory
+      access faults.
     </BodyParagraph>
 
     <p
@@ -2329,7 +2347,7 @@ const AntidoomProjectBody: React.FC = () => (
         color: COLORS.muted,
       }}
     >
-      Validated on Instinct MI325 (gfx942).
+      The validation hardware was Instinct MI325 (gfx942).
     </p>
   </div>
 );

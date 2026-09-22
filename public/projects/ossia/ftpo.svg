@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 250" width="520" height="250"
-     role="img" aria-label="A generated span in which the token Wait repeats; the first repeated Wait is marked rejected, and two alternative tokens at that same position are marked chosen">
+     role="img" aria-label="Diagram of a token sequence in boxes, reading, between ellipses, So Wait Wait Wait Wait. A bracket labeled repeated span covers the run of Waits. The first Wait of the run is drawn with a heavy outline and labeled rejected. Two arrows lead from that outlined cell down to two filled dark cells reading Therefore and The, alternatives at the same position as the rejected token, labeled chosen, sampled from filtered alternatives.">
   <rect width="520" height="250" fill="#EDECE8"/>
   <g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
 

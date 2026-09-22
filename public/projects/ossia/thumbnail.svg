@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 190" width="300" height="190"
-     role="img" aria-label="A repeated span cycling back on itself, cut at its first token and redirected to an alternative continuation">
+     role="img" aria-label="Three identical dark horizontal bars stacked one above another, a span repeating. An arrow along the left edge joins the top bar and the bottom one, closing the stack into a cycle. The first cell of the top bar is outlined with a heavy stroke, cutting the span at its first token, and from that cell a curve descends to a different bar off to the right, an alternative continuation. The letters FTPO sit in small monospace below.">
   <rect width="300" height="190" fill="#EDECE8"/>
 
   <!-- the repeated span: the same continuation, three times over -->
