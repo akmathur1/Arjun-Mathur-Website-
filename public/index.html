@@ -38,15 +38,20 @@
         grid-template-columns: var(--work-gutter) minmax(0, 1fr);
         align-items: center;
       }
+      .work-chart .work-name { font-size: 12px; }
       /* The gutter tightens rather than dropping the name: two of the rows carry the
          same university shield, so the name is what tells them apart. */
       @media (max-width: 600px) {
-        .work-chart { --work-gutter: 118px; }
+        .work-chart { --work-gutter: 132px; }
         .work-chart .work-name { font-size: 10px; }
         /* Touch has no hover, and a tap would otherwise leave the label stuck over
            the track; the ledger below carries the same dates. */
         .work-chart .work-label { display: none; }
       }
+      /* A picked entry is marked by focus rather than by React state: the scroll
+         drops the pointer somewhere unpredictable, so a hover-driven mark would be
+         cleared by whatever it lands on. The inline filter needs the override. */
+      .work-entry:focus img { filter: none !important; }
       /* Bars draw in from the left on first paint, one row after another (the
          per-row delay is set inline). */
       /* backwards, not both: the fill is only needed to hold a row hidden through its

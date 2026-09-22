@@ -495,6 +495,14 @@ const ENTRIES: Entry[] = [
 const App: React.FC = () => {
   const [view, setView] = useState<View>({ name: 'home' });
 
+  // Views are state, not URLs, so nothing resets the scroll on its own: without this
+  // a link followed from deep in one page opens the next one already scrolled past
+  // its title. The Work page's own scroll-to-entry keeps working — it doesn't change
+  // the view.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [view]);
+
   if (view.name === 'project') {
     return <ProjectPage slug={view.slug} onNavigate={setView} />;
   }
@@ -1383,7 +1391,8 @@ const WorkChart: React.FC<ChartProps> = ({ roles, now, active, onActive, onPick 
                   className="work-name"
                   style={{
                     fontFamily: MONO,
-                    fontSize: 12,
+                    // Size lives in the stylesheet so the narrow breakpoint can shrink
+                    // it; an inline value here would outrank the media query.
                     color: isActive ? COLORS.text : COLORS.muted,
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
@@ -1499,6 +1508,7 @@ const WorkRow: React.FC<{
   return (
     <div
       id={`work-${r.slug}`}
+      className="work-entry"
       tabIndex={-1}
       onMouseEnter={() => onActive(r.slug)}
       onMouseLeave={() => onActive(null)}
