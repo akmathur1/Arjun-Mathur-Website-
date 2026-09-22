@@ -31,20 +31,28 @@
         .panel-divider { display: none; }
       }
       /* Work chart: a left gutter with the organization's logo and name, and the
-         time track. Narrow screens drop the name and let the logo carry the row. */
+         time track. */
       .work-chart { --work-gutter: 176px; }
       .work-row {
         display: grid;
         grid-template-columns: var(--work-gutter) minmax(0, 1fr);
         align-items: center;
       }
+      /* The gutter tightens rather than dropping the name: two of the rows carry the
+         same university shield, so the name is what tells them apart. */
       @media (max-width: 600px) {
-        .work-chart { --work-gutter: 40px; }
-        .work-chart .work-name { display: none; }
+        .work-chart { --work-gutter: 118px; }
+        .work-chart .work-name { font-size: 10px; }
+        /* Touch has no hover, and a tap would otherwise leave the label stuck over
+           the track; the ledger below carries the same dates. */
+        .work-chart .work-label { display: none; }
       }
       /* Bars draw in from the left on first paint, one row after another (the
          per-row delay is set inline). */
-      .work-track { animation: work-reveal 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+      /* backwards, not both: the fill is only needed to hold a row hidden through its
+         delay. `both` would leave the end frame's clip-path applied for good, which
+         silently cuts off the dates label. */
+      .work-track { animation: work-reveal 700ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
       @keyframes work-reveal {
         from { clip-path: inset(0 100% 0 0); }
         to { clip-path: inset(0 0 0 0); }

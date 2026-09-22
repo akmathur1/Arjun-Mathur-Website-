@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 596" width="640" height="596" role="img" aria-label="Kiku encoder decoder Transformer: log-Mel spectrogram through a Conv1D GELU stem and encoder blocks, cross attention into decoder blocks, next token prediction over the multitask token format">
+<rect width="640" height="596" fill="#EDECE8"/>
+<g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+<text x="20" y="22" font-size="13" font-weight="700" fill="#1a1a1a">encoder–decoder Transformer over the log-Mel frontend</text>
+<rect x="340" y="44" width="25" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="353" y="62.0" font-size="11" fill="#1a1a1a" text-anchor="middle">EN</text><rect x="368" y="44" width="78" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="407" y="62.0" font-size="11" fill="#1a1a1a" text-anchor="middle">TRANSCRIBE</text><rect x="449" y="44" width="32" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="465" y="62.0" font-size="11" fill="#1a1a1a" text-anchor="middle">0.0</text><rect x="484" y="44" width="32" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="500" y="62.0" font-size="11" fill="#1a1a1a" text-anchor="middle">The</text><rect x="519" y="44" width="45" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="541" y="62.0" font-size="11" fill="#1a1a1a" text-anchor="middle">quick</text><rect x="567" y="44" width="32" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="583" y="62.0" font-size="11" fill="#1a1a1a" text-anchor="middle">···</text>
+<path d="M 480 92 L 480 76" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 475 80 L 480 75 L 485 80" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="340" y="92" width="280" height="42" fill="rgba(26,26,26,0.16)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="480" y="110" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">next-token prediction</text>
+<text x="480" y="127" font-size="11" fill="#696969" text-anchor="middle">(tied output projection)</text>
+<path d="M 480 164 L 480 140" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 475 144 L 480 139 L 485 144" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="160" y="158" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">Transformer encoder blocks × N</text>
+<text x="480" y="158" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">Transformer decoder blocks × N</text>
+<rect x="20" y="166" width="280" height="82" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="160" y="196" font-size="12" fill="#1a1a1a" text-anchor="middle">self-attention</text>
+<text x="160" y="228" font-size="12" fill="#1a1a1a" text-anchor="middle">MLP</text>
+<rect x="340" y="166" width="280" height="82" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="480" y="190" font-size="12" fill="#1a1a1a" text-anchor="middle">self-attention</text>
+<text x="480" y="214" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">cross-attention</text>
+<text x="480" y="238" font-size="12" fill="#1a1a1a" text-anchor="middle">MLP</text>
+<path d="M 160 258 L 160 250" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 155 254 L 160 249 L 165 254" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 480 258 L 480 250" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 475 254 L 480 249 L 485 254" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="20" y="258" width="280" height="82" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="160" y="288" font-size="12" fill="#1a1a1a" text-anchor="middle">self-attention</text>
+<text x="160" y="320" font-size="12" fill="#1a1a1a" text-anchor="middle">MLP</text>
+<rect x="340" y="258" width="280" height="82" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="480" y="282" font-size="12" fill="#1a1a1a" text-anchor="middle">self-attention</text>
+<text x="480" y="306" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">cross-attention</text>
+<text x="480" y="330" font-size="12" fill="#1a1a1a" text-anchor="middle">MLP</text>
+<path d="M 160 350 L 160 342" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 155 346 L 160 341 L 165 346" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 480 350 L 480 342" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 475 346 L 480 341 L 485 346" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="20" y="350" width="280" height="82" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="160" y="380" font-size="12" fill="#1a1a1a" text-anchor="middle">self-attention</text>
+<text x="160" y="412" font-size="12" fill="#1a1a1a" text-anchor="middle">MLP</text>
+<rect x="340" y="350" width="280" height="82" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="480" y="374" font-size="12" fill="#1a1a1a" text-anchor="middle">self-attention</text>
+<text x="480" y="398" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">cross-attention</text>
+<text x="480" y="422" font-size="12" fill="#1a1a1a" text-anchor="middle">MLP</text>
+<path d="M 160 166 L 160 150 L 320 150 L 320 400" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M 320 214 L 337 214" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 333 209 L 338 214 L 333 219" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 320 306 L 337 306" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 333 301 L 338 306 L 333 311" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 320 398 L 337 398" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 333 393 L 338 398 L 333 403" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 160 444 L 160 434" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 155 438 L 160 433 L 165 438" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 480 444 L 480 434" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 475 438 L 480 433 L 485 438" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="20" y="444" width="280" height="34" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="160" y="466" font-size="12" fill="#1a1a1a" text-anchor="middle">positional encoding (sinusoidal)</text>
+<rect x="340" y="444" width="280" height="34" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="480" y="466" font-size="12" fill="#1a1a1a" text-anchor="middle">positional encoding (learned)</text>
+<path d="M 160 512 L 160 488" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 155 492 L 160 487 L 165 492" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 480 546 L 480 488" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 475 492 L 480 487 L 485 492" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="20" y="512" width="280" height="34" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="160" y="534" font-size="12" fill="#1a1a1a" text-anchor="middle">2 × Conv1D + GELU · stride 2</text>
+<path d="M 160 580 L 160 556" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 155 560 L 160 555 L 165 560" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="20" y="580" width="280" height="0" fill="none"/>
+<text x="160" y="574" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">log-Mel spectrogram · 80 ch × 30 s</text>
+<rect x="340" y="546" width="32" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="356" y="564.0" font-size="11" fill="#1a1a1a" text-anchor="middle">SOT</text><rect x="375" y="546" width="25" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="387" y="564.0" font-size="11" fill="#1a1a1a" text-anchor="middle">EN</text><rect x="403" y="546" width="78" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="442" y="564.0" font-size="11" fill="#1a1a1a" text-anchor="middle">TRANSCRIBE</text><rect x="484" y="546" width="32" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="500" y="564.0" font-size="11" fill="#1a1a1a" text-anchor="middle">0.0</text><rect x="519" y="546" width="32" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="535" y="564.0" font-size="11" fill="#1a1a1a" text-anchor="middle">The</text><rect x="554" y="546" width="32" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="569" y="564.0" font-size="11" fill="#1a1a1a" text-anchor="middle">···</text>
+<text x="480" y="590" font-size="11" fill="#696969" text-anchor="middle">tokens in multitask format</text>
+</g></svg>

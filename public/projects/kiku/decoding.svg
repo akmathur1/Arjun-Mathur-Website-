@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 566" width="640" height="566" role="img" aria-label="The decoding loop for one 30 second window: token grammar, temperature ladder retries on repetition or weak evidence, a voice activity gate, and segments emitted with evidence">
+<rect width="640" height="566" fill="#EDECE8"/>
+<g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+<text x="20" y="22" font-size="13" font-weight="700" fill="#1a1a1a">the decoding loop · one 30 second window, gated by evidence</text>
+<text x="20" y="58" font-size="12" font-weight="700" fill="#1a1a1a">token grammar</text>
+<rect x="130" y="40" width="32" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="146" y="58.0" font-size="11" fill="#1a1a1a" text-anchor="middle">SOT</text><rect x="165" y="40" width="65" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="197" y="58.0" font-size="11" fill="#1a1a1a" text-anchor="middle">language</text><rect x="233" y="40" width="38" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="252" y="58.0" font-size="11" fill="#1a1a1a" text-anchor="middle">task</text><rect x="274" y="40" width="25" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="287" y="58.0" font-size="11" fill="#1a1a1a" text-anchor="middle">t0</text><rect x="302" y="40" width="52" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="328" y="58.0" font-size="11" fill="#1a1a1a" text-anchor="middle">text …</text><rect x="357" y="40" width="25" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="369" y="58.0" font-size="11" fill="#1a1a1a" text-anchor="middle">t1</text><rect x="385" y="40" width="25" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="398" y="58.0" font-size="11" fill="#1a1a1a" text-anchor="middle">t1</text><rect x="413" y="40" width="52" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="439" y="58.0" font-size="11" fill="#1a1a1a" text-anchor="middle">text …</text><rect x="468" y="40" width="25" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="480" y="58.0" font-size="11" fill="#1a1a1a" text-anchor="middle">t2</text><rect x="496" y="40" width="32" height="28" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/><text x="512" y="58.0" font-size="11" fill="#1a1a1a" text-anchor="middle">EOT</text>
+<text x="20" y="88" font-size="11" fill="#696969">timestamps come in pairs and never decrease; the first</text>
+<text x="20" y="104" font-size="11" fill="#696969">timestamp is constrained to the window's first second</text>
+<rect x="20" y="128" width="280" height="44" fill="rgba(26,26,26,0.16)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="160" y="156" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">decode window at temperature T</text>
+<text x="20" y="192" font-size="11" fill="#696969">T ladder: 0.0 → 0.2 → 0.4 → 0.6 → 0.8 → 1.0</text>
+<path d="M 160 212 L 160 178" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 155 208 L 160 213 L 165 208" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="20" y="214" width="280" height="52" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="160" y="236" font-size="12" fill="#1a1a1a" text-anchor="middle">compression ratio &gt; 2.4 ?</text>
+<text x="160" y="254" font-size="11" fill="#696969" text-anchor="middle">(repetition)</text>
+<rect x="20" y="280" width="280" height="52" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="160" y="302" font-size="12" fill="#1a1a1a" text-anchor="middle">avg log probability &lt; -1 ?</text>
+<text x="160" y="320" font-size="11" fill="#696969" text-anchor="middle">(weak evidence)</text>
+<path d="M 160 280 L 160 268" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 155 274 L 160 279 L 165 274" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="336" y="242" font-size="11" fill="#696969">either check fails: retry at the next</text>
+<text x="336" y="258" font-size="11" fill="#696969">temperature, keeping the best</text>
+<text x="336" y="274" font-size="11" fill="#696969">evidenced attempt</text>
+<path d="M 300 306 L 318 306 L 318 118 L 160 118 L 160 126" fill="none" stroke="#696969" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="4 3"/><path d="M 155 122 L 160 127 L 165 122" fill="none" stroke="#696969" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 160 350 L 160 334" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 155 346 L 160 351 L 165 346" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="20" y="352" width="280" height="72" fill="rgba(26,26,26,0.07)" stroke="#1a1a1a" stroke-width="3"/>
+<text x="160" y="375" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">VAD gate</text>
+<text x="160" y="396" font-size="12" fill="#1a1a1a" text-anchor="middle">P(nospeech) &gt; 0.6 and</text>
+<text x="160" y="414" font-size="12" fill="#1a1a1a" text-anchor="middle">avg logprob &lt; -1 ?</text>
+<path d="M 300 372 L 337 372" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 333 367 L 338 372 L 333 377" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="318" y="366" font-size="11" fill="#696969" text-anchor="middle">yes</text>
+<rect x="340" y="352" width="280" height="40" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="480" y="377" font-size="12" fill="#1a1a1a" text-anchor="middle">window dropped as non speech</text>
+<path d="M 300 404 L 337 404" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 333 399 L 338 404 L 333 409" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="318" y="420" font-size="11" fill="#696969" text-anchor="middle">no</text>
+<rect x="340" y="404" width="280" height="40" fill="#1a1a1a"/>
+<text x="480" y="429" font-size="12" font-weight="700" fill="#EDECE8" text-anchor="middle">segments emitted with evidence</text>
+<text x="20" y="472" font-size="11" fill="#696969">every segment carries evidence: start · end · language,</text>
+<text x="20" y="490" font-size="11" fill="#696969">avg log probability · no speech probability</text>
+<text x="20" y="508" font-size="11" fill="#696969">low confidence text is display material, never trusted reasoning input</text>
+<text x="20" y="526" font-size="11" fill="#696969">long form audio: the next window starts at the last predicted timestamp,</text>
+<text x="20" y="544" font-size="11" fill="#696969">so a segment never straddles a window boundary</text>
+</g></svg>

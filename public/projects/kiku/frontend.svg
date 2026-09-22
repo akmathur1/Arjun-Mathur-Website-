@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 248" width="640" height="248"
+     role="img" aria-label="Seven audio frontend stages in two rows: WAV input, mix down, resample, pad or trim, Hann STFT, 80 mel filterbank, log compress">
+  <rect width="640" height="248" fill="#EDECE8"/>
+  <g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+    <text x="20" y="22" font-size="13" font-weight="700" fill="#1a1a1a">audio frontend · waveform to the 80 × 3000 log Mel spectrogram</text>
+
+    <g>
+      <rect x="20" y="40" width="140" height="50" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+      <text x="90" y="61" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">WAV input</text>
+      <text x="90" y="78" font-size="11" fill="#696969" text-anchor="middle">any rate/channels</text>
+      <path d="M 166 65 L 186 65" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M 181 60 L 187 65 L 181 70" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <rect x="193" y="40" width="140" height="50" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+      <text x="263" y="61" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">mix down</text>
+      <text x="263" y="78" font-size="11" fill="#696969" text-anchor="middle">to mono</text>
+      <path d="M 339 65 L 359 65" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M 354 60 L 360 65 L 354 70" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <rect x="366" y="40" width="140" height="50" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+      <text x="436" y="61" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">resample</text>
+      <text x="436" y="78" font-size="11" fill="#696969" text-anchor="middle">to 16 kHz</text>
+      <path d="M 512 65 L 532 65" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M 527 60 L 533 65 L 527 70" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <rect x="539" y="40" width="81" height="50" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+      <text x="579" y="61" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">pad/trim</text>
+      <text x="579" y="78" font-size="11" fill="#696969" text-anchor="middle">to 30 s</text>
+    </g>
+
+    <path d="M 579 96 L 579 108 L 90 108 L 90 122" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M 85 117 L 90 123 L 95 117" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g>
+      <rect x="20" y="128" width="140" height="50" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+      <text x="90" y="149" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">Hann STFT</text>
+      <text x="90" y="166" font-size="11" fill="#696969" text-anchor="middle">FFT 400 · hop 160</text>
+      <path d="M 166 153 L 186 153" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M 181 148 L 187 153 L 181 158" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <rect x="193" y="128" width="140" height="50" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+      <text x="263" y="149" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">80 mel</text>
+      <text x="263" y="166" font-size="11" fill="#696969" text-anchor="middle">filterbank</text>
+      <path d="M 339 153 L 359 153" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M 354 148 L 360 153 L 354 158" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <rect x="366" y="128" width="140" height="50" fill="rgba(26,26,26,0.16)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+      <text x="436" y="149" font-size="12" font-weight="700" fill="#1a1a1a" text-anchor="middle">log compress</text>
+      <text x="436" y="166" font-size="11" fill="#696969" text-anchor="middle">and normalize</text>
+    </g>
+
+    <text x="20" y="204" font-size="11" fill="#696969">25 ms analysis window, 10 ms hop, 16 kHz mono, 30 second windows</text>
+    <text x="20" y="222" font-size="11" fill="#696969">the same frontend serves training (notebooks) and the Rust runtime,</text>
+    <text x="20" y="238" font-size="11" fill="#696969">so there is no train versus serve skew</text>
+  </g>
+</svg>

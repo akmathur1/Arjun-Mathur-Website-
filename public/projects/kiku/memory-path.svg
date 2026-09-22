@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 244" width="640" height="244" role="img" aria-label="Four stages from transcription to memory: register, gate, resolve, absorb, with the gate able to make memory abstain">
+<rect width="640" height="244" fill="#EDECE8"/>
+<g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+<text x="20" y="22" font-size="13" font-weight="700" fill="#1a1a1a">from transcription to memory</text>
+<rect x="20" y="40" width="138" height="86" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="89" y="62" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">Register</text>
+<text x="89" y="82" font-size="11" fill="#696969" text-anchor="middle">text · start · end</text>
+<text x="89" y="98" font-size="11" fill="#696969" text-anchor="middle">language</text>
+<text x="89" y="114" font-size="11" fill="#696969" text-anchor="middle">logprob · nospeech</text>
+<path d="M 160 83 L 172 83" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 168 78 L 173 83 L 168 88" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="174" y="40" width="138" height="86" fill="rgba(26,26,26,0.07)" stroke="#1a1a1a" stroke-width="3"/>
+<text x="243" y="62" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">Gate</text>
+<text x="243" y="82" font-size="11" fill="#696969" text-anchor="middle">clears → trusted</text>
+<text x="243" y="98" font-size="11" fill="#696969" text-anchor="middle">weak → display</text>
+<text x="243" y="114" font-size="11" fill="#696969" text-anchor="middle">material only</text>
+<path d="M 314 83 L 326 83" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 322 78 L 327 83 L 322 88" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="328" y="40" width="138" height="86" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="397" y="62" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">Resolve</text>
+<text x="397" y="82" font-size="11" fill="#696969" text-anchor="middle">names · companies</text>
+<text x="397" y="98" font-size="11" fill="#696969" text-anchor="middle">against the closed</text>
+<text x="397" y="114" font-size="11" fill="#696969" text-anchor="middle">tenant lexicon</text>
+<path d="M 468 83 L 480 83" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><path d="M 476 78 L 481 83 L 476 88" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="482" y="40" width="138" height="86" fill="rgba(26,26,26,0.16)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="551" y="62" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">Absorb</text>
+<text x="551" y="82" font-size="11" fill="#696969" text-anchor="middle">graph facts · notes</text>
+<text x="551" y="98" font-size="11" fill="#696969" text-anchor="middle">tasks, each with a</text>
+<text x="551" y="114" font-size="11" fill="#696969" text-anchor="middle">pointer to its span</text>
+<path d="M 243 126 L 243 150" fill="none" stroke="#696969" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M 238 146 L 243 151 L 248 146" fill="none" stroke="#696969" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="243" y="168" font-size="11" fill="#696969" text-anchor="middle">memory abstains — never remembers a guess</text>
+<text x="20" y="206" font-size="11" fill="#696969">runs live over a rolling window while the room is still on the topic</text>
+<text x="20" y="224" font-size="11" fill="#696969">memory constrains the transcript, the transcript never invents memory</text>
+</g></svg>

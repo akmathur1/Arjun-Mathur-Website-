@@ -212,7 +212,7 @@ const WORK: Role[] = [
     location: 'New York',
     summary:
       'Real-time hyperspecific domain information. Backed by Cory Levy and Joshua Browder.',
-    logo: { src: '/work/molterra.png' },
+    logo: { src: '/work/molterra.png', scale: 0.9 },
     url: 'https://molterra.com',
     project: 'molterra-security',
     featured: true,
@@ -224,7 +224,6 @@ const WORK: Role[] = [
     role: 'Researcher',
     start: '2025-08',
     end: null,
-    location: 'St. Louis',
     summary:
       'With Dr. Trevor GrandPré: sequence-resolved coarse-grained Hamiltonians for FUS-derived intrinsically disordered protein variants — MPIPI parameterization, Langevin dynamics, and density–temperature phase diagrams — to get at sequence-dependent interfacial energetics and mesoscale condensate organization through statistical thermodynamics and polymer field theory.',
     logo: { src: '/work/washu.svg' },
@@ -242,7 +241,7 @@ const WORK: Role[] = [
       "Dr. Aadel Chaudhuri's group: multitask learning algorithms and architecture-agnostic methods for modeling heterogeneous treatment responses in cancer.",
     details: [
       'Three models averaging 85% AUC for predicting drug response in high-grade serous ovarian cancer.',
-      'OvarianMTLNet, a custom multitask network that outperformed multinomial logistic regression, random forests, XGBoost, standard neural networks, and SVMs.',
+      'OvarianMTLNet, a custom multitask neural network that outperformed logistic regression, random forests, XGBoost, standard neural networks, and SVMs.',
       'F1 above 85% across the stable, progression, and response categories for every drug.',
     ],
     logo: { src: '/work/mayo-clinic.svg' },
@@ -406,6 +405,21 @@ const MolterraSecurityThumbnail: React.FC = () => (
   />
 );
 
+const KikuThumbnail: React.FC = () => (
+  <img
+    src="/projects/kiku/thumbnail.svg"
+    alt="A log-Mel spectrogram grid becoming a strip of tokens: SOT, EN, 0.0, The"
+    style={{
+      display: 'block',
+      width: 150,
+      maxWidth: '100%',
+      height: 'auto',
+      border: `1px solid ${COLORS.text}`,
+      background: COLORS.bg,
+    }}
+  />
+);
+
 const ENTRIES: Entry[] = [
   {
     slug: 'molterra-security',
@@ -451,6 +465,15 @@ const ENTRIES: Entry[] = [
       'A case study in how far regulatory network structure can be inferred from typical experimental data. We fit 13,824 distinct ODE models — each a different regulatory network over eud-1, sult-1, and nhr-40 — to RNA-seq from three experiments on the nematode Pristionchus pacificus, whose mouth-form dimorphism is a developmental decision. Synthetic tests establish the limits of inference in the experimental data regime; model sets of shared regulatory features are recovered per experiment, and a single network in their intersection explains all three. With FitzGerald, Reich, Agaba, Werner, and Mangan.',
     tier: 'boxed',
     thumbnail: <GRNThumbnail />,
+  },
+  {
+    slug: 'kiku',
+    title: 'Kiku — Multiclass Speech Recognition in Rust',
+    date: 'August 2026 — present',
+    description:
+      "Molterra's speech recognition module, written in Rust as a standalone MIT crate: an encoder-decoder Transformer over an 80-channel log Mel frontend, multiclass by construction — one decoder softmax emits the language token, the task token, no-speech, 20 ms timestamp classes and the text itself. I wrote the frontend, model, tokenizer decoding and decoding loop; the reliability work is in the loop, where a VAD gate needs both P(nospeech) > 0.6 and avg logprob < -1, a timestamp grammar keeps pairs monotonic and pins the first to the window's opening second, and a temperature ladder retries on the 2.4 compression ratio that signals a repetition loop. Every segment carries the evidence it was judged on, which is what lets transcription continue into memory. It never infers who is speaking.",
+    tier: 'boxed',
+    thumbnail: <KikuThumbnail />,
   },
   {
     title: 'Third Entry Title',
@@ -1210,16 +1233,34 @@ type ChartProps = {
 // year through December of this one. Ongoing roles run to a dashed "now" line and
 // fade past it. Hovering a row names its dates; clicking scrolls to its entry.
 const WorkChart: React.FC<ChartProps> = ({ roles, now, active, onActive, onPick }) => {
+  // The gap needed to keep a year label clear of "now" is a pixel distance, not a
+  // number of months: the same three months are 54px of track at desktop and 10px on
+  // a phone. So measure the track and convert.
+  const [trackEl, setTrackEl] = useState<HTMLDivElement | null>(null);
+  const [trackW, setTrackW] = useState(0);
+  useEffect(() => {
+    if (!trackEl) return;
+    const ro = new ResizeObserver(([entry]) => setTrackW(entry.contentRect.width));
+    ro.observe(trackEl);
+    return () => ro.disconnect();
+  }, [trackEl]);
+
   const dated = roles.filter((r): r is Role & { start: string } => Boolean(r.start));
   if (!dated.length) return null;
 
   const firstYear = Math.floor(Math.min(...dated.map((r) => monthIndex(r.start))) / 12);
   const t0 = firstYear * 12;
-  const t1 = (Math.floor(now / 12) + 1) * 12;
+  // Always keep at least a quarter of runway past today, so the fade and the "now"
+  // label have somewhere to sit in December.
+  const t1 = Math.max((Math.floor(now / 12) + 1) * 12, Math.ceil(now) + 3);
   const x = (m: number) => ((m - t0) / (t1 - t0)) * 100;
   const years: number[] = [];
   for (let y = firstYear; y * 12 < t1; y += 1) years.push(y);
   const nowX = x(now);
+  // "now" is right-anchored near the end of the track, where it grows towards the
+  // year label rather than away from it, so it needs the wider berth.
+  const clearPx = nowX > 92 ? 64 : 36;
+  const clearMonths = trackW ? (clearPx / trackW) * (t1 - t0) : 3;
 
   const label: React.CSSProperties = {
     position: 'absolute',
@@ -1233,15 +1274,29 @@ const WorkChart: React.FC<ChartProps> = ({ roles, now, active, onActive, onPick 
 
   return (
     <div className="work-chart" style={{ marginTop: 40 }}>
-      <div className="work-row" style={{ height: 24 }}>
+      <div aria-hidden className="work-row" style={{ height: 24 }}>
         <div />
-        <div style={{ position: 'relative', height: '100%' }}>
-          {years.map((y) => (
-            <span key={y} style={{ ...label, left: `${x(y * 12)}%`, color: COLORS.muted }}>
-              {y}
-            </span>
-          ))}
-          <span style={{ ...label, left: `${nowX}%`, color: COLORS.text }}>now</span>
+        <div ref={setTrackEl} style={{ position: 'relative', height: '100%' }}>
+          {/* A year label within a quarter of today, on either side, would print under
+              "now"; its gridline still marks the year, and "now" implies the date. */}
+          {years
+            .filter((y) => Math.abs(now - y * 12) >= clearMonths)
+            .map((y) => (
+              <span key={y} style={{ ...label, left: `${x(y * 12)}%`, color: COLORS.muted }}>
+                {y}
+              </span>
+            ))}
+          <span
+            style={{
+              ...label,
+              color: COLORS.text,
+              ...(nowX > 92
+                ? { right: `${100 - nowX}%`, paddingLeft: 0, paddingRight: 6 }
+                : { left: `${nowX}%` }),
+            }}
+          >
+            now
+          </span>
         </div>
       </div>
 
@@ -1280,18 +1335,27 @@ const WorkChart: React.FC<ChartProps> = ({ roles, now, active, onActive, onPick 
 
         {dated.map((r, i) => {
           const start = x(monthIndex(r.start));
-          const end = r.end ? x(monthIndex(r.end) + 1) : nowX;
+          // A bar runs to the start of the month after it ends, except that a role
+          // ending this month stops at the now line rather than crossing it.
+          const end = r.end ? Math.min(x(monthIndex(r.end) + 1), nowX) : nowX;
           const fill = isHatched(r) ? HATCH : SOLID;
           const isActive = active === r.slug;
-          // A bar that reaches deep into the track gets its label on the left.
-          const labelLeft = end > 62;
+          // The dates label goes on whichever side of the bar has more room, and is
+          // clamped so it can never reach past the track. The face is monospace with
+          // no letter-spacing, so its width is exactly one ch per character plus the
+          // horizontal padding — no measuring needed.
+          const labelLeft = start > 100 - end;
+          const labelText = `${roleDates(r)} · ${spanLabel(roleMonths(r, now))}`;
+          const inside = `calc(100% - ${labelText.length}ch - 12px)`;
           return (
             <div
               key={r.slug}
               className="work-row"
               role="button"
               tabIndex={0}
-              aria-label={`${r.org}, ${r.role}, ${roleDates(r)}`}
+              aria-label={`${r.org}, ${r.role}${r.kind ? ` (${r.kind})` : ''}, ${monthLabel(
+                r.start
+              )} to ${r.end ? monthLabel(r.end) : 'present'}`}
               onMouseEnter={() => onActive(r.slug)}
               onMouseLeave={() => onActive(null)}
               onFocus={() => onActive(r.slug)}
@@ -1351,7 +1415,10 @@ const WorkChart: React.FC<ChartProps> = ({ roles, now, active, onActive, onPick 
                     style={{
                       position: 'absolute',
                       left: `${nowX}%`,
-                      right: 0,
+                      // A fixed tail: anchoring it to the track's end would make its
+                      // length a function of how much of the year is left.
+                      width: 36,
+                      maxWidth: `${100 - nowX}%`,
                       top: (CHART_ROW - CHART_BAR) / 2,
                       height: CHART_BAR,
                       ...fill,
@@ -1362,13 +1429,14 @@ const WorkChart: React.FC<ChartProps> = ({ roles, now, active, onActive, onPick 
                 )}
                 {isActive && (
                   <span
+                    className="work-label"
                     style={{
                       position: 'absolute',
                       top: '50%',
                       transform: 'translateY(-50%)',
                       ...(labelLeft
-                        ? { right: `calc(${100 - start}% + 8px)` }
-                        : { left: `calc(${end}% + 8px)` }),
+                        ? { right: `min(calc(${100 - start}% + 8px), ${inside})` }
+                        : { left: `min(calc(${end}% + 8px), ${inside})` }),
                       padding: '2px 6px',
                       fontFamily: MONO,
                       fontSize: 11,
@@ -1379,7 +1447,7 @@ const WorkChart: React.FC<ChartProps> = ({ roles, now, active, onActive, onPick 
                       zIndex: 1,
                     }}
                   >
-                    {roleDates(r)} · {spanLabel(roleMonths(r, now))}
+                    {labelText}
                   </span>
                 )}
               </div>
@@ -1389,26 +1457,19 @@ const WorkChart: React.FC<ChartProps> = ({ roles, now, active, onActive, onPick 
       </div>
 
       <div
+        aria-hidden
         style={{
           display: 'flex',
-          flexWrap: 'wrap',
           alignItems: 'center',
-          gap: '6px 18px',
+          gap: 7,
           marginTop: 16,
           fontFamily: MONO,
           fontSize: 11,
           color: COLORS.muted,
         }}
       >
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}>
-          <span style={{ width: 16, height: 8, ...SOLID }} /> founder or full-time
-        </span>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}>
-          <span style={{ width: 16, height: 8, ...HATCH }} /> part-time or internship
-        </span>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}>
-          <span style={{ height: 12, borderLeft: `1px dashed ${COLORS.text}` }} /> today
-        </span>
+        <span style={{ width: 16, height: 8, flexShrink: 0, ...HATCH }} />
+        part-time or internship
       </div>
     </div>
   );
@@ -1438,8 +1499,11 @@ const WorkRow: React.FC<{
   return (
     <div
       id={`work-${r.slug}`}
+      tabIndex={-1}
       onMouseEnter={() => onActive(r.slug)}
       onMouseLeave={() => onActive(null)}
+      onFocus={() => onActive(r.slug)}
+      onBlur={() => onActive(null)}
       style={{
         display: 'flex',
         gap: 20,
@@ -1534,6 +1598,7 @@ const WorkRow: React.FC<{
 
         {r.details && (
           <ul
+            role="list"
             style={{
               listStyle: 'none',
               marginTop: 8,
@@ -1557,7 +1622,13 @@ const WorkRow: React.FC<{
         {(r.url || r.project) && (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 20px', marginTop: 10 }}>
             {r.url && (
-              <a href={r.url} target="_blank" rel="noreferrer" style={linkStyle}>
+              <a
+                href={r.url}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${r.url.replace(/^https?:\/\//, '')} (opens in a new tab)`}
+                style={linkStyle}
+              >
                 {r.url.replace(/^https?:\/\//, '')} ↗
               </a>
             )}
@@ -1585,9 +1656,14 @@ const WorkPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) =
   const today = new Date();
   const now = today.getFullYear() * 12 + today.getMonth() + (today.getDate() - 1) / 31;
 
+  // Send focus along with the scroll: without it a keyboard user activates a row,
+  // the page moves, and the next Tab jumps straight back up to the chart.
   const pick = (slug: string) => {
     const el = document.getElementById(`work-${slug}`);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (!el) return;
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'center' });
+    el.focus({ preventScroll: true });
   };
 
   return (
@@ -2140,6 +2216,8 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             <OssiaProjectBody />
           ) : slug === 'grn-indistinguishability' ? (
             <GRNProjectBody />
+          ) : slug === 'kiku' ? (
+            <KikuProjectBody />
           ) : (
             <p
               style={{
@@ -3043,6 +3121,254 @@ const MolterraSecurityProjectBody: React.FC = () => (
     >
       cargo run --release --bin redteam · 991 attacks · 232 blocked shipped · 988 blocked
       hardened · 112 findings · 3 open by design. github.com/akmathur1/molterra-security
+    </p>
+  </div>
+);
+
+const KikuProjectBody: React.FC = () => (
+  <div style={{ marginTop: 32 }}>
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        color: COLORS.muted,
+        marginTop: 0,
+        marginBottom: 24,
+        letterSpacing: 0.3,
+      }}
+    >
+      Kiku · Molterra's speech recognition module · Rust · MIT ·
+      github.com/akmathur1/Kiku-
+    </p>
+
+    <BodyParagraph top={0}>
+      Molterra listens to meetings, so everything it knows starts as audio. That makes
+      the speech recognizer the narrowest point in the whole system: if a number is
+      wrong there, every downstream claim inherits the error. I wrote Kiku — the
+      frontend, the model code, the tokenizer decoding, and the decoding loop — in Rust,
+      as a standalone MIT crate, so that the part of Molterra I care most about being
+      correct is a part I can read end to end. It runs on candle for tensor operations
+      and rustfft for the FFT; what sits on top of those is mine.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      The design idea is that Kiku is a multiclass network by construction. It is an
+      encoder-decoder Transformer over an 80-channel log Mel frontend, and a single
+      decoder softmax emits everything: the language token, the task token, the
+      no-speech token, 20 ms timestamp classes, and the text itself, in a fixed grammar
+      that runs start-of-transcript, language, task, timestamped text, end-of-transcript.
+      One forward pass answers what language this is, whether anyone is speaking, when
+      each phrase began and ended, and what was said. That is not a convenience. It is
+      the reason transcription can continue into memory at all, which I come back to at
+      the end.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/kiku/architecture.svg"
+      alt="Log-Mel spectrogram through a Conv1D and GELU stem into Transformer encoder blocks, cross-attention into decoder blocks, next-token prediction over the multitask token format"
+      caption={
+        <>
+          <strong>Fig. 1.</strong> The model. Audio enters bottom left, tokens bottom
+          right, and one tied output projection produces language, task, timestamp and
+          text tokens from the same softmax.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The frontend is the part I was most careful with, because a spectrogram bug is
+      invisible — it does not crash, it just quietly costs accuracy. Audio is mixed to
+      mono, resampled to 16 kHz, and cut to exactly 30 second windows: 480,000 samples,
+      which become 3,000 frames. The short-time Fourier transform uses a 400-point FFT
+      with a 160-sample hop, a Hann window, and reflect padding — a 25 ms analysis
+      window every 10 ms. Those frames go through a Slaney-style mel filterbank, then
+      log compression with a 1e-10 floor, a clamp to eight decades below the window
+      maximum, and a final affine normalization. The one shortcut I would flag to a
+      reviewer is the resampler: it is linear interpolation with no anti-aliasing filter
+      ahead of the downsample, which is fine for the 48 kHz capture it sees in practice
+      and would not be fine for arbitrary input.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/kiku/frontend.svg"
+      alt="Seven-stage audio frontend: WAV input, mix down to mono, resample to 16 kHz, pad or trim to 30 second chunks, Hann STFT with FFT 400 and hop 160, 80 mel filterbank, log compress and normalize"
+      caption={
+        <>
+          <strong>Fig. 2.</strong> The frontend, waveform to an 80 × 3000 log Mel
+          spectrogram. The same code path serves the training notebooks and the Rust
+          runtime, so there is no train-versus-serve skew to debug later.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The model itself is conventional and I kept it that way deliberately. The
+      spectrogram passes through two Conv1D layers with GELU, kernel 3 and padding 1,
+      the second with stride 2 to halve the time axis, then picks up positional encoding
+      and runs through pre-activation Transformer blocks — layer norm before each
+      sub-layer, a 4× MLP, epsilon 1e-5, and no bias on the key projection, since the
+      subsequent softmax makes it redundant. The decoder attends to its own history
+      causally and to the encoder output by cross-attention, and the output projection
+      is tied to the token embedding rather than being a separate head. Decoding is
+      KV-cached: self-attention keys and values are concatenated per step, while the
+      cross-attention keys and values are computed once per window and reused for every
+      token in it, which is where most of the saving is.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Kiku does not train its own weights today. It loads openly published safetensors
+      checkpoints as starting weights, reading the architecture out of the checkpoint's
+      own config, so it transcribes for real now while the frontend, the model code and
+      the decoding loop stay mine to evolve for meeting audio — low-volume speech,
+      background chatter, and technical vocabulary. The notebooks in the repository are
+      the other half of that: data preparation, the audio frontend, BPE tokenizer
+      training, the architecture, the training loop, decoding, evaluation, and
+      checkpoint export, end to end. They are the recipe for our own training runs. They
+      are not a run I have performed, and the crate does not depend on them.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Where I did spend real design effort is the decoding loop, because that is where
+      an ASR system either earns trust or fabricates. Three heuristics matter. Voice
+      activity detection drops a window only when the no-speech probability exceeds 0.6
+      <em> and </em>the average log probability of the decoded text is below −1 — the
+      no-speech probability alone is not sufficient, and treating it as sufficient is
+      how you delete real speech. The timestamp grammar requires timestamps in pairs,
+      forbids them from decreasing, and constrains the first timestamp of a window to
+      its opening second, so the model cannot skip the first words by pointing past
+      them. And a temperature ladder from 0.0 up to 1.0 retries a window whenever the
+      zlib compression ratio of the output exceeds 2.4 — the repetition-loop signature —
+      or the average log probability falls below −1, keeping the best-evidenced attempt
+      rather than the last one.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/kiku/decoding.svg"
+      alt="The decoding loop: token grammar, decode at temperature T with a ladder from 0.0 to 1.0, compression ratio and log probability checks that trigger retries, a VAD gate, and segments emitted with evidence"
+      caption={
+        <>
+          <strong>Fig. 3.</strong> One 30 second window. The checks feed retries, the VAD
+          gate decides whether the window is speech at all, and what survives is emitted
+          carrying the evidence it was judged on.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      Long-form audio advances by the last predicted timestamp rather than by a fixed
+      stride, so a phrase never straddles a window boundary and gets transcribed twice
+      or lost between the two. Every segment that comes out carries its start and end
+      times, the identified language, the average log probability, and the no-speech
+      probability. That evidence is the actual product. A consumer downstream is
+      supposed to gate on it, and a low-confidence segment is display material — a human
+      can read it — but nothing learns from it.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      There is one thing Kiku refuses to do, and it is the decision I am most sure
+      about. It never infers who is speaking. Sequence-to-sequence models will happily
+      guess speaker names from transcript context, fluently and wrongly, and that guess
+      is discarded rather than surfaced. In Molterra, speaker identity comes from
+      structural channel attribution and meeting-scoped diarization in the capture
+      pipeline — evidence about who was on which channel, not a language model's
+      inference from what was said. Kiku's output is transcription evidence: text,
+      times, language, confidence. Nothing else.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/kiku/pipeline.svg"
+      alt="Consent-gated meeting audio and the tenant lexicon feed Kiku, whose evidence-carrying segments split into a display transcript and, past the evidence gate, trusted reasoning input"
+      caption={
+        <>
+          <strong>Fig. 4.</strong> Where Kiku sits. Above it, the hearing pipeline stays
+          the trust layer; Kiku is one backend behind an evidence contract, not the
+          arbiter of what is true.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      To know whether any of this works I needed measurement rather than impressions, so
+      the crate ships two evaluation harnesses. The LibriSpeech one transcribes a split,
+      normalizes hypothesis and reference, and computes pooled corpus word error rate.
+      The normalizer is a full English text normalizer and was more work than the metric:
+      numbers, currencies, ordinals, decades, spelled forms like "double oh seven", a
+      British-to-American spelling dictionary, contractions, title abbreviations, and
+      Unicode symbol and diacritic removal, with its own test suite, because a WER that
+      punishes "colour" against "color" measures the normalizer rather than the model.
+      The FLEURS harness does the multilingual case with a language-agnostic normalizer,
+      switching to character error rate for languages written without spaces — Chinese,
+      Japanese, Thai, Lao, Burmese, Khmer. Translation into English runs but is written
+      to a TSV unscored, because FLEURS ships no English reference to score it against.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      I want to be exact about what that means, because it is the easiest place to
+      overclaim: the harnesses exist, and I have not published a number from them. There
+      is no WER or CER figure anywhere in the repository. End-to-end verification so far
+      is the tiny checkpoint on real synthesized speech and silence. The accuracy
+      limitations are the ones any weakly supervised sequence-to-sequence model inherits
+      — hallucination on non-speech and long silence, repetition loops, and performance
+      that is uneven across languages, accents and acoustic conditions, worse in
+      low-resource languages. Low error is not zero error, and the reliability heuristics
+      above are there precisely because the model has these failure modes, not because it
+      does not.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Which brings me back to why the multiclass design matters. Simple transcription
+      ends at a string. Because language identification, voice activity, timestamps and
+      text are all classes of one output layer, every decoded segment is already a piece
+      of evidence — words, when they were said, in what language, how sure the model is
+      — produced by the same forward pass. That is the interface Molterra's memory layer
+      consumes. Segments are registered as evidence; only those clearing the gate become
+      trusted reasoning input; names, companies and terms in trusted segments are
+      resolved against the tenant's closed lexicon, so memory constrains the transcript
+      and the transcript never invents memory; and what survives is absorbed as durable
+      facts, notes and tasks, each holding a pointer back to the audio span and the
+      confidence that grounds it. It runs live over a rolling window while the room is
+      still on the topic. When the audio is weak the chain stops at the gate and memory
+      abstains — the design goal is that the system never remembers a guess.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/kiku/memory-path.svg"
+      alt="Four stages from transcription to memory: register, gate, resolve, absorb, with the gate able to make memory abstain"
+      caption={
+        <>
+          <strong>Fig. 5.</strong> Register, gate, resolve, absorb. The memory layer's
+          implementation lives in Molterra rather than in this repository; what Kiku owns
+          is the evidence that makes the gate decidable.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      Kiku is not the backend Molterra runs in production right now — the capture
+      pipeline currently uses a hosted one. Kiku is the seam for a local, open backend
+      behind the same evidence contract, selected per session, with the higher hearing
+      stages unchanged above it. Still ahead: beam search, previous-text conditioning to
+      boost a tenant's key terms, word-level timestamps by cross-attention alignment,
+      streaming, and our own training runs from the notebooks. Those land as follow-up
+      slices. What exists today is the part I wanted to get right first — a recognizer
+      whose output you can interrogate, that says how sure it is, and that declines to
+      guess about the one thing it should never be asked.
+    </BodyParagraph>
+
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        maxWidth: 640,
+        marginTop: 48,
+        color: COLORS.muted,
+      }}
+    >
+      Rust · candle · MIT. 80-channel log Mel · 30 s windows · VAD at P(nospeech) &gt; 0.6
+      and avg logprob &lt; −1 · temperature ladder 0.0 → 1.0 · LibriSpeech and FLEURS
+      harnesses. github.com/akmathur1/Kiku-
     </p>
   </div>
 );
