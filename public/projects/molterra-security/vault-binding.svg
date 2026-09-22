@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 332" width="640" height="332"
+     role="img" aria-label="Two panels comparing an encrypted vault token before and after it is bound to its database row. Before: copying account A's nonce, ciphertext and tag into account B's row still decrypts as VALID with no key and no plaintext, marked Critical. After: the tag is authenticated with associated data of tenant, account and column, so the same copy fails with a tag mismatch while the stored format is unchanged.">
+  <rect width="640" height="332" fill="#EDECE8"/>
+  <g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+
+    <!-- divider between the two panels -->
+    <line x1="320" y1="14" x2="320" y2="274" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+
+    <!-- ================= LEFT PANEL: Before, unbound ================= -->
+    <text x="18" y="24" font-size="13" font-weight="700" fill="#1a1a1a" dominant-baseline="central">Before: unbound</text>
+
+    <!-- row A -->
+    <rect x="18" y="62" width="288" height="52" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <text x="26" y="88" font-size="11" fill="#696969" dominant-baseline="central">account A</text>
+    <g font-size="11">
+      <rect x="96"  y="69" width="56" height="38" fill="none" stroke="#696969" stroke-width="1"/>
+      <text x="124" y="80" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a">nonce</text>
+      <text x="124" y="96" text-anchor="middle" dominant-baseline="central" fill="#696969">96 bit</text>
+      <rect x="152" y="69" width="84" height="38" fill="none" stroke="#696969" stroke-width="1"/>
+      <text x="194" y="80" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a">ciphertext</text>
+      <rect x="236" y="69" width="60" height="38" fill="none" stroke="#696969" stroke-width="1"/>
+      <text x="266" y="80" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a">tag</text>
+      <text x="266" y="96" text-anchor="middle" dominant-baseline="central" fill="#696969">128 bit</text>
+    </g>
+
+    <!-- row B, with A's token copied in (light fill) -->
+    <rect x="18" y="156" width="288" height="52" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <text x="26" y="182" font-size="11" fill="#696969" dominant-baseline="central">account B</text>
+    <g font-size="11">
+      <rect x="96"  y="163" width="56" height="38" fill="rgba(26,26,26,0.07)" stroke="#696969" stroke-width="1"/>
+      <text x="124" y="174" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a">nonce</text>
+      <text x="124" y="190" text-anchor="middle" dominant-baseline="central" fill="#696969">96 bit</text>
+      <rect x="152" y="163" width="84" height="38" fill="rgba(26,26,26,0.07)" stroke="#696969" stroke-width="1"/>
+      <text x="194" y="174" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a">ciphertext</text>
+      <rect x="236" y="163" width="60" height="38" fill="rgba(26,26,26,0.07)" stroke="#696969" stroke-width="1"/>
+      <text x="266" y="174" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a">tag</text>
+      <text x="266" y="190" text-anchor="middle" dominant-baseline="central" fill="#696969">128 bit</text>
+    </g>
+
+    <!-- transplant arrow: A's token copied down into B's row -->
+    <path d="M 196 107 L 196 163" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 191 157 L 196 163 L 201 157" fill="none" stroke="#1a1a1a" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="204" y="135" font-size="11" fill="#696969" dominant-baseline="central">copy token</text>
+
+    <!-- result -->
+    <text x="18" y="236" font-size="12" font-weight="700" fill="#1a1a1a" dominant-baseline="central">decrypts: VALID</text>
+    <rect x="140" y="226" width="68" height="20" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+    <text x="174" y="236" font-size="11" font-weight="700" fill="#1a1a1a" text-anchor="middle" dominant-baseline="central">Critical</text>
+    <text x="18" y="258" font-size="11" fill="#696969" dominant-baseline="central">no key, no plaintext — only a database write</text>
+
+    <!-- ================= RIGHT PANEL: After, bound to its row ================= -->
+    <text x="338" y="24" font-size="13" font-weight="700" fill="#1a1a1a" dominant-baseline="central">After: bound to its row</text>
+    <text x="616" y="48" font-size="11" fill="#696969" text-anchor="end" dominant-baseline="central">AAD = tenant ‖ account ‖ column</text>
+
+    <!-- row A -->
+    <rect x="338" y="62" width="288" height="52" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <text x="346" y="88" font-size="11" fill="#696969" dominant-baseline="central">account A</text>
+    <g font-size="11">
+      <rect x="416" y="69" width="56" height="38" fill="none" stroke="#696969" stroke-width="1"/>
+      <text x="444" y="80" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a">nonce</text>
+      <text x="444" y="96" text-anchor="middle" dominant-baseline="central" fill="#696969">96 bit</text>
+      <rect x="472" y="69" width="84" height="38" fill="none" stroke="#696969" stroke-width="1"/>
+      <text x="514" y="80" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a">ciphertext</text>
+      <rect x="556" y="69" width="60" height="38" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+      <text x="586" y="80" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a" font-weight="700">tag</text>
+      <text x="586" y="96" text-anchor="middle" dominant-baseline="central" fill="#696969">128 bit</text>
+    </g>
+
+    <!-- row B, with A's token copied in (light fill) -->
+    <rect x="338" y="156" width="288" height="52" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+    <text x="346" y="182" font-size="11" fill="#696969" dominant-baseline="central">account B</text>
+    <g font-size="11">
+      <rect x="416" y="163" width="56" height="38" fill="rgba(26,26,26,0.07)" stroke="#696969" stroke-width="1"/>
+      <text x="444" y="174" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a">nonce</text>
+      <text x="444" y="190" text-anchor="middle" dominant-baseline="central" fill="#696969">96 bit</text>
+      <rect x="472" y="163" width="84" height="38" fill="rgba(26,26,26,0.07)" stroke="#696969" stroke-width="1"/>
+      <text x="514" y="174" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a">ciphertext</text>
+      <rect x="556" y="163" width="60" height="38" fill="rgba(26,26,26,0.07)" stroke="#1a1a1a" stroke-width="3"/>
+      <text x="586" y="174" text-anchor="middle" dominant-baseline="central" fill="#1a1a1a" font-weight="700">tag</text>
+      <text x="586" y="190" text-anchor="middle" dominant-baseline="central" fill="#696969">128 bit</text>
+    </g>
+
+    <!-- same transplant arrow -->
+    <path d="M 516 107 L 516 163" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+    <path d="M 511 157 L 516 163 L 521 157" fill="none" stroke="#1a1a1a" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="524" y="135" font-size="11" fill="#696969" dominant-baseline="central">copy token</text>
+
+    <!-- result -->
+    <text x="338" y="236" font-size="12" font-weight="700" fill="#1a1a1a" dominant-baseline="central">decrypts: FAIL — tag mismatch</text>
+    <text x="338" y="258" font-size="11" fill="#696969" dominant-baseline="central">stored format unchanged</text>
+
+    <!-- caption -->
+    <text x="320" y="306" font-size="11" fill="#696969" text-anchor="middle" dominant-baseline="central">AES-256-GCM authenticates the ciphertext; associated data authenticates where it belongs.</text>
+  </g>
+</svg>

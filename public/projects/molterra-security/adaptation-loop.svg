@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360"
+     role="img" aria-label="The adaptation loop: four stages in a clockwise cycle. An attack lands on shipped code and a finding opens, the attack being its witness; hardening is written beside the attack in the crate, and the hardened verdict must flip to blocked; it is promoted to product as its own reviewed change with a contracts register entry and a measured false-positive cost; the shipped verdict flips, the finding closes, and the attack stays in the corpus forever. An extra arrow from the last stage back to the first notes that a regression fails CI the day it happens. In the centre of the cycle: 112 findings across 9 classes.">
+  <rect width="640" height="360" fill="#EDECE8"/>
+  <g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+
+    <!-- the four stages: hairline boxes at the corners of the cycle -->
+    <g fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1">
+      <rect x="40"  y="24"  width="268" height="86"/>
+      <rect x="352" y="24"  width="268" height="86"/>
+      <rect x="352" y="250" width="268" height="86"/>
+      <rect x="40"  y="250" width="268" height="86"/>
+    </g>
+
+    <!-- stage titles -->
+    <g font-size="13" font-weight="700" fill="#1a1a1a" dominant-baseline="central">
+      <text x="52"  y="43">Attack lands</text>
+      <text x="364" y="43">Hardening written</text>
+      <text x="364" y="269">Promoted to product</text>
+      <text x="52"  y="269">Shipped verdict flips</text>
+    </g>
+
+    <!-- stage details -->
+    <g font-size="11" fill="#696969" dominant-baseline="central">
+      <!-- A: top-left -->
+      <text x="52" y="62">on shipped code → a finding opens</text>
+      <text x="52" y="78">the attack is its witness</text>
+
+      <!-- B: top-right -->
+      <text x="364" y="62">beside the attack, in the crate</text>
+      <text x="364" y="78">hardened verdict must flip to blocked</text>
+
+      <!-- C: bottom-right -->
+      <text x="364" y="288">its own reviewed change</text>
+      <text x="364" y="304">contracts register entry</text>
+      <text x="364" y="320">measured false-positive cost</text>
+
+      <!-- D: bottom-left -->
+      <text x="52" y="288">finding closes</text>
+      <text x="52" y="304">attack stays in the corpus forever</text>
+    </g>
+
+    <!-- the cycle, clockwise: A → B → C → D → A -->
+    <g fill="none" stroke="#1a1a1a" stroke-width="1.5">
+      <!-- A → B -->
+      <path d="M 310 67 L 350 67"/>
+      <path d="M 345 62 L 350 67 L 345 72" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- B → C -->
+      <path d="M 436 112 L 436 248"/>
+      <path d="M 431 243 L 436 248 L 441 243" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- C → D -->
+      <path d="M 350 293 L 310 293"/>
+      <path d="M 315 288 L 310 293 L 315 298" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- D → A -->
+      <path d="M 224 248 L 224 112"/>
+      <path d="M 219 117 L 224 112 L 229 117" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- the extra return path: a regression re-opens the finding -->
+    <path d="M 38 293 L 18 293 L 18 67 L 38 67" fill="none" stroke="#696969" stroke-width="1.5"/>
+    <path d="M 33 62 L 38 67 L 33 72" fill="none" stroke="#696969" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <g font-size="11" fill="#696969" dominant-baseline="central">
+      <text x="28" y="173">regression fails CI</text>
+      <text x="28" y="188">the day it happens</text>
+    </g>
+
+    <!-- centre of the cycle -->
+    <text x="330" y="182" font-family="Newsreader, Georgia, serif" font-size="40" font-weight="400"
+          fill="#1a1a1a" text-anchor="middle">112</text>
+    <text x="330" y="200" font-size="12" fill="#696969" text-anchor="middle" dominant-baseline="central">findings · 9 classes</text>
+  </g>
+</svg>

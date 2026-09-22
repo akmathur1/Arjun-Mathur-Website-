@@ -247,14 +247,38 @@ const GRNThumbnail: React.FC = () => (
   />
 );
 
+const MolterraSecurityThumbnail: React.FC = () => (
+  <img
+    src="/projects/molterra-security/thumbnail.svg"
+    alt="Five bar pairs, one per attack family, each showing the share of attacks blocked with hardening, above the number 991"
+    style={{
+      display: 'block',
+      width: 150,
+      maxWidth: '100%',
+      height: 'auto',
+      border: `1px solid ${COLORS.text}`,
+      background: COLORS.bg,
+    }}
+  />
+);
+
 const ENTRIES: Entry[] = [
+  {
+    slug: 'molterra-security',
+    title: 'Molterra Security: 991 Authorized Attacks Against Our Own Code',
+    date: 'September 2026 — present',
+    description:
+      "Molterra listens to meetings, reads the records a team connects, and writes from them — which puts what people said, the OAuth tokens to their other tools, and the identities that prove who is asking in our care. So I built the security program as executable evidence rather than a description: a Rust crate that links the product's own fence code and runs 991 authorized attacks against it on every change — prompt injection across 18 goals × 34 evasions, Unicode steganography down to the tag block, AES-256-GCM vault tampering, offline credential recovery — each with two recorded verdicts, a 112-finding register, a penetration-test package, and a cryptography review measured against NIST and CNSA 2.0. Shipped code stops 232; the hardening stops 988; the three it cannot are open by design, with the reason written down.",
+    tier: 'featured',
+    thumbnail: <MolterraSecurityThumbnail />,
+  },
   {
     slug: 'fus-idp-hamiltonians',
     title: 'Coarse-Grained Hamiltonians for FUS-Derived IDPs',
     date: 'August 2025 — present',
     description:
       'Sequence-resolved coarse-grained Hamiltonians for FUS-derived intrinsically disordered protein variants. MPIPI parameterization, Langevin dynamics, and density–temperature phase diagrams probing sequence-dependent condensate organization. With Dr. Trevor GrandPré.',
-    tier: 'featured',
+    tier: 'boxed',
     thumbnail: <FUSThumbnail />,
   },
   {
@@ -1404,7 +1428,9 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             </figure>
           )}
 
-          {slug === 'fus-idp-hamiltonians' ? (
+          {slug === 'molterra-security' ? (
+            <MolterraSecurityProjectBody />
+          ) : slug === 'fus-idp-hamiltonians' ? (
             <FUSProjectBody />
           ) : slug === 'ovarian-mtl' ? (
             <OvarianMTLProjectBody />
@@ -1831,6 +1857,470 @@ const GRNProjectBody: React.FC = () => (
     >
       Figures reproduced from the preprint under CC BY 4.0. arxiv.org/abs/2508.21006 ·
       pmc.ncbi.nlm.nih.gov/articles/PMC12407701
+    </p>
+  </div>
+);
+
+const MolterraSecurityProjectBody: React.FC = () => (
+  <div style={{ marginTop: 32 }}>
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        color: COLORS.muted,
+        marginTop: 0,
+        marginBottom: 24,
+        letterSpacing: 0.3,
+      }}
+    >
+      Molterra security program · Rust · github.com/akmathur1/molterra-security ·
+      republished from the product tree after every accepted change
+    </p>
+
+    <BodyParagraph top={0}>
+      Molterra listens to meetings, reads the records a team has connected, and writes
+      work products from them. That puts three kinds of data in our care: what people
+      said, the credentials that reach their other tools, and the identities that prove
+      who is asking. I am the founder. If that data leaks, it leaks because of a decision
+      I made. So I did not write a security page — a description of defenses is only a
+      claim — I wrote an attacker, pointed it at my own product, and published the
+      scoreboard. What follows is how it is built, what it found, and what it has not
+      fixed yet.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      The threat model is not abstract. Every row of data has an owner and a deletion
+      path — a tenant purge removes everything a workspace holds, a member's forget
+      removes what that member contributed with verifiable tombstones — and a datum with
+      no owner cannot be added, because a CI audit refuses the migration. Hostnames,
+      network layout, key-storage locations, alerting thresholds and the exact phrase
+      lists inside the detectors are withheld from the public record on purpose:
+      publishing them helps an attacker more than a reviewer. Everything else is stated
+      as it is practiced, including where the current release falls short.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/molterra-security/defense-layers.svg"
+      alt="Seven stacked bands, in the record's order: in transit, at rest, tenant isolation, identity, integrity, model boundary, process — each with its key controls"
+      caption={
+        <>
+          <strong>Fig. 1.</strong> Defense in depth, in the order the record states it. The model
+          boundary is the one older security programs never had to build; the process
+          layer is the one that keeps the other six from quietly rotting.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      Start with the parts that are supposed to be boring. Traffic is TLS, terminated
+      ahead of the application; the API takes browser requests only from a fixed CORS
+      allow-list, never a wildcard; inbound webhooks are authenticated with HMAC-SHA-256
+      over the raw body, compared in constant time, and rejected before parsing if the
+      signature does not verify. At rest, credentials and memory content sit under
+      AES-256-GCM — 96-bit nonces from the operating system's CSPRNG, fresh per
+      encryption, 128-bit tags — so an attacker who gains write access to the database
+      cannot alter what the application later reads without the tag failing. They can
+      destroy it — and, as it turned out, at the shipped revision they could move it.
+      More on that below. Memory content is not under one key for everyone: a per-tenant key is derived
+      from a master with HKDF-SHA-256, the tenant's UUID bytes as salt and a versioned
+      info label, so tenant keys are cryptographically independent and rotation to a v2
+      label is a well-defined re-derivation rather than a guess. The master key lives
+      outside the database; when it is absent the process boots with memory encryption
+      at rest off and logs a warning, rather than inventing a key. The separate key for
+      the OAuth-token vault is the one enforced by a panic, not by derivation —
+      production must supply an explicit 64-hex key or the process refuses to boot,
+      because deriving that key from the JWT secret would let one leak become every
+      stored OAuth token. No attack row asserts that panic yet; it is a reviewed claim,
+      not a tested one.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Tenant isolation is enforced by the database, not by the query. Every workspace's
+      memory lives under PostgreSQL row-level security; reads run inside a scoped
+      connection that sets the tenant identity for the transaction, and the policy
+      filters every row regardless of what the SQL says. A developer who forgets a WHERE
+      clause gets an empty result, not another customer's data. That policy has a
+      dedicated suite against a real Postgres in CI, and the engineering rules forbid
+      substituting an application-side filter for it. There is a trap here the program
+      names explicitly: backend tests that need Postgres return green having asserted
+      nothing when the database URL is unset, so a tenant-isolation claim must name the
+      CI job that actually supplied a database. A vacuous pass is not a pass.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Identity is Argon2id for passwords — version 19, 19,456 KiB of memory, two passes,
+      one lane, the library default, compared in constant time inside the verifier. Email login codes live ten minutes, allow five attempts, and
+      are throttled per address at four sends per fifteen minutes. Second factor is TOTP
+      per RFC 6238, six digits on a thirty-second step with one step of drift; the shared
+      secret is stored AES-GCM-encrypted, and a successfully used step is recorded with a
+      monotonic guard so a captured code cannot be replayed inside its window. Sessions
+      are sixty-minute HS256 JWT access tokens paired with thirty-day rotating opaque
+      refresh tokens stored only as SHA-256 digests, so a database read does not yield a
+      usable session.
+      The pre-MFA challenge token is signed under a different key from access tokens, so a
+      challenge can never be presented as a session. Validation pins the algorithm and
+      requires expiry, so alg-none and RS256-to-HS256 confusion do not apply. And every
+      write into a tenant's memory appends a leaf to a per-tenant hash chain — content
+      hash, provenance hash, previous root, each 32 bytes, each checked by the database —
+      while authentication and administrative events go to an audit log whose deletion is
+      blocked by a trigger. An intruder with application access cannot erase their own
+      footprints.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      None of that is novel, and that is the point: nothing in the repository implements
+      a cryptographic primitive. It is composition only, and every cryptographic finding the program
+      has produced is a composition or operational error — which is where real systems
+      fail.
+      The novel surface is the one older programs never faced.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/molterra-security/model-boundary.svg"
+      alt="Pipeline from untrusted record through sanitize, control-language detection, constrained source label, prompt and model, to grounding on output and display as fact"
+      caption={
+        <>
+          <strong>Fig. 2.</strong> The model boundary. A record — a CRM note, a calendar
+          body, an email — is untrusted input at a hard boundary, on the way in and on
+          the way out. Document text is data, never instructions.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      Molterra puts retrieved records in front of a language model. That creates a class
+      of attack with no analogue in classical appsec: a record that contains
+      instructions, planted by whoever could write to it, hoping the model will follow
+      them and leak, alter or fabricate. Five controls stand at the boundary. Every
+      excerpt and title is whitespace-collapsed and cut to a fixed character budget so a
+      record cannot flood the context. Each line is checked for control language —
+      attempts to redefine the model's role, override prior instructions, request
+      exfiltration, or impersonate a system or assistant turn — and a matching line is
+      dropped, a matching title replaced by nothing. The label that tells the model where
+      a record came from must be a short machine identifier, or it collapses to a fixed
+      neutral string. And on the way out, before a generated sentence is shown as a fact
+      about a record, it is verified against the tokens of the approved records it claims
+      to come from: the model cannot assert a name, a number or a date the records do not
+      contain. And pages the browser extension reads for ranking are never persisted
+      unless the user turns on an explicit, off-by-default setting. 923 of the 991
+      attacks — injection, steganography and composition — are attacks on this
+      boundary. The other 68 are on the vault and the login-code store.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/molterra-security/corpus-scoreboard.svg"
+      alt="Grouped horizontal bars for five attack families and a total row, each showing attacks, blocked by shipped code, and blocked with hardening"
+      caption={
+        <>
+          <strong>Fig. 3.</strong> The corpus at the published revision. Every attack is
+          run twice — against the code customers are running, and against the hardening
+          written in response to it — and both verdicts are recorded. The hardened column
+          is evidence, not enforcement, until a product change promotes it.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The corpus is a Rust crate that links the product's own fence code by path and runs
+      991 authorized attacks against it in one command, on every change. Five families.
+      Injection: 612 attacks, eighteen attacker goals crossed with thirty-four evasions,
+      against the shipped control-language detector called directly. Steganography: 258
+      payloads hidden in text — zero-width characters, bidirectional overrides, variation
+      selectors, the Unicode tag block, combining marks, mathematical alphanumerics,
+      mixed-script look-alikes — against the shipped sanitizers and the source-label
+      path. Composition: 53 sentences that claim more than the records support or smuggle
+      an instruction through the grounding check. Vault: 54 attacks on ciphertext —
+      tampering, truncation, tag stripping, nonce manipulation, cross-row and cross-tenant
+      transplant, nonce reuse — against a byte-faithful mirror of the AES-256-GCM token
+      store. Credential: 14 attacks on the login-code hashing — offline recovery of codes
+      from a stolen database row, preimage ambiguity, comparison timing. Every attack has a stable identifier, the attacker's intent, the
+      payload rendered with every non-ASCII code point escaped as ⟨U+XXXX⟩ — because the
+      point of half of them is that you cannot see them — the exact value the target
+      function returned, and a severity.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Read the shipped column and it says one thing. The shipped detector is
+      built for the realistic threat — an instruction typed plainly into a record by
+      someone who compromised a colleague's SaaS account — and it stops every
+      plain-language attack in the corpus, in the excerpt path, the span path and the
+      composition path. It stops none of the obfuscated variants, because it matches
+      literally and does not normalize first. In the injection grid the pattern is stark:
+      for every one of the eighteen goals, the plain control and the four wrapper
+      controls — HTML comment, blockquote prefix, plausible surrounding prose,
+      alternating case — are blocked eighteen of eighteen, and every homoglyph, font,
+      encoding and splitting trick lands eighteen of eighteen. Cyrillic and Greek
+      look-alikes. Fullwidth forms, enclosed alphanumerics, mathematical bold, monospace
+      and script. Leetspeak. Letters separated by periods. ROT13. Base64. The instruction
+      reversed. All of it sails through unchanged. The three whitespace evasions —
+      non-breaking, doubled, ideographic — each land on exactly eight of the eighteen
+      goals and are blocked on the other ten, which is the fingerprint of a fragile
+      word-boundary heuristic rather than a principled defense. The corpus was built to
+      enumerate exactly these variants, which is why most of it lands.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Steganography is where it gets ugly. Sixteen single-character channels, each
+      appended eight times to a benign excerpt — zero width space, non-joiner, joiner,
+      word joiner, soft hyphen, byte-order mark, combining grapheme joiner, Arabic letter
+      mark, Mongolian vowel separator, left-to-right mark, right-to-left override,
+      invisible times, invisible separator, Hangul filler, variation selector-16, and a
+      Unicode tag letter — and the shipped sanitizer leaves every one of them present.
+      The tag block is the one that matters. U+E0000 through U+E007F mirrors ASCII, it is
+      neither a control character nor whitespace, and it survived the sanitizer for
+      exactly that reason: it is a complete invisible alphabet. Attack STG-0019 carries a
+      44-byte base64 credential blob out inside the sentence “Renewal is due Nov 14 and
+      Ada owns the thread.” — the decoded bytes even form a JSON token record — and shipped
+      code passes it through verbatim. Rated critical. Then 125 more attacks hide an
+      obfuscated instruction behind a line terminator the excerpt fence cannot see the end
+      of — U+2028, U+2029, vertical tab, form feed, next line — twenty-five evasions each.
+      The shipped sanitizer turns the separator into a space and keeps the smuggled second
+      line. And the source-label surface, which must return the fixed constant “workspace
+      record”, instead echoed attacker bytes — system, assistant, ignore-all-prior-rules —
+      straight into the prompt label.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      The hardening is one move applied everywhere: normalize before you match. The fold
+      runs in a fixed order — strip invisible code points, fold confusables to ASCII, map
+      every Unicode whitespace to a plain space, lowercase, collapse runs. The invisible
+      list is thirty explicit code points plus four ranges: the Combining Diacritical
+      Marks block, both variation-selector blocks, and the entire tag block. The
+      confusable fold is a hand-written 42-entry table — twenty-two Cyrillic, fifteen
+      Greek, one Armenian, two Roman numerals, two Cherokee — plus arithmetic folds for fullwidth, enclosed and all thirteen
+      mathematical alphanumeric blocks of fifty-two; there is no Unicode normalization
+      crate in the dependency tree, because I wanted to know exactly what it folds. The
+      detector then runs over several views of each line at once: the folded form, its
+      de-leeted form, its reversal, its ROT13, and every base64 run of sixteen or more
+      characters that decodes to valid text. Only if all of those miss and the line looks
+      deliberately separated does it fall to a squeezed path with every non-alphanumeric
+      removed. The de-leet rule has a war story: the first version ate “3rd” and “Q3”,
+      and that regression is now a unit test — a word only de-leets if its alphanumeric
+      core is at least four characters and entirely alphabetic afterward, so
+      “4551574n7:” becomes “assistant:” while “3rd of 12 on the 1st” is left alone. The
+      source label is closed the brutal way: reject any non-ASCII outright, then allowlist
+      thirty-eight providers, and everything else — a zero-width space inside “slack”, a
+      Cyrillic ѕ in front of it, “system” — collapses to the same trusted constant. Under
+      hardening, injection and steganography land zero of 870.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/molterra-security/vault-binding.svg"
+      alt="Two panels: before, a ciphertext transplanted from account A's row to account B's decrypts as valid; after, with associated data binding tenant, account and column, the same transplant fails on tag mismatch"
+      caption={
+        <>
+          <strong>Fig. 4.</strong> The vault finding. AES-256-GCM authenticates the
+          ciphertext; only associated data authenticates where it belongs. The stored
+          format does not change — associated data is authenticated, not stored — so the
+          fix needs a re-encryption pass, not a column migration.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The cryptography holds under every mutation the corpus can produce, and that is
+      where the most instructive finding came from. Forty vault attacks flip a single bit
+      across ciphertext bytes zero through thirty-nine; every one fails with an AEAD
+      error, as does a zeroed tag, a truncated tag, a substituted nonce, decryption under
+      a rotated key, and a 68-byte forged blob of exactly the right length. GCM's
+      integrity check catches all of it, by the tag itself, not by policy. And yet
+      copying a valid ciphertext into another account's row decrypted fine — returned the
+      live token — because the shipped call passed no associated data. The cipher
+      authenticated the message but not where it was stored. No key needed, no plaintext,
+      only a database write. That is a violation of binding, not confidentiality, and the
+      hardening binds tenant, account and column as associated data — each as a
+      big-endian length prefix followed by the bytes, in that order — so a transplanted
+      ciphertext fails on tag mismatch while the blob length is unchanged. One consequence
+      operators need to know: a restore from backup that moves a row between accounts now
+      fails to decrypt instead of silently working. Which is the point.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      One vault attack lands under both columns, and I left it that way on purpose.
+      VLT-0054 stages two encryptions under one key and one nonce and recovers the second
+      OAuth token in full, without the key, by XOR: the two ciphertexts, and the one
+      known plaintext. A repeated nonce under GCM is not a degradation, it is a two-time
+      pad, and the GHASH authentication key falls out with it. The random 96-bit nonce is
+      correct — the collision probability is about q² over 2⁹⁷ for q messages — but
+      negligible under a budget is the actual guarantee, and nothing enforces the budget.
+      NIST SP 800-38D caps a key at 2³² invocations under random nonces, and Molterra
+      never counts, caps or alerts on per-key message count. The primitive is modern, the
+      library is correct, and the guarantee still depends on an operational counter nobody
+      is keeping. Associated data does nothing about it. The fix is a counted budget with
+      rotation, or a deterministic nonce, or AES-GCM-SIV, which degrades to leaking only
+      the equality of repeated plaintexts. It is tracked with a date, filed critical, and
+      the corpus refuses to record it as closed.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      The credential family has the cleanest lesson in the whole record. The same
+      function — hex of SHA-256 over the raw value — is called once right and once wrong.
+      For refresh tokens with 244 bits of entropy it is fine. For a six-digit login code
+      it is a commitment anyone can open: the server correctly stops online guessing at
+      five attempts, but a stolen row is enough to walk the million-code space offline in
+      milliseconds, and the five-attempt ceiling never engages because no guess is ever
+      sent. The corpus ran it for real and recovered a live code. It also found that the
+      preimage encoding was ambiguous — email and code joined by a bare colon — so two
+      different address-and-code pairs produce one string and one digest. The hardening is
+      HMAC-SHA-256 under a key that lives outside the database, over a length-prefixed
+      email and the code, compared in constant time. The argument against just using a
+      slow hash is the one I would make to anyone: a slow hash makes the stolen row
+      expensive; a key makes it insufficient. The timing row in this family is filed low
+      and labelled a surrogate — a byte-serial model of the compare's contract, not a
+      wall-clock measurement of the shipped binary — because a unit test on a shared
+      runner cannot honestly produce a timing number, and the document forbids reading it
+      as evidence of an exploitable channel.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Composition is the fence between the model and the card a user sees, and it is the
+      family with the hardest open problem. The shipped fence catches a fabricated number, a
+      fabricated proper noun, a fabricated month and an adjacent month, a homoglyph-masked
+      name; it rejects with named reasons — uncited claim, uncited date, unmatched quote,
+      banned boilerplate, mood narration, model-control language. It also produced one
+      accidental defense the corpus flags as such: a period-separated injection is blocked
+      by shipped code only because it trips the sentence-count limit, not because it is
+      recognized, while the hardening blocks it for the right reason. But two rows land
+      under both columns and will keep landing. “the acme contract closes friday and the
+      owner already signed” — no capitalized token, no number, nothing for token-level
+      grounding to catch. And “The Lovelace Corp renewal is not due Nov 14”, about a fact
+      that says it is: every word is grounded and the sentence is false. Token-level
+      grounding cannot see a false proposition built from true tokens. Closing it needs
+      proposition-level verification, which is design work, not a patch, and the register
+      keeps both rows so nobody reads fifty-one of fifty-three blocked as the fence
+      verifying meaning. It cannot decide truth.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/molterra-security/adaptation-loop.svg"
+      alt="Four boxes in a cycle: attack lands, hardening written, promoted to product, shipped verdict flips; a return arrow notes that a regression fails CI"
+      caption={
+        <>
+          <strong>Fig. 5.</strong> The adaptation loop. An attack that lands is a finding,
+          the attack is its witness, and the attack never leaves the corpus — so a
+          regression fails CI on the day it happens, not in the next audit.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      An attack that lands on shipped code is a finding. The corpus produces 112 — six
+      critical, forty-seven high, fifty-seven medium, two low — and the arithmetic closes:
+      the witness counts across all 112 sum to exactly 759, the shipped-landed total, and
+      the three attacks that land under hardening map one to one onto the three open
+      findings. Status is a test result, not an analyst's judgement: a finding exists
+      because a row lands on shipped code and closes when that row's hardened column
+      blocks it. The register cannot be hand-edited. Seven of the nine remediation classes
+      carry CVSS 3.1 vectors stated as the assessor's estimates for a self-hosted
+      deployment — so a reviewer can disagree with a number rather than with an adjective
+      — and SLAs on the program's severity schedule, thirty days for critical, ninety for
+      high and medium, next quarter for low, with one exception the register states
+      outright: the open proposition-grounding class is design work with no date.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      The split between the two verdicts is the mechanism that keeps the record honest,
+      and it cuts against me. A fix counts as landed only when the shipped column flips to
+      blocked in production code. Until then the hardened column is a proposal with its
+      evidence attached, and at the published revision every one of the six fixes is
+      still exactly that — proposed, sitting executable beside the attack that motivated
+      it, with zero promoted. Promotion is its own reviewed change, with its own entries in the
+      contracts register and a measured false-positive cost on ordinary records. When a
+      fix ships it must appear as a line moving from proposed to shipped, not as an adjective
+      quietly upgraded.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      A suite that recorded whatever the code did would prove nothing, so the corpus
+      asserts itself. Verdicts are written before they are run; each attack states its
+      expected outcome in both columns and the test recomputes them, with injection and
+      steganography expectations coming from an explicit model of what the detector should
+      do rather than from its output. Drift fails in both directions — an attack that
+      starts landing is a regression, an attack that starts being blocked means the
+      register overstates a hole — and the panic message is a policy statement: do not
+      edit the row to match the output without deciding which one is wrong. Every attack
+      runs five times per mode and must agree with itself, including the vault family,
+      which generates fresh nonces; two full passes must produce byte-identical
+      evidence strings for every trace, which is why a rule of engagement forbids any
+      fresh nonce or wall-clock value from appearing in evidence. The hardened column must
+      dominate per row — nothing may be blocked shipped and land hardened — enforced three
+      ways, including a generated superset over 136 verb-object pairs. And the hardening
+      must leave real records alone: a dedicated test feeds it prose a naive fence would
+      flag — “The system prompt for our support bot needs a rewrite — Ada owns it.”
+      “Please disregard my earlier estimate, the real figure is 12.” “assistant: I'll send
+      the deck” — and requires the hardened verdict to be identical to shipped. The
+      false-positive cost is measured, not asserted. One cost is named and not yet
+      measured: the zero-width joiner is on the strip list and is load-bearing in Indic
+      conjuncts and emoji sequences, acceptable for an excerpt, unproven for a title until
+      the eval fixtures carry non-Latin content.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      The penetration-test package is the part a security team needs to evaluate the
+      trust center's commitment. Scope is loopback by construction: the harness accepts a
+      target only if it matches an anchored regular expression whose host is a closed
+      alternation of 127.0.0.1, localhost and ::1, so user-info forms, look-alike hostnames
+      and alternate IP spellings are refused with exit 2 before anything runs, and
+      localhost is rewritten to the literal address so no tool is ever handed a name to
+      resolve. Production, staging, customer tenants and third-party providers are out of
+      scope by construction. Rules of engagement: synthetic identities and credentials
+      only, no destructive or volumetric testing, evidence retained locally and never
+      committed. Coverage is mapped to OWASP WSTG, the OWASP LLM Top 10 and PTES, with a
+      dedicated column for what is not covered — three of eight areas are stamped not
+      exercised: authentication and session, access control, and network and
+      infrastructure — and even the exercised injection row concedes it does not cover
+      live model behavior once an injection lands. The toolchain —
+      Burp, ZAP, Nikto, SQLmap, Nmap, Gobuster, Hydra, Metasploit, WFuzz, WhatWeb — is
+      mapped to what each tests, and none of them has been run against a Molterra target
+      from the repository, and it says so, because fabricated scanner output is worse than
+      none. A tool that was not run is recorded as not run. The continuous program does
+      not replace the annual external test; when one is performed, its findings join the
+      same register with the tester and date named.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Three statements are made carefully, because they are the ones a trust center is
+      most tempted to inflate. The cipher and key size — AES-256 — are what NSA's CNSA 2.0
+      suite specifies for national-security systems, and every primitive is measured
+      against NIST guidance. Molterra is not FIPS 140-3 validated, has not been evaluated
+      for CNSA 2.0 by anyone but itself, and is not post-quantum. The review's CNSA row
+      reads “does not meet — and we do not claim to”: SHA-256 where the suite calls for
+      SHA-384, HS256 sessions, no ML-KEM anywhere, and it lists exactly what a stronger
+      posture would require. It maps each topic of a graduate cryptography curriculum to
+      where it bears on the product, and the bottom half of that map is deliberately
+      empty — public-key encryption, signatures, zero knowledge, secret sharing, secure
+      computation, fully homomorphic encryption, all marked not implemented — because a
+      trust center that claimed zero-knowledge proofs because the words are impressive
+      would be lying. Two more things the record flags from code reading alone, with no
+      attack row yet: MFA recovery codes are five random bytes under the same bare hash,
+      which is a feasible 2⁴⁰ offline search; and the Argon2 parameters are the library
+      default rather than a pinned constant, so a dependency bump could change work
+      factors with nothing failing.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      The vault and credential targets are byte-faithful mirrors of the backend modules,
+      pinned to the shipped wire format by a test, because the backend ships only as a
+      binary crate — and a mirror is still a claim, so one remediation class exists solely
+      to give the backend a library target and delete them. Everything published is
+      generated, and a test fails if the committed copy is stale. That is the whole
+      posture: every number on the scoreboard is the record of a run, not a claim about
+      one.
+    </BodyParagraph>
+
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        maxWidth: 640,
+        marginTop: 48,
+        color: COLORS.muted,
+      }}
+    >
+      cargo run --release --bin redteam · 991 attacks · 232 blocked shipped · 988 blocked
+      hardened · 112 findings · 3 open by design. github.com/akmathur1/molterra-security
     </p>
   </div>
 );

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 190" width="300" height="190"
+     role="img" aria-label="Five horizontal bars, one per attack family, each family's total drawn as a light bar with the count blocked by the hardened system drawn as a solid bar over it from the left; injection is longest, steganography under half of it, then composition, vault and credential as short bars; below them the number 991 attacks">
+  <rect width="300" height="190" fill="#EDECE8"/>
+
+  <!-- common axis: 612 attacks = 264 units (x 18 to 282); scale 0.43137 -->
+  <!-- injection: 612 total, 612 blocked -->
+  <rect x="18" y="20" width="264" height="12" fill="rgba(26,26,26,0.07)"/>
+  <rect x="18" y="20" width="264" height="12" fill="#1a1a1a"/>
+
+  <!-- steganography: 258 total, 258 blocked -->
+  <rect x="18" y="38" width="111.29" height="12" fill="rgba(26,26,26,0.07)"/>
+  <rect x="18" y="38" width="111.29" height="12" fill="#1a1a1a"/>
+
+  <!-- composition: 53 total, 51 blocked -->
+  <rect x="18" y="56" width="22.86" height="12" fill="rgba(26,26,26,0.07)"/>
+  <rect x="18" y="56" width="22.00" height="12" fill="#1a1a1a"/>
+
+  <!-- vault: 54 total, 53 blocked -->
+  <rect x="18" y="74" width="23.29" height="12" fill="rgba(26,26,26,0.07)"/>
+  <rect x="18" y="74" width="22.86" height="12" fill="#1a1a1a"/>
+
+  <!-- credential: 14 total, 14 blocked -->
+  <rect x="18" y="92" width="6.04" height="12" fill="rgba(26,26,26,0.07)"/>
+  <rect x="18" y="92" width="6.04" height="12" fill="#1a1a1a"/>
+
+  <!-- corpus size -->
+  <text x="18" y="160" fill="#1a1a1a"><tspan font-family="Newsreader, Georgia, serif" font-weight="400" font-size="54">991</tspan><tspan dx="8" font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace" font-weight="400" font-size="18" fill="#696969">attacks</tspan></text>
+</svg>

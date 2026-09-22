@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 464" width="640" height="464"
+     role="img" aria-label="Defense in depth: seven stacked security layers numbered 2.1 to 2.7, in the record's order — in transit, at rest, tenant isolation, identity, integrity, model boundary, and process — each listing its key controls, with an arrow down the right side marking the record's order, §2.1 to §2.7">
+  <rect width="640" height="464" fill="#EDECE8"/>
+  <g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+
+    <text x="40" y="28" font-size="15" font-weight="700" fill="#1a1a1a">Defense in depth</text>
+
+    <!-- alternating light fills for rhythm -->
+    <g fill="rgba(26,26,26,0.07)">
+      <rect x="40" y="46"  width="552" height="56"/>
+      <rect x="40" y="158" width="552" height="56"/>
+      <rect x="40" y="270" width="552" height="56"/>
+      <rect x="40" y="382" width="552" height="56"/>
+    </g>
+
+    <!-- band outlines: one outer box and six dividers, so shared edges stay a single hairline -->
+    <g fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1">
+      <rect x="40" y="46" width="552" height="392"/>
+      <path d="M 40 102 L 592 102 M 40 158 L 592 158 M 40 214 L 592 214 M 40 270 L 592 270 M 40 326 L 592 326 M 40 382 L 592 382"/>
+    </g>
+
+    <!-- section numbers, far left -->
+    <g font-size="11" fill="#696969" text-anchor="end" dominant-baseline="central">
+      <text x="32" y="74">2.1</text>
+      <text x="32" y="130">2.2</text>
+      <text x="32" y="186">2.3</text>
+      <text x="32" y="242">2.4</text>
+      <text x="32" y="298">2.5</text>
+      <text x="32" y="354">2.6</text>
+      <text x="32" y="410">2.7</text>
+    </g>
+
+    <!-- layer names -->
+    <g font-size="13" font-weight="700" fill="#1a1a1a" dominant-baseline="central">
+      <text x="52" y="74">In transit</text>
+      <text x="52" y="130">At rest</text>
+      <text x="52" y="186">Tenant isolation</text>
+      <text x="52" y="242">Identity</text>
+      <text x="52" y="298">Integrity</text>
+      <text x="52" y="354">Model boundary</text>
+      <text x="52" y="410">Process</text>
+    </g>
+
+    <!-- key terms, two lines per band -->
+    <g font-size="12" fill="#696969" dominant-baseline="central">
+      <text x="192" y="66">TLS · fixed CORS allow-list ·</text>
+      <text x="192" y="82">HMAC-SHA-256 webhooks, constant-time compare</text>
+
+      <text x="192" y="122">AES-256-GCM, 96-bit nonces, 128-bit tags ·</text>
+      <text x="192" y="138">per-tenant keys via HKDF-SHA-256</text>
+
+      <text x="192" y="178">PostgreSQL row-level security ·</text>
+      <text x="192" y="194">scoped connection · enforced by the database</text>
+
+      <text x="192" y="234">Argon2id · TOTP (RFC 6238) · 60-min access tokens ·</text>
+      <text x="192" y="250">refresh tokens stored as SHA-256</text>
+
+      <text x="192" y="290">per-tenant hash chain: content, provenance,</text>
+      <text x="192" y="306">previous root · trigger-protected audit log</text>
+
+      <text x="192" y="346">sanitize · control-language detection ·</text>
+      <text x="192" y="362">constrained source labels · grounding on output</text>
+
+      <text x="192" y="402">protected main · pinned Actions ·</text>
+      <text x="192" y="418">append-only migrations · contracts register</text>
+    </g>
+
+    <!-- reading order: an arrow spanning all seven bands, §2.1 to §2.7 -->
+    <path d="M 606 48 L 606 434" fill="none" stroke="#696969" stroke-width="1.5"/>
+    <path d="M 601 429 L 606 434 L 611 429" fill="none" stroke="#696969" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="622" y="242" font-size="11" fill="#696969" text-anchor="middle" dominant-baseline="central"
+          transform="rotate(90 622 242)">§2.1 – §2.7, in order</text>
+  </g>
+</svg>
