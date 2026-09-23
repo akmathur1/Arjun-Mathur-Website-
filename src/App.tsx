@@ -4087,12 +4087,12 @@ const OvarianMTLProjectBody: React.FC = () => (
 
     <InlineFigure
       src="/projects/ovarian-mtl/cohort.svg"
-      alt="A stack of 89 PDX models against five agent columns, forming a grid in which each cell carries two binary labels, response and progression"
+      alt="A matrix whose rows are 89 PDX models and whose columns are five agents; every cell holds a pair of squares, response and progression, filled for yes and hollow for no. Filled squares are rare and the two squares in a cell usually agree."
       caption={
         <>
-          <strong>Fig. 1.</strong> The shape of the problem. Eighty-nine PDX models, five
-          second-line agents, and two positively correlated binary labels per cell, under
-          severe class imbalance.
+          <strong>Fig. 1.</strong> The shape of the problem: 89 models × 5 agents × 2 binary
+          labels, or 890 supervision signals, against roughly 20,000 features. Cell values
+          are illustrative.
         </>
       }
     />
