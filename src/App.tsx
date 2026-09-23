@@ -437,22 +437,22 @@ const WatchArbitrageThumbnail: React.FC = () => (
 
 const ENTRIES: Entry[] = [
   {
-    slug: 'molterra-security',
-    title: 'Molterra Security: 991 Authorized Attacks Against Our Own Code',
-    date: 'September 2026 — present',
-    description:
-      "Molterra listens to meetings, reads the records a team connects, and writes from them — which puts what people said, the OAuth tokens to their other tools, and the identities that prove who is asking in our care. So I built the security program as executable evidence rather than a description: a Rust crate that links the product's own fence code and runs 991 authorized attacks against it on every change — prompt injection across 18 goals × 34 evasions, Unicode steganography down to the tag block, AES-256-GCM vault tampering, offline credential recovery — each with two recorded verdicts, a 112-finding register, a penetration-test package, and a cryptography review measured against NIST and CNSA 2.0. Shipped code stops 232; the hardening stops 988; the three it cannot are open by design, with the reason written down.",
-    tier: 'featured',
-    thumbnail: <MolterraSecurityThumbnail />,
-  },
-  {
     slug: 'fus-idp-hamiltonians',
     title: 'Coarse-Grained Hamiltonians for FUS-Derived IDPs',
     date: 'August 2025 — present',
     description:
       'Sequence-resolved coarse-grained Hamiltonians for FUS-derived intrinsically disordered protein variants. MPIPI parameterization, Langevin dynamics, and density–temperature phase diagrams probing sequence-dependent condensate organization. With Dr. Trevor GrandPré.',
-    tier: 'boxed',
+    tier: 'featured',
     thumbnail: <FUSThumbnail />,
+  },
+  {
+    slug: 'molterra-security',
+    title: 'Molterra Security: 991 Authorized Attacks Against Our Own Code',
+    date: 'September 2026 — present',
+    description:
+      "Molterra listens to meetings, reads the records a team connects, and writes from them — which puts what people said, the OAuth tokens to their other tools, and the identities that prove who is asking in our care. So I built the security program as executable evidence rather than a description: a Rust crate that links the product's own fence code and runs 991 authorized attacks against it on every change — prompt injection across 18 goals × 34 evasions, Unicode steganography down to the tag block, AES-256-GCM vault tampering, offline credential recovery — each with two recorded verdicts, a 112-finding register, a penetration-test package, and a cryptography review measured against NIST and CNSA 2.0. Shipped code stops 232; the hardening stops 988; the three it cannot are open by design, with the reason written down.",
+    tier: 'boxed',
+    thumbnail: <MolterraSecurityThumbnail />,
   },
   {
     slug: 'watch-arbitrage',
