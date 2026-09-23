@@ -420,6 +420,21 @@ const KikuThumbnail: React.FC = () => (
   />
 );
 
+const WatchArbitrageThumbnail: React.FC = () => (
+  <img
+    src="/projects/watch-arbitrage/thumbnail.svg"
+    alt="A histogram of executable bids and, far to its right, a tall line marking the asking price"
+    style={{
+      display: 'block',
+      width: 150,
+      maxWidth: '100%',
+      height: 'auto',
+      border: `1px solid ${COLORS.text}`,
+      background: COLORS.bg,
+    }}
+  />
+);
+
 const ENTRIES: Entry[] = [
   {
     slug: 'molterra-security',
@@ -438,6 +453,15 @@ const ENTRIES: Entry[] = [
       'Sequence-resolved coarse-grained Hamiltonians for FUS-derived intrinsically disordered protein variants. MPIPI parameterization, Langevin dynamics, and density–temperature phase diagrams probing sequence-dependent condensate organization. With Dr. Trevor GrandPré.',
     tier: 'boxed',
     thumbnail: <FUSThumbnail />,
+  },
+  {
+    slug: 'watch-arbitrage',
+    title: 'Reference-Level Arbitrage in Specialist Watch Markets',
+    date: 'Ongoing',
+    description:
+      'A model for pricing individual watches well enough to decide whether to buy one for resale. Knowing a watch is a Vacheron or a Lange says almost nothing about what a specific buyer will bid: the reference, movement generation, dial, case condition and service history decide which comparable sales are usable at all. Builds a per-buyer bid distribution with partial pooling across related references, prices the value of one more inspection or quote before committing capital, models the exit as a survival problem rather than a price, and allocates across watch-to-buyer routes under funding and buyer-capacity constraints. I have used arbitrage to acquire a Vacheron Historiques and a Rolex Daytona; the European sourcing algorithm is specified here and not yet executed.',
+    tier: 'boxed',
+    thumbnail: <WatchArbitrageThumbnail />,
   },
   {
     slug: 'ovarian-mtl',
@@ -2220,6 +2244,8 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             <MolterraSecurityProjectBody />
           ) : slug === 'fus-idp-hamiltonians' ? (
             <FUSProjectBody />
+          ) : slug === 'watch-arbitrage' ? (
+            <WatchArbitrageProjectBody />
           ) : slug === 'ovarian-mtl' ? (
             <OvarianMTLProjectBody />
           ) : slug === 'ossia' ? (
@@ -2264,6 +2290,44 @@ const BodyParagraph: React.FC<{ children: React.ReactNode; top?: number }> = ({
   >
     {children}
   </p>
+);
+
+// Display equations. The page they serve is mathematical enough that the equations
+// need to sit apart from the prose, but not so many that a typesetting dependency
+// earns its place — mono with sub/sup carries them.
+const DisplayMath: React.FC<{ children: React.ReactNode; note?: React.ReactNode }> = ({
+  children,
+  note,
+}) => (
+  <div style={{ maxWidth: 640, marginTop: 26 }}>
+    <div
+      style={{
+        fontFamily: MONO,
+        fontSize: 14,
+        lineHeight: 1.9,
+        color: COLORS.text,
+        padding: '14px 18px',
+        borderLeft: `2px solid ${COLORS.text}`,
+        background: 'rgba(26,26,26,0.05)',
+        overflowX: 'auto',
+      }}
+    >
+      {children}
+    </div>
+    {note && (
+      <div
+        style={{
+          fontFamily: MONO,
+          fontSize: 12,
+          lineHeight: 1.6,
+          color: COLORS.muted,
+          marginTop: 8,
+        }}
+      >
+        {note}
+      </div>
+    )}
+  </div>
 );
 
 const InlineFigure: React.FC<{ src: string; alt: string; caption: React.ReactNode }> = ({
@@ -3559,6 +3623,422 @@ const FUSProjectBody: React.FC = () => (
     >
       Figures, simulation studies, and full technical write-up currently in
       development with Dr. Trevor GrandPré.
+    </p>
+  </div>
+);
+
+const WatchArbitrageProjectBody: React.FC = () => (
+  <div style={{ marginTop: 32 }}>
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        color: COLORS.muted,
+        marginTop: 0,
+        marginBottom: 24,
+        letterSpacing: 0.3,
+      }}
+    >
+      Reference-level arbitrage in specialist watch markets · a proposed model, with two
+      executed acquisitions and no executed European strategy
+    </p>
+
+    <BodyParagraph top={0}>
+      I am interested in watches that are difficult to price well. Knowing that something
+      is a Vacheron or a Lange tells you surprisingly little about what a particular buyer
+      will pay for it. The reference, the movement generation, the dial, the case
+      condition and the service history decide which comparisons are useful — and a watch
+      can look inexpensive against online listings while still being expensive against the
+      bids actually available for it. That gap is the object of the research.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/watch-arbitrage/thumbnail.svg"
+      alt="A histogram of executable bids on the left and, far to its right, a single tall line marking the asking price, with the gap between them arrowed"
+      caption={
+        <>
+          <strong>Fig. 1.</strong> The question the whole project asks: how much of an
+          apparent discount survives contact with a buyer.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      Vacheron's Historiques chronographs make the problem concrete. The 47101 and 47111
+      belong to the Lemania-derived 1140/1141 family, and the later 47111 introduced a
+      screwed caseback along with movement changes. The steel Cornes de vache 1955,
+      reference 5000H/000A-B582, is a different observation again — a 38.5 mm case and a
+      manually wound calibre 1142. A database that drops all three into one bucket because
+      they are Vacheron chronographs has thrown away information the buyer can see before
+      the pricing model has started.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Lange makes the same point sharply. The original Datograph 403.035 is a 39 mm
+      platinum watch with calibre L951.1 and no power-reserve indication; the Up/Down
+      introduced in 2012 uses L951.6, a 60-hour reserve and a 41 mm case. Even within the
+      original generation, early METER dial printing is a recorded distinction — and
+      recording it is not the same as knowing what it is worth. Any associated premium
+      still has to be estimated. The 1815 Chronograph needs its own generation labels for
+      the same reason, since Lange changed the movement in 2010. With Journe, movement era
+      belongs inside the identity of the watch: the manufacture dates the brass-to-gold
+      transition to 2004, so the year alone is a poor substitute for inspecting the actual
+      movement.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      These are research groups, not a prestige ranking and not a list of watches I claim
+      to have traded. I would also avoid inferring liquidity from a brand name. Several
+      credible bids on one reference are stronger evidence than a reputation for
+      collectability.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      So the unit of observation is a physical watch at a particular time, and its identity
+      is a vector of attributes rather than a label:
+    </BodyParagraph>
+
+    <DisplayMath
+      note={
+        <>
+          r reference · g generation · m movement · d dial · c case condition · o
+          originality · s service evidence · p provenance · a accessories
+        </>
+      }
+    >
+      z<sub>i</sub> = (r<sub>i</sub>, g<sub>i</sub>, m<sub>i</sub>, d<sub>i</sub>,
+      c<sub>i</sub>, o<sub>i</sub>, s<sub>i</sub>, p<sub>i</sub>, a<sub>i</sub>)
+    </DisplayMath>
+
+    <BodyParagraph>
+      Each attribute needs a value <em>and</em> an evidence status, which is the part most
+      systems get wrong. An unverified original dial cannot be stored as an original dial.
+      A service invoice can establish that work was performed without establishing that
+      every component is period-correct. Unknown service history widens the range of
+      outcomes even where it does not support a fixed dollar discount. And duplicate
+      detection has to come before price estimation: five dealers advertising one consigned
+      watch are not five independent observations, and an uncertain match stays uncertain.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/watch-arbitrage/identity.svg"
+      alt="A nine-row table of watch attributes, each carrying an evidence status of verified, claimed, or unknown"
+      caption={
+        <>
+          <strong>Fig. 2.</strong> The same watch, stored honestly. What separates a usable
+          record from a listing is the right-hand column.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      What I want to estimate is not a price but a distribution of bids for the actual
+      watch, conditional on the buyer and the moment — where the conditioning set contains
+      only what was known at the time:
+    </BodyParagraph>
+
+    <DisplayMath>
+      p( B<sub>i,d,t</sub> | z<sub>i</sub>, 𝒟<sub>t</sub> )
+    </DisplayMath>
+
+    <BodyParagraph>
+      An advertised ask, an auction result and a dealer's purchase bid answer three
+      different questions, so they belong in three separate tables. Auction records can
+      establish reference details and provide transaction evidence, but their price basis,
+      fees, timing and often unusually strong provenance have to be retained with them.
+      They cannot simply be poured into a wholesale-bid training set. A starting
+      specification for the bids themselves:
+    </BodyParagraph>
+
+    <DisplayMath
+      note={
+        <>
+          α<sub>r</sub> the reference's baseline · β′z the individual example · u<sub>d</sub>{' '}
+          the buyer · v<sub>d,r</sub> that buyer on that reference · m<sub>s,t</sub> the
+          segment moving
+        </>
+      }
+    >
+      log B<sub>i,d,t</sub> = α<sub>r</sub> + β<sup>⊤</sup>z<sub>i</sub> + u<sub>d</sub> +
+      v<sub>d,r</sub> + m<sub>s,t</sub> + ε<sub>i,d,t</sub>
+    </DisplayMath>
+
+    <BodyParagraph>
+      For a thin reference I would partially pool its intercept with a defensible family,
+      α<sub>r</sub> ~ 𝒩(μ<sub>f(r)</sub>, τ<sup>2</sup><sub>f(r)</sub>), and learn how
+      strong that pooling should be. Too little gives unstable estimates from a handful of
+      trades; too much erases exactly the reference distinctions that make the project
+      worth doing. A Student-<em>t</em> residual is one candidate for limiting the
+      influence of isolated extremes, with its tail parameter estimated rather than chosen
+      to flatter the fit.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/watch-arbitrage/bid-model.svg"
+      alt="The bid equation decomposed into labelled terms: reference baseline, this example, buyer, buyer by reference, segment over time, and noise"
+      caption={
+        <>
+          <strong>Fig. 3.</strong> Each term answers a different question. Separating them
+          is what lets a thin reference borrow strength without being flattened into its
+          neighbours.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      Dealer effects are the easiest thing here to overinterpret. If one dealer only ever
+      sees exceptional examples, a high estimated dealer effect may be missing condition
+      information wearing a disguise. Telling buyer preference apart from selection needs
+      overlapping watches, repeated quotes, or carefully matched examples. The output I
+      want is a predictive range rather than a point — a low, median and high bid — always
+      reported with the number of independent watches supporting it and how much of it came
+      from comparable rather than identical references. Three old observations should not
+      produce the same confidence as repeated recent bids on the exact configuration. This
+      is a proposed specification: without a suitable bid dataset, its parameters are
+      unknown.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      An unusual asking price is a reason to investigate, not to buy. The comparison that
+      matters is the distribution of net proceeds after every cost of the route:
+    </BodyParagraph>
+
+    <DisplayMath
+      note={
+        <>
+          A gross purchase · R refund, converted when received · f, F exit fees · C
+          acquisition, inspection, delivery and import · H financing or a disclosed capital
+          charge
+        </>
+      }
+    >
+      Π<sub>i,d</sub> = B<sub>i,d</sub>(1 − f<sub>d</sub>) − F<sub>d</sub> +
+      x<sub>r</sub>R<sub>i</sub> − x<sub>p</sub>A<sub>i</sub> − C<sub>i</sub> −
+      H<sub>i</sub>
+    </DisplayMath>
+
+    <BodyParagraph>
+      Every uncertain component stays uncertain until evidence resolves it. A predicted bid
+      is not a committed bid; an expected refund is not cash received. For a research trade
+      I would require an expected profit above a threshold, a loss probability inside a
+      tolerance, and a bounded conditional value at risk in the specified tail — and those
+      three numbers are chosen capital constraints, not discoveries. The model does not get
+      to tell me my risk tolerance. The joint distribution matters too: a weak resale market
+      can cut bids and stretch the holding period at the same time, so estimating each cost
+      independently and adding comfortable averages understates the exposure.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/watch-arbitrage/decision.svg"
+      alt="A decision flow from candidate watch to estimating net proceeds, branching into buy, request information, or pass, with an information request looping back"
+      caption={
+        <>
+          <strong>Fig. 4.</strong> Three outcomes, not two. "Request information" is a real
+          answer, and the middle branch is where most of the value is.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      That middle branch deserves its own arithmetic. In this market the next useful action
+      is often a movement photograph, an inspection, or a direct quote from a specialist,
+      and the algorithm should be able to choose it. The value of an inquiry is the expected
+      improvement in the decision it enables, net of what it costs:
+    </BodyParagraph>
+
+    <DisplayMath
+      note={
+        <>
+          the zero inside each maximum is the option to pass · the inquiry cost includes
+          money and the economic effect of delay · under risk constraints, each maximum
+          ranges only over admissible choices
+        </>
+      }
+    >
+      VOI = 𝔼<sub>Y</sub>[ max(0, max<sub>d</sub> 𝔼[Π<sub>i,d</sub> | 𝒟, Y]) ] − max(0,
+      max<sub>d</sub> 𝔼[Π<sub>i,d</sub> | 𝒟]) − c<sub>inquiry</sub>
+    </DisplayMath>
+
+    <BodyParagraph>
+      This is what makes uncertainty actionable rather than decorative. If the spread turns
+      on whether a dial is original, better evidence can change both the value and the set
+      of buyers willing to bid at all. A model that converts that uncertainty straight into
+      a confident point estimate is solving the wrong problem. Early on I would run this as
+      a recorded decision framework rather than a fitted optimization — I would not put a
+      number on an inquiry without a defensible distribution for its outcomes.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Time to sale belongs beside the bid, because an exit that takes a year is a different
+      trade from the same exit in a month. I would model the hazard of sale as a function of
+      the watch's attributes, the offered price relative to a benchmark, and the channel —
+      treating unsold watches as censored rather than failed, and listings withdrawn for
+      unknown reasons as unresolved rather than as sales. Sale to a dealer, sale to a
+      collector, withdrawal and relisting are different outcomes and, with enough data,
+      competing ones. A finite-horizon estimate has to carry the unsold state explicitly:
+    </BodyParagraph>
+
+    <DisplayMath
+      note={
+        <>
+          the liquidation assumption must be tied to a route that actually exists — it
+          cannot be the same optimistic ask the watch already failed to achieve
+        </>
+      }
+    >
+      𝔼[Π<sub>i</sub>] = p<sub>h</sub> 𝔼[Π<sup>sold</sup> | T ≤ h] + (1 − p<sub>h</sub>)
+      𝔼[Π<sup>liquidated</sup> | T &gt; h]
+    </DisplayMath>
+
+    <BodyParagraph>
+      A small worked example shows why this is worth the trouble. Take a watch costing
+      $40,000 before holding costs, and two exits: a committed dealer bid netting $42,000
+      against $100 of holding cost, or waiting for a collector at $44,500 against $800 —
+      with a 30% chance the sale fails and the watch liquidates at $38,500. Both routes
+      return an expected $1,900. They are not the same trade. Waiting beats the dealer only
+      if the collector-sale probability exceeds 0.70, and it pays for that upside with a
+      possible loss and a longer capital commitment. A committed bid also has to be checked
+      against the clock: a quote that expires before the watch can arrive does not close the
+      trade unless the buyer agrees to hold it.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/watch-arbitrage/exit.svg"
+      alt="A decision tree comparing a committed dealer exit against waiting for a collector, with the two branches reaching the same expected profit"
+      caption={
+        <>
+          <strong>Fig. 5.</strong> Equal expected profit, unequal risk. Illustrative
+          figures, not quotes for any particular watch.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The European extension adds a second set of costs to the same reference-level problem,
+      and I have not executed it. For an ordinary VAT-inclusive invoice the embedded tax is
+      A·v/(1+v) — but ordinary VAT, a secondhand margin scheme, a private sale and a
+      documented net export invoice cannot share one assumed refund percentage. The model
+      has to use the actual invoice and the actual route. I would calculate the effective
+      purchase cost while funding the gross cash requirement, because the refund may arrive
+      long after payment, and I would report real borrowing expense separately from imputed
+      opportunity cost. Import costs need a transaction-specific classification against a
+      dated rule set; seller location does not establish country of origin. A trade whose
+      material import cost is unresolved gets rejected rather than papered over with a
+      generic percentage.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      For a first screen, though, the useful form is the one that inverts into an execution
+      limit — the most I can pay, and the exchange rate at which the trade stops clearing
+      its hurdle:
+    </BodyParagraph>
+
+    <DisplayMath
+      note={
+        <>
+          E effective euro cost · x dollars per euro · F other dollar costs · M the required
+          margin · where duty varies with purchase price, solve the full cost function
+          instead
+        </>
+      }
+    >
+      E<sub>max</sub> = [ B(1 − f) − F − M ] / x   ·   x<sub>max</sub> = [ B(1 − f) − F − M
+      ] / E
+    </DisplayMath>
+
+    <BodyParagraph>
+      I would also keep payment rewards out of the initial screen entirely. The cash spread
+      should survive without a generous valuation of points.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      With several candidates competing at once, the object being chosen is not a watch but
+      a watch-to-buyer route. At most one buyer per watch, so the same piece is not bought
+      twice because it looks attractive down two paths; at most a supported number of
+      watches per buyer, because a dealer's willingness to take one example does not extend
+      to ten. Funding has to hold on every relevant day rather than on average, and shared
+      shipping or travel is charged once to the route rather than to each trade that uses
+      it. Maximizing expected profit against a conditional-value-at-risk penalty over joint
+      scenarios keeps the shared exposure visible: several bids can depend on one buyer,
+      several purchases on one refund route, and a segment repricing can move a group of
+      references together. Separate watch boxes do not imply independent risks.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/watch-arbitrage/allocation.svg"
+      alt="A bipartite graph of four watches and three buyers with candidate and selected routes, under per-watch and per-buyer capacity constraints"
+      caption={
+        <>
+          <strong>Fig. 6.</strong> Allocation over routes, under funding and buyer capacity.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      None of this needs a sophisticated price model to start paying off. The first
+      implementation is a ledger: one record per physical watch with its evidence; separate
+      immutable records for asks, bids, inspections, auction results and settlements; dated
+      cash flows with landed cost and funding requirements; buyer quotes with their
+      conditions, capacity and expiry; and a frozen decision record — buy, request
+      information, or pass — with the reason and the inputs as they stood. Then outcomes:
+      actual settlement, actual costs, unsold inventory, and forecast error. The
+      hierarchical bid model comes after that ledger is reliable, the time-to-sale model
+      after the bid model, and the allocation model only once enough candidates compete for
+      capital at the same time. The system has to retain rejected candidates too — otherwise
+      it cannot tell a useful filter from a story told around a few good trades.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      The benchmark to beat is exact-reference matching against actual buyer bids with a
+      complete cost ledger, and anything more complicated has to improve decisions on data
+      it has not seen. Training and evaluation move forward in time; repeated listings of
+      one physical watch stay together; a later auction result or revised condition report
+      cannot improve the information supposedly available at purchase. I would track
+      interval coverage, bid error, failed-exit losses, holding duration and the gap between
+      forecast and realized cost — broken out by reference and by buyer, because a good
+      aggregate can hide a model that reliably overvalues one configuration. Profit per
+      dollar-day is a fair capital-duration measure, but it goes next to dollar profit, open
+      inventory, sample size and the largest single loss. A quick isolated sale does not
+      establish a repeatable annual return. And I would specifically test whether the
+      model's most attractive-looking opportunities are its largest errors, since searching
+      many references and taking the maximum predicted spread is an efficient way to select
+      optimistic noise.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      What is actually executed: I have used arbitrage to acquire a Vacheron Constantin
+      Historiques and a Rolex Daytona. Those two belong in the account because they connect
+      the work to a real outcome, and the case studies should eventually reconstruct the
+      purchase date, exact reference, amount paid, additional costs and the actual source of
+      the advantage. Those details are not in this draft, and I am not asserting a purchase
+      price, a realized return, a dealer relationship, or a trade in a Lange, a Patek or a
+      Journe. Those references are the research universe, not my transaction history. The
+      European algorithm remains unexecuted, and the mathematics above describes a proposed
+      model with no fitted parameters and no validated backtest behind it. The goal is
+      narrower and more useful than a return figure: to make the next decision explainable
+      at the level of the reference, the buyer and the cash flows — what I think the watch
+      can realize, why I think it, and what I stand to lose if I am wrong.
+    </BodyParagraph>
+
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 12,
+        lineHeight: 1.7,
+        maxWidth: 640,
+        marginTop: 48,
+        color: COLORS.muted,
+      }}
+    >
+      Reference notes, which ground the technical distinctions above and establish no prices:
+      Phillips on Vacheron 47101/47111 and on the Datograph 403.035; Vacheron Constantin on
+      the Cornes de vache 5000H/000A-B582; A. Lange &amp; Söhne on the Datograph Up/Down and
+      the 1815 Chronograph; Phillips on Patek 5070 and 5170; F.P. Journe's Journal 4 for the
+      2004 brass-to-gold transition and the Octa Calendrier Patrimoine record; the European
+      Commission on VAT refunds and VAT special schemes. Catalogue assertions about a
+      particular example still have to be checked against that example's own documents and
+      condition evidence.
     </p>
   </div>
 );

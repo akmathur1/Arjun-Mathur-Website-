@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 190" width="300" height="190" role="img" aria-label="A histogram of executable bids clustered in the left of the frame, and far to its right a single tall line marking the ask, with a double headed arrow spanning the empty gap between the highest bid and the ask">
+<rect width="300" height="190" fill="#EDECE8"/>
+<g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+<rect x="24" y="143" width="12" height="12" fill="rgba(26,26,26,0.28)"/>
+<rect x="41" y="129" width="12" height="26" fill="rgba(26,26,26,0.28)"/>
+<rect x="58" y="109" width="12" height="46" fill="rgba(26,26,26,0.28)"/>
+<rect x="75" y="83" width="12" height="72" fill="rgba(26,26,26,0.28)"/>
+<rect x="92" y="91" width="12" height="64" fill="rgba(26,26,26,0.28)"/>
+<rect x="109" y="105" width="12" height="50" fill="rgba(26,26,26,0.28)"/>
+<rect x="126" y="121" width="12" height="34" fill="rgba(26,26,26,0.28)"/>
+<rect x="143" y="135" width="12" height="20" fill="rgba(26,26,26,0.28)"/>
+<rect x="160" y="144" width="12" height="11" fill="rgba(26,26,26,0.28)"/>
+<path d="M 178 118 L 252 118" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+<path d="M 185 112 L 178 118 L 185 124" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 245 112 L 252 118 L 245 124" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 258 155 L 258 62" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+<path d="M 18 155 L 285 155" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+<text x="26" y="74" font-size="18" fill="#696969">bids</text>
+<text x="284" y="54" font-size="18" fill="#1a1a1a" text-anchor="end">ask</text>
+</g></svg>

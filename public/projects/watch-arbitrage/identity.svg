@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 332" width="640" height="332" role="img" aria-label="Table of nine attributes of one physical watch at one time - reference, generation, movement, dial configuration, case condition, originality, service evidence, provenance, accessories - each carrying an evidence status chip reading verified, claimed or unknown">
+<rect width="640" height="332" fill="#EDECE8"/>
+<g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+<text x="20" y="24" font-size="13" font-weight="700" fill="#1a1a1a">one physical watch, at one time</text>
+
+<text x="20" y="52" font-size="12" font-weight="700" fill="#1a1a1a">attribute</text>
+<text x="300" y="52" font-size="12" font-weight="700" fill="#1a1a1a">evidence status</text>
+<path d="M 20 60 L 620 60" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+
+<text x="20" y="81" font-size="13" fill="#1a1a1a">reference</text>
+<rect x="300" y="67" width="74" height="20" fill="#1a1a1a"/>
+<text x="337" y="81" font-size="11" font-weight="700" fill="#EDECE8" text-anchor="middle">verified</text>
+
+<text x="20" y="105" font-size="13" fill="#1a1a1a">generation</text>
+<rect x="300" y="91" width="74" height="20" fill="#1a1a1a"/>
+<text x="337" y="105" font-size="11" font-weight="700" fill="#EDECE8" text-anchor="middle">verified</text>
+
+<text x="20" y="129" font-size="13" fill="#1a1a1a">movement</text>
+<rect x="300" y="115" width="74" height="20" fill="#1a1a1a"/>
+<text x="337" y="129" font-size="11" font-weight="700" fill="#EDECE8" text-anchor="middle">verified</text>
+
+<text x="20" y="153" font-size="13" fill="#1a1a1a">dial configuration</text>
+<rect x="300" y="139" width="74" height="20" fill="rgba(26,26,26,0.16)"/>
+<text x="337" y="153" font-size="11" fill="#1a1a1a" text-anchor="middle">claimed</text>
+
+<text x="20" y="177" font-size="13" fill="#1a1a1a">case condition</text>
+<rect x="300" y="163" width="74" height="20" fill="#1a1a1a"/>
+<text x="337" y="177" font-size="11" font-weight="700" fill="#EDECE8" text-anchor="middle">verified</text>
+
+<text x="20" y="201" font-size="13" fill="#1a1a1a">originality</text>
+<rect x="300" y="187" width="74" height="20" fill="rgba(26,26,26,0.16)"/>
+<text x="337" y="201" font-size="11" fill="#1a1a1a" text-anchor="middle">claimed</text>
+
+<text x="20" y="225" font-size="13" fill="#1a1a1a">service evidence</text>
+<rect x="300" y="211" width="74" height="20" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="337" y="225" font-size="11" fill="#696969" text-anchor="middle">unknown</text>
+
+<text x="20" y="249" font-size="13" fill="#1a1a1a">provenance</text>
+<rect x="300" y="235" width="74" height="20" fill="rgba(26,26,26,0.16)"/>
+<text x="337" y="249" font-size="11" fill="#1a1a1a" text-anchor="middle">claimed</text>
+
+<text x="20" y="273" font-size="13" fill="#1a1a1a">accessories</text>
+<rect x="300" y="259" width="74" height="20" fill="#1a1a1a"/>
+<text x="337" y="273" font-size="11" font-weight="700" fill="#EDECE8" text-anchor="middle">verified</text>
+
+<text x="20" y="303" font-size="11" fill="#696969">an unverified original dial cannot be stored as an original dial</text>
+<text x="20" y="321" font-size="11" fill="#696969">unknown service history widens the range without supporting a fixed discount</text>
+</g></svg>

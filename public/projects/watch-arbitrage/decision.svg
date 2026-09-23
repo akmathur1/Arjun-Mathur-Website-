@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" width="640" height="380" role="img" aria-label="The buy, investigate or pass decision for one candidate watch: a low ask is estimated as net proceeds rather than price, then routed to buy under capital constraints, to a request for information, or to a pass, with a dashed loop that re-prices on new evidence">
+<rect width="640" height="380" fill="#EDECE8"/>
+<g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+
+<text x="20" y="22" font-size="13" font-weight="700" fill="#1a1a1a">an unusual asking price is a reason to investigate, not to buy</text>
+
+<rect x="186" y="36" width="240" height="48" fill="rgba(26,26,26,0.07)" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="306" y="57" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">candidate watch</text>
+<text x="306" y="76" font-size="11" fill="#696969" text-anchor="middle">ask looks low against listings</text>
+
+<path d="M 306 86 L 306 106" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+<path d="M 301 101 L 306 106 L 311 101" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+<rect x="138" y="108" width="336" height="52" fill="rgba(26,26,26,0.16)" stroke="#1a1a1a" stroke-width="3"/>
+<text x="306" y="130" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">estimate net proceeds, not price</text>
+<text x="306" y="149" font-size="11" fill="#696969" text-anchor="middle">bid, fees, purchase, refund, costs, financing</text>
+
+<path d="M 168 162 L 92 216" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+<path d="M 87 216 L 92 221 L 97 216" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 306 162 L 306 216" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+<path d="M 301 216 L 306 221 L 311 216" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 444 162 L 531 216" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+<path d="M 526 216 L 531 221 L 536 216" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+<rect x="27" y="222" width="130" height="32" fill="#1a1a1a"/>
+<text x="92" y="243" font-size="13" font-weight="700" fill="#EDECE8" text-anchor="middle">buy</text>
+<text x="92" y="272" font-size="11" fill="#696969" text-anchor="middle">expected profit &gt; M</text>
+<text x="92" y="288" font-size="11" fill="#696969" text-anchor="middle">P(loss) &lt;= e</text>
+<text x="92" y="304" font-size="11" fill="#696969" text-anchor="middle">CVaR of the tail &lt;= L</text>
+
+<rect x="211" y="222" width="190" height="32" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="306" y="243" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">request information</text>
+<text x="306" y="272" font-size="11" fill="#696969" text-anchor="middle">movement photograph,</text>
+<text x="306" y="288" font-size="11" fill="#696969" text-anchor="middle">inspection, or a direct quote</text>
+<text x="306" y="304" font-size="11" fill="#696969" text-anchor="middle">when it would change the decision</text>
+
+<rect x="466" y="222" width="130" height="32" fill="none" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+<text x="531" y="243" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">pass</text>
+<text x="531" y="272" font-size="11" fill="#696969" text-anchor="middle">the spread does not survive</text>
+<text x="531" y="288" font-size="11" fill="#696969" text-anchor="middle">the cost of the route</text>
+
+<path d="M 306 316 L 428 316 L 428 164" fill="none" stroke="#696969" stroke-width="1.5" stroke-linejoin="round" stroke-dasharray="4 3"/>
+<path d="M 423 169 L 428 164 L 433 169" fill="none" stroke="#696969" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="367" y="332" font-size="11" fill="#696969" text-anchor="middle">re-price with the new evidence</text>
+
+<text x="20" y="352" font-size="11" fill="#696969">M, e and L are chosen capital constraints</text>
+<text x="20" y="368" font-size="11" fill="#696969">the model does not discover my risk tolerance</text>
+
+</g></svg>
