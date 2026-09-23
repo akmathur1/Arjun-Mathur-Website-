@@ -459,7 +459,7 @@ const ENTRIES: Entry[] = [
     title: 'Reference-Level Arbitrage in Specialist Watch Markets',
     date: 'Ongoing',
     description:
-      'A model for pricing individual watches well enough to decide whether to buy one for resale. Knowing a watch is a Vacheron or a Lange says almost nothing about what a specific buyer will bid: the reference, movement generation, dial, case condition and service history decide which comparable sales are usable at all. Builds a per-buyer bid distribution with partial pooling across related references, prices the value of one more inspection or quote before committing capital, models the exit as a survival problem rather than a price, and allocates across watch-to-buyer routes under funding and buyer-capacity constraints. I have used arbitrage to acquire a Vacheron Historiques and a Rolex Daytona; the European sourcing algorithm is specified here and not yet executed.',
+      'A watch is not a row in a table. One reference number can cover objects buyers price as different things, and one object is several different assets depending on what can be documented about it — so evidence status, not the name on the dial, decides which comparable sales are usable at all. A model for pricing individual watches well enough to decide whether to buy one for resale. Builds a per-buyer bid distribution with partial pooling across related references, prices the value of one more inspection or quote before committing capital, models the exit as a survival problem rather than a price, and allocates across watch-to-buyer routes under funding and buyer-capacity constraints. I have used arbitrage to acquire a Vacheron Historiques and a Rolex Daytona; the European sourcing algorithm is specified here and not yet executed.',
     tier: 'boxed',
     thumbnail: <WatchArbitrageThumbnail />,
   },
@@ -3645,12 +3645,17 @@ const WatchArbitrageProjectBody: React.FC = () => (
     </p>
 
     <BodyParagraph top={0}>
-      I am interested in watches that are difficult to price well. Knowing that something
-      is a Vacheron or a Lange tells you surprisingly little about what a particular buyer
-      will pay for it. The reference, the movement generation, the dial, the case
-      condition and the service history decide which comparisons are useful — and a watch
-      can look inexpensive against online listings while still being expensive against the
-      bids actually available for it. That gap is the object of the research.
+      A watch is not a row in a table. One reference number can cover objects that buyers
+      price as different things, and one object is several different assets depending on
+      what can be documented about it: a chronograph with an original dial and an archive
+      extract, the same watch with a dial only claimed original, and the same watch with a
+      refinishing history nobody can reconstruct draw different bidders and admit different
+      past sales as evidence. The third is not the first at a discount — it is a different
+      distribution, with fewer bidders and a wider spread rather than a fixed deduction. So
+      evidence status, not the name on the dial, decides which past sales I can learn from
+      and how much each one counts. And an apparent discount is measured against asks while
+      it is realized, if it is realized at all, against bids. That gap is the object of the
+      research.
     </BodyParagraph>
 
     <InlineFigure
@@ -3665,26 +3670,55 @@ const WatchArbitrageProjectBody: React.FC = () => (
     />
 
     <BodyParagraph top={40}>
-      Vacheron's Historiques chronographs make the problem concrete. The 47101 and 47111
-      belong to the Lemania-derived 1140/1141 family, and the later 47111 introduced a
-      screwed caseback along with movement changes. The steel Cornes de vache 1955,
-      reference 5000H/000A-B582, is a different observation again — a 38.5 mm case and a
-      manually wound calibre 1142. A database that drops all three into one bucket because
-      they are Vacheron chronographs has thrown away information the buyer can see before
-      the pricing model has started.
+      Grand Seiko's V.F.A. watches make the problem concrete, because there the reference
+      number is not a usable key at all. Vintage Grand Seiko carries two identifiers, a
+      catalogue number and a case-back code, and they do not correspond one to one: a
+      single case-back code can be shared by more than one model. Case back 6185-8020
+      covers both the 1969 silver sunburst catalogued as 6185 030, with its
+      three-dimensional hour indices, and the 1970 matte white 6185 050 with traditionally
+      proportioned ones. Case back 6186-8000 covers a blue dial and a silver one. The
+      catalogue number 6185 030 then reappears in 1972 on case back 6185-8021, this time
+      with the later 6185B calibre and V.F.A. printed on the dial rather than applied. A
+      three-year run, and a key that collides with itself in both directions — a database
+      that groups by either number alone has already mixed generations before the pricing
+      model has started.
     </BodyParagraph>
 
     <BodyParagraph>
-      Lange makes the same point sharply. The original Datograph 403.035 is a 39 mm
-      platinum watch with calibre L951.1 and no power-reserve indication; the Up/Down
-      introduced in 2012 uses L951.6, a 60-hour reserve and a 41 mm case. Even within the
-      original generation, early METER dial printing is a recorded distinction — and
-      recording it is not the same as knowing what it is worth. Any associated premium
-      still has to be estimated. The 1815 Chronograph needs its own generation labels for
-      the same reason, since Lange changed the movement in 2010. With Journe, movement era
-      belongs inside the identity of the watch: the manufacture dates the brass-to-gold
-      transition to 2004, so the year alone is a poor substitute for inspecting the actual
-      movement.
+      Roger Smith's Series 2 makes the same point along the time axis. The escapement
+      inside it changed repeatedly under one model name: Daniels' original two-wheel
+      co-axial, then Smith's single-wheel version in 2010, a lighter escape wheel in 2012,
+      and a smaller one again in 2014 — 4.5 mm where it had been 6 mm — which required a
+      redesigned movement that did not enter the Series 2 until 2019. Sixty Mark 1 watches
+      were made between 2007 and 2019, and their case numbers are not even sequential;
+      owners chose them. Case diameter went from 38 to 40 mm alongside the 2010 change, so
+      it is a partial proxy, but it does not separate 2010 from 2012 — and at least one
+      early watch went back to the workshop to have its original two-wheel escapement
+      replaced with the single-wheel at the owner's request, which defeats the proxy
+      entirely. After a retrofit the generation is not recoverable from the model name, the
+      year, or the date signed on the movement. Recording a distinction is also not the
+      same as knowing what it is worth; any associated premium still has to be estimated.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Thin references are where the pooling question stops being optional. Voutilainen's
+      Observatoire was built on the Peseux 260, an ébauche developed in the 1950s for the
+      observatory chronometer competitions at Geneva and Neuchâtel and never put into
+      commercial production; Phillips reports that no more than about 3,300 blanks are
+      believed to have been made, and that Voutilainen's own supply arrived when a client
+      turned up with an assortment of vintage Peseux calibres. He kept that base and fitted
+      his own free-sprung balance, hairspring and escapement. Roughly fifty were made
+      between 2007 and 2011, when the Vingt-8 replaced the model with his in-house calibre
+      28 — and those fifty are spread across at least five case metals, two diameters and
+      an open-ended set of guilloché dials. The defensible family is therefore not a
+      Voutilainen but a Peseux-260 watch, a boundary set by a finite supply of movement
+      blanks rather than by a marketing decision, and one whose other members include
+      Jean-Baptiste Viot's first watches. Seiko's observatory chronometers are the same
+      shape of problem with an exactly countable population: 73 certified calibre 4520
+      movements sold out of 103 submitted to Neuchâtel, then 25 and 128 calibre 4580, which
+      is 226 watches in all. The 1969 and 1970 watches are marked 4580 on the movement and
+      4520 on the dial, so a comparables set assembled from listing photographs silently
+      mixes two generations.
     </BodyParagraph>
 
     <BodyParagraph>
@@ -3713,7 +3747,13 @@ const WatchArbitrageProjectBody: React.FC = () => (
 
     <BodyParagraph>
       Each attribute needs a value <em>and</em> an evidence status, which is the part most
-      systems get wrong. An unverified original dial cannot be stored as an original dial.
+      systems get wrong. Longines will issue an Extract from the Archives for any watch
+      more than ten years old, and the page that sells it says plainly that the extract
+      does by no means certify the authenticity of the timepiece or its components. That
+      sentence is the whole design problem in one line: the document can settle what left
+      the factory under a serial number and stay silent on whether the case around that
+      movement today is the one that left with it. An unverified original dial cannot be
+      stored as an original dial.
       A service invoice can establish that work was performed without establishing that
       every component is period-correct. Unknown service history widens the range of
       outcomes even where it does not support a fixed dollar discount. And duplicate
@@ -4012,8 +4052,9 @@ const WatchArbitrageProjectBody: React.FC = () => (
       the work to a real outcome, and the case studies should eventually reconstruct the
       purchase date, exact reference, amount paid, additional costs and the actual source of
       the advantage. Those details are not in this draft, and I am not asserting a purchase
-      price, a realized return, a dealer relationship, or a trade in a Lange, a Patek or a
-      Journe. Those references are the research universe, not my transaction history. The
+      price, a realized return, a dealer relationship, or a trade in a Grand Seiko, a
+      Voutilainen or a Roger Smith. Those references are the research universe, not my
+      transaction history. The
       European algorithm remains unexecuted, and the mathematics above describes a proposed
       model with no fitted parameters and no validated backtest behind it. The goal is
       narrower and more useful than a return figure: to make the next decision explainable
@@ -4032,10 +4073,13 @@ const WatchArbitrageProjectBody: React.FC = () => (
       }}
     >
       Reference notes, which ground the technical distinctions above and establish no prices:
-      Phillips on Vacheron 47101/47111 and on the Datograph 403.035; Vacheron Constantin on
-      the Cornes de vache 5000H/000A-B582; A. Lange &amp; Söhne on the Datograph Up/Down and
-      the 1815 Chronograph; Phillips on Patek 5070 and 5170; F.P. Journe's Journal 4 for the
-      2004 brass-to-gold transition and the Octa Calendrier Patrimoine record; the European
+      SJX on Grand Seiko's V.F.A. catalogue and case-back numbering and on Seiko's Neuchâtel
+      observatory chronometers, with Plus9Time on the year-by-year submission and
+      certification counts; Roger W. Smith on the co-axial escapement's four versions and on
+      the Mark 2 movement's introduction to the Series 2 in 2019, and A Collected Man on
+      non-sequential case numbers and on the early Series 2 retrofitted with the single-wheel
+      escapement; Phillips on the Observatoire's Peseux 260 base, its run length and the
+      surviving stock of blanks; Longines on the Extract from the Archives; the European
       Commission on VAT refunds and VAT special schemes. Catalogue assertions about a
       particular example still have to be checked against that example's own documents and
       condition evidence.
