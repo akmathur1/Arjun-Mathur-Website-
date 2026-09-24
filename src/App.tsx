@@ -499,21 +499,6 @@ const ENTRIES: Entry[] = [
     tier: 'boxed',
     thumbnail: <KikuThumbnail />,
   },
-  {
-    title: 'Third Entry Title',
-    date: 'February 18, 2026',
-    description: 'Description text that can wrap onto two lines if needed, like the reference layout.',
-  },
-  {
-    title: 'Fourth Entry Title',
-    date: 'January 9, 2026',
-    description: 'Another placeholder description — swap this for the real summary later.',
-  },
-  {
-    title: 'Fifth Entry Title',
-    date: 'November 21, 2025',
-    description: 'Final placeholder entry to show the timeline rhythm and spacing.',
-  },
 ];
 
 const App: React.FC = () => {
