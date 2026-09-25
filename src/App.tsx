@@ -65,8 +65,10 @@ const HOLDINGS: { group: string; items: Holding[] }[] = [
   {
     group: 'Financials & exchanges',
     items: [
+      { ticker: 'FMCC', name: 'Freddie Mac' },
       { ticker: 'GS', name: 'Goldman Sachs' },
       { ticker: 'ICE', name: 'Intercontinental Exchange' },
+      { ticker: 'JEF', name: 'Jefferies Financial Group' },
       { ticker: 'MA', name: 'Mastercard' },
       { ticker: 'SPGI', name: 'S&P Global' },
       { ticker: 'V', name: 'Visa' },
@@ -89,6 +91,7 @@ const HOLDINGS: { group: string; items: Holding[] }[] = [
       { ticker: 'HHH', name: 'Howard Hughes Holdings' },
       { ticker: 'PSHZF', name: 'Pershing Square Holdings' },
       { ticker: 'PSUS', name: 'Pershing Square USA' },
+      { ticker: 'SEG', name: 'Seaport Entertainment Group' },
     ],
   },
   {
