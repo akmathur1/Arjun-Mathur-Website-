@@ -430,6 +430,21 @@ const KikuThumbnail: React.FC = () => (
   />
 );
 
+const MegaronThumbnail: React.FC = () => (
+  <img
+    src="/projects/megaron/thumbnail.svg"
+    alt="Plan of a hall with one door: six small rooms inside its walls, each joined to a hearth at the centre; an arrow enters through the door"
+    style={{
+      display: 'block',
+      width: 150,
+      maxWidth: '100%',
+      height: 'auto',
+      border: `1px solid ${COLORS.text}`,
+      background: COLORS.bg,
+    }}
+  />
+);
+
 const WatchArbitrageThumbnail: React.FC = () => (
   <img
     src="/projects/watch-arbitrage/thumbnail.svg"
@@ -454,6 +469,15 @@ const ENTRIES: Entry[] = [
       'Sequence-resolved coarse-grained Hamiltonians for FUS-derived intrinsically disordered protein variants. MPIPI parameterization, Langevin dynamics, and density–temperature phase diagrams probing sequence-dependent condensate organization. With Dr. Trevor GrandPré.',
     tier: 'featured',
     thumbnail: <FUSThumbnail />,
+  },
+  {
+    slug: 'megaron',
+    title: 'Megaron — A Command Hall for Rust, Proven at Compile Time',
+    date: 'October 2026 — present',
+    description:
+      'A Rust-native rethinking of Beer Garden, the plugin framework that turns functions into discoverable, remotely callable commands with a generated web form. Megaron keeps its nouns and its seven-status request lifecycle but moves the knowledge forward in time: a proc-macro reads a plugin\'s Rust types and emits the system definition, a JSON Schema per command, the dispatch table and a typed client at build, so a bound on a bool or a regex that will not compile is a compile error, not a surprise at registration. The whole hall is one static binary with SQLite inside — no broker, no document store, no Node toolchain — and plugins dial in over a single WebSocket. Six crates, about fifteen thousand lines of Rust, 137 tests.',
+    tier: 'boxed',
+    thumbnail: <MegaronThumbnail />,
   },
   {
     slug: 'molterra-security',
@@ -2429,7 +2453,9 @@ const ProjectPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             </figure>
           )}
 
-          {slug === 'molterra-security' ? (
+          {slug === 'megaron' ? (
+            <MegaronProjectBody />
+          ) : slug === 'molterra-security' ? (
             <MolterraSecurityProjectBody />
           ) : slug === 'fus-idp-hamiltonians' ? (
             <FUSProjectBody />
@@ -3632,6 +3658,204 @@ const KikuProjectBody: React.FC = () => (
       Rust · candle · MIT. 80-channel log Mel · 30 s windows · VAD at P(nospeech) &gt; 0.6
       and avg logprob &lt; −1 · temperature ladder 0.0 → 1.0 · LibriSpeech and FLEURS
       harnesses. github.com/akmathur1/Kiku-
+    </p>
+  </div>
+);
+
+const MegaronProjectBody: React.FC = () => (
+  <div style={{ marginTop: 32 }}>
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        color: COLORS.muted,
+        marginTop: 0,
+        marginBottom: 24,
+        letterSpacing: 0.3,
+      }}
+    >
+      Megaron · a Rust-native rethinking of Beer Garden · Rust · MIT
+    </p>
+
+    <BodyParagraph top={0}>
+      Beer Garden is a Python framework with a precise promise: write a function,
+      decorate it, and get a validated REST endpoint and a web form for free, with
+      every call recorded as a request. I had two complaints with how it keeps that
+      promise. The shape of a command is learned at runtime — brewtils reads type
+      hints and decorator arguments when the plugin starts, so a mistake in a
+      parameter declaration is discovered by the first person to open the form. And
+      the thing itself is four services: a Tornado API, an AngularJS UI, RabbitMQ to
+      reach the plugins and MongoDB to remember what happened. Megaron is my answer
+      to both, in Rust. It keeps Beer Garden's vocabulary — a System is a group of
+      commands, a Command is one action, a Parameter is one of its inputs, a Request
+      is one performance — and its seven request statuses, verbatim, so an operator
+      who knows one knows the other.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      The design idea is that the plugin's own types are the specification. An
+      attribute on an impl block and one on each method are enough: the macro reads
+      each argument's Rust type and asks it, through a Param trait, what kind of
+      parameter it is. A String is a string with length bounds; a u32 is an integer
+      with value bounds; a bool has no bounds at all, so a minimum on one is refused
+      by rustc with the span of the attribute. A regex is compiled while the macro
+      runs and rejected, with the regex engine's own diagnosis, if it will not
+      compile. A default is emitted as an expression of the parameter's own type, so
+      a default of the wrong type is an ordinary type error at the default itself.
+      Nesting is bounded on purpose — one Vec, one Option, in that order — enforced
+      by a constant on the trait that makes Vec of Option fail to build with a
+      message naming the rule. What comes out is a system definition with a JSON
+      Schema 2020-12 document per command, a dispatch arm that parses each incoming
+      key into the exact type the function asked for, and a typed client other Rust
+      programs call as ordinary async methods. All six refusals are compile-fail
+      tests, and the echo example is the pass case.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/megaron/compile-time.svg"
+      alt="A Rust command signature fanning out through the proc-macro into a SystemDef, a JSON Schema, a dispatch arm and a typed client; beneath, five rust-outlined boxes name what rustc refuses"
+      caption={
+        <>
+          <strong>Fig. 1.</strong> Compile time. The macro reads the function's types and emits the
+          definition, the schema, the dispatch arm and the typed client; the row
+          beneath is what rustc refuses to build, each at the attribute that caused
+          it.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      Around that core Megaron is deliberately one thing to run. The server is a
+      single static binary with SQLite bundled as both the store and the queue — a
+      request is a row before it is a frame, so nothing in flight is lost to a
+      restart — behind one axum process that also serves the UI. Plugins dial the
+      hall over one WebSocket each, which is why a plugin on a laptop, in a
+      container with no ingress, or behind NAT works with no network configuration;
+      the hall never dials out. There is no broker because there is nothing for one
+      to do: the queue is a table scanned by a single dispatcher task, and fan-out
+      is a map from instance to connection inside a registry task that owns every
+      socket and never shares a lock. SQLite runs in WAL mode with one writer and
+      eight readers; every status change writes the row and its audit event in one
+      transaction.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/megaron/hall.svg"
+      alt="One box labelled megaron containing REST and UI, a registry, a dispatcher and reaper, and SQLite; callers enter on the left over REST, plugins dial in on the right over WebSockets; Beer Garden's four processes shown beneath for comparison"
+      caption={
+        <>
+          <strong>Fig. 2.</strong> The hall. One process owns the store, the queue, every plugin socket and
+          the UI; Beer Garden's four processes are shown beneath for scale. Plugins
+          dial in, so the hall needs no route to them.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The server does not trust the macro. Every registration re-runs the
+      definition's own validation — the stored schema must be exactly what the
+      parameters emit, and the definition hash must be exactly the sha256 of its
+      canonical JSON — and every request is validated against the stored schema
+      before any plugin sees it, with formats on and a second pass through chrono
+      for dates, so a string that is not a date is INVALID at creation and never
+      reaches a plugin. The two can only disagree when a plugin is rebuilt against a
+      changed definition, and Megaron treats that as a protocol event: a
+      registration whose hash differs for a version that already has a live instance
+      is refused — bump the version — and when a change is accepted, every queued
+      request of that system is re-validated before dispatch. So INVALID always
+      means the caller sent bad parameters and is a stored, inspectable row, and a
+      parse failure inside a plugin is a server bug and is logged as one.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/megaron/register.svg"
+      alt="A two-lane sequence: the plugin sends Register, the hall checks the token, re-validates the definition and compares the hash with the live instance, and replies Refused or Registered"
+      caption={
+        <>
+          <strong>Fig. 3.</strong> Register. The hall re-validates the definition and compares its hash with
+          the instance already running that version; a change is refused while the
+          old one is live and re-validates the queue when accepted.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      Where I spent the design effort is what happens when things go wrong, because
+      that is where a job runner either earns trust or quietly re-runs something it
+      should not. The whole state machine is one table — CREATED to RECEIVED to
+      IN_PROGRESS to SUCCESS, ERROR or CANCELED, with INVALID as the fourth terminal
+      — and the store refuses any transition the table does not list. When a plugin
+      dies, the hall splits what it was holding by status: a request that was
+      delivered but never started goes back to CREATED, always, because no side
+      effect was possible; one that was running goes back only if its command was
+      declared idempotent and has attempts remaining, and otherwise ends as ERROR
+      with class Disconnected and the attempt count in the output. Megaron never
+      silently re-runs an action that was not declared safe to re-run. Cancellation
+      is cooperative with a grace window: a command that honours the token ends
+      CANCELED; one that ignores it and finishes in time is recorded as what it
+      actually did, because a side effect that happened must not be reported as
+      cancelled; one that does neither is cancelled unilaterally with class
+      CancelTimeout, and a result that arrives afterwards is written to the
+      request's event log as a late result, never applied.
+    </BodyParagraph>
+
+    <InlineFigure
+      src="/projects/megaron/lifecycle.svg"
+      alt="The request state machine: CREATED, RECEIVED, IN_PROGRESS and four terminal states, blue arrows for what the plugin reports and rust arcs for what the hall decides on death, cancel and drift"
+      caption={
+        <>
+          <strong>Fig. 4.</strong> The state machine, in one table. Blue is what the plugin reported; rust is
+          what the hall decided — death, the cancel grace, drift. A late result is
+          recorded as an event, never applied.
+        </>
+      }
+    />
+
+    <BodyParagraph top={40}>
+      The form is a pure function of the schema. Pages are server-rendered with
+      maud; the only client-side code is a vendored htmx and the three lines that
+      configure it, served under a Content-Security-Policy of default-src 'self', so
+      the hall works on an air-gapped machine with no JavaScript build and a test
+      refuses any page that carries an inline script. A string with bounds becomes
+      an input with minlength, maxlength and pattern mirrored from the schema, so
+      the browser's first pass enforces the same rules the server does; a strict
+      choice list is a select; a nullable value gets an explicit null control. An
+      INVALID request's Run again reopens the form with the bad fields highlighted.
+      Everything the UI shows is also JSON under /api/v1, and every request page is
+      live over server-sent events, with the event log — status transitions with
+      their reasons, and the plugin's own log lines — interleaved in order.
+    </BodyParagraph>
+
+    <BodyParagraph>
+      Megaron is smaller than Beer Garden on purpose, and says so. Dependent choices
+      — a dropdown whose options come from another command — parse today and fail to
+      build with a message pointing at the next release. The scheduler and
+      federation are designed and their types are reserved so nothing has to be
+      undone, but neither ships in this version. Bytes, file uploads and nested
+      dictionaries are later; the ten parameter types and the schema emitter already
+      handle them, so adding each touches no server code. What is here is the
+      end-to-end path: a plugin with three commands, the generated form, a request
+      submitted from the browser, watched live and recorded with its audit trail.
+      The rules above are each exercised by a test against a real hall and a fake
+      plugin speaking the wire protocol by hand — one that kills the plugin
+      mid-request, one that changes a definition under a live instance, one that
+      cancels with and without acknowledgement — and a thousand requests are
+      created, dispatched and completed in about two and a half seconds.
+    </BodyParagraph>
+
+    <p
+      style={{
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 1.6,
+        maxWidth: 640,
+        marginTop: 48,
+        color: COLORS.muted,
+      }}
+    >
+      Built and tested on macOS (aarch64). The static musl build is CI's job and has
+      not been produced here.
     </p>
   </div>
 );

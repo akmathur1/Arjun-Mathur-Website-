@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 190" width="300" height="190"
+     role="img" aria-label="Plan of a rectangular hall with a single opening in its bottom wall; six small blue rooms stand just inside the walls, each joined by a straight line to a rust-coloured hearth at the centre; an arrow enters through the opening toward the hearth; the word megaron sits in small monospace below.">
+  <rect width="300" height="190" fill="#EDECE8"/>
+  <!-- lines from each room to the hearth, under everything -->
+  <g stroke="#1a1a1a" stroke-width="1.2" fill="none">
+    <path d="M 75 35 L 150 77"/><path d="M 225 35 L 150 77"/>
+    <path d="M 75 77 L 150 77"/><path d="M 225 77 L 150 77"/>
+    <path d="M 75 119 L 150 77"/><path d="M 225 119 L 150 77"/>
+  </g>
+  <!-- the hall: one wall, one door -->
+  <path d="M 138 136 L 56 136 L 56 18 L 244 18 L 244 136 L 162 136" fill="none" stroke="#1a1a1a" stroke-width="2.2" stroke-linejoin="round"/>
+  <!-- rooms: the systems that answer -->
+  <g fill="#2266a4">
+    <rect x="68" y="28" width="14" height="14"/><rect x="218" y="28" width="14" height="14"/>
+    <rect x="68" y="70" width="14" height="14"/><rect x="218" y="70" width="14" height="14"/>
+    <rect x="68" y="112" width="14" height="14"/><rect x="218" y="112" width="14" height="14"/>
+  </g>
+  <!-- the hearth: where every request is heard and sent -->
+  <rect x="137" y="64" width="26" height="26" fill="#b34f2a"/>
+  <!-- the one way in -->
+  <path d="M 150 172 L 150 150" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M 145 155 L 150 150 L 155 155" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="56" y="178" font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace" font-size="17" letter-spacing="1.5" fill="#696969">megaron</text>
+</svg>

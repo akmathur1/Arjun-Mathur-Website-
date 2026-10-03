@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" width="640" height="380" role="img" aria-label="One box labelled megaron, one static binary, containing REST and UI, a registry, a dispatcher and reaper, and SQLite as store and queue. On the left a browser form and a typed client send requests into it over REST. On the right three plugins each dial into it over one WebSocket. Below, for comparison, Beer Garden's four separate processes: Tornado API, AngularJS UI, RabbitMQ, MongoDB.">
+<rect width="640" height="380" fill="#EDECE8"/>
+<g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+  <rect x="200" y="40" width="240" height="236" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <text x="212" y="60" font-size="12" fill="#1a1a1a">megaron · one binary</text>
+  <rect x="216" y="74" width="96" height="36" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <text x="264" y="96" font-size="11" fill="#1a1a1a" text-anchor="middle">REST · UI</text>
+  <rect x="328" y="74" width="96" height="36" fill="rgba(179,79,42,0.16)" stroke="#b34f2a" stroke-width="1.5"/>
+  <text x="376" y="96" font-size="11" fill="#1a1a1a" text-anchor="middle">registry</text>
+  <rect x="216" y="128" width="208" height="36" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <text x="320" y="150" font-size="11" fill="#1a1a1a" text-anchor="middle">dispatcher · reaper</text>
+  <rect x="216" y="182" width="208" height="76" fill="rgba(26,26,26,0.07)" stroke="#1a1a1a" stroke-width="1.5"/>
+  <text x="320" y="204" font-size="11" fill="#1a1a1a" text-anchor="middle">SQLite · store and queue</text>
+  <text x="320" y="221" font-size="11" fill="#696969" text-anchor="middle">a request is a row</text>
+  <text x="320" y="235" font-size="11" fill="#696969" text-anchor="middle">before it is a frame</text>
+  <text x="320" y="250" font-size="11" fill="#696969" text-anchor="middle">WAL · 1 writer · 8 readers</text>
+  <path d="M 232 110 L 232 182" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+  <path d="M 227 177 L 232 182 L 237 177" fill="none" stroke="#1a1a1a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 340 182 L 340 164" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+  <path d="M 335 169 L 340 164 L 345 169" fill="none" stroke="#1a1a1a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 376 128 L 376 110" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+  <path d="M 371 115 L 376 110 L 381 115" fill="none" stroke="#1a1a1a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- callers -->
+  <rect x="20" y="74" width="130" height="32" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <text x="85" y="94" font-size="11" fill="#1a1a1a" text-anchor="middle">browser · the form</text>
+  <rect x="20" y="118" width="130" height="32" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <text x="85" y="138" font-size="11" fill="#1a1a1a" text-anchor="middle">typed client</text>
+  <path d="M 150 90 L 200 90" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <path d="M 195 85 L 200 90 L 195 95" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 150 134 L 180 134 L 180 98 L 200 98" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <path d="M 195 93 L 200 98 L 195 103" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="85" y="64" font-size="11" fill="#696969" text-anchor="middle">REST · /api/v1</text>
+  <!-- plugins dial in -->
+  <g stroke="#2266a4" stroke-width="1.5" fill="none">
+    <rect x="490" y="74" width="130" height="32"/>
+    <rect x="490" y="130" width="130" height="32"/>
+    <rect x="490" y="186" width="130" height="32"/>
+    <path d="M 490 90 L 440 90"/><path d="M 445 85 L 440 90 L 445 95" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 490 146 L 440 146"/><path d="M 445 141 L 440 146 L 445 151" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 490 202 L 440 202"/><path d="M 445 197 L 440 202 L 445 207" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="555" y="94" font-size="11" fill="#1a1a1a" text-anchor="middle">echo 1.0.0</text>
+  <text x="555" y="150" font-size="11" fill="#1a1a1a" text-anchor="middle">deploy 2.3.1</text>
+  <text x="555" y="206" font-size="11" fill="#1a1a1a" text-anchor="middle">…</text>
+  <text x="620" y="64" font-size="11" fill="#696969" text-anchor="end">plugins · a WebSocket each</text>
+  <text x="620" y="240" font-size="11" fill="#696969" text-anchor="end">they dial in, so</text>
+  <text x="620" y="254" font-size="11" fill="#696969" text-anchor="end">a laptop, NAT or a</text>
+  <text x="620" y="268" font-size="11" fill="#696969" text-anchor="end">container all work</text>
+  <!-- comparison -->
+  <path d="M 20 300 L 620 300" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+  <text x="20" y="320" font-size="11" fill="#696969">Beer Garden, the same job as four processes:</text>
+  <g stroke="rgba(26,26,26,0.18)" stroke-width="1" fill="none">
+    <rect x="20" y="332" width="124" height="30"/><rect x="154" y="332" width="124" height="30"/>
+    <rect x="288" y="332" width="124" height="30"/><rect x="422" y="332" width="124" height="30"/>
+  </g>
+  <g font-size="11" fill="#696969" text-anchor="middle">
+    <text x="82" y="351">Tornado API</text><text x="216" y="351">AngularJS UI</text>
+    <text x="350" y="351">RabbitMQ</text><text x="484" y="351">MongoDB</text>
+  </g>
+  <text x="558" y="351" font-size="11" fill="#696969">+ plugins</text>
+</g></svg>

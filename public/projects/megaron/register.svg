@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 270" width="640" height="270" role="img" aria-label="A two-lane sequence. The plugin on the left sends Register with its definition, definition hash and in-flight request ids to the hall on the right. The hall checks the bearer token, re-runs validate on the definition, and compares the hash with the instance already running that version. Two replies come back: in rust, Refused — definition differs from the running instance, bump the version; in blue, Registered with an instance id and heartbeat interval. Below, after an accepted change the hall re-validates every queued CREATED request against the new schema before any plugin sees it.">
+<rect width="640" height="270" fill="#EDECE8"/>
+<g font-family="JetBrains Mono, ui-monospace, SF Mono, Menlo, monospace">
+  <rect x="40" y="20" width="120" height="30" fill="none" stroke="#2266a4" stroke-width="1.5"/>
+  <text x="100" y="39" font-size="12" fill="#1a1a1a" text-anchor="middle">plugin</text>
+  <rect x="480" y="20" width="120" height="30" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <text x="540" y="39" font-size="12" fill="#1a1a1a" text-anchor="middle">hall</text>
+  <path d="M 100 50 L 100 214" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+  <path d="M 540 50 L 540 214" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+  <!-- register -->
+  <path d="M 100 76 L 540 76" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <path d="M 535 71 L 540 76 L 535 81" fill="none" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="320" y="70" font-size="11" fill="#1a1a1a" text-anchor="middle">Register { definition, definition_hash, instance, in_flight }</text>
+  <!-- checks -->
+  <rect x="318" y="90" width="282" height="56" fill="rgba(26,26,26,0.07)" stroke="#1a1a1a" stroke-width="1"/>
+  <g font-size="11" fill="#1a1a1a">
+    <text x="328" y="107">1  bearer token</text>
+    <text x="328" y="121">2  SystemDef::validate() — trust nothing</text>
+    <text x="328" y="135">3  hash ≠ live instance of this version?</text>
+  </g>
+  <!-- refused -->
+  <path d="M 540 166 L 100 166" fill="none" stroke="#b34f2a" stroke-width="1.5"/>
+  <path d="M 105 161 L 100 166 L 105 171" fill="none" stroke="#b34f2a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="320" y="160" font-size="11" fill="#b34f2a" text-anchor="middle">Refused — differs from the running instance; bump the version</text>
+  <!-- registered -->
+  <path d="M 540 198 L 100 198" fill="none" stroke="#2266a4" stroke-width="1.5"/>
+  <path d="M 105 193 L 100 198 L 105 203" fill="none" stroke="#2266a4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="320" y="192" font-size="11" fill="#2266a4" text-anchor="middle">Registered { instance_id, heartbeat_secs } · in_flight reconciled</text>
+  <!-- then -->
+  <path d="M 40 222 L 600 222" stroke="rgba(26,26,26,0.18)" stroke-width="1"/>
+  <text x="40" y="242" font-size="11" fill="#696969">if a changed hash is accepted: every queued CREATED request is re-validated</text>
+  <text x="40" y="256" font-size="11" fill="#696969">against the new schema first — INVALID · ParameterDrift — before any plugin sees it.</text>
+</g></svg>
