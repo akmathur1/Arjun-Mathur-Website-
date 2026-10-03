@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import writingsData from './writings.json';
+import thesesData from './theses.json';
 
 const COLORS = {
   bg: '#EDECE8',
@@ -40,6 +41,12 @@ const INVESTMENTS: {
 // Positions only: tickers and names, deliberately no sizes, weights, values, or
 // account details. Grouped by sector for scanning rather than by account.
 type Holding = { ticker: string; name: string };
+
+// Theses live in src/theses.json, keyed by ticker, and are written by hand. A blank
+// or missing entry means no thesis yet: that row stays plain text rather than
+// advertising a dialog with nothing in it.
+const THESES: Record<string, string> = thesesData;
+const thesisFor = (ticker: string) => (THESES[ticker] ?? '').trim();
 const HOLDINGS: { group: string; items: Holding[] }[] = [
   {
     group: 'Technology & semiconductors',
@@ -845,6 +852,211 @@ const InvestmentsPanel: React.FC<{ onOpen: () => void }> = ({ onOpen }) => {
   );
 };
 
+// One position. With a thesis written it is a real button — native keyboard and
+// screen-reader behaviour for free; without one it stays inert text.
+const HoldingRow: React.FC<{
+  holding: Holding;
+  onOpen: (trigger: HTMLElement) => void;
+}> = ({ holding, onOpen }) => {
+  const thesis = thesisFor(holding.ticker);
+  const [hover, setHover] = useState(false);
+
+  const inner = (
+    <>
+      <span style={{ fontWeight: 700, color: COLORS.text, flex: '0 0 56px', textAlign: 'left' }}>
+        {holding.ticker}
+      </span>
+      <span
+        style={{
+          color: thesis && hover ? COLORS.text : COLORS.muted,
+          minWidth: 0,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          paddingBottom: 4,
+          textDecoration: thesis ? 'underline' : 'none',
+          textDecorationStyle: hover ? 'solid' : 'dotted',
+          textDecorationColor: hover ? COLORS.text : 'rgba(26,26,26,0.4)',
+          textUnderlineOffset: 4,
+          textDecorationThickness: 1,
+        }}
+      >
+        {holding.name}
+      </span>
+    </>
+  );
+
+  const shared: React.CSSProperties = {
+    display: 'flex',
+    gap: 12,
+    alignItems: 'baseline',
+    fontFamily: MONO,
+    fontSize: 13,
+    minWidth: 0,
+  };
+
+  if (!thesis) return <div style={shared}>{inner}</div>;
+
+  return (
+    <button
+      type="button"
+      onClick={(e) => onOpen(e.currentTarget)}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      aria-label={`${holding.ticker} ${holding.name} — read thesis`}
+      style={{
+        ...shared,
+        width: '100%',
+        background: 'none',
+        border: 'none',
+        padding: 0,
+        margin: 0,
+        fontFamily: MONO,
+        fontSize: 13,
+        lineHeight: 'inherit',
+        letterSpacing: 'inherit',
+        textAlign: 'left',
+        cursor: 'pointer',
+      }}
+    >
+      {inner}
+    </button>
+  );
+};
+
+// Thesis dialog. Focus moves in on open and returns to the row that opened it, Escape
+// and a backdrop click close it, and Tab is kept inside the panel while it is up.
+const ThesisDialog: React.FC<{
+  holding: Holding;
+  thesis: string;
+  returnFocusTo: HTMLElement | null;
+  onClose: () => void;
+}> = ({ holding, thesis, returnFocusTo, onClose }) => {
+  const panel = useRef<HTMLDivElement>(null);
+  const titleId = `thesis-${holding.ticker}`;
+
+  useEffect(() => {
+    panel.current?.focus();
+
+    // The page behind must not scroll while the dialog is up.
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab' || !panel.current) return;
+      const focusable = panel.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable.length) {
+        e.preventDefault();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    };
+
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+      returnFocusTo?.focus?.();
+    };
+  }, [onClose, returnFocusTo]);
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'rgba(26,26,26,0.44)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 24,
+        zIndex: 50,
+      }}
+    >
+      <div
+        ref={panel}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        tabIndex={-1}
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: COLORS.bg,
+          border: `2px solid ${COLORS.text}`,
+          boxShadow: `6px 6px 0 ${COLORS.text}`,
+          padding: '22px 24px 26px',
+          width: 'min(560px, 100%)',
+          maxHeight: '80vh',
+          overflowY: 'auto',
+          outline: 'none',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            justifyContent: 'space-between',
+            gap: 20,
+          }}
+        >
+          <h4 id={titleId} style={{ fontFamily: MONO, fontSize: 15, color: COLORS.text }}>
+            <span style={{ fontWeight: 700 }}>{holding.ticker}</span>
+            <span style={{ fontWeight: 400, color: COLORS.muted }}> · {holding.name}</span>
+          </h4>
+
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            style={{
+              fontFamily: MONO,
+              fontSize: 13,
+              color: COLORS.muted,
+              background: 'none',
+              border: 'none',
+              padding: 4,
+              cursor: 'pointer',
+              lineHeight: 1,
+              flexShrink: 0,
+            }}
+          >
+            close
+          </button>
+        </div>
+
+        <p
+          style={{
+            fontFamily: MONO,
+            fontSize: 13.5,
+            lineHeight: 1.75,
+            color: COLORS.text,
+            marginTop: 18,
+            whiteSpace: 'pre-wrap',
+          }}
+        >
+          {thesis}
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const InvestmentsPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => {
   const rows = INVESTMENTS.rows.filter(
     (r): r is { label: string; percent: number } => r.percent !== null
@@ -852,6 +1064,10 @@ const InvestmentsPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNaviga
   const [head, ...benchmarks] = rows;
   const peak = rows.length ? Math.max(...rows.map((r) => Math.abs(r.percent))) : 1;
   const count = HOLDINGS.reduce((n, g) => n + g.items.length, 0);
+  const [openThesis, setOpenThesis] = useState<{
+    holding: Holding;
+    trigger: HTMLElement | null;
+  } | null>(null);
 
   return (
     <PageShell onNavigate={onNavigate}>
@@ -993,38 +1209,11 @@ const InvestmentsPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNaviga
                 }}
               >
                 {g.items.map((h) => (
-                  <div
+                  <HoldingRow
                     key={h.ticker}
-                    style={{
-                      display: 'flex',
-                      gap: 12,
-                      alignItems: 'baseline',
-                      fontFamily: MONO,
-                      fontSize: 13,
-                      minWidth: 0,
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontWeight: 700,
-                        color: COLORS.text,
-                        flex: '0 0 56px',
-                      }}
-                    >
-                      {h.ticker}
-                    </span>
-                    <span
-                      style={{
-                        color: COLORS.muted,
-                        minWidth: 0,
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      {h.name}
-                    </span>
-                  </div>
+                    holding={h}
+                    onOpen={(trigger) => setOpenThesis({ holding: h, trigger })}
+                  />
                 ))}
               </div>
             </section>
@@ -1044,6 +1233,15 @@ const InvestmentsPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNaviga
           Allocation and a longer performance history to come.
         </p>
       </article>
+      {openThesis && (
+        <ThesisDialog
+          holding={openThesis.holding}
+          thesis={thesisFor(openThesis.holding.ticker)}
+          returnFocusTo={openThesis.trigger}
+          onClose={() => setOpenThesis(null)}
+        />
+      )}
+
     </PageShell>
   );
 };
