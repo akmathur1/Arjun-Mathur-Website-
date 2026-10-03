@@ -868,13 +868,13 @@ const HoldingRow: React.FC<{
       </span>
       <span
         style={{
-          color: thesis && hover ? COLORS.text : COLORS.muted,
+          color: hover ? COLORS.text : COLORS.muted,
           minWidth: 0,
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
           paddingBottom: 4,
-          textDecoration: thesis ? 'underline' : 'none',
+          textDecoration: thesis || hover ? 'underline' : 'none',
           textDecorationStyle: hover ? 'solid' : 'dotted',
           textDecorationColor: hover ? COLORS.text : 'rgba(26,26,26,0.4)',
           textUnderlineOffset: 4,
@@ -895,15 +895,17 @@ const HoldingRow: React.FC<{
     minWidth: 0,
   };
 
-  if (!thesis) return <div style={shared}>{inner}</div>;
-
   return (
     <button
       type="button"
       onClick={(e) => onOpen(e.currentTarget)}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      aria-label={`${holding.ticker} ${holding.name} — read thesis`}
+      aria-label={
+        thesis
+          ? `${holding.ticker} ${holding.name} — read thesis`
+          : `${holding.ticker} ${holding.name} — no thesis written yet`
+      }
       style={{
         ...shared,
         width: '100%',
@@ -1045,12 +1047,13 @@ const ThesisDialog: React.FC<{
             fontFamily: MONO,
             fontSize: 13.5,
             lineHeight: 1.75,
-            color: COLORS.text,
+            color: thesis ? COLORS.text : COLORS.muted,
             marginTop: 18,
             whiteSpace: 'pre-wrap',
+            fontStyle: thesis ? 'normal' : 'italic',
           }}
         >
-          {thesis}
+          {thesis || 'Thesis not written yet.'}
         </p>
       </div>
     </div>
