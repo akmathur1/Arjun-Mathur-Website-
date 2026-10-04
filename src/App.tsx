@@ -2176,14 +2176,13 @@ const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
           minWidth: 0,
         }}
       >
-        I'm Arjun Mathur, founder of Molterra. I spend most of my time thinking about
-        computation, large systems, and the strange ways technology shapes the physical
-        world around us. My work sits closest to industrial software and scientific
-        infrastructure, especially in places where important work still depends on
-        fragmented tools and human intuition. I'm interested in building systems that
-        quietly accelerate progress behind the scenes. Outside of that, I write
-        occasionally about technology, research, markets, and ideas that feel a little
-        ahead of their time.
+        I'm Arjun Mathur. I spend most of my time thinking about computation, large
+        systems, and the strange ways technology shapes the physical world around us. My
+        work is in ambient intelligence at Molterra.com, especially in places where
+        important work still depends on fragmented tools and human intuition. I'm
+        interested in building systems that quietly accelerate progress behind the
+        scenes. Outside of that, I write occasionally about technology, research,
+        markets, and ideas that feel a little ahead of their time.
       </p>
 
       {/* Same flex basis as the Writings column below, so the panel's edges line up
