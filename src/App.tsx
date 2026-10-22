@@ -49,24 +49,13 @@ const THESES: Record<string, string> = thesesData;
 const thesisFor = (ticker: string) => (THESES[ticker] ?? '').trim();
 const HOLDINGS: { group: string; items: Holding[] }[] = [
   {
-    group: 'Technology & semiconductors',
+    group: 'Technology',
     items: [
       { ticker: 'AAPL', name: 'Apple' },
       { ticker: 'AMZN', name: 'Amazon' },
-      { ticker: 'ANET', name: 'Arista Networks' },
-      { ticker: 'ASML', name: 'ASML' },
-      { ticker: 'COHR', name: 'Coherent' },
       { ticker: 'CRWV', name: 'CoreWeave' },
-      { ticker: 'GLW', name: 'Corning' },
       { ticker: 'GOOGL', name: 'Alphabet' },
-      { ticker: 'INTC', name: 'Intel' },
       { ticker: 'META', name: 'Meta Platforms' },
-      { ticker: 'NOW', name: 'ServiceNow' },
-      { ticker: 'NVDA', name: 'Nvidia' },
-      { ticker: 'ORCL', name: 'Oracle' },
-      { ticker: 'SNDK', name: 'Sandisk' },
-      { ticker: 'VPG', name: 'Vishay Precision Group' },
-      { ticker: 'VRT', name: 'Vertiv' },
     ],
   },
   {
@@ -104,10 +93,7 @@ const HOLDINGS: { group: string; items: Holding[] }[] = [
   {
     group: 'Funds & ETFs',
     items: [
-      { ticker: 'DRAM', name: 'Roundhill Memory ETF' },
-      { ticker: 'FXAIX', name: 'Fidelity 500 Index Fund' },
       { ticker: 'GLD', name: 'SPDR Gold Trust' },
-      { ticker: 'JPY', name: 'Lazard Japanese Equity ETF' },
       { ticker: 'QQQ', name: 'Invesco QQQ' },
       { ticker: 'SPY', name: 'SPDR S&P 500 ETF' },
       { ticker: 'TOV', name: 'EA Series Trust ETF' },
