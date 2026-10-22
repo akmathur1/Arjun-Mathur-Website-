@@ -56,12 +56,15 @@ const HOLDINGS: { group: string; items: Holding[] }[] = [
       { ticker: 'CRWV', name: 'CoreWeave' },
       { ticker: 'GOOGL', name: 'Alphabet' },
       { ticker: 'META', name: 'Meta Platforms' },
+      { ticker: 'MSFT', name: 'Microsoft' },
+      { ticker: 'NFLX', name: 'Netflix' },
     ],
   },
   {
     group: 'Financials & exchanges',
     items: [
       { ticker: 'FMCC', name: 'Freddie Mac' },
+      { ticker: 'FNMA', name: 'Fannie Mae' },
       { ticker: 'GS', name: 'Goldman Sachs' },
       { ticker: 'ICE', name: 'Intercontinental Exchange' },
       { ticker: 'JEF', name: 'Jefferies Financial Group' },
@@ -76,6 +79,7 @@ const HOLDINGS: { group: string; items: Holding[] }[] = [
       { ticker: 'ALC', name: 'Alcon' },
       { ticker: 'DAL', name: 'Delta Air Lines' },
       { ticker: 'KO', name: 'Coca-Cola' },
+      { ticker: 'QSR', name: 'Restaurant Brands' },
       { ticker: 'UBER', name: 'Uber' },
       { ticker: 'WMT', name: 'Walmart' },
     ],
@@ -88,6 +92,7 @@ const HOLDINGS: { group: string; items: Holding[] }[] = [
       { ticker: 'PSHZF', name: 'Pershing Square Holdings' },
       { ticker: 'PSUS', name: 'Pershing Square USA' },
       { ticker: 'SEG', name: 'Seaport Entertainment Group' },
+      { ticker: 'SPARC', name: 'Pershing Square SPARC' },
     ],
   },
   {
