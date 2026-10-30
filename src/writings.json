@@ -1,24 +1,152 @@
 [
   {
-    "title": "First Writing Title",
-    "date": "March 4, 2026",
-    "description": "Placeholder description — swap for the real essay summary. Two lines here matches the rhythm of the reference layout.",
-    "tier": "featured"
+    "slug": "generational-wealth-ai-bubble",
+    "title": "How to get generational wealth out of the AI bubble",
+    "date": "October 29, 2026",
+    "description": "Four rules. Own only what survives a ten-year blackout, sell on a schedule and pay the tax, never borrow, and buy what the bubble is throwing away.",
+    "tier": "featured",
+    "tags": [
+      "investing",
+      "AI",
+      "rules"
+    ],
+    "body": [
+      "Four companies will spend about $725 billion on data centers this year, up 77 percent on 2025, and for the first time most of it is not coming out of cash flow. AI-linked companies have issued roughly $140 billion of investment-grade bonds so far in 2026, about half of all investment-grade issuance in America. Alphabet sold a hundred-year bond in February to pay for chips it will depreciate in five or six. Meta's debt went from $36 billion to $84 billion in two and a half years. More than 80 percent of the S&P 500's gain this year came from AI names; strip them out and the index is up about two percent.",
+      "I am not saying it ends tomorrow. I am saying it ends, because every capital cycle financed with other people's money has ended, and the question for someone my age is not how to call the top. It is how to come out the far side of the bubble owning more of the world than you went in with. Here are my four rules. They are not sophisticated. The sophisticated people are the ones who get hurt.",
+      "One. The ten-year test. Before I buy anything I ask whether the company would still be standing if the world shut down for ten years, or if something catastrophic hit the economy in year three. Not thriving. Standing. Coca-Cola (KO) passes: people drank the product through two world wars, a depression and a pandemic, and the company has paid a dividend every year since 1920. Restaurant Brands (QSR) passes: thirty thousand restaurants selling humans the cheapest hot calories in their town, a demand that intensifies in a crisis rather than vanishing. Meta (META) passes, which surprises people. It owns the social graph of more than three billion humans, the graph does not depreciate, and whatever superintelligence turns out to be, the company has the cash flow to stay in that race from behind if it has to.",
+      "Now run the same test on SK Hynix, or Broadcom, or Marvell. Fine companies. But ask ten people who own them what the company sells, to whom, and what happens to the price of that product when the buyer's capital budget is cut in half. Most cannot answer. They own a ticker that went up, which is the only fact they know about it. The test is not \"is this a good business.\" The test is \"do you understand what kills it, and can it be killed.\" High-bandwidth memory is a commodity with a cycle. A social graph is not.",
+      "Two. Do not get greedy, and understand what greed looks like from the inside. What the people around you are experiencing is a number getting larger, which is a different thing from getting richer, and the number stays theirs only until they convert it. Almost no one converts it. They call themselves long-term investors when the actual mechanism is fear of the capital gains tax, so they never sell, and then the market sells for them at a price they did not choose. Pay the tax. Long-term federal capital gains top out at 23.8 percent; the bubble's discount is not capped. Decide in advance what you will sell and when, in writing, and move the proceeds into a separate account you treat as sealed, so that future you cannot talk present you out of the exit. If you want real structure there are legal forms of it: gifting appreciated shares, a charitable remainder trust, a donor-advised fund. What does not exist is a trick that makes a realized gain untaxed. Anyone selling you that trick is selling you a reason never to sell, and never selling is how the paper wealth of 2000 and 2021 turned back into paper.",
+      "Three. No leverage. None. No margin, no options you do not fully understand, no loan against the portfolio to buy more portfolio. Cash in, shares out, the end. Every bubble has a mechanism by which a correct long-term view gets liquidated at the bottom, and the mechanism is always a margin call. India's retail traders lost about $10 billion in derivatives last year. Korean margin debt is above 34 trillion won against an index that has more than doubled since the start of last year, and the forced selling has already started. These are people whose thesis might even be right and whose balance sheet will not let them stay to find out. Only money you can lose without receiving a phone call is money you can hold through a crash.",
+      "Four. Buy what the bubble is making distressed, because the bubble is a sorting machine and it is sorting wrong. Capital is draining out of everything that is not AI and into everything that is, and the exits are mispriced. Gold is about a quarter below its January record. Uber (UBER) sits near a 52-week low because the market decided robotaxis will eat it, while it throws off close to $10 billion of free cash a year. Netflix (NFLX) is down roughly 45 percent in twelve months on an advertising guidance cut. Brookfield (BN) owns ports, pipelines, transmission lines and the kind of assets that produce cash for fifty years regardless of which model is state of the art. These are unsexy, cash-positive businesses, and unsexy cash-positive businesses are the whole root of wealth that outlives a cycle.",
+      "Then hold cash on top. Real cash, boring cash, earning whatever it earns. When the correction comes the companies that are real will still be real, and the labs that matter will still matter; if Anthropic or OpenAI ever list, the time to buy is after the first drawdown and not on the first day. What will not survive is the layer that financed growth with debt it cannot service when revenue misses: the data-center shells, the GPU lessors, the clouds with one customer. Over-financed companies die in every cycle, not because the product was bad, but because debt has a maturity date and hype does not.",
+      "The AI bubble will make a small number of people generationally wealthy. Almost none of them will be the ones who bought the most AI."
+    ],
+    "sources": [
+      {
+        "text": "CNBC, Tech AI spending approaches $700 billion in 2026 (February 2026)",
+        "url": "https://www.cnbc.com/2026/02/06/google-microsoft-meta-amazon-ai-cash.html"
+      },
+      {
+        "text": "Yahoo Finance, Meta, Alphabet, Amazon and Microsoft are getting hooked on debt (June 2026)",
+        "url": "https://finance.yahoo.com/markets/article/meta-alphabet-amazon-and-microsoft-are-getting-hooked-on-debt-to-fuel-ai-boom-140111460.html"
+      },
+      {
+        "text": "Yahoo Finance, Jefferies on the AI rally and 80 percent of S&P 500 gains (May 2026)",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/jefferies-says-ai-rally-remains-101812117.html"
+      },
+      {
+        "text": "SEBI, Profitability of Individual Traders in the Equity Derivatives Segment (August 2026)",
+        "url": "https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf"
+      },
+      {
+        "text": "Seoul Economic Daily, Korean investors pile into margin debt (October 2026)",
+        "url": "https://en.sedaily.com/finance/2026/10/18/margin-debt-up-4-trillion-won-as-stock-market-cash-falls-7"
+      },
+      {
+        "text": "24/7 Wall St, Netflix after a year of doubts (October 26, 2026)",
+        "url": "https://247wallst.com/investing/2026/10/26/netflix-price-prediction-where-the-stock-goes-after-a-year-of-doubts/"
+      },
+      {
+        "text": "TIKR, Uber near 52-week lows (June 2026)",
+        "url": "https://www.tikr.com/blog/uber-stock-is-near-52-week-lows-its-cfo-just-told-investors-why-the-selloff-misreads-the-business"
+      },
+      {
+        "text": "Finance Magnates, gold from record highs to sharp falls (June 2026)",
+        "url": "https://directory.financemagnates.com/forex-brokers/libertex/from-record-highs-to-sharp-falls-and-the-road-back-to-5000-gold/"
+      }
+    ]
   },
   {
-    "title": "Second Writing Title",
-    "date": "January 22, 2026",
-    "description": "Another placeholder. Short entries run bare, with no box around them."
+    "slug": "jane-street-india",
+    "title": "Four hundred to one",
+    "date": "October 29, 2026",
+    "description": "India trades 394 rupees of derivatives for every rupee of stock, nine in ten retail traders lose, and Jane Street made $4 billion there before the regulator noticed.",
+    "tags": [
+      "markets",
+      "India",
+      "derivatives"
+    ],
+    "body": [
+      "For every rupee of stock that changed hands on India's exchanges last fiscal year, about 394 rupees of derivatives changed hands on top of it. In 2016 the ratio was 14. The regulator, SEBI, publishes this number itself, in a study it released this August under the flat title \"Profitability of Individual Traders in the Equity Derivatives Segment,\" which is the bureaucratic way of saying: we counted, and they lose.",
+      "They lose. Of the 8.75 million individuals who traded futures and options in the year to March 2026, 87.7 percent finished in the red. Together they lost 91,685 crore rupees, roughly $10 billion, and that was an improvement: the year before, 10.6 million people lost about $13 billion. Over five years the cumulative figure is 3.85 lakh crore, call it $45 billion, transferred from salaried Indians to whoever sat on the other side of the trade. About a third of these traders hold no stock at all. They are not hedging anything. They are buying weekly Nifty options on their phones the way their fathers bought lottery tickets, except a lottery pays out in the aggregate and this does not.",
+      "Who sat on the other side? For two years the single most profitable answer was a firm from New York that most of them had never heard of. SEBI's July 2025 order alleged that Jane Street made about 36,500 crore rupees, around $4.3 billion, from Indian index derivatives between January 2023 and March 2025, of which 4,843 crore was, in SEBI's view, the product of manipulating the Bank Nifty index: buy the constituent banks hard in the morning, let the index drag the options with it, hold a much larger short options position, then sell the banks into the close. SEBI barred the firm from the market. Jane Street deposited the $567 million in escrow within two weeks, had the bar lifted within three, and is still arguing the merits before the Securities Appellate Tribunal this month, where it has accused the regulator of moving the goalposts after the fact.",
+      "Hold the two facts together. The retail base loses on the order of $10 billion a year, and the best trading firm in the world found that market so rich that its 2024 India take, $2.3 billion, was more than a tenth of its global revenue. In 2025 Jane Street booked $39.6 billion in net trading revenue, more than JPMorgan's entire trading operation. India was part of the reason it could.",
+      "This is the part the moralists miss. SEBI's complaint was never that Jane Street was good. It was that one pattern, in one index, crossed from aggressive into manipulative, and that is a question for the tribunal. The structural fact is older and stranger. On top of a stock market worth roughly $5 trillion, India has built a derivatives market whose notional turnover runs at four hundred times the underlying, populated by tens of millions of individuals who are statistically certain to lose. There is no other market like it. The United States has a bigger options market in dollars and a far smaller one in participation. Korea had the wildest index options market on earth in 2011 and regulated it into a corner within a year. India's regulator is tightening too, with bigger lot sizes and fewer weekly expiries, and the number of active traders fell 18 percent last year. It remains the largest casino in the world where the house seats are open to anyone with a Mumbai office and a market-making license.",
+      "Which is why the right lesson for a hedge fund is not \"stay away.\" Every quantitative firm I would want to own a piece of should have a desk in India and a compliance officer who has read the Jane Street order twice. The edge is not a trick. The edge is that a country of 1.4 billion people has decided, for now, to pay a toll of about $10 billion a year to whoever is fast enough to collect it, and has posted the tariff in a government PDF.",
+      "Toll roads are good businesses. The ones with a published rate are the best."
+    ],
+    "sources": [
+      {
+        "text": "SEBI, Profitability of Individual Traders in the Equity Derivatives Segment, FY25–FY26 (August 2026)",
+        "url": "https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf"
+      },
+      {
+        "text": "Business Standard, Jane Street accuses Sebi of shifting goalposts at SAT (October 8, 2026)",
+        "url": "https://www.business-standard.com/markets/news/jane-street-accuses-sebi-of-shifting-goalposts-in-sat-hearing-on-documents-126100801282_1.html"
+      },
+      {
+        "text": "Business Standard, Jane Street nets $2.3 bn from India equity options (May 2025)",
+        "url": "https://www.business-standard.com/amp/markets/news/jane-street-nets-2-3-bn-from-booming-india-equity-options-trading-125052301072_1.html"
+      },
+      {
+        "text": "Jane Street's record $39.6 billion 2025 trading revenue",
+        "url": "https://www.gurufocus.com/news/8816393/jane-street-achieves-record-396b-trading-revenue-in-2025"
+      },
+      {
+        "text": "Sebi bars Jane Street, orders disgorgement of ₹4,844 crore (July 2025)",
+        "url": "https://www.business-standard.com/amp/markets/news/sebi-bars-jane-street-orders-rs-4844-cr-disgorgement-market-manipulation-125070400081_1.html"
+      }
+    ]
   },
   {
-    "title": "Third Writing Title",
-    "date": "December 9, 2025",
-    "description": "Placeholder text for a third piece, kept to roughly two lines."
+    "slug": "bug-me-last",
+    "title": "Bug me last",
+    "date": "October 29, 2026",
+    "description": "An agent should consult its memory, then an API, then a search engine, then a browser, and only then a human. Each rung costs more than the one below it.",
+    "tags": [
+      "agents",
+      "software",
+      "design"
+    ],
+    "body": [
+      "Every time an agent asks me a question it could have answered itself, it tells me something about how it was built. The question is rarely hard. Which directory is the config in. JSON or YAML. Should I proceed. What it reveals is a lookup order, and the lookup order is wrong.",
+      "Here is the order I want. Memory first: what has already been established in this project, this session, this repo. Then APIs: the structured, typed, authenticated endpoints that return an exact answer in milliseconds. Then search: the open web, unstructured and noisy but wide. Then the browser: slow, visual, a last resort for pages that refuse to be anything but pages. Then, and only then, me.",
+      "The order is a cost gradient. Memory costs nothing. An API call costs a round trip and returns a fact with a schema attached. A search costs a round trip and returns ten guesses. A browser session costs seconds per click and returns pixels. A human costs minutes of latency at best, hours when I am asleep, and returns an answer that is itself a guess, because I usually know less about the current state of the task than the agent does. I am the most expensive oracle in the stack and the least reliable one. Treat me accordingly.",
+      "The industry has this backwards because of a confusion about what politeness is. Products that interrupt constantly are described as keeping the human in the loop, which sounds like respect and functions as delegation of blame. If the agent asks before every step, nothing it does is its fault. That is not safety. That is a design that has outsourced its judgment to the person least able to exercise it, at the moment they are least able to exercise it, and called the result alignment.",
+      "The honest version of the loop is narrower. Ask me when the action cannot be undone and the choice is a real fork: delete this, send that, spend money, publish. Ask me when the task as stated contradicts itself and no amount of reading will resolve the contradiction. Otherwise climb the ladder. Check what you already know. Hit the endpoint. Search. Open the page if you must. Take the most reasonable reading, write it at the top of your work so I can see which reading you took, and keep going.",
+      "I have been building a command framework in Rust where this principle is enforced by the compiler rather than by a prompt. The system definition is generated from the plugin's own types at build time, so a bound that will not typecheck is a compile error and not a surprise at registration. The point of that design is the point of the ladder: push every question as far upstream as it can go. Resolve it in memory if memory has it. Resolve it in the type system if the type system can. Resolve it in a schema. The human is where unresolvable things go, and the measure of a system is how few things it leaves unresolvable.",
+      "An agent that bugs me last has not stopped being careful. It has spent its carefulness on the rungs where carefulness is cheap, so that when it finally reaches me it is carrying a decision and not a question."
+    ]
   },
   {
-    "title": "Fourth Writing Title",
-    "date": "October 30, 2025",
-    "description": "A boxed placeholder, showing the hairline treatment used for older highlights.",
-    "tier": "boxed"
+    "slug": "open-box",
+    "title": "The sticker does the work",
+    "date": "October 29, 2026",
+    "description": "A television does not change when it goes back through the return door. Its price does. Most of investing is noticing that gap.",
+    "tier": "boxed",
+    "tags": [
+      "price",
+      "retail",
+      "investing"
+    ],
+    "body": [
+      "A 65-inch television costs what the shelf tag says it costs until the moment someone carries it back through the door. Then it costs something else. Nothing happened to the panel. The pixels did not age in the eleven days it sat in my living room. But the store cannot put it back on the shelf as new, so a second sticker goes on the box, and the second sticker says open box, and open box means a discount, and the discount is often large.",
+      "So here is a small game I play. Buy the television. Return it inside the window, intact, receipt in hand. Come back a few days later and find the same unit on the clearance rack wearing the second sticker. Buy it again. Pay cash on at least one leg, preferably both, because I would rather the loyalty database not draw a line between the two transactions, and because a game the store would prefer you did not play is still a game you are allowed to play.",
+      "I am not writing this to teach anyone how to shave a few hundred dollars off a Hisense. I am writing it because it is the cleanest demonstration I know of a fact most people never fully absorb: price is not a property of the object. Price is a story the seller tells about the object, and the story can be rewritten by events that never touch the thing itself.",
+      "Physicists have a name for a quantity that depends only on the state of a system and not on its history. The television is a state function. Its price is not. Its price carries a path: who held it, for how long, whether a box was opened, whether a form was filled in. The retailer's accounting cannot see the panel. It can only see the path.",
+      "Markets do this at scale, every day, with better instruments. A bond gets cut one notch below investment grade and every fund whose mandate forbids junk must sell it that week, whether or not a single cash flow changed. A stock falls out of an index and the index funds dump it on rebalance day. A company reports one bad quarter and the word distressed goes on the box. Same cash flows, new sticker. Someone who is only permitted to own clean boxes has to sell to someone who is willing to look inside.",
+      "That second buyer is who I try to be. Not because open boxes are always bargains; they are not, and sometimes the panel really is cracked. But the discount for a damaged label is paid by people who are not allowed to check and collected by people who are.",
+      "The return desk is the most honest counter in the store. It is where the seller admits, in writing, that the first price was only ever a story."
+    ],
+    "sources": [
+      {
+        "text": "Walmart's return policy, summarized",
+        "url": "https://dealnews.com/features/walmart/return-policy"
+      },
+      {
+        "text": "Open-box TV deals: what to check before you buy",
+        "url": "https://www.tomsguide.com/us/open-box-tv-deals-advice%2Cnews-26495.html"
+      }
+    ]
   }
 ]

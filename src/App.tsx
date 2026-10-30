@@ -136,7 +136,8 @@ type View =
   | { name: 'project'; slug: string }
   | { name: 'investments' }
   | { name: 'books' }
-  | { name: 'work' };
+  | { name: 'work' }
+  | { name: 'writing'; slug: string };
 
 // Contact has no page behind it yet, so it stays a plain anchor; an entry with a
 // view routes instead of jumping to a fragment.
@@ -549,6 +550,9 @@ const App: React.FC = () => {
   if (view.name === 'work') {
     return <WorkPage onNavigate={setView} />;
   }
+  if (view.name === 'writing') {
+    return <WritingPage slug={view.slug} onNavigate={setView} />;
+  }
   return <Home onNavigate={setView} />;
 };
 
@@ -745,21 +749,27 @@ const ContributionCalendar: React.FC = () => {
 // Same shape as ENTRIES so both columns share TimelineRow; tier mix mirrors Physical
 // Intelligence — newest carries the shadow, the rest vary.
 type WritingRecord = {
+  slug: string;
   title: string;
   date: string;
   description: string;
   tier?: string;
-  url?: string;
+  tags?: string[];
+  body: string[];
+  sources?: { text: string; url: string }[];
 };
 
 const writingRecords: WritingRecord[] = writingsData;
 
-const WRITINGS: Entry[] = writingRecords.map(({ title, date, description, tier }) => ({
-  title,
-  date,
-  description,
-  tier: tier === 'featured' || tier === 'boxed' ? tier : undefined,
-}));
+const WRITINGS: Entry[] = writingRecords.map(
+  ({ slug, title, date, description, tier }) => ({
+    slug,
+    title,
+    date,
+    description,
+    tier: tier === 'featured' || tier === 'boxed' ? tier : undefined,
+  })
+);
 
 const pct = (n: number) => `${n >= 0 ? '+' : '−'}${Math.abs(n).toFixed(2)}%`;
 
@@ -1072,6 +1082,122 @@ const ThesisDialog: React.FC<{
         </p>
       </div>
     </div>
+  );
+};
+
+const WritingPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = ({
+  slug,
+  onNavigate,
+}) => {
+  const writing = writingRecords.find((w) => w.slug === slug);
+
+  return (
+    <PageShell onNavigate={onNavigate}>
+      <a
+        href="#home"
+        onClick={(e) => {
+          e.preventDefault();
+          onNavigate({ name: 'home' });
+        }}
+        style={{
+          display: 'inline-block',
+          marginTop: 48,
+          fontFamily: MONO,
+          fontSize: 14,
+          color: COLORS.muted,
+          textDecoration: 'none',
+        }}
+      >
+        ← back
+      </a>
+
+      {!writing ? (
+        <p style={{ fontFamily: MONO, marginTop: 32, color: COLORS.muted }}>
+          Writing not found.
+        </p>
+      ) : (
+        <article style={{ marginTop: 28 }}>
+          <h2
+            style={{
+              fontFamily: SERIF,
+              fontWeight: 400,
+              fontSize: 26,
+              letterSpacing: -0.2,
+              lineHeight: 1.25,
+              color: COLORS.text,
+              maxWidth: 640,
+            }}
+          >
+            {writing.title}
+          </h2>
+
+          <div
+            style={{
+              fontFamily: MONO,
+              fontSize: 13,
+              color: COLORS.muted,
+              marginTop: 12,
+              letterSpacing: 0.3,
+            }}
+          >
+            {writing.date}
+            {writing.tags && writing.tags.length > 0 && ` · ${writing.tags.join(' · ')}`}
+          </div>
+
+          {writing.body.map((paragraph, i) => (
+            <BodyParagraph key={i} top={i === 0 ? 32 : 24}>
+              {paragraph}
+            </BodyParagraph>
+          ))}
+
+          {writing.sources && writing.sources.length > 0 && (
+            <div style={{ marginTop: 44, maxWidth: 640 }}>
+              <div
+                style={{
+                  fontFamily: MONO,
+                  fontSize: 11,
+                  letterSpacing: 1.2,
+                  textTransform: 'uppercase',
+                  color: COLORS.muted,
+                  paddingBottom: 8,
+                  borderBottom: '1px solid rgba(26,26,26,0.18)',
+                }}
+              >
+                Sources
+              </div>
+              <ul style={{ listStyle: 'none', marginTop: 14 }}>
+                {writing.sources.map((source) => (
+                  <li
+                    key={source.url}
+                    style={{
+                      fontFamily: MONO,
+                      fontSize: 12,
+                      lineHeight: 1.7,
+                      color: COLORS.muted,
+                      marginBottom: 8,
+                    }}
+                  >
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        color: COLORS.muted,
+                        textDecoration: 'underline',
+                        textUnderlineOffset: 4,
+                        textDecorationThickness: 1,
+                      }}
+                    >
+                      {source.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </article>
+      )}
+    </PageShell>
   );
 };
 
@@ -2227,7 +2353,10 @@ const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
           <SectionHeading>Writings</SectionHeading>
           <SubscribeToWritings />
         </div>
-        <Timeline entries={WRITINGS} />
+        <Timeline
+          entries={WRITINGS}
+          onOpen={(entry) => onNavigate({ name: 'writing', slug: entry.slug as string })}
+        />
       </div>
     </div>
   </PageShell>
