@@ -528,7 +528,29 @@ const ENTRIES: Entry[] = [
 ];
 
 const App: React.FC = () => {
-  const [view, setView] = useState<View>({ name: 'home' });
+  const [view, setViewState] = useState<View>(viewFromHash);
+
+  // The back button and a pasted `/#/writings/<slug>` both arrive as hash changes.
+  useEffect(() => {
+    const onHash = () => setViewState(viewFromHash());
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  const setView = (next: View) => {
+    if (next.name === 'writing') {
+      const hash = `#/writings/${next.slug}`;
+      if (window.location.hash === hash) setViewState(next);
+      else window.location.hash = hash; // hashchange sets the state
+      return;
+    }
+    // Leaving a writing: drop its hash without firing hashchange, so the state below
+    // is the only thing that moves the view.
+    if (WRITING_HASH.test(window.location.hash)) {
+      window.history.pushState(null, '', window.location.pathname + window.location.search);
+    }
+    setViewState(next);
+  };
 
   // Views are state, not URLs, so nothing resets the scroll on its own: without this
   // a link followed from deep in one page opens the next one already scrolled past
@@ -755,8 +777,30 @@ type WritingRecord = {
   description: string;
   tier?: string;
   tags?: string[];
+  url?: string;
+  announce?: boolean;
+  pinned?: boolean;
   body: string[];
   sources?: { text: string; url: string }[];
+};
+
+// The house style allows one piece of inline markup in a body paragraph: *italics*.
+const renderItalics = (text: string): React.ReactNode =>
+  text.split(/(\*[^*\n]+\*)/g).map((part, i) =>
+    part.length > 2 && part.startsWith('*') && part.endsWith('*') ? (
+      <em key={i}>{part.slice(1, -1)}</em>
+    ) : (
+      part
+    )
+  );
+
+// Writings are the one view with an address — `/#/writings/<slug>` — because the
+// announce email links straight to them and a reader should be able to share one.
+// Every other view stays in-memory state, as before.
+const WRITING_HASH = /^#\/writings\/([a-z0-9-]+)$/;
+const viewFromHash = (): View => {
+  const m = WRITING_HASH.exec(window.location.hash);
+  return m ? { name: 'writing', slug: m[1] } : { name: 'home' };
 };
 
 const writingRecords: WritingRecord[] = writingsData;
@@ -1146,7 +1190,7 @@ const WritingPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
 
           {writing.body.map((paragraph, i) => (
             <BodyParagraph key={i} top={i === 0 ? 32 : 24}>
-              {paragraph}
+              {renderItalics(paragraph)}
             </BodyParagraph>
           ))}
 

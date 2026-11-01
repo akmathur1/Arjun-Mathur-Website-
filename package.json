@@ -4,12 +4,22 @@
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
+    "prebuild": "node scripts/build-writings.mjs",
+    "writings": "node scripts/build-writings.mjs",
     "build": "react-scripts build",
     "test": "react-scripts test"
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "repository": {
     "type": "git",

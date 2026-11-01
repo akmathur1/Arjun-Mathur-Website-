@@ -36,7 +36,9 @@ try {
 }
 
 const seen = new Set(previous.map((w) => w.title));
-const fresh = current.filter((w) => !seen.has(w.title));
+// An essay can opt out with `announce: false` in its front matter (carried into the
+// JSON by the generator); it is still new, it just does not get mailed.
+const fresh = current.filter((w) => !seen.has(w.title) && w.announce !== false);
 
 if (fresh.length === 0) {
   console.log('No new writings. Nothing to announce.');
