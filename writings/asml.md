@@ -1,6 +1,6 @@
 ---
 title: "One percent of the light"
-date: 2026-03-28
+date: 2026-08-05
 summary: "Fifty thousand tin droplets a second, picometre mirrors, one company, sold out through 2028. The market still trades it like a cyclical."
 tags: [semiconductors, chokepoints, Netherlands]
 pinned: false

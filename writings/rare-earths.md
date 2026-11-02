@@ -1,6 +1,6 @@
 ---
 title: "The chokehold is in the chemistry"
-date: 2026-05-27
+date: 2026-08-30
 summary: "China mines 60 percent of magnet rare earths and separates 91 percent. The leverage was never in the ground. It is in the solvent."
 tags: [commodities, chokepoints, China]
 pinned: false

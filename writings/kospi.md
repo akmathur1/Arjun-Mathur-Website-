@@ -1,6 +1,6 @@
 ---
 title: "Seventeen years for 400 points, eighteen months for 7,000"
-date: 2026-08-29
+date: 2026-10-05
 summary: "Seventeen years took the KOSPI from 2,000 to 2,400; eighteen months took it to 9,385. Margin did the last leg, and margin runs both ways."
 tags: [markets, Korea, leverage]
 pinned: false

@@ -1,6 +1,6 @@
 ---
 title: "Every path ends in a wire"
-date: 2026-04-17
+date: 2026-08-14
 summary: "Three mines caved, flooded and collapsed in 2025, copper set records in 2026, and the energy transition turned out to be a metals trade."
 tags: [commodities, copper, energy]
 pinned: false

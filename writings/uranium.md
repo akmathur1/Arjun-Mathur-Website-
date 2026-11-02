@@ -1,6 +1,6 @@
 ---
 title: "Three neutrons, ten years"
-date: 2026-01-28
+date: 2026-07-12
 summary: "The AI companies are buying power from reactors that already exist. New uranium demand lands in the 2030s; only the term price has noticed."
 tags: [commodities, uranium, nuclear, AI]
 pinned: false

@@ -1,6 +1,6 @@
 ---
 title: "The sticker does the work"
-date: 2025-12-24
+date: 2026-06-30
 summary: "A television does not change when it goes back through the return door. Its price does. Most of investing is noticing that gap."
 tags: [price, retail, investing]
 pinned: false

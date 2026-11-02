@@ -1,6 +1,6 @@
 ---
 title: "Three envelopes"
-date: 2026-02-16
+date: 2026-07-21
 summary: "Three firms own three quarters of chip-design software. Washington took the pencil by letter in May 2025 and handed it back in forty days."
 tags: [semiconductors, chokepoints, export-controls]
 pinned: false

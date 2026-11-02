@@ -1,6 +1,6 @@
 ---
 title: "Sixteen years on a five-year chip"
-date: 2026-08-19
+date: 2026-09-30
 summary: "Digital Realty just booked a record quarter. I still pass: six tenants, sixteen-year leases on five-year chips, and power it does not own."
 tags: [AI, real estate, investing]
 pinned: false

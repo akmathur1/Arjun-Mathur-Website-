@@ -1,6 +1,6 @@
 ---
 title: "Boiling off in Qatar"
-date: 2026-10-01
+date: 2026-10-17
 summary: "A third of the world's helium sits behind Hormuz. Spot has tripled, fabs are rationed, and a Gulf peace is an AI trade nobody prices."
 tags: [commodities, chokepoints, geopolitics]
 pinned: false

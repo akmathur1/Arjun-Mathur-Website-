@@ -1,6 +1,6 @@
 ---
 title: "Four people and a gallon of diesel"
-date: 2026-06-06
+date: 2026-09-02
 summary: "The first coast-to-coast railroad in American history will be approved or killed by four board members on a clock that stops in August 2027."
 tags: [infrastructure, railroads, regulation]
 pinned: false

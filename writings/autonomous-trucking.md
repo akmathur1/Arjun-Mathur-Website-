@@ -1,6 +1,6 @@
 ---
 title: "A truck with no driver still needs a dispatcher"
-date: 2026-07-30
+date: 2026-09-23
 summary: "Driverless freight is late, real and about to be cheap. The profit pools with whoever owns the loads, and Uber trades as if it owned trucks."
 tags: [autonomy, freight, Uber, investing]
 pinned: false

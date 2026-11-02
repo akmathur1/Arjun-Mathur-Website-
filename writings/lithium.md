@@ -1,6 +1,6 @@
 ---
 title: "Six times the demand, the same price"
-date: 2026-06-20
+date: 2026-09-07
 summary: "Lithium demand has grown six-fold since 2017 and the price is back where it started. The rock was never the scarce part."
 tags: [commodities, lithium, batteries]
 pinned: false

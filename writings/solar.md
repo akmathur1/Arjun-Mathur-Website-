@@ -1,6 +1,6 @@
 ---
 title: "The panel was never the hard part"
-date: 2026-04-30
+date: 2026-08-17
 summary: "A module leaves China for under ten cents a watt and still waits years for a wire. The cheap part of solar is the only part that got cheap."
 tags: [energy, solar, China]
 pinned: false

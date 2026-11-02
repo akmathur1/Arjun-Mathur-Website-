@@ -1,6 +1,6 @@
 ---
 title: "Three hundred thousand dollars a bed"
-date: 2026-06-28
+date: 2026-09-11
 summary: "Two companies hold most of ICE detention. Washington now buys their buildings, pays them to run them, and cannot FOIA either one."
 tags: [institutions, immigration, incentives]
 pinned: false

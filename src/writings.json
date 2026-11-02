@@ -62,7 +62,7 @@
   {
     "slug": "nickel",
     "title": "A cartel of one",
-    "date": "October 20, 2026",
+    "date": "October 25, 2026",
     "description": "Indonesia mines two of every three tonnes of nickel, tried to ration its own ore, and watched the rally round-trip in ten months.",
     "tags": [
       "commodities",
@@ -107,7 +107,7 @@
   {
     "slug": "undersea-cables",
     "title": "A garden hose on the seabed",
-    "date": "October 8, 2026",
+    "date": "October 22, 2026",
     "description": "Six hundred cables carry nearly all intercontinental data, four companies own the new ones, and under twenty ships exist to mend them.",
     "tags": [
       "infrastructure",
@@ -151,7 +151,7 @@
   {
     "slug": "helium",
     "title": "Boiling off in Qatar",
-    "date": "October 1, 2026",
+    "date": "October 17, 2026",
     "description": "A third of the world's helium sits behind Hormuz. Spot has tripled, fabs are rationed, and a Gulf peace is an AI trade nobody prices.",
     "tags": [
       "commodities",
@@ -195,7 +195,7 @@
   {
     "slug": "lng",
     "title": "Qatar buys American",
-    "date": "September 20, 2026",
+    "date": "October 13, 2026",
     "description": "The world's second-largest LNG exporter just signed to buy 7 million tonnes a year of US gas. It is buying insurance on its own strait.",
     "tags": [
       "energy",
@@ -239,7 +239,7 @@
   {
     "slug": "cobalt",
     "title": "Rationing a metal the chemists are deleting",
-    "date": "September 6, 2026",
+    "date": "October 10, 2026",
     "description": "Congo shut its border, sent cobalt hydroxide up fourfold, and now watches the price fall: the cathode that needed the metal is retiring.",
     "tags": [
       "commodities",
@@ -284,7 +284,7 @@
   {
     "slug": "kospi",
     "title": "Seventeen years for 400 points, eighteen months for 7,000",
-    "date": "August 29, 2026",
+    "date": "October 5, 2026",
     "description": "Seventeen years took the KOSPI from 2,000 to 2,400; eighteen months took it to 9,385. Margin did the last leg, and margin runs both ways.",
     "tags": [
       "markets",
@@ -331,7 +331,7 @@
   {
     "slug": "data-center-reits",
     "title": "Sixteen years on a five-year chip",
-    "date": "August 19, 2026",
+    "date": "September 30, 2026",
     "description": "Digital Realty just booked a record quarter. I still pass: six tenants, sixteen-year leases on five-year chips, and power it does not own.",
     "tags": [
       "AI",
@@ -372,7 +372,7 @@
   {
     "slug": "netflix",
     "title": "The $2.8 billion consolation prize",
-    "date": "August 6, 2026",
+    "date": "September 26, 2026",
     "description": "Netflix won the streaming war, was paid $2.8 billion to lose the bidding war, and sits at a 52-week low. I own a lot and I want an activist.",
     "tags": [
       "companies",
@@ -417,7 +417,7 @@
   {
     "slug": "autonomous-trucking",
     "title": "A truck with no driver still needs a dispatcher",
-    "date": "July 30, 2026",
+    "date": "September 23, 2026",
     "description": "Driverless freight is late, real and about to be cheap. The profit pools with whoever owns the loads, and Uber trades as if it owned trucks.",
     "tags": [
       "autonomy",
@@ -464,7 +464,7 @@
   {
     "slug": "grid",
     "title": "Every wire on earth, again",
-    "date": "July 19, 2026",
+    "date": "September 19, 2026",
     "description": "The money for the grid is finally arriving. The transformers are not. Electrification is now limited by a queue, not a budget.",
     "tags": [
       "infrastructure",
@@ -509,7 +509,7 @@
   {
     "slug": "clorox",
     "title": "The bleach that stayed in the bottle",
-    "date": "July 10, 2026",
+    "date": "September 14, 2026",
     "description": "Clorox peaked at $240 in August 2020 and trades at $87 today. The safe trade is safe for a quarter and then it is a stock like any other.",
     "tags": [
       "companies",
@@ -555,7 +555,7 @@
   {
     "slug": "private-prisons",
     "title": "Three hundred thousand dollars a bed",
-    "date": "June 28, 2026",
+    "date": "September 11, 2026",
     "description": "Two companies hold most of ICE detention. Washington now buys their buildings, pays them to run them, and cannot FOIA either one.",
     "tags": [
       "institutions",
@@ -599,7 +599,7 @@
   {
     "slug": "lithium",
     "title": "Six times the demand, the same price",
-    "date": "June 20, 2026",
+    "date": "September 7, 2026",
     "description": "Lithium demand has grown six-fold since 2017 and the price is back where it started. The rock was never the scarce part.",
     "tags": [
       "commodities",
@@ -643,7 +643,7 @@
   {
     "slug": "railroad",
     "title": "Four people and a gallon of diesel",
-    "date": "June 6, 2026",
+    "date": "September 2, 2026",
     "description": "The first coast-to-coast railroad in American history will be approved or killed by four board members on a clock that stops in August 2027.",
     "tags": [
       "infrastructure",
@@ -687,7 +687,7 @@
   {
     "slug": "rare-earths",
     "title": "The chokehold is in the chemistry",
-    "date": "May 27, 2026",
+    "date": "August 30, 2026",
     "description": "China mines 60 percent of magnet rare earths and separates 91 percent. The leverage was never in the ground. It is in the solvent.",
     "tags": [
       "commodities",
@@ -731,7 +731,7 @@
   {
     "slug": "otis",
     "title": "The elevator is the only tenant that never leaves",
-    "date": "May 20, 2026",
+    "date": "August 26, 2026",
     "description": "Otis sells the elevator at a 5 percent margin and services it at 25 for decades. The annuity hiding inside every building is the business.",
     "tags": [
       "infrastructure",
@@ -772,7 +772,7 @@
   {
     "slug": "water",
     "title": "The metal that named the trade",
-    "date": "May 9, 2026",
+    "date": "August 22, 2026",
     "description": "Up to nine million American homes still drink through lead pipe banned in 1986. The rule to remove it runs to 2037, and the pipe is patient.",
     "tags": [
       "infrastructure",
@@ -821,7 +821,7 @@
   {
     "slug": "solar",
     "title": "The panel was never the hard part",
-    "date": "April 30, 2026",
+    "date": "August 17, 2026",
     "description": "A module leaves China for under ten cents a watt and still waits years for a wire. The cheap part of solar is the only part that got cheap.",
     "tags": [
       "energy",
@@ -866,7 +866,7 @@
   {
     "slug": "copper",
     "title": "Every path ends in a wire",
-    "date": "April 17, 2026",
+    "date": "August 14, 2026",
     "description": "Three mines caved, flooded and collapsed in 2025, copper set records in 2026, and the energy transition turned out to be a metals trade.",
     "tags": [
       "commodities",
@@ -911,7 +911,7 @@
   {
     "slug": "phosphate",
     "title": "Fourteen centuries of rock",
-    "date": "April 9, 2026",
+    "date": "August 9, 2026",
     "description": "Morocco holds 50 of the world's 73 billion tonnes of phosphate, nothing alive can substitute for it, and the seller has no shares.",
     "tags": [
       "commodities",
@@ -955,7 +955,7 @@
   {
     "slug": "asml",
     "title": "One percent of the light",
-    "date": "March 28, 2026",
+    "date": "August 5, 2026",
     "description": "Fifty thousand tin droplets a second, picometre mirrors, one company, sold out through 2028. The market still trades it like a cyclical.",
     "tags": [
       "semiconductors",
@@ -998,7 +998,7 @@
   {
     "slug": "jane-street-india",
     "title": "Four hundred to one",
-    "date": "March 18, 2026",
+    "date": "August 2, 2026",
     "description": "India trades 394 rupees of derivatives per rupee of stock, nine in ten retail traders lose, and Jane Street made $4 billion there.",
     "tags": [
       "markets",
@@ -1043,7 +1043,7 @@
   {
     "slug": "the-trades-pitch",
     "title": "A labour-supply request in work boots",
-    "date": "March 11, 2026",
+    "date": "July 28, 2026",
     "description": "The people telling teenagers to become electricians are the people who will hire them. A purchase order is not career advice.",
     "tags": [
       "labour",
@@ -1087,7 +1087,7 @@
   {
     "slug": "nintendo",
     "title": "Not on the axis",
-    "date": "February 25, 2026",
+    "date": "July 24, 2026",
     "description": "Switch 2 sold 23.7 million units in thirteen months. The stock is down 42 percent, at thirty times a year Nintendo says will be worse.",
     "tags": [
       "companies",
@@ -1133,7 +1133,7 @@
   {
     "slug": "eda",
     "title": "Three envelopes",
-    "date": "February 16, 2026",
+    "date": "July 21, 2026",
     "description": "Three firms own three quarters of chip-design software. Washington took the pencil by letter in May 2025 and handed it back in forty days.",
     "tags": [
       "semiconductors",
@@ -1178,7 +1178,7 @@
   {
     "slug": "vertical-integration",
     "title": "Four signatures, one hand",
-    "date": "February 5, 2026",
+    "date": "July 17, 2026",
     "description": "UnitedHealth is the payer, the doctor, the pharmacist and the rail the money runs on. The fury is a signal. The structure is the problem.",
     "tags": [
       "healthcare",
@@ -1223,7 +1223,7 @@
   {
     "slug": "uranium",
     "title": "Three neutrons, ten years",
-    "date": "January 28, 2026",
+    "date": "July 12, 2026",
     "description": "The AI companies are buying power from reactors that already exist. New uranium demand lands in the 2030s; only the term price has noticed.",
     "tags": [
       "commodities",
@@ -1270,7 +1270,7 @@
   {
     "slug": "toys-that-listen",
     "title": "The doll was a surveillance device",
-    "date": "January 16, 2026",
+    "date": "July 9, 2026",
     "description": "Germany banned a talking doll under its spy-equipment law. Alexa won the kitchen with no intelligence. Owning the room beats being smart.",
     "tags": [
       "technology",
@@ -1314,7 +1314,7 @@
   {
     "slug": "bug-me-last",
     "title": "Bug me last",
-    "date": "January 6, 2026",
+    "date": "July 4, 2026",
     "description": "Memory, then an API, then search, then the browser, then me. Every rung costs more than the one below it, and I am the most expensive.",
     "tags": [
       "agents",
@@ -1337,7 +1337,7 @@
   {
     "slug": "open-box",
     "title": "The sticker does the work",
-    "date": "December 24, 2025",
+    "date": "June 30, 2026",
     "description": "A television does not change when it goes back through the return door. Its price does. Most of investing is noticing that gap.",
     "tier": "boxed",
     "tags": [

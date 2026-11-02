@@ -1,6 +1,6 @@
 ---
 title: "Bug me last"
-date: 2026-01-06
+date: 2026-07-04
 summary: "Memory, then an API, then search, then the browser, then me. Every rung costs more than the one below it, and I am the most expensive."
 tags: [agents, software, design]
 pinned: false

@@ -1,6 +1,6 @@
 ---
 title: "A garden hose on the seabed"
-date: 2026-10-08
+date: 2026-10-22
 summary: "Six hundred cables carry nearly all intercontinental data, four companies own the new ones, and under twenty ships exist to mend them."
 tags: [infrastructure, chokepoints, internet]
 pinned: false

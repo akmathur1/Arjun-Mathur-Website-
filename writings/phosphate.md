@@ -1,6 +1,6 @@
 ---
 title: "Fourteen centuries of rock"
-date: 2026-04-09
+date: 2026-08-09
 summary: "Morocco holds 50 of the world's 73 billion tonnes of phosphate, nothing alive can substitute for it, and the seller has no shares."
 tags: [commodities, chokepoints, food]
 pinned: false
