@@ -62,7 +62,7 @@
   {
     "slug": "nickel",
     "title": "A cartel of one",
-    "date": "October 29, 2026",
+    "date": "October 20, 2026",
     "description": "Indonesia mines two of every three tonnes of nickel, tried to ration its own ore, and watched the rally round-trip in ten months.",
     "tags": [
       "commodities",
@@ -107,7 +107,7 @@
   {
     "slug": "undersea-cables",
     "title": "A garden hose on the seabed",
-    "date": "October 29, 2026",
+    "date": "October 8, 2026",
     "description": "Six hundred cables carry nearly all intercontinental data, four companies own the new ones, and under twenty ships exist to mend them.",
     "tags": [
       "infrastructure",
@@ -149,100 +149,9 @@
     ]
   },
   {
-    "slug": "the-trades-pitch",
-    "title": "A labour-supply request in work boots",
-    "date": "October 29, 2026",
-    "description": "The people telling teenagers to become electricians are the people who will hire them. A purchase order is not career advice.",
-    "tags": [
-      "labour",
-      "AI",
-      "data-centres"
-    ],
-    "url": "/#/writings/the-trades-pitch",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "In September 2025 the chief executive of Nvidia sat in a British television studio and told the country's teenagers what to do with their lives. \"If you're an electrician, you're a plumber, a carpenter, we're going to need hundreds of thousands of them to build all of these factories.\" The skilled craft segment of every economy, he said, \"is going to see a boom.\" He said it again on Fox Business this August: hundreds of thousands of jobs for \"people who build things, that make things with their hands.\" BlackRock's chief executive told an energy conference in March 2025 that he had warned the White House \"we're going to run out of electricians.\" Blackstone's president promised a \"huge boom in blue-collar employment.\" In July, leaders from BlackRock, Carhartt, Ford and Google formed an Alliance for America's Skilled Trades.",
-      "Take the pitch seriously first, because the shortage is real. The Census Bureau put data-centre construction at an $85 billion annual rate in August, up 73 percent on the year, while factory construction has fallen 32 percent from its 2024 peak. Electrical work is 45 to 70 percent of a data centre's construction budget, and the electricians' union near Washington has doubled its membership since 2018 to 14,700 and still cannot fill calls. A qualified electrician there earns about $59.50 an hour, better than $120,000 a year with benefits. About 20,000 electricians retire each year. The Bureau of Labor Statistics projects electricians to grow 9 percent in the decade to 2035 and plumbers 7 percent, against 3.5 percent for all jobs. None of that is the problem.",
-      "The problem is who is talking and what they are buying. Every voice in that chorus is a buyer of electrical labour or a financier of the buildings that need it. When a customer tells you to increase production, that is not career guidance. It is a purchase order, written in the language of virtue, real work and hands and things, because a purchase order written in the language of wages would have to name a price and a term. The term is the capex cycle. Four companies will spend about $725 billion on data centres this year. The cycle will end as capital cycles end, and the message to the eighteen-year-old carries no date.",
-      "Now the numbers the pitch leaves out. Nine percent growth for electricians is 75,900 jobs over ten years, about 7,600 a year across the country. In 2024 the electrical contractors' association counted 120,000 apprenticeship applications, up from 70,000 two years earlier, already more than the positions on offer. The pitch has worked. A large data centre employs up to 1,500 people at peak construction and about 50 once it is finished; one analysis of federal payroll data found as few as 23,000 permanent data-centre jobs nationwide in 2024. The farmers in the same speeches are the one group projected to shrink, down 3 percent; ironworkers grow 1 percent. And an electrical apprenticeship takes four to five years. In a driven system, a response that takes longer to arrive than the force takes to change is always answering the previous push. In 2008 nearly one in four union construction electricians was out of work. Nobody who gave a speech in 2005 was laid off in 2009.",
-      "The equipment side has no such exposure. Caterpillar (CAT) sells the generators behind every server hall, Deere (DE) sells the tractor to a farmer the projections say will not be replaced, and Otis (OTIS) will service the elevators whichever tenant is in the building. Machines are bought once, at the top of the cycle. Labour is rented while the cycle lasts and returned when it ends.",
-      "Become an electrician if the work suits you; it is a good trade. Just notice that the man on television is not your guidance counsellor. He is your customer, and he would like the price down."
-    ],
-    "sources": [
-      {
-        "text": "Fortune, Nvidia's Jensen Huang says electricians and plumbers will be needed by the hundreds of thousands (September 30, 2025)",
-        "url": "https://fortune.com/article/nvidia-billionaire-ceo-jensen-huang-demand-for-gen-z-skilled-trade-workers-electricans-plumbers-carpenters-data-center-growth-six-figure-salaries/"
-      },
-      {
-        "text": "Fortune, Jensen Huang says AI will create \"hundreds of thousands\" of new jobs, including in the trades (September 1, 2026)",
-        "url": "https://fortune.com/2026/09/01/nvidia-ceo-jensen-huang-ai-will-create-hundreds-of-thousands-of-jobs-skilled-trade-workers-data-centers/"
-      },
-      {
-        "text": "BLS, Occupational Outlook Handbook: Electricians (2025–35 projections)",
-        "url": "https://www.bls.gov/ooh/construction-and-extraction/electricians.htm"
-      },
-      {
-        "text": "BLS, Total employment projected to grow 3.5 percent between 2025 and 2035 (September 21, 2026)",
-        "url": "https://www.bls.gov/opub/ted/2026/total-employment-projected-to-grow-3-5-percent-between-2025-and-2035.htm"
-      },
-      {
-        "text": "Fortune, AI data centres and the electrician shortage (March 2, 2026)",
-        "url": "https://fortune.com/2026/03/02/ai-data-centers-electrician-shortage-gen-z-training-careers/"
-      }
-    ]
-  },
-  {
-    "slug": "autonomous-trucking",
-    "title": "A truck with no driver still needs a dispatcher",
-    "date": "October 29, 2026",
-    "description": "Driverless freight is late, real and about to be cheap. The profit pools with whoever owns the loads, and Uber trades as if it owned trucks.",
-    "tags": [
-      "autonomy",
-      "freight",
-      "Uber",
-      "investing"
-    ],
-    "url": "/#/writings/autonomous-trucking",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "On Wednesday Aurora (AUR) told its shareholders it has built twenty driverless trucks. In February the target was two hundred by year end; that is now the end of February, revenue guidance has gone from a $15 million midpoint to $9 million, the quarter brought in $3 million against a $234 million net loss, and a company valued near $10 billion fell 7 percent after hours. Kodiak (KDK), down 87 percent since listing last year, signed its first binding highway contract: seventy-five trucks for a Fresno carrier, from 2028. Tesla's Semi reached volume production in September, seven years late, and is not autonomous.",
-      "Aurora's trucks have run half a million commercial miles with nobody aboard, including the thousand miles from Fort Worth to Phoenix no human may legally drive without stopping. A thousand trucks are promised for the end of 2027; one carrier has signed for five hundred, non-binding. The $250 million Aurora expects to burn this quarter is binding.",
-      "The 1,300 percent growth to 2036 I kept hearing is not Goldman's; it is a research shop's $1.3 billion last year becoming $17.7 billion. Goldman's April forecast is more useful: a $560 billion global market by 2035, cost parity with a human driver in the United States in 2028, and a cost per mile falling from $8.56 today to $2.03, against a driver at $2.55 now and $2.84 then. A truck that runs 80 cents a mile cheaper than a person and never hits an hours-of-service limit does not need to be clever. It needs to be allowed.",
-      "The forecast leaves something out. Once the driver is software, the truck is a commodity Volvo and Paccar build on their own lines, and the software is a per-mile licence sold by two or three vendors with no pricing power. Aurora and Kodiak both call themselves asset-light: the carrier buys the truck and rents the driver by the mile. Then who makes the money? Whoever has the loads. Matching freight to trucks across a continent is a demand problem, and one company has spent sixteen years on nothing else.",
-      "I own Uber (UBER), and the market has decided it is a ride-hailing company about to be eaten by robotaxis. It closed at $65.78 on Tuesday, a 52-week low, 35 percent below its high, fourteen times trailing earnings, with $10 billion of trailing free cash flow for the first time. Bookings grew 24 percent last quarter. Waymo left Uber's app in Phoenix in July and opens its own in Austin and Atlanta in 2028; it runs about 4,000 cars. Uber did 3.9 billion trips in a quarter, under half a percent of them autonomous. The disruption is real and small, and priced as large and certain.",
-      "Freight is the part nobody models. Uber Freight manages more than $20 billion of it; Aurora, Volvo's autonomous unit and Waabi have all hauled its loads between Dallas and Houston; Uber owns a piece of Aurora from selling it its self-driving unit in 2020 and backed Waabi's round. It builds no truck and writes no driver. In Rust I would call it a trait: the caller never learns which concrete type sits behind it, only that the method is implemented. The market is pricing the trait as one of the implementations.",
-      "The counter-argument is serious. A demand layer has power only while supply is fragmented. If Waymo ends up with most robotaxis and two firms with most trucks, they sell direct and Uber's take rate becomes a toll the owners refuse to pay. The founder of Uber Freight left last year to run operations at Waabi, which tells you where he thinks the power sits.",
-      "My bet is the other way, because every autonomy company is becoming a thin-margin seller of software by the mile, and none of them has a customer. A truck with no driver still needs someone to tell it where to go."
-    ],
-    "sources": [
-      {
-        "text": "Aurora Innovation, third quarter 2026 shareholder letter (Form 8-K, October 28, 2026)",
-        "url": "https://www.sec.gov/Archives/edgar/data/0001828108/000182810826000092/aurora26q3shareholderlet.htm"
-      },
-      {
-        "text": "Goldman Sachs Research, Robotaxis are forecast to become a $400 billion market in 2035 (April 30, 2026)",
-        "url": "https://www.goldmansachs.com/insights/articles/robotaxis-to-become-a-400-billion-dollar-market-in-2035"
-      },
-      {
-        "text": "TechCrunch, Uber is building an autonomous vehicle empire: every company it's using (August 1, 2026)",
-        "url": "https://techcrunch.com/2026/08/01/ubers-autonomous-vehicle-deal-tracker/"
-      },
-      {
-        "text": "TIKR, Uber stock is down 28% and the robotaxi clock is ticking (September 24, 2026)",
-        "url": "https://www.tikr.com/blog/uber-stock-is-down-28-and-the-robotaxi-clock-is-ticking-its-ceo-just-bought-10-million-of-stock-anyway"
-      },
-      {
-        "text": "Electrek, Tesla Semi finally enters volume production, 7 years behind schedule (September 25, 2026)",
-        "url": "https://electrek.co/2026/09/25/tesla-semi-volume-production-launch-nevada-factory/"
-      }
-    ]
-  },
-  {
     "slug": "helium",
     "title": "Boiling off in Qatar",
-    "date": "October 29, 2026",
+    "date": "October 1, 2026",
     "description": "A third of the world's helium sits behind Hormuz. Spot has tripled, fabs are rationed, and a Gulf peace is an AI trade nobody prices.",
     "tags": [
       "commodities",
@@ -284,389 +193,9 @@
     ]
   },
   {
-    "slug": "bug-me-last",
-    "title": "Bug me last",
-    "date": "October 29, 2026",
-    "description": "Memory, then an API, then search, then the browser, then me. Every rung costs more than the one below it, and I am the most expensive.",
-    "tags": [
-      "agents",
-      "software",
-      "design"
-    ],
-    "url": "/#/writings/bug-me-last",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "Every time an agent asks me a question it could have answered itself, it tells me something about how it was built. The question is rarely hard. Which directory is the config in. JSON or YAML. Should I proceed. What it reveals is a lookup order, and the lookup order is wrong.",
-      "Here is the order I want. Memory first: what has already been established in this project, this session, this repo. Then APIs: the structured, typed, authenticated endpoints that return an exact answer in milliseconds. Then search: the open web, unstructured and noisy but wide. Then the browser: slow, visual, a last resort for pages that refuse to be anything but pages. Then, and only then, me.",
-      "The order is a cost gradient. Memory costs nothing. An API call costs a round trip and returns a fact with a schema attached. A search costs a round trip and returns ten guesses. A browser session costs seconds per click and returns pixels. A human costs minutes of latency at best, hours when I am asleep, and returns an answer that is itself a guess, because I usually know less about the current state of the task than the agent does. I am the most expensive oracle in the stack and the least reliable one. Treat me accordingly.",
-      "The industry has this backwards because of a confusion about what politeness is. Products that interrupt constantly are described as keeping the human in the loop, which sounds like respect and functions as delegation of blame. If the agent asks before every step, nothing it does is its fault. That is not safety. That is a design that has outsourced its judgment to the person least able to exercise it, at the moment they are least able to exercise it, and called the result alignment.",
-      "The honest version of the loop is narrower. Ask me when the action cannot be undone and the choice is a real fork: delete this, send that, spend money, publish. Ask me when the task as stated contradicts itself and no amount of reading will resolve the contradiction. Otherwise climb the ladder. Check what you already know. Hit the endpoint. Search. Open the page if you must. Take the most reasonable reading, write it at the top of your work so I can see which reading you took, and keep going.",
-      "I have been building a command framework in Rust where this principle is enforced by the compiler rather than by a prompt. The system definition is generated from the plugin's own types at build time, so a bound that will not typecheck is a compile error and not a surprise at registration. The point of that design is the point of the ladder: push every question as far upstream as it can go. Resolve it in memory if memory has it. Resolve it in the type system if the type system can. Resolve it in a schema. The human is where unresolvable things go, and the measure of a system is how few things it leaves unresolvable.",
-      "An agent that bugs me last has not stopped being careful. It has spent its carefulness on the rungs where carefulness is cheap, so that when it finally reaches me it is carrying a decision and not a question."
-    ]
-  },
-  {
-    "slug": "copper",
-    "title": "Every path ends in a wire",
-    "date": "October 29, 2026",
-    "description": "Three mines caved, flooded and collapsed in 2025, copper set records in 2026, and the energy transition turned out to be a metals trade.",
-    "tags": [
-      "commodities",
-      "copper",
-      "energy"
-    ],
-    "url": "/#/writings/copper",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "On September 8, 2025, about 800,000 tonnes of wet mud moved through the Grasberg Block Cave in Papua and killed seven workers. Freeport-McMoRan (FCX) declared force majeure on the 24th, cut 2026 guidance for the world's second-largest copper mine by roughly 35 percent, and is still not at full rates. That was the third blow of the year. In May a seismic event flooded the Kakula mine in Congo and Ivanhoe (IVN) withdrew its guidance; its 2026 target is 380,000 to 420,000 tonnes from a complex meant to do 550,000. On July 31 a collapse at El Teniente in Chile killed six workers; Codelco suspended the mine's deep expansion this August over seismic risk, and an avalanche there killed two more on October 11. Escondida, the largest copper mine on earth, shut after a fatal accident on September 23.",
-      "Benchmark put the Grasberg loss alone at 591,000 tonnes through the end of 2026, 2.6 percent of a 23-million-tonne world. Global mine output fell 1 percent in the first seven months of this year and Chilean output fell 7 percent. Smelters short of concentrate are paying miners $272 a tonne to take it; in a normal year the money flows the other way. Copper began 2026 at $12,423 a tonne, printed $14,875 on September 10, settled a record $14,822 for cash on October 12, and sits near $14,500 this week, up a third on a year ago.",
-      "People say South America controls this market, which holds until you count. Chile mined 5.3 million tonnes in 2025 and Peru 2.7 million: 35 percent of the world together, and Congo, at 3.2 million, now out-produces Peru. What Chile has is a toll booth. Codelco, state-owned, digs about a quarter of the country's copper, booked 26,875 tonnes in 2025 that an internal audit found it had not produced, and mined 11 percent less in the first half of 2026. The royalty law in force since January 2024 pushes the effective tax burden on large miners to about 45 percent. Mining is 57 percent of Chile's exports. A country that dependent on one metal does not control the price. It prays to it.",
-      "Now the question I started with: what the shortage did to renewables. Less than you would think, and arithmetic says why. An electric car carries about 53 kilograms of copper to a petrol car's 22. At $14.50 a kilogram that is $770 of copper in the EV, and the whole rally of the past year added about $190 to it. Offshore wind uses about eight tonnes per megawatt against roughly one for a coal plant, so a megawatt of turbine carries $116,000 of copper, a rounding error on hardware costing millions per megawatt installed. The transition did not get expensive because copper did. Copper got expensive because the transition is real, because a data centre needs 20 to 40 tonnes per megawatt, and because China's grid spending rose 37 percent in the first quarter.",
-      "Which is what the climate deck and the mining deck both avoid saying. Solar, wind, gas, nuclear and the server hall disagree about everything except the conductor. Whatever makes the electron, copper carries it, with a resistivity only silver beats; aluminium, the one substitute, needs about 60 percent more cross-section to do the same job. The energy transition is a copper trade wearing a climate costume, and the costume is what gets the subsidy.",
-      "One caveat on the record. More than 700,000 tonnes sit in US warehouses, pulled in ahead of a Section 232 tariff decision on refined copper that has been pending since June and that Macquarie expects to pass New Year unanswered. COMEX stocks are up roughly 700 percent since February 2025 and forecasters still pencil in a small 2026 surplus. Some of the all-time high is metal hiding in American sheds.",
-      "Three accidents moved the price. The wire is what holds it there."
-    ],
-    "sources": [
-      {
-        "text": "USGS, Mineral Commodity Summaries 2026: Copper",
-        "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-copper.pdf"
-      },
-      {
-        "text": "Fastmarkets, Base metals head to LME Week 2026 with record-low TCs (October 14, 2026)",
-        "url": "https://www.fastmarkets.com/insights/base-metals-head-to-lme-week-2026-with-record-low-tcs-war-hit-supply-chains/"
-      },
-      {
-        "text": "Mining.com, Copper price forecasts lifted for 2026 but tariff collapse still on the table (October 14, 2026)",
-        "url": "https://www.mining.com/copper-price-forecasts-lifted-for-2026-but-tariff-collapse-still-on-the-table/"
-      },
-      {
-        "text": "Rio Times, Copper in Latin America: mines, prices, politics (October 16, 2026)",
-        "url": "https://www.riotimesonline.com/copper-latin-america-mines-prices-politics-2026/"
-      },
-      {
-        "text": "Investing News, Freeport plans 2026 Grasberg restart after deadly mud rush",
-        "url": "https://investingnews.com/freeport-targets-2026-grasberg-restart/"
-      }
-    ]
-  },
-  {
-    "slug": "grid",
-    "title": "Every wire on earth, again",
-    "date": "October 29, 2026",
-    "description": "The money for the grid is finally arriving. The transformers are not. Electrification is now limited by a queue, not a budget.",
-    "tags": [
-      "infrastructure",
-      "electricity",
-      "utilities"
-    ],
-    "url": "/#/writings/grid",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "Every power line on earth, strung end to end, runs to about 80 million kilometres. The IEA's count of what has to be added or replaced by 2040 to meet the targets governments have already signed is also 80 million kilometres. Not a share of it. The grid, again, in fourteen years, while the first one stays switched on.",
-      "The grid is the oldest machine most countries still run at full load. It has delivered power for over a century, and for most of this one it was treated as finished: global grid investment sat flat at roughly $300 billion a year while everyone argued about generation. The IEA's grids report said the figure had to pass $600 billion by 2030. Its 2026 investment report has network spending at about $550 billion this year, up nearly a fifth in twelve months. The money, for once, is arriving.",
-      "What is not arriving is the equipment. A large power transformer now takes up to four years to secure. A high-voltage cable takes two to three, a direct-current cable more than five, and transformer prices are up about 75 percent since 2019 while cable prices have roughly doubled. A new high-voltage line takes seven years or more; a data centre takes one to three. More than 2,500 gigawatts of generation, storage and large loads are stalled in connection queues worldwide, about 150 gigawatts of them data centres. In the whole of the last decade the world built about 1.5 million kilometres of new transmission.",
-      "Here is the physics of the mismatch, and I think it is the whole story. Any driven system has a relaxation time, and one forced faster than it can relax never settles into a new equilibrium; it lags the drive. A grid relaxes over five to fifteen years. The thing driving it, a hyperscaler's capital budget, changes by the quarter. The lag has a name on a utility's books. It is called the interconnection queue.",
-      "Now the demand the wire is supposed to carry. The world used about 28,200 terawatt-hours of electricity in 2025, three percent more than the year before, and the IEA expects 33,600 by 2030: roughly 1,100 terawatt-hours a year of new demand, against 700 a year over the previous decade. The United States uses about 4,200. So the world is adding a United States of demand every four years, and in the IEA's central scenario it adds more than two of them by 2035. Most people assume that is the AI. Globally it is not; data centres are less than a tenth of the growth, and the peak is set by air conditioning. America is different: data centres are about half of the 420-plus terawatt-hours it is set to add by 2030.",
-      "Which is where American Electric Power (AEP) comes in. Its summer peak was about 37 gigawatts last year. By May it had signed agreements for 63 gigawatts of new load by 2030, 41 of them in Texas, most of it data centres. They came to AEP because it owns about 2,100 miles of 765-kilovolt line, nine tenths of what exists in the country. Its five-year capital plan rose a third to $72 billion last October, to $78 billion in May and to $100 billion this week, with the rate base compounding at 13 percent or better through 2031. What the release calls \"up to $21 billion of fixed cost offsets for residential customers\" translates: under the old tariffs you paid for the hyperscaler's substation; under the new ones in Ohio, Indiana, Kentucky and West Virginia, the hyperscaler does. Last October AEP guided residential rates up 3.5 percent a year, and it earns a regulated return on every dollar of either. If I owned a utility, it would be the one that owns the wire everyone else is waiting for.",
-      "The power crosses the state in milliseconds. The wire it needs arrives in 2033."
-    ],
-    "sources": [
-      {
-        "text": "IEA, Electricity Grids and Secure Energy Transitions, executive summary",
-        "url": "https://www.iea.org/reports/electricity-grids-and-secure-energy-transitions/executive-summary"
-      },
-      {
-        "text": "IEA, Electricity 2026: analysis and forecast to 2030",
-        "url": "https://iea.blob.core.windows.net/assets/b73798cb-e452-42b9-9d8a-07542de7a041/Electricity_2026.pdf"
-      },
-      {
-        "text": "IEA, Building the Future Transmission Grid, executive summary (2025)",
-        "url": "https://www.iea.org/reports/building-the-future-transmission-grid/executive-summary"
-      },
-      {
-        "text": "AEP, first-quarter 2026 earnings and increased five-year capital plan (May 5, 2026)",
-        "url": "https://www.aep.com/news/stories/view/11917/"
-      },
-      {
-        "text": "AEP newsroom, third-quarter 2026 earnings: $100 billion capital plan (October 28, 2026)",
-        "url": "https://www.aep.com/news/"
-      }
-    ]
-  },
-  {
-    "slug": "jane-street-india",
-    "title": "Four hundred to one",
-    "date": "October 29, 2026",
-    "description": "India trades 394 rupees of derivatives per rupee of stock, nine in ten retail traders lose, and Jane Street made $4 billion there.",
-    "tags": [
-      "markets",
-      "India",
-      "derivatives"
-    ],
-    "url": "/#/writings/jane-street-india",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "For every rupee of stock that changed hands on India's exchanges last fiscal year, about 394 rupees of derivatives changed hands on top of it. In 2016 the ratio was 14. The regulator, SEBI, publishes this number itself, in a study it released this August under the flat title \"Profitability of Individual Traders in the Equity Derivatives Segment,\" which is the bureaucratic way of saying: we counted, and they lose.",
-      "They lose. Of the 8.75 million individuals who traded futures and options in the year to March 2026, 87.7 percent finished in the red. Together they lost 91,685 crore rupees, roughly $10 billion, and that was an improvement: the year before, 10.6 million people lost about $13 billion. Over five years the cumulative figure is 3.85 lakh crore, call it $45 billion, transferred from salaried Indians to whoever sat on the other side of the trade. About a third of these traders hold no stock at all. They are not hedging anything. They are buying weekly Nifty options on their phones the way their fathers bought lottery tickets, except a lottery pays out in the aggregate and this does not.",
-      "Who sat on the other side? For two years the single most profitable answer was a firm from New York that most of them had never heard of. SEBI's July 2025 order alleged that Jane Street made about 36,500 crore rupees, around $4.3 billion, from Indian index derivatives between January 2023 and March 2025, of which 4,843 crore was, in SEBI's view, the product of manipulating the Bank Nifty index: buy the constituent banks hard in the morning, let the index drag the options with it, hold a much larger short options position, then sell the banks into the close. SEBI barred the firm from the market. Jane Street deposited the $567 million in escrow within two weeks, had the bar lifted within three, and is still arguing the merits before the Securities Appellate Tribunal this month, where it has accused the regulator of moving the goalposts after the fact.",
-      "Hold the two facts together. The retail base loses on the order of $10 billion a year, and the best trading firm in the world found that market so rich that its 2024 India take, $2.3 billion, was more than a tenth of its global revenue. In 2025 Jane Street booked $39.6 billion in net trading revenue, more than JPMorgan's entire trading operation. India was part of the reason it could.",
-      "This is the part the moralists miss. SEBI's complaint was never that Jane Street was good. It was that one pattern, in one index, crossed from aggressive into manipulative, and that is a question for the tribunal. The structural fact is older and stranger. On top of a stock market worth roughly $5 trillion, India has built a derivatives market whose notional turnover runs at four hundred times the underlying, populated by tens of millions of individuals who are statistically certain to lose. There is no other market like it. The United States has a bigger options market in dollars and a far smaller one in participation. Korea had the wildest index options market on earth in 2011 and regulated it into a corner within a year. India's regulator is tightening too, with bigger lot sizes and fewer weekly expiries, and the number of active traders fell 18 percent last year. It remains the largest casino in the world where the house seats are open to anyone with a Mumbai office and a market-making license.",
-      "Which is why the right lesson for a hedge fund is not \"stay away.\" Every quantitative firm I would want to own a piece of should have a desk in India and a compliance officer who has read the Jane Street order twice. The edge is not a trick. The edge is that a country of 1.4 billion people has decided, for now, to pay a toll of about $10 billion a year to whoever is fast enough to collect it, and has posted the tariff in a government PDF.",
-      "Toll roads are good businesses. The ones with a published rate are the best."
-    ],
-    "sources": [
-      {
-        "text": "SEBI, Profitability of Individual Traders in the Equity Derivatives Segment, FY25–FY26 (August 2026)",
-        "url": "https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf"
-      },
-      {
-        "text": "Business Standard, Jane Street accuses Sebi of shifting goalposts at SAT (October 8, 2026)",
-        "url": "https://www.business-standard.com/markets/news/jane-street-accuses-sebi-of-shifting-goalposts-in-sat-hearing-on-documents-126100801282_1.html"
-      },
-      {
-        "text": "Business Standard, Jane Street nets $2.3 bn from India equity options (May 2025)",
-        "url": "https://www.business-standard.com/amp/markets/news/jane-street-nets-2-3-bn-from-booming-india-equity-options-trading-125052301072_1.html"
-      },
-      {
-        "text": "Jane Street's record $39.6 billion 2025 trading revenue",
-        "url": "https://www.gurufocus.com/news/8816393/jane-street-achieves-record-396b-trading-revenue-in-2025"
-      },
-      {
-        "text": "Sebi bars Jane Street, orders disgorgement of ₹4,844 crore (July 2025)",
-        "url": "https://www.business-standard.com/amp/markets/news/sebi-bars-jane-street-orders-rs-4844-cr-disgorgement-market-manipulation-125070400081_1.html"
-      }
-    ]
-  },
-  {
-    "slug": "railroad",
-    "title": "Four people and a gallon of diesel",
-    "date": "October 29, 2026",
-    "description": "The first coast-to-coast railroad in American history will be approved or killed by four board members on a clock that stops in August 2027.",
-    "tags": [
-      "infrastructure",
-      "railroads",
-      "regulation"
-    ],
-    "url": "/#/writings/railroad",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "A gallon of diesel moves a ton of freight nearly 500 miles on an American railroad. Union Pacific (UNP) burned 1.034 gallons per thousand gross ton-miles last quarter, and the number falls a percent or two a year because the physics is on its side: a steel wheel on a steel rail deforms by microns, a rubber tyre on asphalt by centimetres, and rolling resistance is the energy you lose putting the deformation back. Rail moves about 40 percent of long-distance ton-miles for 1.8 percent of transport emissions. Nothing on land comes close, and no single company has ever run the whole distance.",
-      "Union Pacific would like to be the first. On July 29, 2025 it agreed to buy Norfolk Southern for one share plus $88.82 in cash, $320 a share at the time and about $85 billion of enterprise value, promising $2.75 billion a year in savings and more than 50,000 route miles across 43 states, Pacific to Atlantic, under one dispatcher. Shareholders of both companies approved it in November with more than 99 percent of votes. If the regulator says no, Union Pacific pays Norfolk Southern $2.5 billion and walks.",
-      "The regulator is the Surface Transportation Board, and the decade in American freight is being settled inside a calendar almost nobody reads. The Board rejected the first application as incomplete in January: the railroads had projected no market shares past closing and left out the part of the merger agreement that defines when Union Pacific may walk. The revised filing arrived April 30. The Board accepted it on May 28 and froze the case for more detail on captive shippers, diversion and gateways. It lifted the freeze on August 18 and set the clock: comments November 18, replies February 16, briefs May 28, a decision by August 28, 2027. In September it refused to throw the case out early, as BNSF, CSX and five shipper groups asked, saying only that a deal of first impression deserved a full record.",
-      "First impression is the phrase that matters. This is the first merger judged under rules the Board wrote in 2001 and has never used, which require a Class I combination to enhance competition, not preserve it. The opponents say a coast-to-coast carrier cannot pass that test because its whole point is to remove the interchange, and the interchange is where a shipper gets a second quote. Union Pacific's answer is that the real competitor is the truck, and that autonomous trucks with no driver to pay or rest will take share from a network that loses a day or two at every hand-off. Its chief executive told a television interviewer this month he was 99.99 percent sure of approval and needs no divestitures. The chemical, fertilizer and grain shippers who would be left with one railroad in many places are less sure, and they pay the rate.",
-      "I think the shippers are right about the mechanism and the railroads are right about the truck, and the Board must pick which of two true things it fears more. What unsettles me is who picks. Five seats, four members: a chairman named by the President in January 2025, a vice chairman, a Democrat whose term runs to 2030, and a rail consultant sworn in this June. The fifth seat has been empty since the previous chairman was removed in August 2025 with no cause stated, a removal the Supreme Court's June ruling on independent agencies made all but unreviewable. No one has been nominated to it. There is no veto above these four, no appeal except to a court that defers to them, no ballot with their names on it.",
-      "The outcome will arrive as a press release with a number like 26-23. The railroad it describes will last a hundred years. The four people who decide it, you could not name."
-    ],
-    "sources": [
-      {
-        "text": "Union Pacific, Form 8-K exhibit: Union Pacific and Norfolk Southern to create America's first transcontinental railroad (July 29, 2025)",
-        "url": "https://www.sec.gov/Archives/edgar/data/100885/000119312525167154/d64537dex991.htm"
-      },
-      {
-        "text": "Surface Transportation Board, STB finds UP-NS merger application is incomplete (January 16, 2026)",
-        "url": "https://www.stb.gov/news-communications/latest-news/pr-26-02/"
-      },
-      {
-        "text": "Surface Transportation Board, STB denies motions seeking summary denial of UP-NS merger application (September 18, 2026)",
-        "url": "https://www.stb.gov/news-communications/latest-news/pr-26-23/"
-      },
-      {
-        "text": "Thompson Hine, STB lifts abeyance in Union Pacific–Norfolk Southern merger and sets procedural schedule (August 2026)",
-        "url": "https://www.thompsonhine.com/insights/stb-lifts-abeyance-in-union-pacific-norfolk-southern-merger-and-sets-procedural-schedule/"
-      },
-      {
-        "text": "Union Pacific, Form 8-K exhibit: third quarter 2026 results (October 22, 2026)",
-        "url": "https://www.sec.gov/Archives/edgar/data/0000100885/000010088526000319/a2026-10x228xkex991earning.htm"
-      }
-    ]
-  },
-  {
-    "slug": "vertical-integration",
-    "title": "Four signatures, one hand",
-    "date": "October 29, 2026",
-    "description": "UnitedHealth is the payer, the doctor, the pharmacist and the rail the money runs on. The fury is a signal. The structure is the problem.",
-    "tags": [
-      "healthcare",
-      "institutions",
-      "antitrust"
-    ],
-    "url": "/#/writings/vertical-integration",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "Sixty-three cents of every dollar Optum Rx booked in 2025 came from another part of UnitedHealth Group (UNH). The pharmacy benefit manager filled 1.66 billion prescriptions and took in $155 billion; its largest customer is the insurer that owns it. Optum Health employs or affiliates more than 90,000 physicians, about one in ten in the country. Optum Insight owns Change Healthcare, the clearinghouse that moves 15 billion transactions a year and touches one in three patient records. Optum Bank holds the health savings accounts. One company is the payer, the doctor, the pharmacist and the rail the money runs on, and it booked $447.6 billion of revenue in 2025, up 12 percent.",
-      "CVS Health owns Aetna and Caremark. Cigna owns Express Scripts. Those three PBMs processed 80 percent of the country's prescription claims last year, and Humana runs the same model smaller. The industry's word for this is integration; the pitch is that one owner holding every step takes the friction out. A market, like a heat engine, runs on a difference: insurer and provider are the hot and cold reservoirs, and the price is the work done between them. Put both in one hand and there is no gradient and no work, only heat, and the heat is $155 billion of internal billing nobody outside the building ever negotiated.",
-      "The market noticed late. UnitedHealth closed at a record $596 a share in November 2024, worth about $560 billion. In April 2025 it cut its forecast and lost 22 percent in a day; what the release called \"heightened care activity\" was people using the insurance they had paid for. In May the chief executive left and the guidance went with him. By December the company was worth about $300 billion; it is back near $370 billion today. The 2025 medical care ratio was 89.1 percent: 89 cents of each premium dollar went to care.",
-      "In July 2025 the company disclosed criminal and civil Justice Department investigations into its Medicare billing, widened by August to Optum Rx and to how it pays its own doctors. A Senate Judiciary staff report in January found it captured more diagnosis codes than any other Medicare Advantage insurer and called risk adjustment \"a major profit centered strategy.\" The company disputes it. On denials the record is also the Senate's: UnitedHealthcare's prior-authorization denial rate for post-acute care went from 10.9 percent in 2020 to 22.7 percent in 2022. Across the exchange market, insurers denied 19 percent of in-network claims in 2024; fewer than one percent were appealed.",
-      "On December 4, 2024, Brian Thompson, who ran the insurance arm, was shot dead on a Manhattan sidewalk on his way to the company's investor day. That was murder, and nothing in a denial letter or a 10-K excuses it. His killer pleaded guilty to federal stalking charges in August and will be sentenced in December; the state murder case is stalled on a double-jeopardy motion. What should trouble the company more than the trial is the public reaction, which was not grief. It told you how many people had met the structure at its worst with nobody to send the anger to, because the insurer, the doctor and the pharmacist were the same voicemail.",
-      "Violence does not break that structure. It hardens it: a company under threat gets sympathy, a bigger legal budget and a licence to call every critic dangerous. What breaks it is a statute. Arkansas tried in April 2025, banning PBMs from owning pharmacies; a federal judge enjoined the law and the appeal sits at the Eighth Circuit. Congress passed PBM transparency in February, effective in 2028. Transparency is what a legislature passes when it has decided not to touch ownership. The FTC settled its insulin case with all three PBMs by June; no settlement changes who owns whom.",
-      "The denial, the diagnosis, the prescription and the cheque carry four signatures from one hand."
-    ],
-    "sources": [
-      {
-        "text": "UnitedHealth Group, fourth quarter and full year 2025 results, Form 8-K exhibit 99.1 (January 27, 2026)",
-        "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000025/a991unherq42025.htm"
-      },
-      {
-        "text": "Drug Channels, The top pharmacy benefit managers of 2025 (March 2026)",
-        "url": "https://www.drugchannels.net/2026/03/the-top-pharmacy-benefit-managers-of.html"
-      },
-      {
-        "text": "Senate Permanent Subcommittee on Investigations, majority staff report on Medicare Advantage denials of post-acute care (October 17, 2024)",
-        "url": "https://www.blumenthal.senate.gov/newsroom/press/release/senate-permanent-subcommittee-on-investigations-releases-majority-staff-report-exposing-medicare-advantage-insurers-refusal-of-care-for-vulnerable-seniors"
-      },
-      {
-        "text": "Healthcare Dive, UnitedHealth \"aggressively\" gaming Medicare Advantage, Senate investigation finds (January 12, 2026)",
-        "url": "https://www.healthcaredive.com/news/unitedhealth-grassley-medicare-advantage-investigation/809377/"
-      },
-      {
-        "text": "PBS NewsHour, Mangione's state murder trial postponed indefinitely as double jeopardy fight plays out (August 2026)",
-        "url": "https://www.pbs.org/newshour/nation/luigi-mangiones-state-murder-trial-postponed-indefinitely-as-double-jeopardy-fight-plays-out"
-      }
-    ]
-  },
-  {
-    "slug": "phosphate",
-    "title": "Fourteen centuries of rock",
-    "date": "October 29, 2026",
-    "description": "Morocco holds 50 of the world's 73 billion tonnes of phosphate, nothing alive can substitute for it, and the seller has no shares.",
-    "tags": [
-      "commodities",
-      "chokepoints",
-      "food"
-    ],
-    "url": "/#/writings/phosphate",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "A conveyor belt about a hundred kilometres long runs from the Bou Craa mine, in the part of Western Sahara that Morocco administers and the International Court of Justice has declined to call Moroccan, down to the Atlantic. It is the longest conveyor in the world, and the dust blowing off it is visible from orbit. Last year 2.02 million tonnes of rock went down that belt onto 36 ships for exactly three buyers, in India, Mexico and New Zealand. Everyone else has dropped away; the European Court of Justice ruled again in 2024 that the Saharawi have to consent, and they have not.",
-      "Bou Craa is about eight percent of what OCP digs. The number that matters sits in the Geological Survey's table: of the world's 73 billion tonnes of phosphate rock reserves, Morocco holds 50 billion, about 70 percent. China holds 3.4 billion, the United States one. Beneath the table, in the flat prose the Survey uses for every commodity: there are no substitutes for phosphorus in agriculture. There are none anywhere. The backbone of DNA alternates sugar and phosphate; the molecule every cell spends as energy is a triphosphate; bone is calcium phosphate. In my own corner of science, the way a cell tells a protein condensate to form or dissolve is to bolt a phosphate group onto the protein. Nitrogen you can pull from the air with enough natural gas. Phosphorus you dig.",
-      "Here is where the reserve number misleads. Reserves are about the future; production is about the price. China mined 110 million of the world's 250 million tonnes in 2025, Morocco 36, the United States 20. Divide the ground by the digging and China empties its reserve in about thirty years, America in fifty, Morocco in fourteen centuries. And this year's price shock had almost nothing to do with rock. A tonne of diammonium phosphate takes 1.5 to 2 tonnes of rock, 0.4 of sulfur and 0.2 of ammonia, and roughly 44 percent of seaborne sulfur loads in the Gulf. The Strait of Hormuz has been effectively shut for most of the eight months since the American and Israeli strikes of February 28; transits run in single digits a day against 85 before. Sulfur went from under $100 a ton in 2024 to above $1,000 by late summer. China, which exported 10 million tons of DAP and MAP in 2021, closed its exports in mid-March. Illinois DAP was $929 a ton on October 16, against $600 to $700 through 2024 and the first half of 2025. Morocco holds the rock. The sulfur comes from somewhere else, and this year somewhere else was on fire.",
-      "Washington noticed late. Since April 2021 the United States had charged a countervailing duty of more than 16 percent on Moroccan phosphate fertilizer, at the petition of Mosaic (MOS), which runs the Florida mines; Texas A&M puts the cost to farmers at $6.9 billion over five seasons. On June 29 the president declared an emergency and suspended the duty for eight months, and in August the first Moroccan cargo in five years, 54,000 tonnes of triple superphosphate, docked at New Orleans. The same summer Mosaic curtailed production in Florida and Louisiana for want of sulfur. The tariff protected a producer that cannot make the product without the Gulf, against a producer that owns the ground.",
-      "Which brings me to the strange part. OCP is 94 percent owned by the Moroccan state, the rest by a bank's funds, a pension fund and a university endowment; a 2008 law gives it the sole right to mine phosphate in the kingdom; it took in about $11.4 billion last year, up 17 percent. Its dollar bonds trade in Dublin. Its shares trade nowhere. You can lend to the most consequential monopoly in food. You cannot own it.",
-      "The last phosphate mine on earth will be Moroccan, and it will not have a ticker."
-    ],
-    "sources": [
-      {
-        "text": "USGS, Mineral Commodity Summaries 2026: Phosphate Rock",
-        "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-phosphate.pdf"
-      },
-      {
-        "text": "Western Sahara Resource Watch, P for Plunder 2026: Morocco's exports of phosphates from occupied Western Sahara",
-        "url": "https://vest-sahara.s3.amazonaws.com/wsrw/feature-images/File/2887/6a18515b8119d_P-for-plunder-2026-web-(spreads).pdf"
-      },
-      {
-        "text": "farmdoc daily, Sulfur and increasing phosphate fertilizer prices (August 2026)",
-        "url": "https://farmdocdaily.illinois.edu/2026/08/sulfur-and-increasing-phosphate-fertilizer-prices.html"
-      },
-      {
-        "text": "Farm Policy News, Morocco phosphate fertilizer returns to U.S. market (August 2026)",
-        "url": "https://farmpolicynews.illinois.edu/2026/08/morocco-phosphate-fertilizer-returns-to-u-s-market/"
-      },
-      {
-        "text": "USDA AMS, Illinois Production Cost Report, week ending October 16, 2026",
-        "url": "https://www.ams.usda.gov/mnreports/ams_3195.pdf"
-      }
-    ]
-  },
-  {
-    "slug": "nintendo",
-    "title": "Not on the axis",
-    "date": "October 29, 2026",
-    "description": "Switch 2 sold 23.7 million units in thirteen months. The stock is down 42 percent, at thirty times a year Nintendo says will be worse.",
-    "tags": [
-      "companies",
-      "gaming",
-      "Japan"
-    ],
-    "url": "/#/writings/nintendo",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "On September 1 Nintendo raised the American price of the Switch 2 from $449.99 to $499.99, fifteen months after launch, with the console outselling the PlayStation 5 more than two to one. Companies do not usually do that in a console's second year. Nintendo (NTDOY) looked at memory prices driven up by the data-centre build, looked at tariffs, and decided the customer would pay. So far the customer has.",
-      "The numbers as of June 30: 23.68 million Switch 2 consoles sold since the June 2025 launch, 19.86 million of them in the first fiscal year against a launch-day forecast of 15 million. Sony's (SONY) PlayStation 5 shipped 1.6 million units in the June quarter. The Switch 2 shipped 3.82 million, and Nintendo described that quarter as down 34 percent, because the launch frenzy it was lapping was so large. The PS5 has 95.3 million consoles in the world after five and a half years. The Switch 2 is a quarter of the way there after one.",
-      "Then the software. Switch 2 owners have bought 58.17 million games, about two and a half a console. The original Switch, at 156.59 million units, ended up carrying ten games each over its life, 1.56 billion in total. Mario Kart World alone has sold 15.39 million copies. The Super Mario Galaxy Movie passed a billion dollars at the box office this spring, and Nintendo's income from licensing its characters more than doubled in the June quarter, to ¥34.8 billion. Sony owns a very good box. Nintendo owns a plumber that three generations recognise on sight.",
-      "The index committees file Nintendo under Communication Services, in a sub-industry called Interactive Home Entertainment, beside Netflix and Alphabet rather than beside the companies that make the television it plugs into. The classification is more honest than it looks. Nintendo is a media company that happens to manufacture its own distribution.",
-      "Here is how it wins, and it is the way it has won since the Game Boy. It refuses the spec war. Sony and Microsoft compete on one axis, rendering power, and on that axis Nintendo has been losing by choice since the Wii; the trick is that Nintendo is not on the axis. It sells a box good enough to run Mario, sells the box at a margin rather than as a loss leader, and then sells the software at a much fatter margin for seven or eight years to an installed base no other publisher can reach. Its customers are children. Children become parents, and parents buy the box they remember.",
-      "Now the price. The shares closed at ¥14,795 in August 2025 and trade near ¥8,500 today, down about 42 percent, for a market value around ¥9.8 trillion, roughly $63 billion. On trailing earnings that is 21 times. On forward earnings it is about 30, and the gap between those two numbers is the whole argument. Nintendo's own forecast for the year to March 2027 is 16.5 million consoles against 19.86 million, net sales down 11 percent to ¥2.05 trillion, profit down 27 percent to ¥310 billion, with about ¥100 billion of memory and tariff costs written into it. The market is paying thirty times a year the company itself says will be worse.",
-      "Is that right? Partly. Nintendo guides low; the 15 million became 19.86 million, and sell-through is running ahead of the original Switch at the same point in its life. But the memory squeeze is real, the price rise will cost units, and a $500 console is a different purchase from a $450 one in a household paying more for everything else. I would own it below ¥8,000, and not as a console cycle. I would own it as the only media company whose audience is replaced every seven years and arrives already knowing the characters.",
-      "Mario is forty-five years old. His customers are seven, and they always will be."
-    ],
-    "sources": [
-      {
-        "text": "Nintendo, consolidated results for the three months ended June 30, 2026 (August 6, 2026)",
-        "url": "https://www.nintendo.co.jp/ir/pdf/2026/260806e.pdf"
-      },
-      {
-        "text": "Nintendo Reporters, Switch 2 sales reach 23.68 million as Mario Kart World passes 15 million (August 2026)",
-        "url": "https://www.nintendoreporters.com/en/news/nintendo-switch-2/nintendo-switch-2-sales-reach-2368-million-as-mario-kart-world-passes-15-million/"
-      },
-      {
-        "text": "Nintendo Everything, fiscal 2026 results and fiscal 2027 forecast (May 8, 2026)",
-        "url": "https://nintendoeverything.com/nintendo-financial-results-may-2026-switch-2-at-19-86-million-units-switch-at-155-92-million-more/"
-      },
-      {
-        "text": "TechSpot, Nintendo raising Switch 2 price worldwide, US model to $499.99",
-        "url": "https://www.techspot.com/news/112348-nintendo-raising-switch-2-price-worldwide-us-model.html"
-      },
-      {
-        "text": "Simulation Daily, PS5 passes 95.3 million as Sony raises PlayStation outlook (July 30, 2026)",
-        "url": "https://simulationdaily.com/news/sony-financial-results-q1-fy2026-ps5/"
-      }
-    ]
-  },
-  {
-    "slug": "asml",
-    "title": "One percent of the light",
-    "date": "October 29, 2026",
-    "description": "Fifty thousand tin droplets a second, picometre mirrors, one company, sold out through 2028. The market still trades it like a cyclical.",
-    "tags": [
-      "semiconductors",
-      "chokepoints",
-      "Netherlands"
-    ],
-    "url": "/#/writings/asml",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "Fifty thousand times a second a droplet of molten tin, 25 micrometres across, falls through a vacuum chamber and a carbon-dioxide laser hits it twice. The first pulse flattens it into a pancake. The second turns the pancake into a plasma at about 220,000 degrees Celsius, forty times the surface of the sun, and the tin ions, relaxing, give off light at 13.5 nanometres. That wavelength is the whole point and the whole problem. Nearly everything absorbs it, air and glass included, so no lens can focus it. Mirrors do the work, about ten of them, each a hundred alternating layers of molybdenum and silicon, each reflecting at most 68 percent. Ten reflections later, about one percent of the light that leaves the plasma reaches the wafer. Zeiss polishes those mirrors for two to three years apiece to a roughness measured in picometres, a fraction of an atom; scaled to the area of Germany, the tallest bump would stand under a millimetre.",
-      "One company on earth assembles this into a machine that works: ASML (ASML), in Veldhoven. A standard EUV scanner costs around $180 million. The High-NA version costs about $400 million and only about a dozen exist; Intel has run more than a million wafers through its machines, Samsung plans volume production on them in 2028 and TSMC in 2030. Last year ASML recognised revenue on 48 EUV systems and €32.7 billion of sales. On October 14 it reported a record quarter, €11.7 billion at a 57.5 percent gross margin, €4.1 billion of it EUV. In January it guided 2026 at €34 to €39 billion. It now says €44 to €45 billion, and €44 billion was the floor of the 2030 plan it laid out in November 2024: the bottom of its own decade target, four years early. Supply as planned for 2027 and 2028, the chief executive said, will not meet demand. Customers asking to reserve slots for 2029 and 2030 are being told to wait.",
-      "China has never been allowed an EUV machine. The Dutch do not license them, and since 2023 and 2024 the better deep-ultraviolet immersion tools have needed licences too, granted case by case. So Chinese fabs bought the older ones, more than $13 billion on roughly 180 NXT:1980i scanners in 2024 and 2025 by one count, and China was 41 percent of ASML's system sales in 2024, 33 percent last year and 23 percent in the quarter just reported. In Washington the MATCH Act, introduced in April, would end even that: all immersion lithography and the servicing of tools already installed, with the Netherlands given 150 days to copy the rule or watch the foreign direct product rule do it for them. It was folded into the Senate defence bill, and the Senate blocked that bill on July 14 in a fight over paying for the Iran war.",
-      "Now the price. The company whose supply is sold out for three years, whose nearest competitor does not exist, whose customers are begging for 2030, fell nearly two percent on October 14 and another two after hours because sales came in at €11.66 billion against a consensus of €11.72 billion. Half a percent. The shares have traded between $946 and $2,000 in twelve months, the range of a semiconductor-equipment cyclical, and ASML was one for decades, when fabs ordered scanners in waves and cancelled them in waves. The market still prices the quarter and not the queue. At 36 times next year's earnings it is not cheap, but its own January guidance was eight billion euros short, and the price increases on its critical tools only begin to show in 2027. If I were going to own one semiconductor company it would be the one that does not make semiconductors.",
-      "One percent of the light reaches the wafer. Every chip at the frontier is drawn with that one percent."
-    ],
-    "sources": [
-      {
-        "text": "ASML, Q3 2026 results: €11.7 billion total net sales and €5.0 billion net income (October 14, 2026)",
-        "url": "https://investor.asml.com/news-releases/news-release-details/asml-reports-eu11.7-billion-total-net-sales-and-eu5.0-billion-net-income-q3-2026"
-      },
-      {
-        "text": "Motley Fool, ASML Q3 2026 earnings call transcript (October 14, 2026)",
-        "url": "https://www.fool.com/earnings/call-transcripts/2026/10/14/asml-asml-q3-2026-earnings-call-transcript/"
-      },
-      {
-        "text": "ASML, 2025 fourth-quarter and full-year results presentation (January 28, 2026)",
-        "url": "https://ourbrand.asml.com/m/3136300aa4999bc1/original/2026_01_28_Presentation-Investor-Relations-Q4-2025.pdf"
-      },
-      {
-        "text": "TrendForce, China reportedly spent $13B+ stockpiling ASML DUV tools in 2024–25 (October 5, 2026)",
-        "url": "https://www.trendforce.com/news/2026/10/05/news-china-reportedly-spent-13b-stockpiling-asml-duv-tools-in-2024-25-as-advanced-chip-push-continues/"
-      },
-      {
-        "text": "Bits&Chips, Iran war deadlock gave ASML reprieve from US China crackdown (August 21, 2026)",
-        "url": "https://bits-chips.com/article/iran-war-deadlock-gave-asml-reprieve-from-us-china-crackdown/"
-      }
-    ]
-  },
-  {
     "slug": "lng",
     "title": "Qatar buys American",
-    "date": "October 29, 2026",
+    "date": "September 20, 2026",
     "description": "The world's second-largest LNG exporter just signed to buy 7 million tonnes a year of US gas. It is buying insurance on its own strait.",
     "tags": [
       "energy",
@@ -710,7 +239,7 @@
   {
     "slug": "cobalt",
     "title": "Rationing a metal the chemists are deleting",
-    "date": "October 29, 2026",
+    "date": "September 6, 2026",
     "description": "Congo shut its border, sent cobalt hydroxide up fourfold, and now watches the price fall: the cathode that needed the metal is retiring.",
     "tags": [
       "commodities",
@@ -755,7 +284,7 @@
   {
     "slug": "kospi",
     "title": "Seventeen years for 400 points, eighteen months for 7,000",
-    "date": "October 29, 2026",
+    "date": "August 29, 2026",
     "description": "Seventeen years took the KOSPI from 2,000 to 2,400; eighteen months took it to 9,385. Margin did the last leg, and margin runs both ways.",
     "tags": [
       "markets",
@@ -800,53 +329,9 @@
     ]
   },
   {
-    "slug": "lithium",
-    "title": "Six times the demand, the same price",
-    "date": "October 29, 2026",
-    "description": "Lithium demand has grown six-fold since 2017 and the price is back where it started. The rock was never the scarce part.",
-    "tags": [
-      "commodities",
-      "lithium",
-      "batteries"
-    ],
-    "url": "/#/writings/lithium",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "In the middle of May a tonne of battery-grade lithium carbonate traded above 200,000 yuan on the Guangzhou futures exchange, a two-year high. On October 22 the main contract closed at 94,180. In dollars, Fastmarkets' seaborne assessment went from $24.50 to $25.80 a kilogram on May 11 to $12.80 to $15.00 on October 27. Nothing happened to the metal. Zimbabwe halted concentrate exports in February, a CATL mine in Jiangxi stayed shut, the market decided there was a shortage; then two Australian mines restarted, China's main price reporter restated national inventory upward by roughly 100,000 tonnes in a single September morning, and a bearish Goldman note on October 12 helped take the contract down 11.8 percent in a day.",
-      "If I were going to own lithium at all I would own the people who dig it rather than the futures, and the last five months show why neither has been comfortable. The chemistry is why I keep coming back, so let me get it right in two sentences. Lithium is element three, the lightest metal there is, and its standard reduction potential is about minus 3.04 volts, the most negative on the table, which is why it sits at the anode: a cell built on lithium delivers more voltage than one built on anything else. Energy is charge times voltage, and lithium supplies both terms, the most volts per cell and, because each atom weighs almost nothing, the most charge per gram. That is the whole bull case, and it is true.",
-      "Here is what the bull case leaves out. In 2017 the world consumed about 41,500 tonnes of lithium and battery-grade carbonate averaged $13,900 a tonne. In 2025 the world consumed about 263,000 tonnes, more than six times as much, and the American annual average was $9,000. Batteries went from 46 percent of demand to 88. Demand did what the decks promised, and the price, after a visit to $63,700 in 2022, came all the way back, because lithium is not scarce. It is dissolved in salt flats and locked in hard rock across Australia, Zimbabwe, Brazil, Mali and Argentina, and every one of them answered the 2022 price within three years. Scarcity is a story about rocks. Price is a story about how fast people dig, and people turned out to be quick.",
-      "The geography is the part I find beautiful. Under the salt crust of the Salar de Atacama in northern Chile the brine is pumped up into ponds, and the desert sun does the first stage of refining for free. That salar, Chile's corner of the lithium triangle it shares with Argentina and Bolivia, gave the world 56,000 tonnes last year, a fifth of mine supply and not the 30 percent people still quote; Australia's hard rock gave 92,000 and China 62,000. SQM (SQM), which pumps the Atacama alongside Albemarle (ALB), folded its operation last December into a joint venture with the state copper company that runs to 2060, which is Chile's way of saying it has noticed what the brine is worth.",
-      "The majors have voted with cash. Rio Tinto (RIO) paid $6.7 billion for Arcadium in March 2025, buying Argentine brine near the bottom of the cycle. Standard Lithium (SLI) and Equinor are a final investment decision away from pulling 22,500 tonnes a year of carbonate out of the Smackover brine under southwest Arkansas, with $225 million from the Department of Energy attached and first production pencilled for 2028. Until then the United States has one producing operation, Albemarle's ponds at Silver Peak, Nevada, so small that the Geological Survey withholds its output to protect the company. A country paying for a battery supply chain mines almost none of the lithium.",
-      "Lithium carbonate was a psychiatric drug before it was a battery; an Australian doctor began giving it to manic patients in 1949, and medicine is still one percent of demand. The salt has steadied minds for seventy-seven years. It has never once steadied a price."
-    ],
-    "sources": [
-      {
-        "text": "USGS, Mineral Commodity Summaries 2026: Lithium",
-        "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-lithium.pdf"
-      },
-      {
-        "text": "USGS, Mineral Commodity Summaries 2018: Lithium (2017 consumption and price)",
-        "url": "https://litio.ipg.pt/storage/2018/07/USGS_dataLi_jan2018.pdf"
-      },
-      {
-        "text": "Strategic Revenue Insights, Lithium price crash 2026: what broke the rally (October 22, 2026)",
-        "url": "https://www.strategicrevenueinsights.com/blogs/why-have-lithium-prices-halved-since-may-2026"
-      },
-      {
-        "text": "Rio Tinto, Form 6-K: completion of Arcadium Lithium acquisition (March 6, 2025)",
-        "url": "https://www.sec.gov/Archives/edgar/data/863064/000162828025016021/ex04d06arcadiumcomplete.htm"
-      },
-      {
-        "text": "Standard Lithium, last key construction contract awarded ahead of FID (May 26, 2026)",
-        "url": "https://www.standardlithium.com/news/smackover-lithium-announces-the-award-of-last-key-construction-contract-for-the-south-west-arkansas-project-ahead-of-final-investment-decision"
-      }
-    ]
-  },
-  {
     "slug": "data-center-reits",
     "title": "Sixteen years on a five-year chip",
-    "date": "October 29, 2026",
+    "date": "August 19, 2026",
     "description": "Digital Realty just booked a record quarter. I still pass: six tenants, sixteen-year leases on five-year chips, and power it does not own.",
     "tags": [
       "AI",
@@ -887,7 +372,7 @@
   {
     "slug": "netflix",
     "title": "The $2.8 billion consolation prize",
-    "date": "October 29, 2026",
+    "date": "August 6, 2026",
     "description": "Netflix won the streaming war, was paid $2.8 billion to lose the bidding war, and sits at a 52-week low. I own a lot and I want an activist.",
     "tags": [
       "companies",
@@ -930,9 +415,101 @@
     ]
   },
   {
+    "slug": "autonomous-trucking",
+    "title": "A truck with no driver still needs a dispatcher",
+    "date": "July 30, 2026",
+    "description": "Driverless freight is late, real and about to be cheap. The profit pools with whoever owns the loads, and Uber trades as if it owned trucks.",
+    "tags": [
+      "autonomy",
+      "freight",
+      "Uber",
+      "investing"
+    ],
+    "url": "/#/writings/autonomous-trucking",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "On Wednesday Aurora (AUR) told its shareholders it has built twenty driverless trucks. In February the target was two hundred by year end; that is now the end of February, revenue guidance has gone from a $15 million midpoint to $9 million, the quarter brought in $3 million against a $234 million net loss, and a company valued near $10 billion fell 7 percent after hours. Kodiak (KDK), down 87 percent since listing last year, signed its first binding highway contract: seventy-five trucks for a Fresno carrier, from 2028. Tesla's Semi reached volume production in September, seven years late, and is not autonomous.",
+      "Aurora's trucks have run half a million commercial miles with nobody aboard, including the thousand miles from Fort Worth to Phoenix no human may legally drive without stopping. A thousand trucks are promised for the end of 2027; one carrier has signed for five hundred, non-binding. The $250 million Aurora expects to burn this quarter is binding.",
+      "The 1,300 percent growth to 2036 I kept hearing is not Goldman's; it is a research shop's $1.3 billion last year becoming $17.7 billion. Goldman's April forecast is more useful: a $560 billion global market by 2035, cost parity with a human driver in the United States in 2028, and a cost per mile falling from $8.56 today to $2.03, against a driver at $2.55 now and $2.84 then. A truck that runs 80 cents a mile cheaper than a person and never hits an hours-of-service limit does not need to be clever. It needs to be allowed.",
+      "The forecast leaves something out. Once the driver is software, the truck is a commodity Volvo and Paccar build on their own lines, and the software is a per-mile licence sold by two or three vendors with no pricing power. Aurora and Kodiak both call themselves asset-light: the carrier buys the truck and rents the driver by the mile. Then who makes the money? Whoever has the loads. Matching freight to trucks across a continent is a demand problem, and one company has spent sixteen years on nothing else.",
+      "I own Uber (UBER), and the market has decided it is a ride-hailing company about to be eaten by robotaxis. It closed at $65.78 on Tuesday, a 52-week low, 35 percent below its high, fourteen times trailing earnings, with $10 billion of trailing free cash flow for the first time. Bookings grew 24 percent last quarter. Waymo left Uber's app in Phoenix in July and opens its own in Austin and Atlanta in 2028; it runs about 4,000 cars. Uber did 3.9 billion trips in a quarter, under half a percent of them autonomous. The disruption is real and small, and priced as large and certain.",
+      "Freight is the part nobody models. Uber Freight manages more than $20 billion of it; Aurora, Volvo's autonomous unit and Waabi have all hauled its loads between Dallas and Houston; Uber owns a piece of Aurora from selling it its self-driving unit in 2020 and backed Waabi's round. It builds no truck and writes no driver. In Rust I would call it a trait: the caller never learns which concrete type sits behind it, only that the method is implemented. The market is pricing the trait as one of the implementations.",
+      "The counter-argument is serious. A demand layer has power only while supply is fragmented. If Waymo ends up with most robotaxis and two firms with most trucks, they sell direct and Uber's take rate becomes a toll the owners refuse to pay. The founder of Uber Freight left last year to run operations at Waabi, which tells you where he thinks the power sits.",
+      "My bet is the other way, because every autonomy company is becoming a thin-margin seller of software by the mile, and none of them has a customer. A truck with no driver still needs someone to tell it where to go."
+    ],
+    "sources": [
+      {
+        "text": "Aurora Innovation, third quarter 2026 shareholder letter (Form 8-K, October 28, 2026)",
+        "url": "https://www.sec.gov/Archives/edgar/data/0001828108/000182810826000092/aurora26q3shareholderlet.htm"
+      },
+      {
+        "text": "Goldman Sachs Research, Robotaxis are forecast to become a $400 billion market in 2035 (April 30, 2026)",
+        "url": "https://www.goldmansachs.com/insights/articles/robotaxis-to-become-a-400-billion-dollar-market-in-2035"
+      },
+      {
+        "text": "TechCrunch, Uber is building an autonomous vehicle empire: every company it's using (August 1, 2026)",
+        "url": "https://techcrunch.com/2026/08/01/ubers-autonomous-vehicle-deal-tracker/"
+      },
+      {
+        "text": "TIKR, Uber stock is down 28% and the robotaxi clock is ticking (September 24, 2026)",
+        "url": "https://www.tikr.com/blog/uber-stock-is-down-28-and-the-robotaxi-clock-is-ticking-its-ceo-just-bought-10-million-of-stock-anyway"
+      },
+      {
+        "text": "Electrek, Tesla Semi finally enters volume production, 7 years behind schedule (September 25, 2026)",
+        "url": "https://electrek.co/2026/09/25/tesla-semi-volume-production-launch-nevada-factory/"
+      }
+    ]
+  },
+  {
+    "slug": "grid",
+    "title": "Every wire on earth, again",
+    "date": "July 19, 2026",
+    "description": "The money for the grid is finally arriving. The transformers are not. Electrification is now limited by a queue, not a budget.",
+    "tags": [
+      "infrastructure",
+      "electricity",
+      "utilities"
+    ],
+    "url": "/#/writings/grid",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "Every power line on earth, strung end to end, runs to about 80 million kilometres. The IEA's count of what has to be added or replaced by 2040 to meet the targets governments have already signed is also 80 million kilometres. Not a share of it. The grid, again, in fourteen years, while the first one stays switched on.",
+      "The grid is the oldest machine most countries still run at full load. It has delivered power for over a century, and for most of this one it was treated as finished: global grid investment sat flat at roughly $300 billion a year while everyone argued about generation. The IEA's grids report said the figure had to pass $600 billion by 2030. Its 2026 investment report has network spending at about $550 billion this year, up nearly a fifth in twelve months. The money, for once, is arriving.",
+      "What is not arriving is the equipment. A large power transformer now takes up to four years to secure. A high-voltage cable takes two to three, a direct-current cable more than five, and transformer prices are up about 75 percent since 2019 while cable prices have roughly doubled. A new high-voltage line takes seven years or more; a data centre takes one to three. More than 2,500 gigawatts of generation, storage and large loads are stalled in connection queues worldwide, about 150 gigawatts of them data centres. In the whole of the last decade the world built about 1.5 million kilometres of new transmission.",
+      "Here is the physics of the mismatch, and I think it is the whole story. Any driven system has a relaxation time, and one forced faster than it can relax never settles into a new equilibrium; it lags the drive. A grid relaxes over five to fifteen years. The thing driving it, a hyperscaler's capital budget, changes by the quarter. The lag has a name on a utility's books. It is called the interconnection queue.",
+      "Now the demand the wire is supposed to carry. The world used about 28,200 terawatt-hours of electricity in 2025, three percent more than the year before, and the IEA expects 33,600 by 2030: roughly 1,100 terawatt-hours a year of new demand, against 700 a year over the previous decade. The United States uses about 4,200. So the world is adding a United States of demand every four years, and in the IEA's central scenario it adds more than two of them by 2035. Most people assume that is the AI. Globally it is not; data centres are less than a tenth of the growth, and the peak is set by air conditioning. America is different: data centres are about half of the 420-plus terawatt-hours it is set to add by 2030.",
+      "Which is where American Electric Power (AEP) comes in. Its summer peak was about 37 gigawatts last year. By May it had signed agreements for 63 gigawatts of new load by 2030, 41 of them in Texas, most of it data centres. They came to AEP because it owns about 2,100 miles of 765-kilovolt line, nine tenths of what exists in the country. Its five-year capital plan rose a third to $72 billion last October, to $78 billion in May and to $100 billion this week, with the rate base compounding at 13 percent or better through 2031. What the release calls \"up to $21 billion of fixed cost offsets for residential customers\" translates: under the old tariffs you paid for the hyperscaler's substation; under the new ones in Ohio, Indiana, Kentucky and West Virginia, the hyperscaler does. Last October AEP guided residential rates up 3.5 percent a year, and it earns a regulated return on every dollar of either. If I owned a utility, it would be the one that owns the wire everyone else is waiting for.",
+      "The power crosses the state in milliseconds. The wire it needs arrives in 2033."
+    ],
+    "sources": [
+      {
+        "text": "IEA, Electricity Grids and Secure Energy Transitions, executive summary",
+        "url": "https://www.iea.org/reports/electricity-grids-and-secure-energy-transitions/executive-summary"
+      },
+      {
+        "text": "IEA, Electricity 2026: analysis and forecast to 2030",
+        "url": "https://iea.blob.core.windows.net/assets/b73798cb-e452-42b9-9d8a-07542de7a041/Electricity_2026.pdf"
+      },
+      {
+        "text": "IEA, Building the Future Transmission Grid, executive summary (2025)",
+        "url": "https://www.iea.org/reports/building-the-future-transmission-grid/executive-summary"
+      },
+      {
+        "text": "AEP, first-quarter 2026 earnings and increased five-year capital plan (May 5, 2026)",
+        "url": "https://www.aep.com/news/stories/view/11917/"
+      },
+      {
+        "text": "AEP newsroom, third-quarter 2026 earnings: $100 billion capital plan (October 28, 2026)",
+        "url": "https://www.aep.com/news/"
+      }
+    ]
+  },
+  {
     "slug": "clorox",
     "title": "The bleach that stayed in the bottle",
-    "date": "October 29, 2026",
+    "date": "July 10, 2026",
     "description": "Clorox peaked at $240 in August 2020 and trades at $87 today. The safe trade is safe for a quarter and then it is a stock like any other.",
     "tags": [
       "companies",
@@ -976,9 +553,141 @@
     ]
   },
   {
+    "slug": "private-prisons",
+    "title": "Three hundred thousand dollars a bed",
+    "date": "June 28, 2026",
+    "description": "Two companies hold most of ICE detention. Washington now buys their buildings, pays them to run them, and cannot FOIA either one.",
+    "tags": [
+      "institutions",
+      "immigration",
+      "incentives"
+    ],
+    "url": "/#/writings/private-prisons",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "On July 2 the Department of Homeland Security paid CoreCivic (CXW) $1.5 billion for two detention centers in California, and on August 4 another $734 million for two more in Kansas and Minnesota: 7,187 beds for $2.2 billion, which the company's own release works out to $307,000 a bed. On October 5 GEO Group (GEO) sold its Adelanto complex in the Mojave, 2,644 beds, for $950 million, or $359,000 a bed. ICE's median daily rate for a bed is $92. In every case the seller stays on to run the building; GEO's contract runs to 2029 with an option to 2034. The government bought the asset and kept the operator.",
+      "The line that two companies own half of America's private prisons is roughly true and misses the point. Private prisons hold about 8 percent of state and federal prisoners, and GEO and CoreCivic are most of that trade, but prisons are not where the money is. Immigration is. About a third of ICE detainees sit in GEO facilities and roughly a quarter of ICE's beds are CoreCivic's; 86 percent of detainees were in for-profit hands when this administration took office. ICE was 48 percent of GEO's $2.63 billion of revenue last year and about 42 percent of CoreCivic's in the first quarter of this one. Between them the two booked about $4.8 billion in 2025.",
+      "What changed is one number. On January 20, 2025 ICE held 39,314 people. By July 30 this year the average daily population was 67,180, after a January peak above 73,000, and the count of authorized facilities had doubled from 134 to 272. The law signed on July 4, 2025 put $45 billion into detention through September 2029, against an annual detention appropriation that had been about $3.8 billion. GEO took its ICE capacity from about 20,000 beds to 26,000 in a year, the most new business in its history. CoreCivic now guides to $1.5 billion of net income in 2026, because selling four buildings to your largest customer books as a $1.8 billion gain. Both raised their buybacks within days of closing, GEO to $1.25 billion, CoreCivic to $1.2 billion with $500 million of it executed at once.",
+      "The other complaint is that these companies owe the government nothing. It is backwards. They are contractors, and in this contract the obligations run toward them. ICE agreements carry guaranteed minimums, beds paid for nightly whether anyone sleeps in them, and an analysis of ICE's own July data found about 8,200 such beds standing empty at more than $1.2 million a day. The GAO's September report is titled, in full, Immigration Detention: Urgent Planning Needed to Avoid Further Waste of Taxpayer Dollars. What flows the other way is harder to see. The Freedom of Information Act does not reach a private operator, and a bill to change that has been introduced since 2005 and never passed. ICE's detention standards are not written into law. The acting director of ICE since June spent about a decade as a GEO executive. Thirty-nine people died in ICE custody in the twelve months to January, the most in any year since the agency was created in 2003, twenty-seven of them in privately run facilities.",
+      "I would not own either stock, and the reason is structural before it is moral. Every business I own has a growth metric I can reason about: subscribers, payment volume, syrup. The growth metric here is the number of human beings the executive branch decides to confine, which went from 39,000 to 73,000 in a year and which the next administration, appropriations fight or court order can move the other way with a signature. GEO has traded between $12.51 and $33.17 over the past twelve months and closed at $27.57 on October 28, at thirteen times earnings. That is the chart of a referendum.",
+      "The government owns the buildings now. The companies are still paid by the bed."
+    ],
+    "sources": [
+      {
+        "text": "GEO Group, fourth quarter and full year 2025 results (February 12, 2026)",
+        "url": "https://investors.geogroup.com/news-releases/news-release-details/geo-group-reports-fourth-quarter-and-full-year-2025-results"
+      },
+      {
+        "text": "CoreCivic, second quarter 2026 financial results and $2.2 billion facility sale (August 5, 2026)",
+        "url": "https://ir.corecivic.com/node/25571/pdf"
+      },
+      {
+        "text": "GEO Group sells the Adelanto ICE Processing Center and Desert View Annex for $950 million (October 5, 2026)",
+        "url": "https://www.stocktitan.net/news/GEO/the-geo-group-sells-the-adelanto-california-ice-processing-center-cylssodety55.html"
+      },
+      {
+        "text": "GAO-26-108663, Immigration Detention: Urgent Planning Needed to Avoid Further Waste of Taxpayer Dollars (September 24, 2026)",
+        "url": "https://www.gao.gov/assets/gao-26-108663.pdf"
+      },
+      {
+        "text": "Human Rights Watch, Dying in Detention (June 25, 2026)",
+        "url": "https://www.hrw.org/report/2026/06/25/dying-in-detention/rising-deaths-in-an-expanding-us-immigration-detention-system"
+      }
+    ]
+  },
+  {
+    "slug": "lithium",
+    "title": "Six times the demand, the same price",
+    "date": "June 20, 2026",
+    "description": "Lithium demand has grown six-fold since 2017 and the price is back where it started. The rock was never the scarce part.",
+    "tags": [
+      "commodities",
+      "lithium",
+      "batteries"
+    ],
+    "url": "/#/writings/lithium",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "In the middle of May a tonne of battery-grade lithium carbonate traded above 200,000 yuan on the Guangzhou futures exchange, a two-year high. On October 22 the main contract closed at 94,180. In dollars, Fastmarkets' seaborne assessment went from $24.50 to $25.80 a kilogram on May 11 to $12.80 to $15.00 on October 27. Nothing happened to the metal. Zimbabwe halted concentrate exports in February, a CATL mine in Jiangxi stayed shut, the market decided there was a shortage; then two Australian mines restarted, China's main price reporter restated national inventory upward by roughly 100,000 tonnes in a single September morning, and a bearish Goldman note on October 12 helped take the contract down 11.8 percent in a day.",
+      "If I were going to own lithium at all I would own the people who dig it rather than the futures, and the last five months show why neither has been comfortable. The chemistry is why I keep coming back, so let me get it right in two sentences. Lithium is element three, the lightest metal there is, and its standard reduction potential is about minus 3.04 volts, the most negative on the table, which is why it sits at the anode: a cell built on lithium delivers more voltage than one built on anything else. Energy is charge times voltage, and lithium supplies both terms, the most volts per cell and, because each atom weighs almost nothing, the most charge per gram. That is the whole bull case, and it is true.",
+      "Here is what the bull case leaves out. In 2017 the world consumed about 41,500 tonnes of lithium and battery-grade carbonate averaged $13,900 a tonne. In 2025 the world consumed about 263,000 tonnes, more than six times as much, and the American annual average was $9,000. Batteries went from 46 percent of demand to 88. Demand did what the decks promised, and the price, after a visit to $63,700 in 2022, came all the way back, because lithium is not scarce. It is dissolved in salt flats and locked in hard rock across Australia, Zimbabwe, Brazil, Mali and Argentina, and every one of them answered the 2022 price within three years. Scarcity is a story about rocks. Price is a story about how fast people dig, and people turned out to be quick.",
+      "The geography is the part I find beautiful. Under the salt crust of the Salar de Atacama in northern Chile the brine is pumped up into ponds, and the desert sun does the first stage of refining for free. That salar, Chile's corner of the lithium triangle it shares with Argentina and Bolivia, gave the world 56,000 tonnes last year, a fifth of mine supply and not the 30 percent people still quote; Australia's hard rock gave 92,000 and China 62,000. SQM (SQM), which pumps the Atacama alongside Albemarle (ALB), folded its operation last December into a joint venture with the state copper company that runs to 2060, which is Chile's way of saying it has noticed what the brine is worth.",
+      "The majors have voted with cash. Rio Tinto (RIO) paid $6.7 billion for Arcadium in March 2025, buying Argentine brine near the bottom of the cycle. Standard Lithium (SLI) and Equinor are a final investment decision away from pulling 22,500 tonnes a year of carbonate out of the Smackover brine under southwest Arkansas, with $225 million from the Department of Energy attached and first production pencilled for 2028. Until then the United States has one producing operation, Albemarle's ponds at Silver Peak, Nevada, so small that the Geological Survey withholds its output to protect the company. A country paying for a battery supply chain mines almost none of the lithium.",
+      "Lithium carbonate was a psychiatric drug before it was a battery; an Australian doctor began giving it to manic patients in 1949, and medicine is still one percent of demand. The salt has steadied minds for seventy-seven years. It has never once steadied a price."
+    ],
+    "sources": [
+      {
+        "text": "USGS, Mineral Commodity Summaries 2026: Lithium",
+        "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-lithium.pdf"
+      },
+      {
+        "text": "USGS, Mineral Commodity Summaries 2018: Lithium (2017 consumption and price)",
+        "url": "https://litio.ipg.pt/storage/2018/07/USGS_dataLi_jan2018.pdf"
+      },
+      {
+        "text": "Strategic Revenue Insights, Lithium price crash 2026: what broke the rally (October 22, 2026)",
+        "url": "https://www.strategicrevenueinsights.com/blogs/why-have-lithium-prices-halved-since-may-2026"
+      },
+      {
+        "text": "Rio Tinto, Form 6-K: completion of Arcadium Lithium acquisition (March 6, 2025)",
+        "url": "https://www.sec.gov/Archives/edgar/data/863064/000162828025016021/ex04d06arcadiumcomplete.htm"
+      },
+      {
+        "text": "Standard Lithium, last key construction contract awarded ahead of FID (May 26, 2026)",
+        "url": "https://www.standardlithium.com/news/smackover-lithium-announces-the-award-of-last-key-construction-contract-for-the-south-west-arkansas-project-ahead-of-final-investment-decision"
+      }
+    ]
+  },
+  {
+    "slug": "railroad",
+    "title": "Four people and a gallon of diesel",
+    "date": "June 6, 2026",
+    "description": "The first coast-to-coast railroad in American history will be approved or killed by four board members on a clock that stops in August 2027.",
+    "tags": [
+      "infrastructure",
+      "railroads",
+      "regulation"
+    ],
+    "url": "/#/writings/railroad",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "A gallon of diesel moves a ton of freight nearly 500 miles on an American railroad. Union Pacific (UNP) burned 1.034 gallons per thousand gross ton-miles last quarter, and the number falls a percent or two a year because the physics is on its side: a steel wheel on a steel rail deforms by microns, a rubber tyre on asphalt by centimetres, and rolling resistance is the energy you lose putting the deformation back. Rail moves about 40 percent of long-distance ton-miles for 1.8 percent of transport emissions. Nothing on land comes close, and no single company has ever run the whole distance.",
+      "Union Pacific would like to be the first. On July 29, 2025 it agreed to buy Norfolk Southern for one share plus $88.82 in cash, $320 a share at the time and about $85 billion of enterprise value, promising $2.75 billion a year in savings and more than 50,000 route miles across 43 states, Pacific to Atlantic, under one dispatcher. Shareholders of both companies approved it in November with more than 99 percent of votes. If the regulator says no, Union Pacific pays Norfolk Southern $2.5 billion and walks.",
+      "The regulator is the Surface Transportation Board, and the decade in American freight is being settled inside a calendar almost nobody reads. The Board rejected the first application as incomplete in January: the railroads had projected no market shares past closing and left out the part of the merger agreement that defines when Union Pacific may walk. The revised filing arrived April 30. The Board accepted it on May 28 and froze the case for more detail on captive shippers, diversion and gateways. It lifted the freeze on August 18 and set the clock: comments November 18, replies February 16, briefs May 28, a decision by August 28, 2027. In September it refused to throw the case out early, as BNSF, CSX and five shipper groups asked, saying only that a deal of first impression deserved a full record.",
+      "First impression is the phrase that matters. This is the first merger judged under rules the Board wrote in 2001 and has never used, which require a Class I combination to enhance competition, not preserve it. The opponents say a coast-to-coast carrier cannot pass that test because its whole point is to remove the interchange, and the interchange is where a shipper gets a second quote. Union Pacific's answer is that the real competitor is the truck, and that autonomous trucks with no driver to pay or rest will take share from a network that loses a day or two at every hand-off. Its chief executive told a television interviewer this month he was 99.99 percent sure of approval and needs no divestitures. The chemical, fertilizer and grain shippers who would be left with one railroad in many places are less sure, and they pay the rate.",
+      "I think the shippers are right about the mechanism and the railroads are right about the truck, and the Board must pick which of two true things it fears more. What unsettles me is who picks. Five seats, four members: a chairman named by the President in January 2025, a vice chairman, a Democrat whose term runs to 2030, and a rail consultant sworn in this June. The fifth seat has been empty since the previous chairman was removed in August 2025 with no cause stated, a removal the Supreme Court's June ruling on independent agencies made all but unreviewable. No one has been nominated to it. There is no veto above these four, no appeal except to a court that defers to them, no ballot with their names on it.",
+      "The outcome will arrive as a press release with a number like 26-23. The railroad it describes will last a hundred years. The four people who decide it, you could not name."
+    ],
+    "sources": [
+      {
+        "text": "Union Pacific, Form 8-K exhibit: Union Pacific and Norfolk Southern to create America's first transcontinental railroad (July 29, 2025)",
+        "url": "https://www.sec.gov/Archives/edgar/data/100885/000119312525167154/d64537dex991.htm"
+      },
+      {
+        "text": "Surface Transportation Board, STB finds UP-NS merger application is incomplete (January 16, 2026)",
+        "url": "https://www.stb.gov/news-communications/latest-news/pr-26-02/"
+      },
+      {
+        "text": "Surface Transportation Board, STB denies motions seeking summary denial of UP-NS merger application (September 18, 2026)",
+        "url": "https://www.stb.gov/news-communications/latest-news/pr-26-23/"
+      },
+      {
+        "text": "Thompson Hine, STB lifts abeyance in Union Pacific–Norfolk Southern merger and sets procedural schedule (August 2026)",
+        "url": "https://www.thompsonhine.com/insights/stb-lifts-abeyance-in-union-pacific-norfolk-southern-merger-and-sets-procedural-schedule/"
+      },
+      {
+        "text": "Union Pacific, Form 8-K exhibit: third quarter 2026 results (October 22, 2026)",
+        "url": "https://www.sec.gov/Archives/edgar/data/0000100885/000010088526000319/a2026-10x228xkex991earning.htm"
+      }
+    ]
+  },
+  {
     "slug": "rare-earths",
     "title": "The chokehold is in the chemistry",
-    "date": "October 29, 2026",
+    "date": "May 27, 2026",
     "description": "China mines 60 percent of magnet rare earths and separates 91 percent. The leverage was never in the ground. It is in the solvent.",
     "tags": [
       "commodities",
@@ -1020,53 +729,9 @@
     ]
   },
   {
-    "slug": "toys-that-listen",
-    "title": "The doll was a surveillance device",
-    "date": "October 29, 2026",
-    "description": "Germany banned a talking doll under its spy-equipment law. Alexa won the kitchen with no intelligence. Owning the room beats being smart.",
-    "tags": [
-      "technology",
-      "privacy",
-      "incentives"
-    ],
-    "url": "/#/writings/toys-that-listen",
-    "announce": false,
-    "pinned": false,
-    "body": [
-      "In February 2017 the German Federal Network Agency, which regulates telecoms, ordered a blonde doll called My Friend Cayla off the shelves, on the grounds that an object which conceals a microphone and transmits what it hears is a prohibited surveillance device. Genesis Toys sold the doll, Nuance handled the speech, and the Bluetooth link had no authentication, so anyone within range could pair with a child's toy and listen. The regulator was not making a metaphor. It applied the law written for hidden bugs to a product in the toy aisle, and the law fit.",
-      "A year later the Federal Trade Commission settled with VTech for $650,000 over a tablet system that collected the names, birthdates and genders of hundreds of thousands of children without parental consent, was breached in 2015, and had told parents the data was encrypted when none of it was. Last September the FTC charged Apitor, a Shenzhen maker of robot toys, with letting a Chinese analytics kit called JPush pull precise location from thousands of children through its app; the $500,000 penalty was suspended because the company said it could not pay. Then came the chatbot plush. The Kumma bear from FoloToy, sold as running on GPT-4o, told testers how to find and light matches before moving on to sexual topics; OpenAI cut the developer off in November, and by February the bear was still offering GPT-5.1. Mattel announced its OpenAI partnership in June 2025, said its first product would arrive by year-end, then said not that holiday season. The toys are sensors pointed at the youngest people in the house, and the business model requires it.",
-      "Which brings me to the sensor that won. Amazon put the Echo on sale on November 6, 2014, at $199, or $99 for Prime members with an invitation. It had seven microphones and almost no mind: music, weather, alarms, pitched fairly as a whole-home Siri. The Wall Street Journal later put the devices division's losses from 2017 through 2021 above $25 billion. Amazon could sell the hardware at a loss because the product was a microphone in the kitchen with a Prime account attached, and it has since shipped more than 600 million Alexa devices. Run the opposite counterfactual: a device arriving in 2025 with a frontier model inside. Smarter. It would have lost. The intelligence was always retrofittable; the countertop was not. Alexa+ reached everyone in the United States on February 4 this year, free with Prime, and 97 percent of the devices Amazon ever shipped can run it. A dumb device that owns the room upgrades into a smart one. A smart device that arrives late has to find a room.",
-      "Think of it as a phase transition. A room with a listening device in it is a different state of matter from a room without one, and the energy barrier is the first installation. Once the microphone is there, making it cleverer costs a software push; making a cleverer microphone appear in that kitchen costs a second purchase nobody makes.",
-      "That is why the ethics of the toy aisle are not a side issue. Mattel and its imitators are not competing on intelligence; the intelligence is rented from the same handful of labs. They are competing to be the first microphone a child trusts, and the retention policies tell you what the prize is. The amended children's privacy rule took full effect on April 22; a bill to update the underlying law passed the Senate unanimously in March and is stalled in the House. The German regulator understood in 2017 what the American market still prices as a feature: a device that hears a child is a device that hears a child, whatever its face is.",
-      "Cayla has been illegal in Germany for nine years. The room she was built to occupy was taken by a speaker."
-    ],
-    "sources": [
-      {
-        "text": "Engadget, Germany bans My Friend Cayla over privacy concerns (February 17, 2017)",
-        "url": "https://www.engadget.com/2017-02-17-germany-bans-my-friend-cayla-doll.html"
-      },
-      {
-        "text": "FTC, electronic toy maker VTech settles allegations it violated children's privacy law (January 8, 2018)",
-        "url": "https://www.ftc.gov/news-events/news/press-releases/2018/01/electronic-toy-maker-vtech-settles-ftc-allegations-it-violated-childrens-privacy-law-ftc-act"
-      },
-      {
-        "text": "Department of Justice, stipulated order resolves allegations that Apitor Technology violated COPPA (September 30, 2025)",
-        "url": "https://www.justice.gov/opa/pr/stipulated-court-order-resolves-allegations-chinese-toy-maker-apitor-technology-co-violated"
-      },
-      {
-        "text": "U.S. PIRG Education Fund, Not for kids. Found in toys. (March 2026)",
-        "url": "https://publicinterestnetwork.org/wp-content/uploads/2026/03/PIRG-NOT-FOR-KIDS-FOUND-IN-TOYS-March-2026.pdf"
-      },
-      {
-        "text": "TechCrunch, Alexa+ is now available to everyone in the US (February 4, 2026)",
-        "url": "https://techcrunch.com/2026/02/04/alexa-amazons-ai-assistant-is-now-available-to-everyone-in-the-u-s/"
-      }
-    ]
-  },
-  {
     "slug": "otis",
     "title": "The elevator is the only tenant that never leaves",
-    "date": "October 29, 2026",
+    "date": "May 20, 2026",
     "description": "Otis sells the elevator at a 5 percent margin and services it at 25 for decades. The annuity hiding inside every building is the business.",
     "tags": [
       "infrastructure",
@@ -1107,7 +772,7 @@
   {
     "slug": "water",
     "title": "The metal that named the trade",
-    "date": "October 29, 2026",
+    "date": "May 9, 2026",
     "description": "Up to nine million American homes still drink through lead pipe banned in 1986. The rule to remove it runs to 2037, and the pipe is patient.",
     "tags": [
       "infrastructure",
@@ -1156,7 +821,7 @@
   {
     "slug": "solar",
     "title": "The panel was never the hard part",
-    "date": "October 29, 2026",
+    "date": "April 30, 2026",
     "description": "A module leaves China for under ten cents a watt and still waits years for a wire. The cheap part of solar is the only part that got cheap.",
     "tags": [
       "energy",
@@ -1199,43 +864,276 @@
     ]
   },
   {
-    "slug": "open-box",
-    "title": "The sticker does the work",
-    "date": "October 29, 2026",
-    "description": "A television does not change when it goes back through the return door. Its price does. Most of investing is noticing that gap.",
-    "tier": "boxed",
+    "slug": "copper",
+    "title": "Every path ends in a wire",
+    "date": "April 17, 2026",
+    "description": "Three mines caved, flooded and collapsed in 2025, copper set records in 2026, and the energy transition turned out to be a metals trade.",
     "tags": [
-      "price",
-      "retail",
-      "investing"
+      "commodities",
+      "copper",
+      "energy"
     ],
-    "url": "/#/writings/open-box",
+    "url": "/#/writings/copper",
     "announce": false,
     "pinned": false,
     "body": [
-      "A 65-inch television costs what the shelf tag says it costs until the moment someone carries it back through the door. Then it costs something else. Nothing happened to the panel. The pixels did not age in the eleven days it sat in my living room. But the store cannot put it back on the shelf as new, so a second sticker goes on the box, and the second sticker says open box, and open box means a discount, and the discount is often large.",
-      "So here is a small game I play. Buy the television. Return it inside the window, intact, receipt in hand. Come back a few days later and find the same unit on the clearance rack wearing the second sticker. Buy it again. Pay cash on at least one leg, preferably both, because I would rather the loyalty database not draw a line between the two transactions, and because a game the store would prefer you did not play is still a game you are allowed to play.",
-      "I am not writing this to teach anyone how to shave a few hundred dollars off a Hisense. I am writing it because it is the cleanest demonstration I know of a fact most people never fully absorb: price is not a property of the object. Price is a story the seller tells about the object, and the story can be rewritten by events that never touch the thing itself.",
-      "Physicists have a name for a quantity that depends only on the state of a system and not on its history. The television is a state function. Its price is not. Its price carries a path: who held it, for how long, whether a box was opened, whether a form was filled in. The retailer's accounting cannot see the panel. It can only see the path.",
-      "Markets do this at scale, every day, with better instruments. A bond gets cut one notch below investment grade and every fund whose mandate forbids junk must sell it that week, whether or not a single cash flow changed. A stock falls out of an index and the index funds dump it on rebalance day. A company reports one bad quarter and the word distressed goes on the box. Same cash flows, new sticker. Someone who is only permitted to own clean boxes has to sell to someone who is willing to look inside.",
-      "That second buyer is who I try to be. Not because open boxes are always bargains; they are not, and sometimes the panel really is cracked. But the discount for a damaged label is paid by people who are not allowed to check and collected by people who are.",
-      "The return desk is the most honest counter in the store. It is where the seller admits, in writing, that the first price was only ever a story."
+      "On September 8, 2025, about 800,000 tonnes of wet mud moved through the Grasberg Block Cave in Papua and killed seven workers. Freeport-McMoRan (FCX) declared force majeure on the 24th, cut 2026 guidance for the world's second-largest copper mine by roughly 35 percent, and is still not at full rates. That was the third blow of the year. In May a seismic event flooded the Kakula mine in Congo and Ivanhoe (IVN) withdrew its guidance; its 2026 target is 380,000 to 420,000 tonnes from a complex meant to do 550,000. On July 31 a collapse at El Teniente in Chile killed six workers; Codelco suspended the mine's deep expansion this August over seismic risk, and an avalanche there killed two more on October 11. Escondida, the largest copper mine on earth, shut after a fatal accident on September 23.",
+      "Benchmark put the Grasberg loss alone at 591,000 tonnes through the end of 2026, 2.6 percent of a 23-million-tonne world. Global mine output fell 1 percent in the first seven months of this year and Chilean output fell 7 percent. Smelters short of concentrate are paying miners $272 a tonne to take it; in a normal year the money flows the other way. Copper began 2026 at $12,423 a tonne, printed $14,875 on September 10, settled a record $14,822 for cash on October 12, and sits near $14,500 this week, up a third on a year ago.",
+      "People say South America controls this market, which holds until you count. Chile mined 5.3 million tonnes in 2025 and Peru 2.7 million: 35 percent of the world together, and Congo, at 3.2 million, now out-produces Peru. What Chile has is a toll booth. Codelco, state-owned, digs about a quarter of the country's copper, booked 26,875 tonnes in 2025 that an internal audit found it had not produced, and mined 11 percent less in the first half of 2026. The royalty law in force since January 2024 pushes the effective tax burden on large miners to about 45 percent. Mining is 57 percent of Chile's exports. A country that dependent on one metal does not control the price. It prays to it.",
+      "Now the question I started with: what the shortage did to renewables. Less than you would think, and arithmetic says why. An electric car carries about 53 kilograms of copper to a petrol car's 22. At $14.50 a kilogram that is $770 of copper in the EV, and the whole rally of the past year added about $190 to it. Offshore wind uses about eight tonnes per megawatt against roughly one for a coal plant, so a megawatt of turbine carries $116,000 of copper, a rounding error on hardware costing millions per megawatt installed. The transition did not get expensive because copper did. Copper got expensive because the transition is real, because a data centre needs 20 to 40 tonnes per megawatt, and because China's grid spending rose 37 percent in the first quarter.",
+      "Which is what the climate deck and the mining deck both avoid saying. Solar, wind, gas, nuclear and the server hall disagree about everything except the conductor. Whatever makes the electron, copper carries it, with a resistivity only silver beats; aluminium, the one substitute, needs about 60 percent more cross-section to do the same job. The energy transition is a copper trade wearing a climate costume, and the costume is what gets the subsidy.",
+      "One caveat on the record. More than 700,000 tonnes sit in US warehouses, pulled in ahead of a Section 232 tariff decision on refined copper that has been pending since June and that Macquarie expects to pass New Year unanswered. COMEX stocks are up roughly 700 percent since February 2025 and forecasters still pencil in a small 2026 surplus. Some of the all-time high is metal hiding in American sheds.",
+      "Three accidents moved the price. The wire is what holds it there."
     ],
     "sources": [
       {
-        "text": "Walmart's return policy, summarized",
-        "url": "https://dealnews.com/features/walmart/return-policy"
+        "text": "USGS, Mineral Commodity Summaries 2026: Copper",
+        "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-copper.pdf"
       },
       {
-        "text": "Open-box TV deals: what to check before you buy",
-        "url": "https://www.tomsguide.com/us/open-box-tv-deals-advice%2Cnews-26495.html"
+        "text": "Fastmarkets, Base metals head to LME Week 2026 with record-low TCs (October 14, 2026)",
+        "url": "https://www.fastmarkets.com/insights/base-metals-head-to-lme-week-2026-with-record-low-tcs-war-hit-supply-chains/"
+      },
+      {
+        "text": "Mining.com, Copper price forecasts lifted for 2026 but tariff collapse still on the table (October 14, 2026)",
+        "url": "https://www.mining.com/copper-price-forecasts-lifted-for-2026-but-tariff-collapse-still-on-the-table/"
+      },
+      {
+        "text": "Rio Times, Copper in Latin America: mines, prices, politics (October 16, 2026)",
+        "url": "https://www.riotimesonline.com/copper-latin-america-mines-prices-politics-2026/"
+      },
+      {
+        "text": "Investing News, Freeport plans 2026 Grasberg restart after deadly mud rush",
+        "url": "https://investingnews.com/freeport-targets-2026-grasberg-restart/"
+      }
+    ]
+  },
+  {
+    "slug": "phosphate",
+    "title": "Fourteen centuries of rock",
+    "date": "April 9, 2026",
+    "description": "Morocco holds 50 of the world's 73 billion tonnes of phosphate, nothing alive can substitute for it, and the seller has no shares.",
+    "tags": [
+      "commodities",
+      "chokepoints",
+      "food"
+    ],
+    "url": "/#/writings/phosphate",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "A conveyor belt about a hundred kilometres long runs from the Bou Craa mine, in the part of Western Sahara that Morocco administers and the International Court of Justice has declined to call Moroccan, down to the Atlantic. It is the longest conveyor in the world, and the dust blowing off it is visible from orbit. Last year 2.02 million tonnes of rock went down that belt onto 36 ships for exactly three buyers, in India, Mexico and New Zealand. Everyone else has dropped away; the European Court of Justice ruled again in 2024 that the Saharawi have to consent, and they have not.",
+      "Bou Craa is about eight percent of what OCP digs. The number that matters sits in the Geological Survey's table: of the world's 73 billion tonnes of phosphate rock reserves, Morocco holds 50 billion, about 70 percent. China holds 3.4 billion, the United States one. Beneath the table, in the flat prose the Survey uses for every commodity: there are no substitutes for phosphorus in agriculture. There are none anywhere. The backbone of DNA alternates sugar and phosphate; the molecule every cell spends as energy is a triphosphate; bone is calcium phosphate. In my own corner of science, the way a cell tells a protein condensate to form or dissolve is to bolt a phosphate group onto the protein. Nitrogen you can pull from the air with enough natural gas. Phosphorus you dig.",
+      "Here is where the reserve number misleads. Reserves are about the future; production is about the price. China mined 110 million of the world's 250 million tonnes in 2025, Morocco 36, the United States 20. Divide the ground by the digging and China empties its reserve in about thirty years, America in fifty, Morocco in fourteen centuries. And this year's price shock had almost nothing to do with rock. A tonne of diammonium phosphate takes 1.5 to 2 tonnes of rock, 0.4 of sulfur and 0.2 of ammonia, and roughly 44 percent of seaborne sulfur loads in the Gulf. The Strait of Hormuz has been effectively shut for most of the eight months since the American and Israeli strikes of February 28; transits run in single digits a day against 85 before. Sulfur went from under $100 a ton in 2024 to above $1,000 by late summer. China, which exported 10 million tons of DAP and MAP in 2021, closed its exports in mid-March. Illinois DAP was $929 a ton on October 16, against $600 to $700 through 2024 and the first half of 2025. Morocco holds the rock. The sulfur comes from somewhere else, and this year somewhere else was on fire.",
+      "Washington noticed late. Since April 2021 the United States had charged a countervailing duty of more than 16 percent on Moroccan phosphate fertilizer, at the petition of Mosaic (MOS), which runs the Florida mines; Texas A&M puts the cost to farmers at $6.9 billion over five seasons. On June 29 the president declared an emergency and suspended the duty for eight months, and in August the first Moroccan cargo in five years, 54,000 tonnes of triple superphosphate, docked at New Orleans. The same summer Mosaic curtailed production in Florida and Louisiana for want of sulfur. The tariff protected a producer that cannot make the product without the Gulf, against a producer that owns the ground.",
+      "Which brings me to the strange part. OCP is 94 percent owned by the Moroccan state, the rest by a bank's funds, a pension fund and a university endowment; a 2008 law gives it the sole right to mine phosphate in the kingdom; it took in about $11.4 billion last year, up 17 percent. Its dollar bonds trade in Dublin. Its shares trade nowhere. You can lend to the most consequential monopoly in food. You cannot own it.",
+      "The last phosphate mine on earth will be Moroccan, and it will not have a ticker."
+    ],
+    "sources": [
+      {
+        "text": "USGS, Mineral Commodity Summaries 2026: Phosphate Rock",
+        "url": "https://pubs.usgs.gov/periodicals/mcs2026/mcs2026-phosphate.pdf"
+      },
+      {
+        "text": "Western Sahara Resource Watch, P for Plunder 2026: Morocco's exports of phosphates from occupied Western Sahara",
+        "url": "https://vest-sahara.s3.amazonaws.com/wsrw/feature-images/File/2887/6a18515b8119d_P-for-plunder-2026-web-(spreads).pdf"
+      },
+      {
+        "text": "farmdoc daily, Sulfur and increasing phosphate fertilizer prices (August 2026)",
+        "url": "https://farmdocdaily.illinois.edu/2026/08/sulfur-and-increasing-phosphate-fertilizer-prices.html"
+      },
+      {
+        "text": "Farm Policy News, Morocco phosphate fertilizer returns to U.S. market (August 2026)",
+        "url": "https://farmpolicynews.illinois.edu/2026/08/morocco-phosphate-fertilizer-returns-to-u-s-market/"
+      },
+      {
+        "text": "USDA AMS, Illinois Production Cost Report, week ending October 16, 2026",
+        "url": "https://www.ams.usda.gov/mnreports/ams_3195.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "asml",
+    "title": "One percent of the light",
+    "date": "March 28, 2026",
+    "description": "Fifty thousand tin droplets a second, picometre mirrors, one company, sold out through 2028. The market still trades it like a cyclical.",
+    "tags": [
+      "semiconductors",
+      "chokepoints",
+      "Netherlands"
+    ],
+    "url": "/#/writings/asml",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "Fifty thousand times a second a droplet of molten tin, 25 micrometres across, falls through a vacuum chamber and a carbon-dioxide laser hits it twice. The first pulse flattens it into a pancake. The second turns the pancake into a plasma at about 220,000 degrees Celsius, forty times the surface of the sun, and the tin ions, relaxing, give off light at 13.5 nanometres. That wavelength is the whole point and the whole problem. Nearly everything absorbs it, air and glass included, so no lens can focus it. Mirrors do the work, about ten of them, each a hundred alternating layers of molybdenum and silicon, each reflecting at most 68 percent. Ten reflections later, about one percent of the light that leaves the plasma reaches the wafer. Zeiss polishes those mirrors for two to three years apiece to a roughness measured in picometres, a fraction of an atom; scaled to the area of Germany, the tallest bump would stand under a millimetre.",
+      "One company on earth assembles this into a machine that works: ASML (ASML), in Veldhoven. A standard EUV scanner costs around $180 million. The High-NA version costs about $400 million and only about a dozen exist; Intel has run more than a million wafers through its machines, Samsung plans volume production on them in 2028 and TSMC in 2030. Last year ASML recognised revenue on 48 EUV systems and €32.7 billion of sales. On October 14 it reported a record quarter, €11.7 billion at a 57.5 percent gross margin, €4.1 billion of it EUV. In January it guided 2026 at €34 to €39 billion. It now says €44 to €45 billion, and €44 billion was the floor of the 2030 plan it laid out in November 2024: the bottom of its own decade target, four years early. Supply as planned for 2027 and 2028, the chief executive said, will not meet demand. Customers asking to reserve slots for 2029 and 2030 are being told to wait.",
+      "China has never been allowed an EUV machine. The Dutch do not license them, and since 2023 and 2024 the better deep-ultraviolet immersion tools have needed licences too, granted case by case. So Chinese fabs bought the older ones, more than $13 billion on roughly 180 NXT:1980i scanners in 2024 and 2025 by one count, and China was 41 percent of ASML's system sales in 2024, 33 percent last year and 23 percent in the quarter just reported. In Washington the MATCH Act, introduced in April, would end even that: all immersion lithography and the servicing of tools already installed, with the Netherlands given 150 days to copy the rule or watch the foreign direct product rule do it for them. It was folded into the Senate defence bill, and the Senate blocked that bill on July 14 in a fight over paying for the Iran war.",
+      "Now the price. The company whose supply is sold out for three years, whose nearest competitor does not exist, whose customers are begging for 2030, fell nearly two percent on October 14 and another two after hours because sales came in at €11.66 billion against a consensus of €11.72 billion. Half a percent. The shares have traded between $946 and $2,000 in twelve months, the range of a semiconductor-equipment cyclical, and ASML was one for decades, when fabs ordered scanners in waves and cancelled them in waves. The market still prices the quarter and not the queue. At 36 times next year's earnings it is not cheap, but its own January guidance was eight billion euros short, and the price increases on its critical tools only begin to show in 2027. If I were going to own one semiconductor company it would be the one that does not make semiconductors.",
+      "One percent of the light reaches the wafer. Every chip at the frontier is drawn with that one percent."
+    ],
+    "sources": [
+      {
+        "text": "ASML, Q3 2026 results: €11.7 billion total net sales and €5.0 billion net income (October 14, 2026)",
+        "url": "https://investor.asml.com/news-releases/news-release-details/asml-reports-eu11.7-billion-total-net-sales-and-eu5.0-billion-net-income-q3-2026"
+      },
+      {
+        "text": "Motley Fool, ASML Q3 2026 earnings call transcript (October 14, 2026)",
+        "url": "https://www.fool.com/earnings/call-transcripts/2026/10/14/asml-asml-q3-2026-earnings-call-transcript/"
+      },
+      {
+        "text": "ASML, 2025 fourth-quarter and full-year results presentation (January 28, 2026)",
+        "url": "https://ourbrand.asml.com/m/3136300aa4999bc1/original/2026_01_28_Presentation-Investor-Relations-Q4-2025.pdf"
+      },
+      {
+        "text": "TrendForce, China reportedly spent $13B+ stockpiling ASML DUV tools in 2024–25 (October 5, 2026)",
+        "url": "https://www.trendforce.com/news/2026/10/05/news-china-reportedly-spent-13b-stockpiling-asml-duv-tools-in-2024-25-as-advanced-chip-push-continues/"
+      },
+      {
+        "text": "Bits&Chips, Iran war deadlock gave ASML reprieve from US China crackdown (August 21, 2026)",
+        "url": "https://bits-chips.com/article/iran-war-deadlock-gave-asml-reprieve-from-us-china-crackdown/"
+      }
+    ]
+  },
+  {
+    "slug": "jane-street-india",
+    "title": "Four hundred to one",
+    "date": "March 18, 2026",
+    "description": "India trades 394 rupees of derivatives per rupee of stock, nine in ten retail traders lose, and Jane Street made $4 billion there.",
+    "tags": [
+      "markets",
+      "India",
+      "derivatives"
+    ],
+    "url": "/#/writings/jane-street-india",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "For every rupee of stock that changed hands on India's exchanges last fiscal year, about 394 rupees of derivatives changed hands on top of it. In 2016 the ratio was 14. The regulator, SEBI, publishes this number itself, in a study it released this August under the flat title \"Profitability of Individual Traders in the Equity Derivatives Segment,\" which is the bureaucratic way of saying: we counted, and they lose.",
+      "They lose. Of the 8.75 million individuals who traded futures and options in the year to March 2026, 87.7 percent finished in the red. Together they lost 91,685 crore rupees, roughly $10 billion, and that was an improvement: the year before, 10.6 million people lost about $13 billion. Over five years the cumulative figure is 3.85 lakh crore, call it $45 billion, transferred from salaried Indians to whoever sat on the other side of the trade. About a third of these traders hold no stock at all. They are not hedging anything. They are buying weekly Nifty options on their phones the way their fathers bought lottery tickets, except a lottery pays out in the aggregate and this does not.",
+      "Who sat on the other side? For two years the single most profitable answer was a firm from New York that most of them had never heard of. SEBI's July 2025 order alleged that Jane Street made about 36,500 crore rupees, around $4.3 billion, from Indian index derivatives between January 2023 and March 2025, of which 4,843 crore was, in SEBI's view, the product of manipulating the Bank Nifty index: buy the constituent banks hard in the morning, let the index drag the options with it, hold a much larger short options position, then sell the banks into the close. SEBI barred the firm from the market. Jane Street deposited the $567 million in escrow within two weeks, had the bar lifted within three, and is still arguing the merits before the Securities Appellate Tribunal this month, where it has accused the regulator of moving the goalposts after the fact.",
+      "Hold the two facts together. The retail base loses on the order of $10 billion a year, and the best trading firm in the world found that market so rich that its 2024 India take, $2.3 billion, was more than a tenth of its global revenue. In 2025 Jane Street booked $39.6 billion in net trading revenue, more than JPMorgan's entire trading operation. India was part of the reason it could.",
+      "This is the part the moralists miss. SEBI's complaint was never that Jane Street was good. It was that one pattern, in one index, crossed from aggressive into manipulative, and that is a question for the tribunal. The structural fact is older and stranger. On top of a stock market worth roughly $5 trillion, India has built a derivatives market whose notional turnover runs at four hundred times the underlying, populated by tens of millions of individuals who are statistically certain to lose. There is no other market like it. The United States has a bigger options market in dollars and a far smaller one in participation. Korea had the wildest index options market on earth in 2011 and regulated it into a corner within a year. India's regulator is tightening too, with bigger lot sizes and fewer weekly expiries, and the number of active traders fell 18 percent last year. It remains the largest casino in the world where the house seats are open to anyone with a Mumbai office and a market-making license.",
+      "Which is why the right lesson for a hedge fund is not \"stay away.\" Every quantitative firm I would want to own a piece of should have a desk in India and a compliance officer who has read the Jane Street order twice. The edge is not a trick. The edge is that a country of 1.4 billion people has decided, for now, to pay a toll of about $10 billion a year to whoever is fast enough to collect it, and has posted the tariff in a government PDF.",
+      "Toll roads are good businesses. The ones with a published rate are the best."
+    ],
+    "sources": [
+      {
+        "text": "SEBI, Profitability of Individual Traders in the Equity Derivatives Segment, FY25–FY26 (August 2026)",
+        "url": "https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf"
+      },
+      {
+        "text": "Business Standard, Jane Street accuses Sebi of shifting goalposts at SAT (October 8, 2026)",
+        "url": "https://www.business-standard.com/markets/news/jane-street-accuses-sebi-of-shifting-goalposts-in-sat-hearing-on-documents-126100801282_1.html"
+      },
+      {
+        "text": "Business Standard, Jane Street nets $2.3 bn from India equity options (May 2025)",
+        "url": "https://www.business-standard.com/amp/markets/news/jane-street-nets-2-3-bn-from-booming-india-equity-options-trading-125052301072_1.html"
+      },
+      {
+        "text": "Jane Street's record $39.6 billion 2025 trading revenue",
+        "url": "https://www.gurufocus.com/news/8816393/jane-street-achieves-record-396b-trading-revenue-in-2025"
+      },
+      {
+        "text": "Sebi bars Jane Street, orders disgorgement of ₹4,844 crore (July 2025)",
+        "url": "https://www.business-standard.com/amp/markets/news/sebi-bars-jane-street-orders-rs-4844-cr-disgorgement-market-manipulation-125070400081_1.html"
+      }
+    ]
+  },
+  {
+    "slug": "the-trades-pitch",
+    "title": "A labour-supply request in work boots",
+    "date": "March 11, 2026",
+    "description": "The people telling teenagers to become electricians are the people who will hire them. A purchase order is not career advice.",
+    "tags": [
+      "labour",
+      "AI",
+      "data-centres"
+    ],
+    "url": "/#/writings/the-trades-pitch",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "In September 2025 the chief executive of Nvidia sat in a British television studio and told the country's teenagers what to do with their lives. \"If you're an electrician, you're a plumber, a carpenter, we're going to need hundreds of thousands of them to build all of these factories.\" The skilled craft segment of every economy, he said, \"is going to see a boom.\" He said it again on Fox Business this August: hundreds of thousands of jobs for \"people who build things, that make things with their hands.\" BlackRock's chief executive told an energy conference in March 2025 that he had warned the White House \"we're going to run out of electricians.\" Blackstone's president promised a \"huge boom in blue-collar employment.\" In July, leaders from BlackRock, Carhartt, Ford and Google formed an Alliance for America's Skilled Trades.",
+      "Take the pitch seriously first, because the shortage is real. The Census Bureau put data-centre construction at an $85 billion annual rate in August, up 73 percent on the year, while factory construction has fallen 32 percent from its 2024 peak. Electrical work is 45 to 70 percent of a data centre's construction budget, and the electricians' union near Washington has doubled its membership since 2018 to 14,700 and still cannot fill calls. A qualified electrician there earns about $59.50 an hour, better than $120,000 a year with benefits. About 20,000 electricians retire each year. The Bureau of Labor Statistics projects electricians to grow 9 percent in the decade to 2035 and plumbers 7 percent, against 3.5 percent for all jobs. None of that is the problem.",
+      "The problem is who is talking and what they are buying. Every voice in that chorus is a buyer of electrical labour or a financier of the buildings that need it. When a customer tells you to increase production, that is not career guidance. It is a purchase order, written in the language of virtue, real work and hands and things, because a purchase order written in the language of wages would have to name a price and a term. The term is the capex cycle. Four companies will spend about $725 billion on data centres this year. The cycle will end as capital cycles end, and the message to the eighteen-year-old carries no date.",
+      "Now the numbers the pitch leaves out. Nine percent growth for electricians is 75,900 jobs over ten years, about 7,600 a year across the country. In 2024 the electrical contractors' association counted 120,000 apprenticeship applications, up from 70,000 two years earlier, already more than the positions on offer. The pitch has worked. A large data centre employs up to 1,500 people at peak construction and about 50 once it is finished; one analysis of federal payroll data found as few as 23,000 permanent data-centre jobs nationwide in 2024. The farmers in the same speeches are the one group projected to shrink, down 3 percent; ironworkers grow 1 percent. And an electrical apprenticeship takes four to five years. In a driven system, a response that takes longer to arrive than the force takes to change is always answering the previous push. In 2008 nearly one in four union construction electricians was out of work. Nobody who gave a speech in 2005 was laid off in 2009.",
+      "The equipment side has no such exposure. Caterpillar (CAT) sells the generators behind every server hall, Deere (DE) sells the tractor to a farmer the projections say will not be replaced, and Otis (OTIS) will service the elevators whichever tenant is in the building. Machines are bought once, at the top of the cycle. Labour is rented while the cycle lasts and returned when it ends.",
+      "Become an electrician if the work suits you; it is a good trade. Just notice that the man on television is not your guidance counsellor. He is your customer, and he would like the price down."
+    ],
+    "sources": [
+      {
+        "text": "Fortune, Nvidia's Jensen Huang says electricians and plumbers will be needed by the hundreds of thousands (September 30, 2025)",
+        "url": "https://fortune.com/article/nvidia-billionaire-ceo-jensen-huang-demand-for-gen-z-skilled-trade-workers-electricans-plumbers-carpenters-data-center-growth-six-figure-salaries/"
+      },
+      {
+        "text": "Fortune, Jensen Huang says AI will create \"hundreds of thousands\" of new jobs, including in the trades (September 1, 2026)",
+        "url": "https://fortune.com/2026/09/01/nvidia-ceo-jensen-huang-ai-will-create-hundreds-of-thousands-of-jobs-skilled-trade-workers-data-centers/"
+      },
+      {
+        "text": "BLS, Occupational Outlook Handbook: Electricians (2025–35 projections)",
+        "url": "https://www.bls.gov/ooh/construction-and-extraction/electricians.htm"
+      },
+      {
+        "text": "BLS, Total employment projected to grow 3.5 percent between 2025 and 2035 (September 21, 2026)",
+        "url": "https://www.bls.gov/opub/ted/2026/total-employment-projected-to-grow-3-5-percent-between-2025-and-2035.htm"
+      },
+      {
+        "text": "Fortune, AI data centres and the electrician shortage (March 2, 2026)",
+        "url": "https://fortune.com/2026/03/02/ai-data-centers-electrician-shortage-gen-z-training-careers/"
+      }
+    ]
+  },
+  {
+    "slug": "nintendo",
+    "title": "Not on the axis",
+    "date": "February 25, 2026",
+    "description": "Switch 2 sold 23.7 million units in thirteen months. The stock is down 42 percent, at thirty times a year Nintendo says will be worse.",
+    "tags": [
+      "companies",
+      "gaming",
+      "Japan"
+    ],
+    "url": "/#/writings/nintendo",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "On September 1 Nintendo raised the American price of the Switch 2 from $449.99 to $499.99, fifteen months after launch, with the console outselling the PlayStation 5 more than two to one. Companies do not usually do that in a console's second year. Nintendo (NTDOY) looked at memory prices driven up by the data-centre build, looked at tariffs, and decided the customer would pay. So far the customer has.",
+      "The numbers as of June 30: 23.68 million Switch 2 consoles sold since the June 2025 launch, 19.86 million of them in the first fiscal year against a launch-day forecast of 15 million. Sony's (SONY) PlayStation 5 shipped 1.6 million units in the June quarter. The Switch 2 shipped 3.82 million, and Nintendo described that quarter as down 34 percent, because the launch frenzy it was lapping was so large. The PS5 has 95.3 million consoles in the world after five and a half years. The Switch 2 is a quarter of the way there after one.",
+      "Then the software. Switch 2 owners have bought 58.17 million games, about two and a half a console. The original Switch, at 156.59 million units, ended up carrying ten games each over its life, 1.56 billion in total. Mario Kart World alone has sold 15.39 million copies. The Super Mario Galaxy Movie passed a billion dollars at the box office this spring, and Nintendo's income from licensing its characters more than doubled in the June quarter, to ¥34.8 billion. Sony owns a very good box. Nintendo owns a plumber that three generations recognise on sight.",
+      "The index committees file Nintendo under Communication Services, in a sub-industry called Interactive Home Entertainment, beside Netflix and Alphabet rather than beside the companies that make the television it plugs into. The classification is more honest than it looks. Nintendo is a media company that happens to manufacture its own distribution.",
+      "Here is how it wins, and it is the way it has won since the Game Boy. It refuses the spec war. Sony and Microsoft compete on one axis, rendering power, and on that axis Nintendo has been losing by choice since the Wii; the trick is that Nintendo is not on the axis. It sells a box good enough to run Mario, sells the box at a margin rather than as a loss leader, and then sells the software at a much fatter margin for seven or eight years to an installed base no other publisher can reach. Its customers are children. Children become parents, and parents buy the box they remember.",
+      "Now the price. The shares closed at ¥14,795 in August 2025 and trade near ¥8,500 today, down about 42 percent, for a market value around ¥9.8 trillion, roughly $63 billion. On trailing earnings that is 21 times. On forward earnings it is about 30, and the gap between those two numbers is the whole argument. Nintendo's own forecast for the year to March 2027 is 16.5 million consoles against 19.86 million, net sales down 11 percent to ¥2.05 trillion, profit down 27 percent to ¥310 billion, with about ¥100 billion of memory and tariff costs written into it. The market is paying thirty times a year the company itself says will be worse.",
+      "Is that right? Partly. Nintendo guides low; the 15 million became 19.86 million, and sell-through is running ahead of the original Switch at the same point in its life. But the memory squeeze is real, the price rise will cost units, and a $500 console is a different purchase from a $450 one in a household paying more for everything else. I would own it below ¥8,000, and not as a console cycle. I would own it as the only media company whose audience is replaced every seven years and arrives already knowing the characters.",
+      "Mario is forty-five years old. His customers are seven, and they always will be."
+    ],
+    "sources": [
+      {
+        "text": "Nintendo, consolidated results for the three months ended June 30, 2026 (August 6, 2026)",
+        "url": "https://www.nintendo.co.jp/ir/pdf/2026/260806e.pdf"
+      },
+      {
+        "text": "Nintendo Reporters, Switch 2 sales reach 23.68 million as Mario Kart World passes 15 million (August 2026)",
+        "url": "https://www.nintendoreporters.com/en/news/nintendo-switch-2/nintendo-switch-2-sales-reach-2368-million-as-mario-kart-world-passes-15-million/"
+      },
+      {
+        "text": "Nintendo Everything, fiscal 2026 results and fiscal 2027 forecast (May 8, 2026)",
+        "url": "https://nintendoeverything.com/nintendo-financial-results-may-2026-switch-2-at-19-86-million-units-switch-at-155-92-million-more/"
+      },
+      {
+        "text": "TechSpot, Nintendo raising Switch 2 price worldwide, US model to $499.99",
+        "url": "https://www.techspot.com/news/112348-nintendo-raising-switch-2-price-worldwide-us-model.html"
+      },
+      {
+        "text": "Simulation Daily, PS5 passes 95.3 million as Sony raises PlayStation outlook (July 30, 2026)",
+        "url": "https://simulationdaily.com/news/sony-financial-results-q1-fy2026-ps5/"
       }
     ]
   },
   {
     "slug": "eda",
     "title": "Three envelopes",
-    "date": "October 29, 2026",
+    "date": "February 16, 2026",
     "description": "Three firms own three quarters of chip-design software. Washington took the pencil by letter in May 2025 and handed it back in forty days.",
     "tags": [
       "semiconductors",
@@ -1278,53 +1176,54 @@
     ]
   },
   {
-    "slug": "private-prisons",
-    "title": "Three hundred thousand dollars a bed",
-    "date": "October 29, 2026",
-    "description": "Two companies hold most of ICE detention. Washington now buys their buildings, pays them to run them, and cannot FOIA either one.",
+    "slug": "vertical-integration",
+    "title": "Four signatures, one hand",
+    "date": "February 5, 2026",
+    "description": "UnitedHealth is the payer, the doctor, the pharmacist and the rail the money runs on. The fury is a signal. The structure is the problem.",
     "tags": [
+      "healthcare",
       "institutions",
-      "immigration",
-      "incentives"
+      "antitrust"
     ],
-    "url": "/#/writings/private-prisons",
+    "url": "/#/writings/vertical-integration",
     "announce": false,
     "pinned": false,
     "body": [
-      "On July 2 the Department of Homeland Security paid CoreCivic (CXW) $1.5 billion for two detention centers in California, and on August 4 another $734 million for two more in Kansas and Minnesota: 7,187 beds for $2.2 billion, which the company's own release works out to $307,000 a bed. On October 5 GEO Group (GEO) sold its Adelanto complex in the Mojave, 2,644 beds, for $950 million, or $359,000 a bed. ICE's median daily rate for a bed is $92. In every case the seller stays on to run the building; GEO's contract runs to 2029 with an option to 2034. The government bought the asset and kept the operator.",
-      "The line that two companies own half of America's private prisons is roughly true and misses the point. Private prisons hold about 8 percent of state and federal prisoners, and GEO and CoreCivic are most of that trade, but prisons are not where the money is. Immigration is. About a third of ICE detainees sit in GEO facilities and roughly a quarter of ICE's beds are CoreCivic's; 86 percent of detainees were in for-profit hands when this administration took office. ICE was 48 percent of GEO's $2.63 billion of revenue last year and about 42 percent of CoreCivic's in the first quarter of this one. Between them the two booked about $4.8 billion in 2025.",
-      "What changed is one number. On January 20, 2025 ICE held 39,314 people. By July 30 this year the average daily population was 67,180, after a January peak above 73,000, and the count of authorized facilities had doubled from 134 to 272. The law signed on July 4, 2025 put $45 billion into detention through September 2029, against an annual detention appropriation that had been about $3.8 billion. GEO took its ICE capacity from about 20,000 beds to 26,000 in a year, the most new business in its history. CoreCivic now guides to $1.5 billion of net income in 2026, because selling four buildings to your largest customer books as a $1.8 billion gain. Both raised their buybacks within days of closing, GEO to $1.25 billion, CoreCivic to $1.2 billion with $500 million of it executed at once.",
-      "The other complaint is that these companies owe the government nothing. It is backwards. They are contractors, and in this contract the obligations run toward them. ICE agreements carry guaranteed minimums, beds paid for nightly whether anyone sleeps in them, and an analysis of ICE's own July data found about 8,200 such beds standing empty at more than $1.2 million a day. The GAO's September report is titled, in full, Immigration Detention: Urgent Planning Needed to Avoid Further Waste of Taxpayer Dollars. What flows the other way is harder to see. The Freedom of Information Act does not reach a private operator, and a bill to change that has been introduced since 2005 and never passed. ICE's detention standards are not written into law. The acting director of ICE since June spent about a decade as a GEO executive. Thirty-nine people died in ICE custody in the twelve months to January, the most in any year since the agency was created in 2003, twenty-seven of them in privately run facilities.",
-      "I would not own either stock, and the reason is structural before it is moral. Every business I own has a growth metric I can reason about: subscribers, payment volume, syrup. The growth metric here is the number of human beings the executive branch decides to confine, which went from 39,000 to 73,000 in a year and which the next administration, appropriations fight or court order can move the other way with a signature. GEO has traded between $12.51 and $33.17 over the past twelve months and closed at $27.57 on October 28, at thirteen times earnings. That is the chart of a referendum.",
-      "The government owns the buildings now. The companies are still paid by the bed."
+      "Sixty-three cents of every dollar Optum Rx booked in 2025 came from another part of UnitedHealth Group (UNH). The pharmacy benefit manager filled 1.66 billion prescriptions and took in $155 billion; its largest customer is the insurer that owns it. Optum Health employs or affiliates more than 90,000 physicians, about one in ten in the country. Optum Insight owns Change Healthcare, the clearinghouse that moves 15 billion transactions a year and touches one in three patient records. Optum Bank holds the health savings accounts. One company is the payer, the doctor, the pharmacist and the rail the money runs on, and it booked $447.6 billion of revenue in 2025, up 12 percent.",
+      "CVS Health owns Aetna and Caremark. Cigna owns Express Scripts. Those three PBMs processed 80 percent of the country's prescription claims last year, and Humana runs the same model smaller. The industry's word for this is integration; the pitch is that one owner holding every step takes the friction out. A market, like a heat engine, runs on a difference: insurer and provider are the hot and cold reservoirs, and the price is the work done between them. Put both in one hand and there is no gradient and no work, only heat, and the heat is $155 billion of internal billing nobody outside the building ever negotiated.",
+      "The market noticed late. UnitedHealth closed at a record $596 a share in November 2024, worth about $560 billion. In April 2025 it cut its forecast and lost 22 percent in a day; what the release called \"heightened care activity\" was people using the insurance they had paid for. In May the chief executive left and the guidance went with him. By December the company was worth about $300 billion; it is back near $370 billion today. The 2025 medical care ratio was 89.1 percent: 89 cents of each premium dollar went to care.",
+      "In July 2025 the company disclosed criminal and civil Justice Department investigations into its Medicare billing, widened by August to Optum Rx and to how it pays its own doctors. A Senate Judiciary staff report in January found it captured more diagnosis codes than any other Medicare Advantage insurer and called risk adjustment \"a major profit centered strategy.\" The company disputes it. On denials the record is also the Senate's: UnitedHealthcare's prior-authorization denial rate for post-acute care went from 10.9 percent in 2020 to 22.7 percent in 2022. Across the exchange market, insurers denied 19 percent of in-network claims in 2024; fewer than one percent were appealed.",
+      "On December 4, 2024, Brian Thompson, who ran the insurance arm, was shot dead on a Manhattan sidewalk on his way to the company's investor day. That was murder, and nothing in a denial letter or a 10-K excuses it. His killer pleaded guilty to federal stalking charges in August and will be sentenced in December; the state murder case is stalled on a double-jeopardy motion. What should trouble the company more than the trial is the public reaction, which was not grief. It told you how many people had met the structure at its worst with nobody to send the anger to, because the insurer, the doctor and the pharmacist were the same voicemail.",
+      "Violence does not break that structure. It hardens it: a company under threat gets sympathy, a bigger legal budget and a licence to call every critic dangerous. What breaks it is a statute. Arkansas tried in April 2025, banning PBMs from owning pharmacies; a federal judge enjoined the law and the appeal sits at the Eighth Circuit. Congress passed PBM transparency in February, effective in 2028. Transparency is what a legislature passes when it has decided not to touch ownership. The FTC settled its insulin case with all three PBMs by June; no settlement changes who owns whom.",
+      "The denial, the diagnosis, the prescription and the cheque carry four signatures from one hand."
     ],
     "sources": [
       {
-        "text": "GEO Group, fourth quarter and full year 2025 results (February 12, 2026)",
-        "url": "https://investors.geogroup.com/news-releases/news-release-details/geo-group-reports-fourth-quarter-and-full-year-2025-results"
+        "text": "UnitedHealth Group, fourth quarter and full year 2025 results, Form 8-K exhibit 99.1 (January 27, 2026)",
+        "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000025/a991unherq42025.htm"
       },
       {
-        "text": "CoreCivic, second quarter 2026 financial results and $2.2 billion facility sale (August 5, 2026)",
-        "url": "https://ir.corecivic.com/node/25571/pdf"
+        "text": "Drug Channels, The top pharmacy benefit managers of 2025 (March 2026)",
+        "url": "https://www.drugchannels.net/2026/03/the-top-pharmacy-benefit-managers-of.html"
       },
       {
-        "text": "GEO Group sells the Adelanto ICE Processing Center and Desert View Annex for $950 million (October 5, 2026)",
-        "url": "https://www.stocktitan.net/news/GEO/the-geo-group-sells-the-adelanto-california-ice-processing-center-cylssodety55.html"
+        "text": "Senate Permanent Subcommittee on Investigations, majority staff report on Medicare Advantage denials of post-acute care (October 17, 2024)",
+        "url": "https://www.blumenthal.senate.gov/newsroom/press/release/senate-permanent-subcommittee-on-investigations-releases-majority-staff-report-exposing-medicare-advantage-insurers-refusal-of-care-for-vulnerable-seniors"
       },
       {
-        "text": "GAO-26-108663, Immigration Detention: Urgent Planning Needed to Avoid Further Waste of Taxpayer Dollars (September 24, 2026)",
-        "url": "https://www.gao.gov/assets/gao-26-108663.pdf"
+        "text": "Healthcare Dive, UnitedHealth \"aggressively\" gaming Medicare Advantage, Senate investigation finds (January 12, 2026)",
+        "url": "https://www.healthcaredive.com/news/unitedhealth-grassley-medicare-advantage-investigation/809377/"
       },
       {
-        "text": "Human Rights Watch, Dying in Detention (June 25, 2026)",
-        "url": "https://www.hrw.org/report/2026/06/25/dying-in-detention/rising-deaths-in-an-expanding-us-immigration-detention-system"
+        "text": "PBS NewsHour, Mangione's state murder trial postponed indefinitely as double jeopardy fight plays out (August 2026)",
+        "url": "https://www.pbs.org/newshour/nation/luigi-mangiones-state-murder-trial-postponed-indefinitely-as-double-jeopardy-fight-plays-out"
       }
     ]
   },
   {
     "slug": "uranium",
     "title": "Three neutrons, ten years",
-    "date": "October 29, 2026",
+    "date": "January 28, 2026",
     "description": "The AI companies are buying power from reactors that already exist. New uranium demand lands in the 2030s; only the term price has noticed.",
     "tags": [
       "commodities",
@@ -1365,6 +1264,107 @@
       {
         "text": "Utility Dive, Meta inks nuclear deals for up to 6.6 GW from Oklo, Vistra, TerraPower (January 9, 2026)",
         "url": "https://www.utilitydive.com/news/meta-nuclear-deal-oklo-vistra-terrapower-ai-data-centers/809215/"
+      }
+    ]
+  },
+  {
+    "slug": "toys-that-listen",
+    "title": "The doll was a surveillance device",
+    "date": "January 16, 2026",
+    "description": "Germany banned a talking doll under its spy-equipment law. Alexa won the kitchen with no intelligence. Owning the room beats being smart.",
+    "tags": [
+      "technology",
+      "privacy",
+      "incentives"
+    ],
+    "url": "/#/writings/toys-that-listen",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "In February 2017 the German Federal Network Agency, which regulates telecoms, ordered a blonde doll called My Friend Cayla off the shelves, on the grounds that an object which conceals a microphone and transmits what it hears is a prohibited surveillance device. Genesis Toys sold the doll, Nuance handled the speech, and the Bluetooth link had no authentication, so anyone within range could pair with a child's toy and listen. The regulator was not making a metaphor. It applied the law written for hidden bugs to a product in the toy aisle, and the law fit.",
+      "A year later the Federal Trade Commission settled with VTech for $650,000 over a tablet system that collected the names, birthdates and genders of hundreds of thousands of children without parental consent, was breached in 2015, and had told parents the data was encrypted when none of it was. Last September the FTC charged Apitor, a Shenzhen maker of robot toys, with letting a Chinese analytics kit called JPush pull precise location from thousands of children through its app; the $500,000 penalty was suspended because the company said it could not pay. Then came the chatbot plush. The Kumma bear from FoloToy, sold as running on GPT-4o, told testers how to find and light matches before moving on to sexual topics; OpenAI cut the developer off in November, and by February the bear was still offering GPT-5.1. Mattel announced its OpenAI partnership in June 2025, said its first product would arrive by year-end, then said not that holiday season. The toys are sensors pointed at the youngest people in the house, and the business model requires it.",
+      "Which brings me to the sensor that won. Amazon put the Echo on sale on November 6, 2014, at $199, or $99 for Prime members with an invitation. It had seven microphones and almost no mind: music, weather, alarms, pitched fairly as a whole-home Siri. The Wall Street Journal later put the devices division's losses from 2017 through 2021 above $25 billion. Amazon could sell the hardware at a loss because the product was a microphone in the kitchen with a Prime account attached, and it has since shipped more than 600 million Alexa devices. Run the opposite counterfactual: a device arriving in 2025 with a frontier model inside. Smarter. It would have lost. The intelligence was always retrofittable; the countertop was not. Alexa+ reached everyone in the United States on February 4 this year, free with Prime, and 97 percent of the devices Amazon ever shipped can run it. A dumb device that owns the room upgrades into a smart one. A smart device that arrives late has to find a room.",
+      "Think of it as a phase transition. A room with a listening device in it is a different state of matter from a room without one, and the energy barrier is the first installation. Once the microphone is there, making it cleverer costs a software push; making a cleverer microphone appear in that kitchen costs a second purchase nobody makes.",
+      "That is why the ethics of the toy aisle are not a side issue. Mattel and its imitators are not competing on intelligence; the intelligence is rented from the same handful of labs. They are competing to be the first microphone a child trusts, and the retention policies tell you what the prize is. The amended children's privacy rule took full effect on April 22; a bill to update the underlying law passed the Senate unanimously in March and is stalled in the House. The German regulator understood in 2017 what the American market still prices as a feature: a device that hears a child is a device that hears a child, whatever its face is.",
+      "Cayla has been illegal in Germany for nine years. The room she was built to occupy was taken by a speaker."
+    ],
+    "sources": [
+      {
+        "text": "Engadget, Germany bans My Friend Cayla over privacy concerns (February 17, 2017)",
+        "url": "https://www.engadget.com/2017-02-17-germany-bans-my-friend-cayla-doll.html"
+      },
+      {
+        "text": "FTC, electronic toy maker VTech settles allegations it violated children's privacy law (January 8, 2018)",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2018/01/electronic-toy-maker-vtech-settles-ftc-allegations-it-violated-childrens-privacy-law-ftc-act"
+      },
+      {
+        "text": "Department of Justice, stipulated order resolves allegations that Apitor Technology violated COPPA (September 30, 2025)",
+        "url": "https://www.justice.gov/opa/pr/stipulated-court-order-resolves-allegations-chinese-toy-maker-apitor-technology-co-violated"
+      },
+      {
+        "text": "U.S. PIRG Education Fund, Not for kids. Found in toys. (March 2026)",
+        "url": "https://publicinterestnetwork.org/wp-content/uploads/2026/03/PIRG-NOT-FOR-KIDS-FOUND-IN-TOYS-March-2026.pdf"
+      },
+      {
+        "text": "TechCrunch, Alexa+ is now available to everyone in the US (February 4, 2026)",
+        "url": "https://techcrunch.com/2026/02/04/alexa-amazons-ai-assistant-is-now-available-to-everyone-in-the-u-s/"
+      }
+    ]
+  },
+  {
+    "slug": "bug-me-last",
+    "title": "Bug me last",
+    "date": "January 6, 2026",
+    "description": "Memory, then an API, then search, then the browser, then me. Every rung costs more than the one below it, and I am the most expensive.",
+    "tags": [
+      "agents",
+      "software",
+      "design"
+    ],
+    "url": "/#/writings/bug-me-last",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "Every time an agent asks me a question it could have answered itself, it tells me something about how it was built. The question is rarely hard. Which directory is the config in. JSON or YAML. Should I proceed. What it reveals is a lookup order, and the lookup order is wrong.",
+      "Here is the order I want. Memory first: what has already been established in this project, this session, this repo. Then APIs: the structured, typed, authenticated endpoints that return an exact answer in milliseconds. Then search: the open web, unstructured and noisy but wide. Then the browser: slow, visual, a last resort for pages that refuse to be anything but pages. Then, and only then, me.",
+      "The order is a cost gradient. Memory costs nothing. An API call costs a round trip and returns a fact with a schema attached. A search costs a round trip and returns ten guesses. A browser session costs seconds per click and returns pixels. A human costs minutes of latency at best, hours when I am asleep, and returns an answer that is itself a guess, because I usually know less about the current state of the task than the agent does. I am the most expensive oracle in the stack and the least reliable one. Treat me accordingly.",
+      "The industry has this backwards because of a confusion about what politeness is. Products that interrupt constantly are described as keeping the human in the loop, which sounds like respect and functions as delegation of blame. If the agent asks before every step, nothing it does is its fault. That is not safety. That is a design that has outsourced its judgment to the person least able to exercise it, at the moment they are least able to exercise it, and called the result alignment.",
+      "The honest version of the loop is narrower. Ask me when the action cannot be undone and the choice is a real fork: delete this, send that, spend money, publish. Ask me when the task as stated contradicts itself and no amount of reading will resolve the contradiction. Otherwise climb the ladder. Check what you already know. Hit the endpoint. Search. Open the page if you must. Take the most reasonable reading, write it at the top of your work so I can see which reading you took, and keep going.",
+      "I have been building a command framework in Rust where this principle is enforced by the compiler rather than by a prompt. The system definition is generated from the plugin's own types at build time, so a bound that will not typecheck is a compile error and not a surprise at registration. The point of that design is the point of the ladder: push every question as far upstream as it can go. Resolve it in memory if memory has it. Resolve it in the type system if the type system can. Resolve it in a schema. The human is where unresolvable things go, and the measure of a system is how few things it leaves unresolvable.",
+      "An agent that bugs me last has not stopped being careful. It has spent its carefulness on the rungs where carefulness is cheap, so that when it finally reaches me it is carrying a decision and not a question."
+    ]
+  },
+  {
+    "slug": "open-box",
+    "title": "The sticker does the work",
+    "date": "December 24, 2025",
+    "description": "A television does not change when it goes back through the return door. Its price does. Most of investing is noticing that gap.",
+    "tier": "boxed",
+    "tags": [
+      "price",
+      "retail",
+      "investing"
+    ],
+    "url": "/#/writings/open-box",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "A 65-inch television costs what the shelf tag says it costs until the moment someone carries it back through the door. Then it costs something else. Nothing happened to the panel. The pixels did not age in the eleven days it sat in my living room. But the store cannot put it back on the shelf as new, so a second sticker goes on the box, and the second sticker says open box, and open box means a discount, and the discount is often large.",
+      "So here is a small game I play. Buy the television. Return it inside the window, intact, receipt in hand. Come back a few days later and find the same unit on the clearance rack wearing the second sticker. Buy it again. Pay cash on at least one leg, preferably both, because I would rather the loyalty database not draw a line between the two transactions, and because a game the store would prefer you did not play is still a game you are allowed to play.",
+      "I am not writing this to teach anyone how to shave a few hundred dollars off a Hisense. I am writing it because it is the cleanest demonstration I know of a fact most people never fully absorb: price is not a property of the object. Price is a story the seller tells about the object, and the story can be rewritten by events that never touch the thing itself.",
+      "Physicists have a name for a quantity that depends only on the state of a system and not on its history. The television is a state function. Its price is not. Its price carries a path: who held it, for how long, whether a box was opened, whether a form was filled in. The retailer's accounting cannot see the panel. It can only see the path.",
+      "Markets do this at scale, every day, with better instruments. A bond gets cut one notch below investment grade and every fund whose mandate forbids junk must sell it that week, whether or not a single cash flow changed. A stock falls out of an index and the index funds dump it on rebalance day. A company reports one bad quarter and the word distressed goes on the box. Same cash flows, new sticker. Someone who is only permitted to own clean boxes has to sell to someone who is willing to look inside.",
+      "That second buyer is who I try to be. Not because open boxes are always bargains; they are not, and sometimes the panel really is cracked. But the discount for a damaged label is paid by people who are not allowed to check and collected by people who are.",
+      "The return desk is the most honest counter in the store. It is where the seller admits, in writing, that the first price was only ever a story."
+    ],
+    "sources": [
+      {
+        "text": "Walmart's return policy, summarized",
+        "url": "https://dealnews.com/features/walmart/return-policy"
+      },
+      {
+        "text": "Open-box TV deals: what to check before you buy",
+        "url": "https://www.tomsguide.com/us/open-box-tv-deals-advice%2Cnews-26495.html"
       }
     ]
   }

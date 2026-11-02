@@ -1,6 +1,6 @@
 ---
 title: "Four signatures, one hand"
-date: 2026-10-29
+date: 2026-02-05
 summary: "UnitedHealth is the payer, the doctor, the pharmacist and the rail the money runs on. The fury is a signal. The structure is the problem."
 tags: [healthcare, institutions, antitrust]
 pinned: false

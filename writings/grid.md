@@ -1,6 +1,6 @@
 ---
 title: "Every wire on earth, again"
-date: 2026-10-29
+date: 2026-07-19
 summary: "The money for the grid is finally arriving. The transformers are not. Electrification is now limited by a queue, not a budget."
 tags: [infrastructure, electricity, utilities]
 pinned: false

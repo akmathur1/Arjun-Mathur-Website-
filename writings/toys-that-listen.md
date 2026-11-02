@@ -1,6 +1,6 @@
 ---
 title: "The doll was a surveillance device"
-date: 2026-10-29
+date: 2026-01-16
 summary: "Germany banned a talking doll under its spy-equipment law. Alexa won the kitchen with no intelligence. Owning the room beats being smart."
 tags: [technology, privacy, incentives]
 pinned: false

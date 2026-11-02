@@ -1,6 +1,6 @@
 ---
 title: "Rationing a metal the chemists are deleting"
-date: 2026-10-29
+date: 2026-09-06
 summary: "Congo shut its border, sent cobalt hydroxide up fourfold, and now watches the price fall: the cathode that needed the metal is retiring."
 tags: [commodities, chokepoints, batteries]
 pinned: false

@@ -1,6 +1,6 @@
 ---
 title: "Not on the axis"
-date: 2026-10-29
+date: 2026-02-25
 summary: "Switch 2 sold 23.7 million units in thirteen months. The stock is down 42 percent, at thirty times a year Nintendo says will be worse."
 tags: [companies, gaming, Japan]
 pinned: false

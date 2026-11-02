@@ -1,6 +1,6 @@
 ---
 title: "A cartel of one"
-date: 2026-10-29
+date: 2026-10-20
 summary: "Indonesia mines two of every three tonnes of nickel, tried to ration its own ore, and watched the rally round-trip in ten months."
 tags: [commodities, chokepoints, Indonesia]
 pinned: false

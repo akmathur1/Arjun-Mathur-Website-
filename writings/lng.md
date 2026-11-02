@@ -1,6 +1,6 @@
 ---
 title: "Qatar buys American"
-date: 2026-10-29
+date: 2026-09-20
 summary: "The world's second-largest LNG exporter just signed to buy 7 million tonnes a year of US gas. It is buying insurance on its own strait."
 tags: [energy, LNG, geopolitics]
 pinned: false

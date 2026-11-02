@@ -1,6 +1,6 @@
 ---
 title: "The elevator is the only tenant that never leaves"
-date: 2026-10-29
+date: 2026-05-20
 summary: "Otis sells the elevator at a 5 percent margin and services it at 25 for decades. The annuity hiding inside every building is the business."
 tags: [infrastructure, Otis, annuities]
 pinned: false

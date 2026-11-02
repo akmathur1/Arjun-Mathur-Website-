@@ -1,6 +1,6 @@
 ---
 title: "A labour-supply request in work boots"
-date: 2026-10-29
+date: 2026-03-11
 summary: "The people telling teenagers to become electricians are the people who will hire them. A purchase order is not career advice."
 tags: [labour, AI, data-centres]
 pinned: false

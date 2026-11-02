@@ -1,6 +1,6 @@
 ---
 title: "The bleach that stayed in the bottle"
-date: 2026-10-29
+date: 2026-07-10
 summary: "Clorox peaked at $240 in August 2020 and trades at $87 today. The safe trade is safe for a quarter and then it is a stock like any other."
 tags: [companies, consumer, investing]
 pinned: false
