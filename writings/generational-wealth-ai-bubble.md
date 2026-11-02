@@ -1,5 +1,5 @@
 ---
-title: "How to get generational wealth out of the AI bubble"
+title: "The far side of the bubble"
 date: 2026-10-29
 summary: "Four rules: own only what survives a ten-year blackout, sell on a schedule and pay the tax, never borrow, buy what the bubble throws away."
 tags: [investing, AI, rules]

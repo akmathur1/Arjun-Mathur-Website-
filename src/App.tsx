@@ -781,7 +781,6 @@ type WritingRecord = {
   announce?: boolean;
   pinned?: boolean;
   body: string[];
-  sources?: { text: string; url: string }[];
 };
 
 // The house style allows one piece of inline markup in a body paragraph: *italics*.
@@ -1194,51 +1193,6 @@ const WritingPage: React.FC<{ slug: string; onNavigate: (v: View) => void }> = (
             </BodyParagraph>
           ))}
 
-          {writing.sources && writing.sources.length > 0 && (
-            <div style={{ marginTop: 44, maxWidth: 640 }}>
-              <div
-                style={{
-                  fontFamily: MONO,
-                  fontSize: 11,
-                  letterSpacing: 1.2,
-                  textTransform: 'uppercase',
-                  color: COLORS.muted,
-                  paddingBottom: 8,
-                  borderBottom: '1px solid rgba(26,26,26,0.18)',
-                }}
-              >
-                Sources
-              </div>
-              <ul style={{ listStyle: 'none', marginTop: 14 }}>
-                {writing.sources.map((source) => (
-                  <li
-                    key={source.url}
-                    style={{
-                      fontFamily: MONO,
-                      fontSize: 12,
-                      lineHeight: 1.7,
-                      color: COLORS.muted,
-                      marginBottom: 8,
-                    }}
-                  >
-                    <a
-                      href={source.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{
-                        color: COLORS.muted,
-                        textDecoration: 'underline',
-                        textUnderlineOffset: 4,
-                        textDecorationThickness: 1,
-                      }}
-                    >
-                      {source.text}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </article>
       )}
     </PageShell>

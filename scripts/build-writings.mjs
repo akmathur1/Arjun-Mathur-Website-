@@ -54,6 +54,9 @@ for (const file of readdirSync(DIR).filter((f) => f.endsWith('.md')).sort()) {
   }
 
   // The body ends where the Sources block begins; everything before it is prose.
+  // Sources stay in the markdown as the fact-checking record and are not published —
+  // they are parsed only so they never leak into the body, and so a malformed line
+  // still gets a warning.
   let body = parsed.body.trim();
   const sources = [];
   const split = /\n[ \t]*Sources?:[ \t]*\n([\s\S]*)$/i.exec(`\n${body}`);
@@ -93,7 +96,6 @@ for (const file of readdirSync(DIR).filter((f) => f.endsWith('.md')).sort()) {
     announce: fm.announce !== false,
     pinned,
     body: paragraphs,
-    sources: sources.length ? sources : undefined,
     _iso: String(fm.date),
   });
 }

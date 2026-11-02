@@ -25,6 +25,9 @@ the generator skips them.
    - [Title](https://…)
    ```
 
+   The Sources block stays in the markdown as the fact-checking record; the site does
+   not show it.
+
    Optional keys: `tier: boxed` draws a hairline box around the entry on the home
    page; `pinned: true` puts it first with the heavy box and shadow (one essay at a
    time); `announce: false` keeps the subscriber email from going out for that entry.
