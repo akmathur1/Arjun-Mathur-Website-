@@ -63,26 +63,158 @@ type Book = {
   note?: string;
 };
 
-// Placeholder shelf, same convention as WRITINGS — swap in real titles.
-const BOOKS: Book[] = [
+type Shelf = { name: string; books: Book[] };
+
+// Four shelves. Notes say what a book is, in a line; a bare title and author
+// reads fine where the title already says it.
+const SHELVES: Shelf[] = [
   {
-    title: 'First Book Title',
-    author: 'Author Name',
-    note: 'A line on why it stuck — placeholder until the real note goes in.',
+    name: 'Science and history',
+    books: [
+      { title: 'Sapiens: A Brief History of Humankind', author: 'Yuval Noah Harari', note: 'A history of the species from the cognitive revolution onward. The central idea is that shared fictions are what let strangers cooperate.' },
+      { title: 'The Lessons of History', author: 'Will and Ariel Durant', note: 'A hundred pages distilled from their eleven-volume history of civilisation.' },
+      { title: 'The Story of Philosophy', author: 'Will Durant', note: 'The lives and ideas of the major Western philosophers, Plato to Dewey.' },
+      { title: 'Guns, Germs, and Steel', author: 'Jared Diamond', note: "Why some continents ended up with the guns, germs and steel and others didn't." },
+      { title: 'The Sovereign Individual', author: 'James Dale Davidson, William Rees-Mogg', note: 'A 1997 forecast of what information technology does to the nation state.' },
+      { title: 'The Rational Optimist', author: 'Matt Ridley', note: "Ridley's case that exchange and specialisation, not individual genius, are what made prosperity compound." },
+      { title: 'Genome', author: 'Matt Ridley', note: 'Twenty-three chapters, one per chromosome, each hung on a single gene.' },
+      { title: 'The Red Queen', author: 'Matt Ridley', note: 'Sex as an arms race, and what the race did to human nature.' },
+      { title: 'The Origins of Virtue', author: 'Matt Ridley', note: 'How cooperation evolves among self-interested genes.' },
+      { title: 'The Evolution of Everything', author: 'Matt Ridley', note: 'Bottom-up change in language, money, morality and technology, with nobody in charge of any of it.' },
+      { title: 'The Selfish Gene', author: 'Richard Dawkins', note: "Evolution from the gene's point of view." },
+      { title: 'The Origin of Species', author: 'Charles Darwin' },
+      { title: 'The Gene: An Intimate History', author: 'Siddhartha Mukherjee', note: "A history of genetics, threaded through the author's own family." },
+      { title: 'Sex at Dawn', author: 'Christopher Ryan and Cacilda Jethá', note: 'A contested account of prehistoric human sexuality.' },
+      { title: 'Six Easy Pieces', author: 'Richard Feynman', note: 'The six most approachable lectures from the Caltech course.' },
+      { title: 'Six Not-So-Easy Pieces', author: 'Richard Feynman', note: 'The sequel: symmetry, relativity and curved space.' },
+      { title: 'The Character of Physical Law', author: 'Richard Feynman', note: 'Seven lectures on what a physical law is.' },
+      { title: 'QED: The Strange Theory of Light and Matter', author: 'Richard Feynman', note: 'Quantum electrodynamics with little arrows and no equations.' },
+      { title: "Surely You're Joking, Mr. Feynman!", author: 'Richard Feynman', note: 'The anecdotes.' },
+      { title: 'Perfectly Reasonable Deviations from the Beaten Track', author: 'Richard Feynman', note: 'His letters, edited by his daughter.' },
+      { title: 'Genius: The Life and Science of Richard Feynman', author: 'James Gleick', note: 'The biography.' },
+      { title: 'Thinking Physics', author: 'Lewis Carroll Epstein', note: 'Physics puzzles you can reason through without any maths. Most people get them wrong the first time.' },
+      { title: 'Thing Explainer', author: 'Randall Munroe', note: 'Complicated machines explained using only the thousand most common English words. The Saturn V is the Up Goer Five.' },
+      { title: 'Seven Brief Lessons on Physics', author: 'Carlo Rovelli', note: 'Short enough for one evening.' },
+      { title: 'Reality Is Not What It Seems', author: 'Carlo Rovelli', note: 'Loop quantum gravity for a general reader, with the history that led up to it.' },
+      { title: 'The Order of Time', author: 'Carlo Rovelli', note: "Why time doesn't flow the way it feels like it does." },
+      { title: 'Helgoland', author: 'Carlo Rovelli', note: 'Heisenberg on a bare island in 1925, and the relational reading of quantum mechanics that came out of it.' },
+      { title: 'The Fabric of Reality', author: 'David Deutsch', note: 'Quantum physics, epistemology, computation and evolution argued as one explanation.' },
+      { title: 'The Beginning of Infinity', author: 'David Deutsch', note: 'Good explanations are hard to vary, and progress has no limit. Not an easy read.' },
+      { title: 'Objective Knowledge', author: 'Karl Popper', note: "Popper's later essays on knowledge as something that exists outside any one head." },
+      { title: 'The Structure of Scientific Revolutions', author: 'Thomas S. Kuhn', note: 'Where the word paradigm comes from.' },
+      { title: 'Gödel, Escher, Bach', author: 'Douglas R. Hofstadter', note: 'Self-reference in logic, music and art, and how a mind might come out of it.' },
+      { title: 'Chaos: Making a New Science', author: 'James Gleick', note: "Nonlinear dynamics from Lorenz's weather model to the Mandelbrot set." },
+      { title: 'The Information', author: 'James Gleick', note: 'Information as a quantity, from talking drums to Shannon.' },
+      { title: 'A Short History of Nearly Everything', author: 'Bill Bryson', note: 'The history of science, told by someone who kept asking how anyone could know that.' },
+      { title: 'Thermoinfocomplexity', author: 'Behzad Mohit' },
+    ],
   },
   {
-    title: 'Second Book Title',
-    author: 'Author Name',
-    note: 'Another placeholder. Notes are optional; a bare title and author reads fine.',
+    name: 'Thinking, games and markets',
+    books: [
+      { title: 'Skin in the Game', author: 'Nassim Nicholas Taleb', note: "Don't take advice from anyone who doesn't bear the cost of being wrong." },
+      { title: 'Antifragile', author: 'Nassim Nicholas Taleb', note: 'Things that gain from disorder, and how to be one of them.' },
+      { title: 'The Black Swan', author: 'Nassim Nicholas Taleb', note: 'On the events nobody predicts and everybody explains afterwards.' },
+      { title: 'Fooled by Randomness', author: 'Nassim Nicholas Taleb', note: 'How much of success in markets is luck, and why the lucky never think so.' },
+      { title: 'The Bed of Procrustes', author: 'Nassim Nicholas Taleb', note: 'Aphorisms.' },
+      { title: "Poor Charlie's Almanack", author: 'Charlie Munger', note: "Munger's talks and his latticework of mental models, with a biography up front. Edited by Peter Kaufman." },
+      { title: 'Seeking Wisdom: From Darwin to Munger', author: 'Peter Bevelin', note: 'A guide to how Munger thinks, organised by the sources he borrowed from.' },
+      { title: 'The Intelligent Investor', author: 'Benjamin Graham', note: 'Margin of safety and Mr. Market. Chapters 8 and 20 are the ones people tell you to read.' },
+      { title: 'The Most Important Thing', author: 'Howard Marks', note: "Marks's memos on risk, cycles and second-level thinking, collected." },
+      { title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', note: 'The two systems, and the catalogue of ways the fast one misleads the slow one.' },
+      { title: 'Influence', author: 'Robert B. Cialdini', note: 'The six levers of persuasion, from a psychologist who went undercover with salesmen.' },
+      { title: 'Pre-Suasion', author: 'Robert B. Cialdini', note: 'What happens before the pitch matters more than the pitch.' },
+      { title: 'The Elephant in the Brain', author: 'Kevin Simler and Robin Hanson', note: 'The hidden motives behind ordinary behaviour, and why we hide them from ourselves too.' },
+      { title: 'Wanting', author: 'Luke Burgis', note: "René Girard's mimetic theory, the idea that we borrow our desires from other people, made readable." },
+      { title: 'The Compleat Strategyst', author: 'J. D. Williams', note: 'A 1954 RAND primer on game theory, with cartoons.' },
+      { title: 'The Evolution of Cooperation', author: 'Robert Axelrod', note: 'Tit for tat wins the tournament, and why that matters for everything from trench warfare to trade.' },
+      { title: 'Finite and Infinite Games', author: 'James P. Carse', note: 'Finite games are played to win. Infinite games are played to keep playing.' },
+      { title: 'The Undercover Economist', author: 'Tim Harford', note: 'Microeconomics through coffee shops, supermarkets and traffic.' },
+      { title: 'Economics in One Lesson', author: 'Henry Hazlitt', note: 'The lesson is to look at the effects on everyone, not just the group in front of you.' },
+      { title: 'Zero to One', author: 'Peter Thiel with Blake Masters', note: "Notes from Thiel's Stanford course on building something new instead of copying." },
+      { title: 'The Almanack of Naval Ravikant', author: 'Eric Jorgenson', note: "Naval's thinking on wealth and happiness, compiled from his tweets and interviews. A lot of the books on this page are from his reading list." },
+      { title: 'Tools of Titans', author: 'Tim Ferriss', note: 'Routines and tactics from a few hundred interviews, organised as a reference.' },
+      { title: 'How to Win Friends and Influence People', author: 'Dale Carnegie', note: 'From 1936, and still the standard book on dealing with people.' },
+      { title: "God's Debris", author: 'Scott Adams', note: 'A short thought experiment dressed as a novel.' },
+    ],
   },
   {
-    title: 'Third Book Title',
-    author: 'Author Name',
+    name: 'Philosophy and spirituality',
+    books: [
+      { title: 'Meditations', author: 'Marcus Aurelius', note: 'The private notebook of a Roman emperor, never meant to be read by anyone else.' },
+      { title: 'The Tao of Seneca', author: 'Seneca', note: 'The letters to Lucilius, in the three-volume edition Tim Ferriss put out.' },
+      { title: 'The Enchiridion', author: 'Epictetus', note: 'A short handbook from a Stoic who had been a slave.' },
+      { title: 'The Allegory of the Cave', author: 'Plato', note: 'Book VII of the Republic.' },
+      { title: 'Essays and Aphorisms', author: 'Arthur Schopenhauer', note: 'The accessible Schopenhauer, in the Penguin selection.' },
+      { title: 'Thus Spoke Zarathustra', author: 'Friedrich Nietzsche' },
+      { title: 'Self-Reliance and Other Essays', author: 'Ralph Waldo Emerson' },
+      { title: 'Letters to His Son', author: 'Lord Chesterfield', note: 'Eighteenth-century advice from a father on how to conduct yourself.' },
+      { title: 'A Confession', author: 'Leo Tolstoy', note: 'Tolstoy at fifty, famous, on why none of it was enough.' },
+      { title: "Man's Search for Meaning", author: 'Viktor E. Frankl', note: "A psychiatrist's account of the camps, and the therapy he built afterwards." },
+      { title: 'Siddhartha', author: 'Hermann Hesse', note: 'A short novel about a man who turns down every teacher, including the Buddha, and works it out by a river.' },
+      { title: 'Zen and the Art of Motorcycle Maintenance', author: 'Robert M. Pirsig', note: 'A road trip and an inquiry into quality.' },
+      { title: 'The Book of Life', author: 'Jiddu Krishnamurti', note: "A year of daily readings drawn from Krishnamurti's talks." },
+      { title: 'Total Freedom', author: 'Jiddu Krishnamurti', note: 'The fuller anthology.' },
+      { title: 'The Book of Secrets', author: 'Osho', note: "Osho's commentary on the Vigyan Bhairav Tantra and its 112 meditation techniques." },
+      { title: 'The Great Challenge', author: 'Osho' },
+      { title: 'Spiritual Enlightenment: The Damnedest Thing', author: 'Jed McKenna', note: 'The first of the Enlightenment Trilogy.' },
+      { title: 'Theory of Everything: The Enlightened Perspective', author: 'Jed McKenna', note: 'The first of the Dreamstate Trilogy.' },
+      { title: "Jed McKenna's Notebook", author: 'Jed McKenna' },
+      { title: 'Jed Talks', author: 'Jed McKenna', note: 'Volumes one and two.' },
+      { title: "A Master's Secret Whispers", author: 'Kapil Gupta' },
+      { title: 'Direct Truth', author: 'Kapil Gupta' },
+      { title: 'Atmamun', author: 'Kapil Gupta' },
+      { title: 'The Way to Love', author: 'Anthony de Mello', note: "De Mello's last meditations, mostly on attachment." },
+      { title: 'Awareness', author: 'Anthony de Mello', note: 'Transcribed talks.' },
+      { title: 'The Untethered Soul', author: 'Michael A. Singer', note: 'On the voice in your head and who is listening to it.' },
+      { title: 'Love Yourself Like Your Life Depends on It', author: 'Kamal Ravikant', note: 'A very short book with one instruction, which is in the title.' },
+      { title: 'Know Yourself', author: 'Awhad al-din Balyani', note: 'A thirteenth-century Sufi treatise on the oneness of being, long attributed to Ibn Arabi.' },
+      { title: 'I Am That', author: 'Nisargadatta Maharaj', note: 'Conversations with a Bombay shopkeeper who taught Advaita from his flat.' },
+      { title: "Vasistha's Yoga", author: 'Swami Venkatesananda, translator', note: "The Yoga Vasistha in Venkatesananda's translation. Advaita taught through stories." },
+      { title: 'The Bhagavad Gita', author: 'Eknath Easwaran, translator' },
+      { title: 'Tao Te Ching', author: 'Lao Tzu', note: 'Eighty-one short chapters. The translations disagree with each other.' },
+      { title: 'The Way of Zen', author: 'Alan Watts', note: "Zen's history and practice, written for a Western reader." },
+      { title: 'The Book: On the Taboo Against Knowing Who You Are', author: 'Alan Watts', note: "Watts's clearest statement of the idea that the self is not separate from everything else." },
+      { title: 'The Joyous Cosmology', author: 'Alan Watts', note: 'Watts on consciousness and psychedelics, 1962.' },
+      { title: 'The Tao of Philosophy', author: 'Alan Watts', note: 'Transcribed lectures.' },
+      { title: 'The Wisdom of Insecurity', author: 'Alan Watts', note: 'On living without the certainty you keep asking for.' },
+      { title: "Zen Mind, Beginner's Mind", author: 'Shunryu Suzuki', note: 'Talks to students at the San Francisco Zen Center.' },
+      { title: 'Striking Thoughts', author: 'Bruce Lee', note: "Lee's notes and aphorisms, arranged by subject." },
+      { title: 'The Prophet', author: 'Kahlil Gibran', note: 'Twenty-six prose poems on love, work, children and death, from 1923.' },
+      { title: 'Illusions: The Adventures of a Reluctant Messiah', author: 'Richard Bach', note: 'A short fable about a barnstorming pilot.' },
+      { title: 'How to Change Your Mind', author: 'Michael Pollan', note: "The history and the current science of psychedelics, with Pollan's own experiences reported." },
+      { title: 'The Doors of Perception and Heaven and Hell', author: 'Aldous Huxley', note: 'Huxley on mescaline, 1954.' },
+      { title: "The Psychedelic Explorer's Guide", author: 'James Fadiman', note: 'A practical manual, written by a researcher.' },
+      { title: 'Waking Up', author: 'Sam Harris', note: "Spirituality for people who don't believe in anything supernatural." },
+      { title: 'Counseling with Choice Theory', author: 'William Glasser', note: "Glasser's argument that nearly all behaviour is chosen." },
+    ],
   },
   {
-    title: 'Fourth Book Title',
-    author: 'Author Name',
-    note: 'Final placeholder, showing the spacing across a longer shelf.',
+    name: 'Fiction',
+    books: [
+      { title: 'Ficciones', author: 'Jorge Luis Borges', note: 'The Library of Babel, The Garden of Forking Paths, and the rest.' },
+      { title: 'Labyrinths', author: 'Jorge Luis Borges', note: 'The other Borges collection. It overlaps with Ficciones and adds the essays.' },
+      { title: 'Stories of Your Life and Others', author: 'Ted Chiang', note: 'Eight stories, including Story of Your Life, which became the film Arrival, and Understand.' },
+      { title: 'Exhalation', author: 'Ted Chiang', note: 'Nine more. The title story is about entropy, told by a machine taking its own brain apart.' },
+      { title: 'The Lifecycle of Software Objects', author: 'Ted Chiang', note: 'A novella about raising digital creatures over many years.' },
+      { title: 'The Last Question', author: 'Isaac Asimov', note: 'A short story about entropy, asked across trillions of years.' },
+      { title: 'Foundation', author: 'Isaac Asimov', note: 'Psychohistory and the fall of a galactic empire.' },
+      { title: 'Snow Crash', author: 'Neal Stephenson', note: 'The 1992 novel that named the Metaverse.' },
+      { title: 'The Diamond Age', author: 'Neal Stephenson', note: 'Nanotech, a stolen interactive primer, and the girl it raises.' },
+      { title: 'Cryptonomicon', author: 'Neal Stephenson', note: 'Codebreakers in 1942 and a data haven in the 1990s.' },
+      { title: 'Anathem', author: 'Neal Stephenson', note: 'Monks who do mathematics, on another world.' },
+      { title: 'Neuromancer', author: 'William Gibson', note: 'The 1984 novel that made cyberspace a word people used.' },
+      { title: 'The Three-Body Problem', author: 'Cixin Liu', note: 'First contact, starting in the Cultural Revolution.' },
+      { title: 'The Dark Forest', author: 'Cixin Liu', note: 'The sequel, and the source of the dark-forest answer to the Fermi paradox.' },
+      { title: 'Dune', author: 'Frank Herbert' },
+      { title: 'Permutation City', author: 'Greg Egan', note: 'What it would mean to be a running copy of yourself.' },
+      { title: 'Diaspora', author: 'Greg Egan', note: 'Minds without bodies, a few thousand years from now.' },
+      { title: 'Blindsight', author: 'Peter Watts', note: "First contact with something intelligent that isn't conscious." },
+      { title: 'A Fire Upon the Deep', author: 'Vernor Vinge', note: 'A galaxy where how much thinking is possible depends on where you are in it.' },
+      { title: 'Hyperion', author: 'Dan Simmons', note: 'Seven pilgrims, seven stories, one Shrike.' },
+      { title: 'Flowers for Algernon', author: 'Daniel Keyes', note: "A man's intelligence raised and then taken back, told in his own progress reports." },
+      { title: 'Sum: Forty Tales from the Afterlives', author: 'David Eagleman', note: 'Forty short possibilities for what happens after.' },
+    ],
   },
 ];
 
@@ -798,7 +930,8 @@ const BookRow: React.FC<{ book: Book }> = ({ book }) => (
         alignItems: 'baseline',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
-        gap: 24,
+        // Row gap stays tight so a wrapped author sits under its title on phones.
+        gap: '4px 24px',
       }}
     >
       <span
@@ -888,19 +1021,28 @@ const BooksPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) 
         systems, and markets.
       </p>
 
-      <div
-        style={{
-          marginTop: 32,
-          maxWidth: 640,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 24,
-        }}
-      >
-        {BOOKS.map((book) => (
-          <BookRow key={book.title} book={book} />
-        ))}
-      </div>
+      {SHELVES.map((shelf) => (
+        <section key={shelf.name} style={{ marginTop: 40, maxWidth: 640 }}>
+          <div
+            style={{
+              fontFamily: MONO,
+              fontSize: 11,
+              letterSpacing: 1.2,
+              textTransform: 'uppercase',
+              color: COLORS.muted,
+              paddingBottom: 8,
+              borderBottom: '1px solid rgba(26,26,26,0.18)',
+            }}
+          >
+            {shelf.name}
+          </div>
+          <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 22 }}>
+            {shelf.books.map((book) => (
+              <BookRow key={book.title} book={book} />
+            ))}
+          </div>
+        </section>
+      ))}
     </article>
   </PageShell>
 );
