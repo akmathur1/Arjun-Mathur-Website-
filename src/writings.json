@@ -26,6 +26,28 @@
     ]
   },
   {
+    "slug": "nothing-if-not-secure",
+    "title": "Nothing if not secure",
+    "date": "November 4, 2026",
+    "description": "Two weeks after the PHP patch, 29 million servers were still open and an AI-built scanner had rooted firewalls. Security is the whole product.",
+    "tags": [
+      "security",
+      "AI",
+      "infrastructure"
+    ],
+    "url": "/#/writings/nothing-if-not-secure",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "Two weeks after the emergency patch, Censys could still see 46 million reachable servers running a vulnerable version of PHP, and 29 million of them hadn't installed it. PHP runs about seven in ten websites. The two bugs, which picked up the name PHP2Shell, let anyone on the internet run code on the server without logging in. The PHP team shipped fixes on October 21, and Amazon had already seen someone trying the exploit four days before that. CISA's advice the same day was unusually blunt: if you can't update today, take the PHP systems offline until you can. By October 26 both bugs were on its list of vulnerabilities known to be exploited.",
+      "The part that made me sit up was the firewalls. A Palo Alto Networks firewall is the thing you buy so you don't have to think about any of this, and its management interface runs PHP. A group that Unit 42 tracks as Chinese-speaking, working in the UTC+8 time zone, chained PHP2Shell with a Linux kernel bug called Fragnesia and got root on the firewall itself. Dream, the firm that found it, counted 25 firewall and management servers compromised across the United States, Japan, Taiwan and South Korea, three of them in an environment tied to the US government. The attackers had scanned about 19,000 firewalls by October 23 and narrowed the list to 240 they could break. Their scanner, which they called aiscan, was built on DeepSeek and Kimi, and they started assembling it on October 8, before the patch existed. Once inside they went for Active Directory and came out with a service account password and private keys. Palo Alto says only a small fraction of a percent of its installed base has a management interface on the internet, and that patched customers aren't affected. The same firewalls had a different hole in their VPN, a cookie check that let you skip multi-factor authentication, that two ransomware crews had been using since June.",
+      "That was one week. In the same week North Korea took about $6.3 billion out of Binance in roughly twenty minutes, the largest theft of anything in history, and the way in was a fake job offer to one engineer whose laptop got infected. Fortnite logged every player out on October 30 after an account hijacking, and the fullest explanation I could find came from a community account rather than Epic. CrowdStrike, the company other companies pay to be the adult in the room, caught one of its own employees last year selling screenshots of its internal systems to a crime group that claimed it paid $25,000 for them. So when someone says everything can be hacked, I don't think they're being dramatic anymore.",
+      "The industry's answer this week was more product. On November 3 CrowdStrike announced a kill switch for AI agents, a button that terminates an agent wherever it's running and bars it from the network, and agreed to buy two AI security startups for something like $495 million. I get it. CrowdStrike's own threat report says 88 percent of the exploitation it saw in the first half of this year came within 48 hours of a public proof of concept, and that a North Korean group slipped a malicious package into at least 131 AI framework packages in June. The attacker's tooling now runs on the same models the rest of us use. A kill switch is a reasonable thing to own, and it's also an admission about how the agents were built in the first place.",
+      "This is where I have skin in the game. Molterra listens to meetings, reads the records a team connects to it, and writes from them, which means it holds what people said, the OAuth tokens to their other tools, and the identities that prove who is asking. I can't think of a more attractive target, and I'm the one building it. So I stopped treating security as a document and made it a program that runs: a Rust crate that links the product's own fence code and throws 991 authorized attacks at it on every change, prompt injection across 18 goals and 34 evasions, Unicode steganography, tampering with the AES-256-GCM vault, offline credential recovery. Shipped code stops 232 of them, the hardening stops 988, and the three it can't stop are open on purpose, with the reason written down next to each one. I'd rather know the number than believe the adjective.",
+      "What I keep coming back to is that an AI product is worth what its security is worth and not a dollar more, because a model that can read your calendar and your contracts becomes a liability the day someone else can read them through it. The patch has been out for two weeks. Twenty-nine million servers haven't installed it, and the scanner looking for them was written with a model. I'd plan around that gap rather than around whichever warning is on the news today."
+    ]
+  },
+  {
     "slug": "nickel",
     "title": "A cartel of one",
     "date": "October 25, 2026",
