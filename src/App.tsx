@@ -1835,13 +1835,23 @@ const Home: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) => (
           minWidth: 0,
         }}
       >
-        I'm Arjun Mathur. I spend most of my time thinking about computation, large
-        systems, and the strange ways technology shapes the physical world around us. My
-        work is in ambient intelligence at Molterra.com, especially in places where
-        important work still depends on fragmented tools and human intuition. I'm
-        interested in building systems that quietly accelerate progress behind the
-        scenes. Outside of that, I write occasionally about technology, research,
-        markets, and ideas that feel a little ahead of their time.
+        I'm Arjun Mathur. I founded{' '}
+        <a
+          href="https://molterra.com"
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            color: COLORS.text,
+            textDecoration: 'underline',
+            textUnderlineOffset: 4,
+            textDecorationThickness: 1,
+          }}
+        >
+          Molterra
+        </a>
+        , where I work on ambient intelligence. I try to spend my time responsibly, on
+        things that will still scale years from now and that can be built in the time we
+        have. I also write here now and then about technology, research, and markets.
       </p>
 
       <div style={{ flex: '1 1 420px', maxWidth: 540, minWidth: 0 }}>
