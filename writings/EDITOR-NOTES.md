@@ -9,6 +9,7 @@ The big one first: **the Strait of Hormuz has been closed or contested since the
 | Piece | You wrote | Piece says | Why |
 |---|---|---|---|
 | **Pinned** | Move shares into a trust to avoid capital gains | Pre-commit the exit, seal the proceeds; names the structures that exist (gifting, CRT, DAF); no trick makes a realized gain untaxed | A revocable trust changes nothing for tax; an irrevocable one is a gift and doesn't erase the gain |
+| **Pinned** (November 5, 2026 rework) | Four rules against a debt-financed capex bubble; Coca-Cola and gold as the safe side | Rebuilt around spenders versus suppliers: the froth is in memory stocks ($1T each in May, SK Hynix +1,000%) and venture (82.7% of US VC dollars); hyperscaler capex $140B (2023) to $740B (2026) with a 15–25% pre-tax return per gigawatt; rotation names are now Uber, Visa, Mastercard, S&P Global, Netflix, Brookfield; Coca-Cola and gold dropped | Every figure re-verified November 5, 2026 against October–November filings, earnings releases and the Q3 2026 letters cited in Sources |
 | **Pinned** | Gold "going low" | About a quarter below its January record ($5,595 → ~$4,118) | Verified |
 | **Jane Street** | "Over $400 of derivatives per dollar" | 394x (FY26); peak 405x; 14x in 2016 | SEBI's own August 2026 study |
 | **Jane Street** | "India banned them completely" | Barred July 3–21, 2025; deposited $567M; bar lifted; still fighting at SAT in October 2026 | They are trading again |
