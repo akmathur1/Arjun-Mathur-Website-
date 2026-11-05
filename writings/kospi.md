@@ -1,5 +1,5 @@
 ---
-title: "Seventeen years for 400 points, eighteen months for 7,000"
+title: "The KOSPI rally is running on margin debt"
 date: 2026-10-05
 summary: "Seventeen years took the KOSPI from 2,000 to 2,400. Eighteen months took it to 9,385. Margin debt did the last leg, and margin runs both ways."
 tags: [markets, Korea, leverage]

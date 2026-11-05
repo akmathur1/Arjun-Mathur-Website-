@@ -1,5 +1,5 @@
 ---
-title: "Fourteen centuries of rock"
+title: "Morocco's phosphate monopoly"
 date: 2026-08-09
 summary: "Morocco holds 50 of the world's 73 billion tonnes of phosphate, nothing alive can do without it, and the company that digs it has no shares to buy."
 tags: [commodities, chokepoints, food]

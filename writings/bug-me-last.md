@@ -1,5 +1,5 @@
 ---
-title: "Bug me last"
+title: "Where an agent should look before it asks me"
 date: 2026-07-04
 summary: "The order an agent should look things up in: memory, an API, search, the browser, and then me. I'm the most expensive step and the least reliable."
 tags: [agents, software, design]

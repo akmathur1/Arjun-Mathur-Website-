@@ -1,5 +1,5 @@
 ---
-title: "Qatar buys American"
+title: "Why Qatar is buying American LNG"
 date: 2026-10-13
 summary: "The world's second-largest LNG exporter just signed to buy 7 million tonnes a year of US gas. I think it's buying insurance on its own strait."
 tags: [energy, LNG, geopolitics]

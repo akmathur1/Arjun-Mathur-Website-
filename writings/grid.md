@@ -1,5 +1,5 @@
 ---
-title: "Every wire on earth, again"
+title: "The transformer queue holding up the grid"
 date: 2026-09-19
 summary: "The money for the grid is finally showing up. The transformers aren't. Electrification is limited by a queue now, not a budget."
 tags: [infrastructure, electricity, utilities]

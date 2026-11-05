@@ -1,5 +1,5 @@
 ---
-title: "Rationing a metal the chemists are deleting"
+title: "Congo is rationing cobalt as batteries move away from it"
 date: 2026-10-10
 summary: "Congo closed its border and cobalt went up fourfold. Now it's falling anyway, because the cathode chemistry that needed the metal is on its way out."
 tags: [commodities, chokepoints, batteries]

@@ -1,5 +1,5 @@
 ---
-title: "The metal that named the trade"
+title: "The rule to dig out America's lead water pipes"
 date: 2026-08-22
 summary: "Up to nine million American homes still drink through lead pipe that was banned in 1986. The rule to remove it runs to 2037, and the pipe is patient."
 tags: [infrastructure, water, institutions]

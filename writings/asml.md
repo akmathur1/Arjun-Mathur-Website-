@@ -1,5 +1,5 @@
 ---
-title: "One percent of the light"
+title: "Why I find ASML more interesting than Nvidia"
 date: 2026-08-05
 summary: "ASML is sold out through 2028 with no competitor and still fell two percent on a half-percent sales miss. I think that's the wrong thing to price."
 tags: [semiconductors, chokepoints, Netherlands]

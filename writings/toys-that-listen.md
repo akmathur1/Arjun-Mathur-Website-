@@ -1,5 +1,5 @@
 ---
-title: "The doll was a surveillance device"
+title: "Smart toys are competing to be the first microphone in the house"
 date: 2026-07-09
 summary: "Germany banned a talking doll under its spy-equipment law. Alexa took the kitchen with almost no intelligence. Owning the room beats being smart."
 tags: [technology, privacy, incentives]

@@ -1,5 +1,5 @@
 ---
-title: "The elevator is the only tenant that never leaves"
+title: "Otis is a service business with a factory attached"
 date: 2026-08-26
 summary: "Otis sells the elevator at a 5 percent margin and services it at 25 for decades. The annuity hiding inside every building is the actual business."
 tags: [infrastructure, Otis, annuities]

@@ -11,7 +11,7 @@ the generator skips them.
 
    ```
    ---
-   title: "Four hundred to one"
+   title: "Jane Street and the Indian options market"
    date: 2026-10-29
    summary: "Two lines under the title on the home page. About 100–140 characters."
    tags: [markets, India]

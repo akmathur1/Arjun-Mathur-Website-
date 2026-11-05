@@ -1,5 +1,5 @@
 ---
-title: "The $2.8 billion consolation prize"
+title: "Netflix at a 52-week low"
 date: 2026-09-26
 summary: "Netflix won the streaming war, got paid $2.8 billion to lose the bidding war, and sits at a 52-week low. I own a lot and I'd like an activist."
 tags: [companies, media, investing]

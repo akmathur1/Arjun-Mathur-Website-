@@ -1,5 +1,5 @@
 ---
-title: "Three hundred thousand dollars a bed"
+title: "The private-prison business is ICE detention now"
 date: 2026-09-11
 summary: "Two companies hold most of ICE detention. Washington now buys their buildings, pays them to keep running them, and can't FOIA either one."
 tags: [institutions, immigration, incentives]

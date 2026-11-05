@@ -1,7 +1,7 @@
 [
   {
     "slug": "generational-wealth-ai-bubble",
-    "title": "The far side of the bubble",
+    "title": "My rules for the AI bubble",
     "date": "November 5, 2026",
     "description": "The bubble is in the chips and the venture rounds, not in the companies buying the compute. Own the buyers and what the rotation left behind.",
     "tier": "featured",
@@ -30,7 +30,7 @@
   },
   {
     "slug": "nothing-if-not-secure",
-    "title": "Nothing if not secure",
+    "title": "AI is nothing if not secure",
     "date": "November 4, 2026",
     "description": "Two weeks after the PHP patch, 29 million servers were still open and an AI-built scanner had rooted firewalls. Security is the whole product.",
     "tags": [
@@ -52,7 +52,7 @@
   },
   {
     "slug": "nickel",
-    "title": "A cartel of one",
+    "title": "Indonesia's nickel quota isn't working",
     "date": "October 25, 2026",
     "description": "Indonesia mines two of every three tonnes of nickel, tried to ration its own ore this year, and watched the rally round-trip in ten months.",
     "tags": [
@@ -75,7 +75,7 @@
   },
   {
     "slug": "undersea-cables",
-    "title": "A garden hose on the seabed",
+    "title": "Undersea cables and the ships that fix them",
     "date": "October 22, 2026",
     "description": "Six hundred cables carry nearly all intercontinental data, four companies own most of the new ones, and fewer than twenty ships exist to fix them.",
     "tags": [
@@ -97,7 +97,7 @@
   },
   {
     "slug": "helium",
-    "title": "Boiling off in Qatar",
+    "title": "Qatar's helium and the fabs waiting on it",
     "date": "October 17, 2026",
     "description": "A third of the world's helium sits behind Hormuz. Spot has tripled, fabs are rationed, and nobody's model has a line for a Gulf peace.",
     "tags": [
@@ -119,7 +119,7 @@
   },
   {
     "slug": "lng",
-    "title": "Qatar buys American",
+    "title": "Why Qatar is buying American LNG",
     "date": "October 13, 2026",
     "description": "The world's second-largest LNG exporter just signed to buy 7 million tonnes a year of US gas. I think it's buying insurance on its own strait.",
     "tags": [
@@ -141,7 +141,7 @@
   },
   {
     "slug": "cobalt",
-    "title": "Rationing a metal the chemists are deleting",
+    "title": "Congo is rationing cobalt as batteries move away from it",
     "date": "October 10, 2026",
     "description": "Congo closed its border and cobalt went up fourfold. Now it's falling anyway, because the cathode chemistry that needed the metal is on its way out.",
     "tags": [
@@ -163,7 +163,7 @@
   },
   {
     "slug": "kospi",
-    "title": "Seventeen years for 400 points, eighteen months for 7,000",
+    "title": "The KOSPI rally is running on margin debt",
     "date": "October 5, 2026",
     "description": "Seventeen years took the KOSPI from 2,000 to 2,400. Eighteen months took it to 9,385. Margin debt did the last leg, and margin runs both ways.",
     "tags": [
@@ -188,7 +188,7 @@
   },
   {
     "slug": "data-center-reits",
-    "title": "Sixteen years on a five-year chip",
+    "title": "Digital Realty's sixteen-year leases on five-year hardware",
     "date": "September 30, 2026",
     "description": "Digital Realty just had its best quarter ever and I still pass: six tenants, sixteen-year leases on five-year hardware, and power it doesn't own.",
     "tags": [
@@ -211,7 +211,7 @@
   },
   {
     "slug": "netflix",
-    "title": "The $2.8 billion consolation prize",
+    "title": "Netflix at a 52-week low",
     "date": "September 26, 2026",
     "description": "Netflix won the streaming war, got paid $2.8 billion to lose the bidding war, and sits at a 52-week low. I own a lot and I'd like an activist.",
     "tags": [
@@ -234,7 +234,7 @@
   },
   {
     "slug": "autonomous-trucking",
-    "title": "A truck with no driver still needs a dispatcher",
+    "title": "Who gets paid when the trucks drive themselves",
     "date": "September 23, 2026",
     "description": "Driverless trucks are late, real and about to get cheap. I think the money ends up with whoever has the loads, so I own Uber, not Aurora.",
     "tags": [
@@ -259,7 +259,7 @@
   },
   {
     "slug": "grid",
-    "title": "Every wire on earth, again",
+    "title": "The transformer queue holding up the grid",
     "date": "September 19, 2026",
     "description": "The money for the grid is finally showing up. The transformers aren't. Electrification is limited by a queue now, not a budget.",
     "tags": [
@@ -282,7 +282,7 @@
   },
   {
     "slug": "clorox",
-    "title": "The bleach that stayed in the bottle",
+    "title": "Clorox and the cost of the safe-haven trade",
     "date": "September 14, 2026",
     "description": "Clorox peaked at $240 in 2020 and is $87 now. The safe-haven trade works for about one quarter in twenty, and you pay for it in the other nineteen.",
     "tags": [
@@ -305,7 +305,7 @@
   },
   {
     "slug": "private-prisons",
-    "title": "Three hundred thousand dollars a bed",
+    "title": "The private-prison business is ICE detention now",
     "date": "September 11, 2026",
     "description": "Two companies hold most of ICE detention. Washington now buys their buildings, pays them to keep running them, and can't FOIA either one.",
     "tags": [
@@ -327,7 +327,7 @@
   },
   {
     "slug": "lithium",
-    "title": "Six times the demand, the same price",
+    "title": "How lithium supply caught up with demand",
     "date": "September 7, 2026",
     "description": "Lithium demand has grown six-fold since 2017 and the price is back where it started. The rock was never the scarce part.",
     "tags": [
@@ -349,7 +349,7 @@
   },
   {
     "slug": "railroad",
-    "title": "Four people and a gallon of diesel",
+    "title": "The Surface Transportation Board and the Union Pacific merger",
     "date": "September 2, 2026",
     "description": "The first coast-to-coast railroad in American history will be approved or killed by four board members, on a clock that runs out in August 2027.",
     "tags": [
@@ -371,7 +371,7 @@
   },
   {
     "slug": "rare-earths",
-    "title": "The chokehold is in the chemistry",
+    "title": "China's rare-earth leverage is in the separation plants",
     "date": "August 30, 2026",
     "description": "China mines 60 percent of magnet rare earths and separates 91 percent. The leverage was never in the ground. It's in the solvent.",
     "tags": [
@@ -393,7 +393,7 @@
   },
   {
     "slug": "otis",
-    "title": "The elevator is the only tenant that never leaves",
+    "title": "Otis is a service business with a factory attached",
     "date": "August 26, 2026",
     "description": "Otis sells the elevator at a 5 percent margin and services it at 25 for decades. The annuity hiding inside every building is the actual business.",
     "tags": [
@@ -416,7 +416,7 @@
   },
   {
     "slug": "water",
-    "title": "The metal that named the trade",
+    "title": "The rule to dig out America's lead water pipes",
     "date": "August 22, 2026",
     "description": "Up to nine million American homes still drink through lead pipe that was banned in 1986. The rule to remove it runs to 2037, and the pipe is patient.",
     "tags": [
@@ -439,7 +439,7 @@
   },
   {
     "slug": "solar",
-    "title": "The panel was never the hard part",
+    "title": "What still makes solar expensive in America",
     "date": "August 17, 2026",
     "description": "A module leaves China for under ten cents a watt and then waits years for a wire. The cheap part of solar is the only part that got cheap.",
     "tags": [
@@ -462,7 +462,7 @@
   },
   {
     "slug": "copper",
-    "title": "Every path ends in a wire",
+    "title": "Copper and the energy transition",
     "date": "August 14, 2026",
     "description": "Three mine disasters set up the record copper price. What keeps it there is that every kind of power plant, and every data center, ends in a wire.",
     "tags": [
@@ -485,7 +485,7 @@
   },
   {
     "slug": "phosphate",
-    "title": "Fourteen centuries of rock",
+    "title": "Morocco's phosphate monopoly",
     "date": "August 9, 2026",
     "description": "Morocco holds 50 of the world's 73 billion tonnes of phosphate, nothing alive can do without it, and the company that digs it has no shares to buy.",
     "tags": [
@@ -507,7 +507,7 @@
   },
   {
     "slug": "asml",
-    "title": "One percent of the light",
+    "title": "Why I find ASML more interesting than Nvidia",
     "date": "August 5, 2026",
     "description": "ASML is sold out through 2028 with no competitor and still fell two percent on a half-percent sales miss. I think that's the wrong thing to price.",
     "tags": [
@@ -529,7 +529,7 @@
   },
   {
     "slug": "jane-street-india",
-    "title": "Four hundred to one",
+    "title": "Jane Street and the Indian options market",
     "date": "August 2, 2026",
     "description": "India trades 394 rupees of derivatives per rupee of stock, nine in ten retail traders lose, and Jane Street made $4 billion there.",
     "tags": [
@@ -551,7 +551,7 @@
   },
   {
     "slug": "the-trades-pitch",
-    "title": "A labor-supply request in work boots",
+    "title": "Nvidia's CEO wants teenagers to become electricians",
     "date": "July 28, 2026",
     "description": "The people telling teenagers to become electricians are the people who'll be hiring them. A purchase order isn't career advice.",
     "tags": [
@@ -573,7 +573,7 @@
   },
   {
     "slug": "nintendo",
-    "title": "Not on the axis",
+    "title": "Nintendo is a media company that happens to make consoles",
     "date": "July 24, 2026",
     "description": "Switch 2 sold 23.7 million units in thirteen months. The stock is down 42 percent, at thirty times a year Nintendo itself says will be worse.",
     "tags": [
@@ -597,7 +597,7 @@
   },
   {
     "slug": "eda",
-    "title": "Three envelopes",
+    "title": "Export controls on chip-design software",
     "date": "July 21, 2026",
     "description": "Three firms own three quarters of chip-design software. Washington put it under license by letter in May 2025 and handed it back forty days later.",
     "tags": [
@@ -620,7 +620,7 @@
   },
   {
     "slug": "vertical-integration",
-    "title": "Four signatures, one hand",
+    "title": "UnitedHealth's vertical integration",
     "date": "July 17, 2026",
     "description": "UnitedHealth is the payer, the doctor, the pharmacist and the rail the money runs on. The fury is a signal. The structure is the actual problem.",
     "tags": [
@@ -643,7 +643,7 @@
   },
   {
     "slug": "uranium",
-    "title": "Three neutrons, ten years",
+    "title": "The uranium bottleneck is enrichment",
     "date": "July 12, 2026",
     "description": "The AI companies are buying power from reactors that already exist. New uranium demand lands in the 2030s, and only the term price has noticed.",
     "tags": [
@@ -668,7 +668,7 @@
   },
   {
     "slug": "toys-that-listen",
-    "title": "The doll was a surveillance device",
+    "title": "Smart toys are competing to be the first microphone in the house",
     "date": "July 9, 2026",
     "description": "Germany banned a talking doll under its spy-equipment law. Alexa took the kitchen with almost no intelligence. Owning the room beats being smart.",
     "tags": [
@@ -690,7 +690,7 @@
   },
   {
     "slug": "bug-me-last",
-    "title": "Bug me last",
+    "title": "Where an agent should look before it asks me",
     "date": "July 4, 2026",
     "description": "The order an agent should look things up in: memory, an API, search, the browser, and then me. I'm the most expensive step and the least reliable.",
     "tags": [
@@ -713,7 +713,7 @@
   },
   {
     "slug": "open-box",
-    "title": "The sticker does the work",
+    "title": "Buying the same television twice",
     "date": "June 30, 2026",
     "description": "A television doesn't change when it goes back through the return door. Its price does. A lot of investing is just noticing that gap.",
     "tier": "boxed",

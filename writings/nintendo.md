@@ -1,5 +1,5 @@
 ---
-title: "Not on the axis"
+title: "Nintendo is a media company that happens to make consoles"
 date: 2026-07-24
 summary: "Switch 2 sold 23.7 million units in thirteen months. The stock is down 42 percent, at thirty times a year Nintendo itself says will be worse."
 tags: [companies, gaming, Japan]

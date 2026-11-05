@@ -1,5 +1,5 @@
 ---
-title: "A cartel of one"
+title: "Indonesia's nickel quota isn't working"
 date: 2026-10-25
 summary: "Indonesia mines two of every three tonnes of nickel, tried to ration its own ore this year, and watched the rally round-trip in ten months."
 tags: [commodities, chokepoints, Indonesia]

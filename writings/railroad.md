@@ -1,5 +1,5 @@
 ---
-title: "Four people and a gallon of diesel"
+title: "The Surface Transportation Board and the Union Pacific merger"
 date: 2026-09-02
 summary: "The first coast-to-coast railroad in American history will be approved or killed by four board members, on a clock that runs out in August 2027."
 tags: [infrastructure, railroads, regulation]

@@ -1,5 +1,5 @@
 ---
-title: "Boiling off in Qatar"
+title: "Qatar's helium and the fabs waiting on it"
 date: 2026-10-17
 summary: "A third of the world's helium sits behind Hormuz. Spot has tripled, fabs are rationed, and nobody's model has a line for a Gulf peace."
 tags: [commodities, chokepoints, geopolitics]

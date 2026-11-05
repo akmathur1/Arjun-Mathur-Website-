@@ -1,5 +1,5 @@
 ---
-title: "A truck with no driver still needs a dispatcher"
+title: "Who gets paid when the trucks drive themselves"
 date: 2026-09-23
 summary: "Driverless trucks are late, real and about to get cheap. I think the money ends up with whoever has the loads, so I own Uber, not Aurora."
 tags: [autonomy, freight, Uber, investing]

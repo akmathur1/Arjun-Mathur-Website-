@@ -1,5 +1,5 @@
 ---
-title: "Nothing if not secure"
+title: "AI is nothing if not secure"
 date: 2026-11-04
 summary: "Two weeks after the PHP patch, 29 million servers were still open and an AI-built scanner had rooted firewalls. Security is the whole product."
 tags: [security, AI, infrastructure]

@@ -1,5 +1,5 @@
 ---
-title: "Four hundred to one"
+title: "Jane Street and the Indian options market"
 date: 2026-08-02
 summary: "India trades 394 rupees of derivatives per rupee of stock, nine in ten retail traders lose, and Jane Street made $4 billion there."
 tags: [markets, India, derivatives]

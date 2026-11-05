@@ -1,5 +1,5 @@
 ---
-title: "A labor-supply request in work boots"
+title: "Nvidia's CEO wants teenagers to become electricians"
 date: 2026-07-28
 summary: "The people telling teenagers to become electricians are the people who'll be hiring them. A purchase order isn't career advice."
 tags: [labor, AI, data-centers]

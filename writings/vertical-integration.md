@@ -1,5 +1,5 @@
 ---
-title: "Four signatures, one hand"
+title: "UnitedHealth's vertical integration"
 date: 2026-07-17
 summary: "UnitedHealth is the payer, the doctor, the pharmacist and the rail the money runs on. The fury is a signal. The structure is the actual problem."
 tags: [healthcare, institutions, antitrust]

@@ -1,5 +1,5 @@
 ---
-title: "The bleach that stayed in the bottle"
+title: "Clorox and the cost of the safe-haven trade"
 date: 2026-09-14
 summary: "Clorox peaked at $240 in 2020 and is $87 now. The safe-haven trade works for about one quarter in twenty, and you pay for it in the other nineteen."
 tags: [companies, consumer, investing]

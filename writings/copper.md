@@ -1,5 +1,5 @@
 ---
-title: "Every path ends in a wire"
+title: "Copper and the energy transition"
 date: 2026-08-14
 summary: "Three mine disasters set up the record copper price. What keeps it there is that every kind of power plant, and every data center, ends in a wire."
 tags: [commodities, copper, energy]

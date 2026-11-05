@@ -1,5 +1,5 @@
 ---
-title: "The sticker does the work"
+title: "Buying the same television twice"
 date: 2026-06-30
 summary: "A television doesn't change when it goes back through the return door. Its price does. A lot of investing is just noticing that gap."
 tags: [price, retail, investing]
