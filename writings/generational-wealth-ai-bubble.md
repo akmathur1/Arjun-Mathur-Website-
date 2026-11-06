@@ -1,5 +1,5 @@
 ---
-title: "My rules for the AI bubble"
+title: "How I'm investing through the AI bubble"
 date: 2026-11-05
 summary: "The bubble is in the chips and the venture rounds, not in the companies buying the compute. Own the buyers and what the rotation left behind."
 tags: [investing, AI, rules]
