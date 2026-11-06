@@ -29,4 +29,4 @@ jobs:
           RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
           RESEND_FROM: ${{ secrets.RESEND_FROM }}
           BEFORE_SHA: ${{ github.event.before }}
-          SITE_URL: https://arjun-mathur-website.vercel.app
+          SITE_URL: https://arjunkmathur.com

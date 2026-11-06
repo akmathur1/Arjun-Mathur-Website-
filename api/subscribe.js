@@ -1,26 +1,22 @@
-// Vercel serverless function: POST { email } → adds the address to the Resend audience
-// that announce-writings.mjs broadcasts to. Vercel picks up api/*.ts alongside the CRA
-// build with no config. Requires RESEND_API_KEY and RESEND_AUDIENCE_ID in the project's
-// environment variables.
-
-type Req = { method?: string; body?: unknown };
-type Res = {
-  status: (code: number) => Res;
-  setHeader: (name: string, value: string) => void;
-  json: (body: unknown) => void;
-  end: () => void;
-};
+// Vercel serverless function: POST { email } adds the address to the Resend audience
+// that scripts/announce-writings.mjs broadcasts to. Needs RESEND_API_KEY and
+// RESEND_AUDIENCE_ID in the Vercel project's environment variables.
+//
+// Plain CommonJS on purpose. The TypeScript version of this file was compiled by
+// Vercel into a module that kept `export default`, and with no "type": "module" in
+// package.json the Node 24 runtime read it as CommonJS and threw a SyntaxError on
+// every request. A .js file with module.exports has nothing to compile.
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const RESEND_API = process.env.RESEND_API ?? 'https://api.resend.com';
+const RESEND_API = process.env.RESEND_API || 'https://api.resend.com';
 
-export default async function handler(req: Req, res: Res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ ok: false, error: 'Method not allowed.' });
   }
 
-  const raw = (req.body as { email?: unknown } | undefined)?.email;
+  const raw = req.body && typeof req.body === 'object' ? req.body.email : undefined;
   const email = typeof raw === 'string' ? raw.trim().toLowerCase() : '';
   if (!EMAIL.test(email) || email.length > 254) {
     return res.status(400).json({ ok: false, error: 'Enter a valid email address.' });
@@ -49,4 +45,4 @@ export default async function handler(req: Req, res: Res) {
 
   console.error(`subscribe: resend ${r.status} ${detail.slice(0, 300)}`);
   return res.status(502).json({ ok: false, error: 'Could not subscribe. Try again in a moment.' });
-}
+};

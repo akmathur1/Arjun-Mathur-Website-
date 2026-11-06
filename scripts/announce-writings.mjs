@@ -17,7 +17,7 @@ const {
   RESEND_AUDIENCE_ID,
   RESEND_FROM,
   BEFORE_SHA = 'HEAD~1',
-  SITE_URL = 'https://arjun-mathur-website.vercel.app',
+  SITE_URL = 'https://arjunkmathur.com',
   RESEND_API = 'https://api.resend.com',
   DRY_RUN,
 } = process.env;
