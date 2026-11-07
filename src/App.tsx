@@ -1621,21 +1621,6 @@ const WorkPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) =
           Work
         </h2>
 
-        <p
-          style={{
-            fontFamily: MONO,
-            fontSize: 14,
-            lineHeight: 1.75,
-            maxWidth: 640,
-            marginTop: 20,
-            color: COLORS.text,
-          }}
-        >
-          Where I've worked, newest first. Several of these ran at the same time, so
-          the chart lays each role against the calendar; the list underneath has what I
-          did at each.
-        </p>
-
         <WorkChart
           roles={WORK}
           now={now}
