@@ -48,13 +48,11 @@ type View =
   | { name: 'work' }
   | { name: 'writing'; slug: string };
 
-// Contact has no page behind it yet, so it stays a plain anchor; an entry with a
-// view routes instead of jumping to a fragment.
+// An entry with a view routes to it; one without a view would be a plain anchor.
 const NAV: { label: string; view?: View }[] = [
   { label: 'Home', view: { name: 'home' } },
   { label: 'Work', view: { name: 'work' } },
   { label: 'Books', view: { name: 'books' } },
-  { label: 'Contact' },
 ];
 
 type Book = {
