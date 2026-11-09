@@ -267,7 +267,7 @@ const WORK: Role[] = [
     end: null,
     location: 'New York',
     summary:
-      'Real-time hyperspecific domain information. Backed by Cory Levy and Joshua Browder.',
+      'Real-time hyperspecific domain information.',
     logo: { src: '/work/molterra.png', scale: 0.9 },
     url: 'https://molterra.com',
     project: 'molterra-security',
