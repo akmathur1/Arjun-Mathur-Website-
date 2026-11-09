@@ -1033,8 +1033,7 @@ const BooksPage: React.FC<{ onNavigate: (v: View) => void }> = ({ onNavigate }) 
           color: COLORS.text,
         }}
       >
-        What I'm reading, and the books that shaped how I think about computation,
-        systems, and markets.
+        What I'm reading and want to read.
       </p>
 
       {SHELVES.map((shelf) => (
