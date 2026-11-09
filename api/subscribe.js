@@ -1,14 +1,25 @@
-// Vercel serverless function: POST { email } adds the address to the Resend audience
-// that scripts/announce-writings.mjs broadcasts to. Needs RESEND_API_KEY and
-// RESEND_AUDIENCE_ID in the Vercel project's environment variables.
+// Vercel serverless function: POST { email } stores the address in the project's
+// private Vercel Blob store (writings-subscribers), one small JSON record per address
+// at subscribers/<sha256(email)>.json. scripts/announce-writings.mjs reads the same
+// records when a new essay is pushed, and api/unsubscribe.js deletes one.
+//
+// Needs BLOB_READ_WRITE_TOKEN, which Vercel sets on the project for the connected store.
 //
 // Plain CommonJS on purpose. The TypeScript version of this file was compiled by
 // Vercel into a module that kept `export default`, and with no "type": "module" in
 // package.json the Node 24 runtime read it as CommonJS and threw a SyntaxError on
 // every request. A .js file with module.exports has nothing to compile.
 
+const { createHash, randomBytes } = require('node:crypto');
+const { head, put, BlobNotFoundError } = require('@vercel/blob');
+
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const RESEND_API = process.env.RESEND_API || 'https://api.resend.com';
+
+const recordPath = (email) =>
+  `subscribers/${createHash('sha256').update(email).digest('hex')}.json`;
+
+const isNotFound = (err) =>
+  err instanceof BlobNotFoundError || (err && err.name === 'BlobNotFoundError');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -22,27 +33,38 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ ok: false, error: 'Enter a valid email address.' });
   }
 
-  const key = process.env.RESEND_API_KEY;
-  const audience = process.env.RESEND_AUDIENCE_ID;
-  if (!key || !audience) {
-    console.error('subscribe: RESEND_API_KEY / RESEND_AUDIENCE_ID not set');
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    console.error('subscribe: BLOB_READ_WRITE_TOKEN not set');
     return res.status(500).json({ ok: false, error: 'Subscriptions are not set up yet.' });
   }
 
-  const r = await fetch(`${RESEND_API}/audiences/${audience}/contacts`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, unsubscribed: false }),
-  });
+  const pathname = recordPath(email);
+  try {
+    // Already on the list: answer yes again rather than tell a visitor the address is known.
+    try {
+      await head(pathname);
+      return res.status(200).json({ ok: true });
+    } catch (err) {
+      if (!isNotFound(err)) throw err;
+    }
 
-  if (r.ok) return res.status(200).json({ ok: true });
-
-  // Re-subscribing an address already in the audience is not an error to the visitor.
-  const detail = await r.text().catch(() => '');
-  if (r.status === 409 || /already exists/i.test(detail)) {
+    const record = {
+      email,
+      token: randomBytes(16).toString('hex'),
+      subscribedAt: new Date().toISOString(),
+    };
+    await put(pathname, JSON.stringify(record), {
+      access: 'private',
+      addRandomSuffix: false,
+      contentType: 'application/json',
+    });
     return res.status(200).json({ ok: true });
+  } catch (err) {
+    // Two first submits of one address racing: the second put trips over the first's record.
+    if (err && /already exists/i.test(err.message || '')) {
+      return res.status(200).json({ ok: true });
+    }
+    console.error(`subscribe: ${err && err.message}`);
+    return res.status(502).json({ ok: false, error: 'Could not subscribe. Try again in a moment.' });
   }
-
-  console.error(`subscribe: resend ${r.status} ${detail.slice(0, 300)}`);
-  return res.status(502).json({ ok: false, error: 'Could not subscribe. Try again in a moment.' });
 };

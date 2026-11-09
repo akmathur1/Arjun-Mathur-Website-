@@ -36,6 +36,8 @@
   "dependencies": {
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@vercel/blob": "^2.9.0",
+    "nodemailer": "^10.4.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-scripts": "^5.0.1",
