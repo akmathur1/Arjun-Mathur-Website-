@@ -29,6 +29,48 @@
     ]
   },
   {
+    "slug": "arm-royalties",
+    "title": "Arm's royalty on ten billion chips a quarter",
+    "date": "November 11, 2026",
+    "description": "A Cambridge firm that builds no chips collects a few cents on almost every one made. In March it started building its own.",
+    "tags": [
+      "semiconductors",
+      "business models",
+      "investing"
+    ],
+    "url": "/#/writings/arm-royalties",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "Count the Arm chips within reach of wherever you're sitting. A phone has one for the apps, another in the modem, another for Bluetooth, and the SIM card inside it is often an Arm core as well. Earbuds carry one each, and so do the watch, the laptop, the router, the chip on a bank card, and many of the controllers in a car. My count for a desk comes to between two and ten. In the quarter that ended in September, Arm's licensees reported shipping more than ten billion of them, a first, and the running total since 1990 passed 350 billion in the spring.",
+      "The company behind that number is in Cambridge and until this year had never sold a chip. Arm (ARM) began in November 1990 as twelve engineers from Acorn Computers in a converted turkey barn, with Apple and VLSI Technology as partners. Its first big product, the chip in Apple's Newton, flopped, and in 1993 Robin Saxby turned the firm into something odder than a chipmaker. Arm would design the instruction set and the cores, license them to anyone who asked, and take a fee up front plus a royalty on every chip that shipped. Thirty-six years later that's still the whole business. About 99 percent of smartphones run on it, Apple moved the Mac to it in 2020, and Arm says it now holds about half the CPU compute at the largest cloud companies.",
+      "The royalty is tiny and the base is enormous. Last quarter's $670 million of royalties on ten billion chips is under seven cents a chip. The fiscal year to March brought $2.61 billion of royalties and $2.31 billion of license fees from two kinds of customer. Most buy finished core designs. A handful, Apple and Qualcomm among them, hold architecture licenses that let them design their own cores, provided the cores run Arm's instruction set and pay the royalty anyway. The instruction set is the interface between every compiled program and the silicon, and interfaces are where the rent is: leave Arm and you recompile the world. That's why the second kind of customer resents it. The better your own engineers get, the more the seven cents looks like a tax on work you did yourself.",
+      "The sell side models Arm as an AI company. It closed Monday at 207 times trailing earnings and 70 times next year's, a $194 billion market value on $5.5 billion of revenue, with SoftBank still holding 87 percent. What I'd model instead is that in March Arm broke its own rule. It announced the AGI CPU, a 136-core data center processor it designed and sells as finished silicon, with Meta as the lead customer. For 33 years the deal was that Arm would never turn up on the other side of a sales call. Now it does. Bloomberg reported in May that the FTC is examining whether Arm would degrade the licenses it sells to companies it now competes with. In October a Delaware jury found that Arm had breached its contract with Qualcomm (QCOM) and interfered with a Qualcomm deal at Meta. Qualcomm asked for $1.5 billion and got two dollars, and the judge still has to decide whether Qualcomm can stop paying Arm royalties for five years.",
+      "License revenue grew 50 percent last quarter, as customers buy the newest cores for their own AI chips, and royalties grew 8 percent. What I'd want to know before paying 70 times next year's earnings is how many of those customers decide the royalty now funds a competitor and start leaving. RISC-V exists for that purpose, and the companies best placed to move are the ones Arm just sued or started selling against. The royalty was easy to pay for 35 years because Arm couldn't compete with the people paying it. Since March it can, and the probe and the verdict are the first invoices."
+    ]
+  },
+  {
+    "slug": "golf-equipment",
+    "title": "Golf's equipment makers have the bigger gain ahead",
+    "date": "November 11, 2026",
+    "description": "Golf adds a million players a year and has 2,000 fewer courses than at its peak. The money that can't get a tee time buys balls and clubs.",
+    "tags": [
+      "golf",
+      "consumer",
+      "investing"
+    ],
+    "url": "/#/writings/golf-equipment",
+    "announce": false,
+    "pinned": false,
+    "body": [
+      "The United States had about 16,000 golf courses at the end of 2025, roughly 2,000 fewer than at the peak twenty years ago, and the people who play on them set a record anyway. Rounds passed 500 million for the sixth year running, up a little over 1 percent on 2024. On-course golfers passed 29 million, a million more than the year before and the eighth straight year of growth, with 4 million juniors, the most since 2004, and 8 million women, an all-time high. Another 19 million people only hit balls at a range or a simulator, and 21 million more told the National Golf Foundation they didn't play in 2025 but would very much like to.",
+      "I think the equipment makers are the better way to own that, and that the bigger gain is still ahead of them. A course is a fixed asset with a fixed number of tee times, and the count is shrinking. A golfer buys balls every month, a driver every few years, shoes, gloves, and a bag, and needs no tee time for any of it. When players grow faster than the places to play, the money shows up in the pro shop and on the website. Two public companies sell most of the bag: Acushnet (GOLF), which owns Titleist and FootJoy, and Callaway Golf Company (CALY), which in January sold 60 percent of Topgolf for about half what it paid in 2020 and went back to being a club and ball company.",
+      "The ball is the best business in golf. A dozen Pro V1s costs about $55 to $58 and lasts a good player a few rounds, and Titleist had 72 percent of the ball count on the professional tours last year. In the September quarter, with everything else at Acushnet shrinking, Titleist ball revenue grew 3.3 percent to $209 million on higher prices and higher volume. Acushnet sold $831 million of balls in 2025, two and a half times Callaway, the next biggest.",
+      "The quarter both companies just reported is why the stocks are where they are. Acushnet's sales fell 1.3 percent, Callaway's fell 5.6 percent, and the shares sit at $85 against a 52-week high of $120, and $17 against $20. The sell side reads that as the pandemic cohort finally putting the clubs away. I read the same releases differently. Acushnet's nine-month sales are up 6.8 percent and its adjusted profit is up 17 percent, and the quarter fell because the new metalwoods launched in the second quarter this year instead of the third. Callaway's gross margin widened five points, it raised full-year guidance, and it holds $434 million of cash against $76 million of debt after paying down $1.4 billion in the first half. Both spent 2025 and 2026 eating tariffs, $70 million this year at Acushnet and $75 million over two years at Callaway, and both are getting part of it back now that the Supreme Court has struck down the emergency tariffs: $34 million so far at Acushnet, and $34 million in the quarter alone at Callaway. A headwind that turns into a refund is not a demand problem.",
+      "Acushnet trades at 23 times trailing earnings, pays a 1.2 percent dividend, and bought back $81 million of stock through September plus $52 million in October. Callaway is at 18 times next year's earnings and has bought back $135 million this year, with $70 million left. Neither is cheap, and the risk I'd name is that clubs are discretionary: a driver gets replaced when the owner feels rich, and a recession reaches the equipment counter before it reaches the tee sheet. My bet, over the next three to five years, is that a sport which added a million players a year for eight years while losing courses keeps buying more balls and clubs than the course count can explain, and that the two companies that sell them collect most of it."
+    ]
+  },
+  {
     "slug": "pain-of-paying",
     "title": "Paying with a card is making you poorer",
     "date": "November 6, 2026",
