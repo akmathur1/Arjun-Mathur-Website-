@@ -26,13 +26,9 @@ import { list, get } from '@vercel/blob';
 import nodemailer from 'nodemailer';
 
 const FILE = 'src/writings.json';
-const {
-  BLOB_READ_WRITE_TOKEN,
-  SMTP_USER,
-  SMTP_PASS,
-  BEFORE_SHA = 'HEAD~1',
-  DRY_RUN,
-} = process.env;
+const { BLOB_READ_WRITE_TOKEN, SMTP_USER, SMTP_PASS, DRY_RUN } = process.env;
+// A manual run has no github.event.before, so the workflow passes an empty string.
+const BEFORE_SHA = process.env.BEFORE_SHA || 'HEAD~1';
 const SMTP_HOST = process.env.SMTP_HOST || 'smtp.gmail.com';
 const SMTP_PORT = Number(process.env.SMTP_PORT) || 465;
 const SITE_URL = process.env.SITE_URL || 'https://arjunkmathur.com';

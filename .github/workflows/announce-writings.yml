@@ -6,6 +6,9 @@ on:
   push:
     branches: [main]
     paths: [src/writings.json]
+  # Manual runs (gh workflow run announce-writings.yml) diff against HEAD~1, so they
+  # send nothing unless the latest commit added an essay; useful to check the job.
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -24,8 +27,10 @@ jobs:
           node-version: 22
           cache: npm
 
-      # The script needs @vercel/blob and nodemailer from package.json.
-      - run: npm ci --ignore-scripts
+      # The script needs @vercel/blob and nodemailer from package.json. npm install, not
+      # npm ci: the lockfile is written by whichever npm is on the laptop, and npm ci on
+      # the runner refuses a lock from a different npm major over optional peer entries.
+      - run: npm install --no-audit --no-fund --ignore-scripts
 
       - run: node scripts/announce-writings.mjs
         env:
